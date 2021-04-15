@@ -64,8 +64,10 @@ export function setTitleElement(pageState) {
 
           if (pageState.currentMountType.startsWith("kv") || pageState.currentMountType == "cubbyhole") {
             changePage(pages.KEY_VALUE_VIEW);
-          } else {
+          } else if (pageState.currentMountType == "totp"){
             changePage(pages.TOTP);
+          } else if (pageState.currentMountType == "transit") {
+            changePage(pages.TRANSIT_VIEW);
           }
         }
       }),
