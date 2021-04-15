@@ -23,7 +23,7 @@ jobs:
       run:  npx webpack
 
     - name: "Tar up the dist files"
-      run: tar caf VaultUI.tar --transform="s/dist\///" $(find dist -type f) LICENSE
+      run: tar caf VaultUI.tar --transform="s/dist\///" $(find dist -type f) LICENSE.md
 
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
