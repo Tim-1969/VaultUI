@@ -14,6 +14,7 @@ export class TransitViewSecretPage extends Page {
       children: makeElement({
         tag: "a",
         class: "uk-link-heading",
+        onclick: onclick,
         children: [
           makeElement({
             tag: "p",
@@ -46,11 +47,10 @@ export class TransitViewSecretPage extends Page {
           ]
         }),
       ]
-
     }));
   }
 
   get name() {
-    return "Password Generator";
+    return "Transit Secret View";
   }
 }
