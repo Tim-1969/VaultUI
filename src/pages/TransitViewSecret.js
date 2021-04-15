@@ -7,7 +7,7 @@ export class TransitViewSecretPage extends Page {
     super();
   }
 
-  makeTile(title, description, onclick) {
+  makeTile(title, description, icon = "code", onclick = _ => {}) {
     return makeElement({
       tag: "div",
       class: ["uk-tile", "uk-tile-default", "uk-tile-primary", "uk-padding-small"],
@@ -19,7 +19,16 @@ export class TransitViewSecretPage extends Page {
           makeElement({
             tag: "p",
             class: "uk-h4",
-            text: title
+            text: title,
+            children: makeElement({
+              tag: "span",
+              class: ["uk-icon", "uk-margin-small-left"],
+              attributes: {
+                "uk-icon": `icon: ${icon}`,
+                "role": "img",
+                "aria-label": `${title} icon`
+              } 
+            })
           }),
           makeElement({
             tag: "span",
@@ -42,8 +51,8 @@ export class TransitViewSecretPage extends Page {
         makeElement({
           tag: "div",
           children: [
-            this.makeTile("Encrypt", "Encrypt some plaintext or base64 encoded binary."),
-            this.makeTile("Decrypt", "Decrypt some cyphertext."),
+            this.makeTile("Encrypt", "Encrypt some plaintext or base64 encoded binary.", "lock"),
+            this.makeTile("Decrypt", "Decrypt some cyphertext.", "mail"),
           ]
         }),
       ]
