@@ -1,0 +1,24 @@
+name: Bundle & Release
+
+on:
+  push:
+    branches: [ main ]    
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source files
+      uses: actions/checkout@v2
+
+
+    - name: Install nodejs
+      run:  curl -fsSL https://deb.nodesource.com/setup_15.x | bash -; apt-get install -y nodejs
+
+    - name: Install Build Deps
+      run:  npm install
+
+    - name: Build VaultUI
+      run:  npx webpack
