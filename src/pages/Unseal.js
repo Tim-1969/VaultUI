@@ -34,7 +34,7 @@ export class UnsealPage extends Page {
     this.unsealProgress = makeElement({
       tag: "progress",
       class: "uk-progress",
-      attributes: {value: "0", max: "0"}
+      attributes: { value: "0", max: "0" }
     });
     this.unsealProgressText = makeElement({
       tag: "p",

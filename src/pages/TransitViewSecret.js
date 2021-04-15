@@ -7,14 +7,14 @@ export class TransitViewSecretPage extends Page {
     super();
   }
 
-  makeTile(title, description, icon = "code", onclick = _ => {}) {
+  makeTile(title, description, icon = "code", onclick = _ => { }) {
     return makeElement({
-      tag: "div",
-      class: ["uk-tile", "uk-tile-default", "uk-tile-primary", "uk-padding-small"],
+      tag: "a",
+      class: "uk-link-heading",
+      onclick: onclick,
       children: makeElement({
-        tag: "a",
-        class: "uk-link-heading",
-        onclick: onclick,
+        tag: "div",
+        class: ["uk-tile", "uk-tile-default", "uk-tile-primary", "uk-padding-small"],
         children: [
           makeElement({
             tag: "p",
@@ -27,7 +27,7 @@ export class TransitViewSecretPage extends Page {
                 "uk-icon": `icon: ${icon}`,
                 "role": "img",
                 "aria-label": `${title} icon`
-              } 
+              }
             })
           }),
           makeElement({
@@ -37,7 +37,6 @@ export class TransitViewSecretPage extends Page {
           })
         ]
       })
-
     });
   }
 

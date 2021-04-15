@@ -25,8 +25,8 @@ export class TOTPViewPage extends Page {
           id: "loadingText",
           text: "Loading TOTP Codes..",
         }),
-        makeElement({tag: "br"}),
-        makeElement({tag: "br"}),
+        makeElement({ tag: "br" }),
+        makeElement({ tag: "br" }),
         totpList
       ]
     }));

@@ -1,4 +1,4 @@
-import {changePage} from  "../pageUtils.js";
+import { changePage } from "../pageUtils.js";
 
 export class Page {
   constructor() { }
