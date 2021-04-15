@@ -36,7 +36,6 @@ export class NewTOTPPage extends Page {
           tag: "input",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
-            required: true,
             type: "text",
             placeholder: "URI",
             name: "uri"
@@ -46,7 +45,6 @@ export class NewTOTPPage extends Page {
           tag: "input",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
-            required: true,
             type: "text",
             placeholder: "Key",
             name: "key"
