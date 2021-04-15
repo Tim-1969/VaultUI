@@ -1,0 +1,22 @@
+{
+    "esversion": 8,
+	"browser": true,
+	"onevar": true,    
+	"passfail": false,    
+	"white": true,
+	"maxerr": 100,
+	"predef": [         
+		"define",
+		"require",
+		"console",
+		"ClipboardJS",
+		"UIkit",
+		"Prism",
+		"CodeJar",
+		"moment"
+	],
+	"indent": 2,
+    "globals": {
+
+    }
+}

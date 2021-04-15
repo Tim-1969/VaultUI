@@ -1,0 +1,14 @@
+.editor {
+	background-color:  #3B4252;
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+.code-block {
+    padding-top: 10px !important;
+    padding-right: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+}
+@import "./prism-nord.scss";
+@import "./uikit.scss";

@@ -1,0 +1,74 @@
+$global-color:                                   #D8DEE9 !default;
+$global-emphasis-color:                          #E5E9F0 !default;
+$global-muted-color:                             #E5E9F0 !default;
+
+$global-link-color:                              #5E81AC !default;
+$global-link-hover-color:                        #88C0D0 !default;
+
+$global-inverse-color:                           #fff !default;
+
+$global-background:                              #2E3440 !default;
+
+$global-muted-background:                        #3B4252 !default;
+$global-primary-background:                      #434C5E !default;
+$global-secondary-background:                    #4C566A !default;
+
+$global-success-background:                      #A3BE8C !default;
+$global-warning-background:                      #D08770 !default;
+$global-danger-background:                       #BF616A !default;
+
+
+$button-primary-background: #5E81AC;
+
+// Keep these in same order as https://github.com/uikit/uikit/blob/develop/src/less/components/_import.less
+@import "uikit/src/scss/variables.scss";
+@import "uikit/src/scss/mixins.scss";
+@import "uikit/src/scss/components/base.scss";
+
+// Elements
+@import "uikit/src/scss/components/link.scss";
+@import "uikit/src/scss/components/heading.scss";
+@import "uikit/src/scss/components/list.scss";
+@import "uikit/src/scss/components/icon.scss";
+@import "uikit/src/scss/components/form.scss";
+@import "uikit/src/scss/components/button.scss";
+@import "uikit/src/scss/components/progress.scss";
+
+// Layout
+@import "uikit/src/scss/components/section.scss";
+@import "uikit/src/scss/components/container.scss";
+@import "uikit/src/scss/components/tile.scss";
+@import "uikit/src/scss/components/card.scss";
+
+// Common
+@import "uikit/src/scss/components/spinner.scss";
+@import "uikit/src/scss/components/alert.scss";
+
+// JavaScript
+@import "uikit/src/scss/components/slider.scss";
+@import "uikit/src/scss/components/notification.scss";
+
+
+// Other
+@import "uikit/src/scss/components/grid.scss";
+
+@import "uikit/src/scss/components/nav.scss";
+@import "uikit/src/scss/components/navbar.scss";
+@import "uikit/src/scss/components/tab.scss";
+
+// Utils
+
+@import "uikit/src/scss/components/width.scss";
+@import "uikit/src/scss/components/height.scss";
+@import "uikit/src/scss/components/text.scss";
+@import "uikit/src/scss/components/column.scss";
+@import "uikit/src/scss/components/cover.scss";
+@import "uikit/src/scss/components/background.scss";
+@import "uikit/src/scss/components/align.scss";
+@import "uikit/src/scss/components/svg.scss";
+@import "uikit/src/scss/components/utility.scss";
+@import "uikit/src/scss/components/flex.scss";
+@import "uikit/src/scss/components/margin.scss";
+@import "uikit/src/scss/components/padding.scss";
+@import "uikit/src/scss/components/position.scss";
+@import "uikit/src/scss/components/inverse.scss";
