@@ -11,7 +11,7 @@ module.exports = {
   },
   plugins: [new MiniCssExtractPlugin(), new HtmlWebpackPlugin({ title: "VaultUI" })],
   devServer: {
-    open: 'microsoft-edge-dev',
+    open: process.env.BROWSER || "microsoft-edge-dev",
   },
   resolve: {
     modules: ['node_modules'],
