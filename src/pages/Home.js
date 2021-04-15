@@ -122,7 +122,7 @@ export class HomePage extends Page {
       if (typeof mount != 'object') return;
       if (mount == null) return;
       if (!("type" in mount)) return;
-      if (!(["kv", "totp"].includes(mount.type))) return;
+      if (!(["kv", "totp", "transit"].includes(mount.type))) return;
 
       let mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
 
@@ -134,6 +134,9 @@ export class HomePage extends Page {
       } else if (mount.type == "totp") {
         linkText = `TOTP - ${baseMount}`;
         linkPage = pages.TOTP;
+      } else if (mount.type == "transit"){
+        linkText = `Transit - ${baseMount}`;
+        linkPage = pages.TRANSIT_VIEW; 
       }
 
       navList.appendChild(makeElement({

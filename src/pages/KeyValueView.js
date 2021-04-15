@@ -71,7 +71,7 @@ export class KeyValueViewPage extends Page {
             } else {
                 setErrorText(e.message);
             }
-        };
+        }
     }
 
     get name() {

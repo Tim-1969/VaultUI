@@ -11,3 +11,5 @@ export { KeyValueNewPage } from "./KeyValueNew.js";
 export { KeyValueDeletePage } from "./KeyValueDelete.js";
 export { KeyValueSecretsEditPage } from "./KeyValueSecretsEdit.js";
 export { PwGenPage } from "./PwGen.js";
+export { TransitViewPage } from "./TransitView.js";
+export { TransitViewSecretPage } from "./TransitViewSecret.js";
