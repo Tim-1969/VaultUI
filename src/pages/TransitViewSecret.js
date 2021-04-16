@@ -1,10 +1,13 @@
 import { Page } from "../types/Page.js";
-import { setPageContent, setTitleElement } from "../pageUtils.js";
+import { changePage, setPageContent, setTitleElement } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 
 export class TransitViewSecretPage extends Page {
   constructor() {
     super();
+  }
+  goBack(){
+    changePage(pages.TRANSIT_VIEW);
   }
 
   makeTile(title, description, icon = "code", onclick = _ => { }) {
@@ -50,7 +53,12 @@ export class TransitViewSecretPage extends Page {
         makeElement({
           tag: "div",
           children: [
-            this.makeTile("Encrypt", "Encrypt some plaintext or base64 encoded binary.", "lock"),
+            this.makeTile(
+              "Encrypt",
+              "Encrypt some plaintext or base64 encoded binary.",
+              "lock",
+              _ => { changePage(pages.TRANSIT_ENCRYPT); }
+            ),
             this.makeTile("Decrypt", "Decrypt some cyphertext.", "mail"),
           ]
         }),
