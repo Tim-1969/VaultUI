@@ -1,14 +1,19 @@
 import { Page } from "../types/Page.js";
-import { setPageContent, setTitleElement } from "../pageUtils.js";
+import { transitEncrypt } from "../api.js";
+import { setPageContent, setTitleElement, setErrorText } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 import { Margin } from "../elements/Margin.js";
+import { CopyableModal } from "../elements/CopyableModal.js";
+import UIkit from 'uikit/dist/js/uikit.min.js';
+
 
 export class TransitEncryptPage extends Page {
   constructor() {
     super();
   }
   goBack() {
-    changePage(pages.HOME);
+    pageState.currentSecret = "";
+    changePage(pages.TRANSIT_VIEW);
   }
   async render() {
     setTitleElement(pageState);
@@ -64,12 +69,21 @@ export class TransitEncryptPage extends Page {
 
     this.transitEncryptForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      this.newKVSecretHandleForm();
+      this.transitEncryptFormHandler();
     }.bind(this));
   }
 
   transitEncryptFormHandler() {
-    alert("Not Yet Implemented");
+    let formData = new FormData(this.transitEncryptForm);
+    let encodedData = formData.get("base64Checkbox") ? formData.get("plaintext") : btoa(formData.get("plaintext"));
+    transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, encodedData).then(res => {
+      console.log(res);
+      let modal = CopyableModal("Encryption Result", res.ciphertext);
+      pageContent.appendChild(modal);
+      UIkit.modal(modal).show();
+    }).catch(e => {
+      setErrorText(`API Error: ${e.message}`);
+    });
   }
 
   get name() {
