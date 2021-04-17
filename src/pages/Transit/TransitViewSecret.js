@@ -1,6 +1,6 @@
-import { Page } from "../types/Page.js";
-import { changePage, setPageContent, setTitleElement } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
+import { Page } from "../../types/Page.js";
+import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { makeElement } from "../../htmlUtils.js";
 
 export class TransitViewSecretPage extends Page {
   constructor() {

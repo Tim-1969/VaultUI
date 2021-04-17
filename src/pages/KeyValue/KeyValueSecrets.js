@@ -1,13 +1,9 @@
-import { Page } from "../types/Page.js";
-import { getSecret, undeleteSecret, getCapabilities } from "../api.js";
-import { setPageContent, setTitleElement } from "../pageUtils.js";
-import { CopyableInputBox } from "../elements/CopyableInputBox.js";
-import { makeElement } from "../htmlUtils.js";
-
+import { Page } from "../../types/Page.js";
+import { getSecret, undeleteSecret, getCapabilities } from "../../api.js";
+import { setPageContent, setTitleElement } from "../../pageUtils.js";
+import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
+import { makeElement } from "../../htmlUtils.js";
 import Prism from "prismjs";
-
-
-
 
 
 export class KeyValueSecretsPage extends Page {

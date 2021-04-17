@@ -1,7 +1,7 @@
-import { Page } from "../types/Page.js";
-import { deleteSecret } from "../api.js";
-import { setPageContent, setTitleElement } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
+import { Page } from "../../types/Page.js";
+import { deleteSecret } from "../../api.js";
+import { setPageContent, setTitleElement } from "../../pageUtils.js";
+import { makeElement } from "../../htmlUtils.js";
 
 export class KeyValueDeletePage extends Page {
   constructor() {

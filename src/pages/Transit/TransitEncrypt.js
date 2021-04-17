@@ -1,9 +1,9 @@
-import { Page } from "../types/Page.js";
-import { transitEncrypt } from "../api.js";
-import { setPageContent, setTitleElement, setErrorText } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
-import { Margin } from "../elements/Margin.js";
-import { CopyableModal } from "../elements/CopyableModal.js";
+import { Page } from "../../types/Page.js";
+import { transitEncrypt } from "../../api.js";
+import { setPageContent, setTitleElement, setErrorText } from "../../pageUtils.js";
+import { makeElement } from "../../htmlUtils.js";
+import { Margin } from "../../elements/Margin.js";
+import { CopyableModal } from "../../elements/CopyableModal.js";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 
 

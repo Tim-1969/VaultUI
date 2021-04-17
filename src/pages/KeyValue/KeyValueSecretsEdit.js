@@ -1,9 +1,9 @@
-import { Page } from "../types/Page.js";
-import { getSecret, createOrUpdateSecret } from "../api.js";
-import { verifyJSONString } from "../utils.js";
-import { setPageContent, setTitleElement, setErrorText } from "../pageUtils.js";
+import { Page } from "../../types/Page.js";
+import { getSecret, createOrUpdateSecret } from "../../api.js";
+import { verifyJSONString } from "../../utils.js";
+import { setPageContent, setTitleElement, setErrorText } from "../../pageUtils.js";
+import { makeElement } from "../../htmlUtils.js";
 import { CodeJar } from "codejar";
-import { makeElement } from "../htmlUtils.js";
 
 export class KeyValueSecretsEditPage extends Page {
   constructor() {

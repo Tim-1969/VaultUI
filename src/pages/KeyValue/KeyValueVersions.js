@@ -1,7 +1,7 @@
-import { Page } from "../types/Page.js";
-import { getSecretMetadata } from "../api.js";
-import { setPageContent, setTitleElement } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
+import { Page } from "../../types/Page.js";
+import { getSecretMetadata } from "../../api.js";
+import { setPageContent, setTitleElement } from "../../pageUtils.js";
+import { makeElement } from "../../htmlUtils.js";
 
 export class KeyValueVersionsPage extends Page {
   constructor() {
