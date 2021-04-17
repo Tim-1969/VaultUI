@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   setInterval(async () => {
     if (pageState.currentPage != "UNSEAL") {
+      if (!localStorage.getItem('apiurl')) { return; }
       let sealStatus = await getSealStatus();
       if (sealStatus.sealed) {
         changePage("UNSEAL");

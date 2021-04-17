@@ -41,7 +41,6 @@ export class TransitEncryptPage extends Page {
             class: ["uk-form-controls", "uk-form-controls-text"],
             children: makeElement({
               tag: "input",
-              class: ["uk-checkbox"],
               attributes: {
                 type: "checkbox",
                 name: "base64Checkbox",
@@ -74,7 +73,8 @@ export class TransitEncryptPage extends Page {
 
   transitEncryptFormHandler() {
     let formData = new FormData(this.transitEncryptForm);
-    let encodedData = formData.get("base64Checkbox") ? formData.get("plaintext") : btoa(formData.get("plaintext"));
+    let encodedData = 
+      formData.get("base64Checkbox") == "on" ? formData.get("plaintext") : btoa(formData.get("plaintext"));
     transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, encodedData).then(res => {
       console.log(res);
       let modal = CopyableModal("Encryption Result", res.ciphertext);

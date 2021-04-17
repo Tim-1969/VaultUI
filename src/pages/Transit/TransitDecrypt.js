@@ -30,6 +30,24 @@ export class TransitDecryptPage extends Page {
             name: "ciphertext",
           }
         })),
+        Margin([
+          makeElement({
+            tag: "div",
+            class: "uk-form-label",
+            text: "Should the plaintext be base64 decoded?",
+          }),
+          makeElement({
+            tag: "div",
+            class: ["uk-form-controls", "uk-form-controls-text"],
+            children: makeElement({
+              tag: "input",
+              attributes: {
+                type: "checkbox",
+                name: "decodeBase64Checkbox",
+              }
+            }),
+          }),
+        ]),
         makeElement({
           tag: "p",
           id: "errorText",
@@ -56,7 +74,11 @@ export class TransitDecryptPage extends Page {
     let formData = new FormData(this.transitDecryptForm);
 
     transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, formData.get("ciphertext")).then(res => {
-      let modal = CopyableModal("Decryption Result", res.plaintext);
+      let plaintext = res.plaintext;
+      if (formData.get("decodeBase64Checkbox") == "on") {
+        plaintext = atob(plaintext);
+      }
+      let modal = CopyableModal("Decryption Result", plaintext);
       pageContent.appendChild(modal);
       UIkit.modal(modal).show();
     }).catch(e => {
