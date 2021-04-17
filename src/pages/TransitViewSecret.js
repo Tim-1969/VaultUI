@@ -6,7 +6,7 @@ export class TransitViewSecretPage extends Page {
   constructor() {
     super();
   }
-  goBack(){
+  goBack() {
     changePage(pages.TRANSIT_VIEW);
   }
 
@@ -59,7 +59,12 @@ export class TransitViewSecretPage extends Page {
               "lock",
               _ => { changePage(pages.TRANSIT_ENCRYPT); }
             ),
-            this.makeTile("Decrypt", "Decrypt some cyphertext.", "mail"),
+            this.makeTile(
+              "Decrypt",
+              "Decrypt some cyphertext.",
+              "mail",
+              _ => { changePage(pages.TRANSIT_DECRYPT); }
+            ),
           ]
         }),
       ]

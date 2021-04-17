@@ -14,3 +14,4 @@ export { PwGenPage } from "./PwGen.js";
 export { TransitViewPage } from "./TransitView.js";
 export { TransitViewSecretPage } from "./TransitViewSecret.js";
 export { TransitEncryptPage } from "./TransitEncrypt.js";
+export { TransitDecryptPage } from "./TransitDecrypt.js";

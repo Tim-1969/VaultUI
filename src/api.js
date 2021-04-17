@@ -296,6 +296,25 @@ export async function transitEncrypt(baseMount, name, data) {
   }
 }
 
+export async function transitDecrypt(baseMount, name, data) {
+  const request = new Request(getAPIURL() + removeDoubleSlash(`/v1/${baseMount}/decrypt/${name}`), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Vault-Token': getToken()
+    },
+    body: JSON.stringify({ciphertext: data})
+  });
+  let response = await fetch(request);
+  if (!response.ok) {
+    let json = await response.json();
+    throw new Error(json.errors[0]);
+  } else {
+    let json = await response.json();
+    return json.data;
+  }
+}
+
 
 export async function getTOTPKeys(baseMount) {
   const request = new Request(getAPIURL() + `/v1/${baseMount}/keys?list=true`, {
