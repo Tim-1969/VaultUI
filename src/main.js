@@ -15,6 +15,7 @@ import {
 } from "./pageUtils.js";
 import { PageState } from "./PageState.js";
 import { makeElement } from "./htmlUtils.js";
+import { getSealStatus } from './api.js';
 
 import {
   HomePage,
@@ -35,8 +36,6 @@ import {
   KeyValueSecretsEditPage,
   PwGenPage,
 } from "./pages";
-
-import { getSealStatus } from './api.js';
 
 const pages = {
   HOME: new HomePage(),

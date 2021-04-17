@@ -1,5 +1,5 @@
 import { Page } from "../../types/Page.js";
-import { getTOTPKeys, getTOTPCode } from "../../api.js";
+import { getTOTPKeys, getTOTPCode, DoesNotExistError } from "../../api.js";
 import { setTitleElement, setPageContent, changePage } from "../../pageUtils.js";
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { makeElement } from "../../htmlUtils.js";
@@ -43,7 +43,15 @@ export class TOTPViewPage extends Page {
         this.refreshers.push(setInterval(totpRefresher, 3000, totpKeyName, totpListElement));
       }, this);
       document.getElementById("loadingText").remove();
+    }).catch(e => {
+      if (e == DoesNotExistError) {
+        let loadingText = document.getElementById("loadingText");
+        loadingText.innerText =  "You seem to have no TOTP codes here, would you like to create one?";
+      } else {
+        setErrorText(e.message);
+      }
     });
+
   }
 
   cleanup() {

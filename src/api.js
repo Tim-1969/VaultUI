@@ -323,6 +323,9 @@ export async function getTOTPKeys(baseMount) {
     }
   });
   return fetch(request).then(response => {
+    if (response.status == 404) {
+      throw DoesNotExistError;
+    }
     return response.json();
   }).then(data => {
     return data.data.keys;
