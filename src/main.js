@@ -15,6 +15,7 @@ import {
   renderPage,
 } from "./pageUtils.js";
 import { PageState } from "./PageState.js";
+import { makeElement } from "./htmlUtils.js";
 
 import {
   HomePage,
@@ -61,28 +62,67 @@ const pages = {
 var pageState = new PageState();
 window.pageState = pageState;
 window.pages = pages;
-// when making static html, make changePage global so it can be used with onclick
 window.changePage = changePage;
 
+function ListItem(children) {
+  return makeElement({
+    tag: "li",
+    children: children
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  document.body.innerHTML += `
-  <nav class="uk-navbar uk-navbar-container">
-    <div class="uk-navbar-left">
-        <ul class="uk-navbar-nav">
-            <li><a onclick="changePage(pages.HOME);">Home</a></li>
-            <li><a onclick="pageState.currentPage.goBack();">Back</a></li>
-            <li class="uk-active"><a onclick="changePage(pageState.currentPage)">Refresh</a></li>
-        </ul>
-    </div>
-  </nav>
-  <div class="uk-container uk-container-medium uk-align-center">
-    <div class="uk-card uk-card-body">
-        <h3 class="uk-card-title" id="pageTitle">Title</h3>
-        <div id="pageContent">
-        </div>
-    </div>
-  </div>
-  `;
+  document.body.innerHTML = "";
+  document.body.appendChild(makeElement({
+    tag: "nav",
+    class: ["uk-navbar", "uk-navbar-container"],
+    children: makeElement({
+      tag: "div",
+      class: "uk-navbar-left",
+      children: makeElement({
+        tag: "ul",
+        class: "uk-navbar-nav",
+        children: [
+          ListItem(makeElement({
+            tag: "a",
+            text: "Home",
+            onclick: _ => { changePage(pages.HOME); }
+          })),
+          ListItem(makeElement({
+            tag: "a",
+            text: "Back",
+            onclick: _ => { pageState.currentPage.goBack(); }
+          })),
+          ListItem(makeElement({
+            tag: "a",
+            text: "Refresh",
+            onclick: _ => { changePage(pageState.currentPage); }
+          })),
+        ]
+      })
+    })
+  }));
+  document.body.appendChild(makeElement({
+    tag: "div",
+    class: ["uk-container", "uk-container-medium", "uk-align-center"],
+    children: makeElement({
+      tag: "div",
+      class: ["uk-card", "uk-card-body"],
+      children: [
+        makeElement({
+          tag: "h3",
+          class: "uk-card-title",
+          id: "pageTitle",
+          text: "Title"
+        }),
+        makeElement({
+          tag: "div",
+          id: "pageContent"
+        })
+      ]
+    })
+  }));
+
   window.pageContent = document.querySelector("#pageContent");
   renderPage();
 
