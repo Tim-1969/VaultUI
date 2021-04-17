@@ -18,7 +18,7 @@ export class TOTPViewPage extends Page {
         makeElement({
           tag: "a",
           text: "Add new TOTP",
-          onclick: _ => { changePage(pages.NEW_TOTP); }
+          onclick: _ => { changePage("NEW_TOTP"); }
         }),
         makeElement({
           tag: "p",

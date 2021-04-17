@@ -10,7 +10,7 @@ export class NewTOTPPage extends Page {
     super();
   }
   goBack() {
-    changePage(pages.TOTP);
+    changePage("TOTP");
   }
   render() {
     setTitleElement(pageState);
@@ -78,7 +78,7 @@ export class NewTOTPPage extends Page {
         generate: false
       };
       addNewTOTP(pageState.currentBaseMount, parms).then(res => {
-        changePage(pages.TOTP);
+        changePage("TOTP");
       }).catch(e => {
         setErrorText(`API Error: ${e.message}`);
       });

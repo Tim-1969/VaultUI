@@ -8,7 +8,7 @@ export class KeyValueNewPage extends Page {
     super();
   }
   goBack() {
-    changePage(pages.KEY_VALUE_VIEW);
+    changePage("KEY_VALUE_VIEW");
   }
   render() {
     setTitleElement(pageState);
@@ -69,7 +69,7 @@ export class KeyValueNewPage extends Page {
       splitPath[splitPath.length - 1],
       keyData
     ).then(_ => {
-      changePage(pages.KEY_VALUE_VIEW);
+      changePage("KEY_VALUE_VIEW");
       return;
     }).catch(e => {
       setErrorText(e.message);

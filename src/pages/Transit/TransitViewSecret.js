@@ -7,7 +7,7 @@ export class TransitViewSecretPage extends Page {
     super();
   }
   goBack() {
-    changePage(pages.TRANSIT_VIEW);
+    changePage("TRANSIT_VIEW");
   }
 
   makeTile(title, description, icon = "code", onclick = _ => { }) {
@@ -57,13 +57,13 @@ export class TransitViewSecretPage extends Page {
               "Encrypt",
               "Encrypt some plaintext or base64 encoded binary.",
               "lock",
-              _ => { changePage(pages.TRANSIT_ENCRYPT); }
+              _ => { changePage("TRANSIT_ENCRYPT"); }
             ),
             this.makeTile(
               "Decrypt",
               "Decrypt some cyphertext.",
               "mail",
-              _ => { changePage(pages.TRANSIT_DECRYPT); }
+              _ => { changePage("TRANSIT_DECRYPT"); }
             ),
           ]
         }),

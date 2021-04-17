@@ -19,7 +19,11 @@ export function changePage(page) {
   if (pageState.currentPage) {
     pageState.currentPage.cleanup();
   }
-  pageState.currentPage = page;
+  if (typeof page == 'object') {
+    pageState.currentPage = page;
+  } else {
+    pageState.currentPage = realPages[page];
+  }
   renderPage();
 }
 
@@ -61,11 +65,11 @@ export function setTitleElement(pageState) {
           pageState.currentSecretVersion = "0";
 
           if (pageState.currentMountType.startsWith("kv") || pageState.currentMountType == "cubbyhole") {
-            changePage(pages.KEY_VALUE_VIEW);
+            changePage("KEY_VALUE_VIEW");
           } else if (pageState.currentMountType == "totp"){
-            changePage(pages.TOTP);
+            changePage("TOTP");
           } else if (pageState.currentMountType == "transit") {
-            changePage(pages.TRANSIT_VIEW);
+            changePage("TRANSIT_VIEW");
           }
         }
       }),
@@ -76,7 +80,7 @@ export function setTitleElement(pageState) {
           onclick: _ => {
             if (pageState.currentMountType.startsWith("kv")) {
               pageState.currentSecretPath = secretPaths.slice(0, index + 1);
-              changePage(pages.KEY_VALUE_VIEW);
+              changePage("KEY_VALUE_VIEW");
             }
           }
         });

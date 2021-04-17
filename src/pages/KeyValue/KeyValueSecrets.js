@@ -13,11 +13,11 @@ export class KeyValueSecretsPage extends Page {
   goBack() {
     if (pageState.currentSecretVersion != "0") {
       pageState.currentSecretVersion = "0";
-      changePage(pages.KEY_VALUE_VERSIONS);
+      changePage("KEY_VALUE_VERSIONS");
 
     } else {
       pageState.currentSecret = "";
-      changePage(pages.KEY_VALUE_VIEW);
+      changePage("KEY_VALUE_VIEW");
     }
 
   }
@@ -57,7 +57,7 @@ export class KeyValueSecretsPage extends Page {
         tag: "button",
         id: "deleteButton",
         class: ["uk-button", "uk-button-danger"],
-        onclick: _ => { changePage(pages.KEY_VALUE_DELETE); },
+        onclick: _ => { changePage("KEY_VALUE_DELETE"); },
         text: deleteButtonText
       }));
     }
@@ -67,7 +67,7 @@ export class KeyValueSecretsPage extends Page {
           tag: "button",
           id: "editButton",
           class: ["uk-button", "uk-margin", "uk-button-primary"],
-          onclick: _ => { changePage(pages.KEY_VALUE_SECRETS_EDIT); },
+          onclick: _ => { changePage("KEY_VALUE_SECRETS_EDIT"); },
           text: "Edit"
         }));
       }
@@ -77,7 +77,7 @@ export class KeyValueSecretsPage extends Page {
         tag: "button",
         id: "versionsButton",
         class: ["uk-button", "uk-button-secondary"],
-        onclick: _ => { changePage(pages.KEY_VALUE_VERSIONS); },
+        onclick: _ => { changePage("KEY_VALUE_VERSIONS"); },
         text: "Versions"
       }));
     }

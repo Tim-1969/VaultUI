@@ -11,7 +11,7 @@ export class Page {
     return "";
   }
   goBack() {
-    changePage(pages.HOME);
+    changePage("HOME");
   }
   cleanup() {
   }

@@ -13,17 +13,17 @@ export class HomePage extends Page {
   async render() {
     pageContent.innerHTML = "";
     if (!getAPIURL()) {
-      changePage(pages.SET_VAULT_URL);
+      changePage("SET_VAULT_URL");
       return;
     }
     if (!getToken()) {
       localStorage.removeItem("token");
-      changePage(pages.LOGIN);
+      changePage("LOGIN");
       return;
     }
     let sealStatus = await getSealStatus();
     if (sealStatus.sealed) {
-      changePage(pages.UNSEAL);
+      changePage("UNSEAL");
       return;
     }
 
@@ -57,7 +57,7 @@ export class HomePage extends Page {
             text: "Renew Lease",
             onclick: () => {
               renewSelf().then(() => {
-                changePage(pages.HOME);
+                changePage("HOME");
               }).catch(e => {
                 setErrorText(e.message);
               });
@@ -70,7 +70,7 @@ export class HomePage extends Page {
             tag: "a",
             text: "Password Generator",
             onclick: () => {
-              changePage(pages.PW_GEN);
+              changePage("PW_GEN");
             }
           })
         })
@@ -89,7 +89,7 @@ export class HomePage extends Page {
       setErrorText(e.message);
       if (e.message == "permission denied") {
         localStorage.removeItem("token");
-        changePage(pages.LOGIN);
+        changePage("LOGIN");
       }
     }
 
@@ -109,7 +109,7 @@ export class HomePage extends Page {
         onclick: _ => {
           pageState.currentBaseMount = "/cubbyhole";
           pageState.currentMountType = "cubbyhole";
-          changePage(pages.KEY_VALUE_VIEW);
+          changePage("KEY_VALUE_VIEW");
         }
       })
     }));
@@ -130,13 +130,13 @@ export class HomePage extends Page {
       let linkPage;
       if (mount.type == "kv") {
         linkText = `K/V (v${mount.options.version}) - ${baseMount}`;
-        linkPage = pages.KEY_VALUE_VIEW;
+        linkPage = "KEY_VALUE_VIEW";
       } else if (mount.type == "totp") {
         linkText = `TOTP - ${baseMount}`;
-        linkPage = pages.TOTP;
+        linkPage = "TOTP";
       } else if (mount.type == "transit"){
         linkText = `Transit - ${baseMount}`;
-        linkPage = pages.TRANSIT_VIEW; 
+        linkPage = "TRANSIT_VIEW"; 
       }
 
       navList.appendChild(makeElement({

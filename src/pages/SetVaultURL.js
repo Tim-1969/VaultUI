@@ -44,7 +44,7 @@ export class SetVaultURLPage extends Page {
       e.preventDefault();
       let formData = new FormData(document.querySelector('#setVaultURLForm'));
       localStorage.setItem('apiurl', formData.get("vaultURL"));
-      changePage(pages.HOME);
+      changePage("HOME");
     });
   }
   get name() {

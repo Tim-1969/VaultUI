@@ -10,9 +10,9 @@ export class KeyValueViewPage extends Page {
   goBack() {
     if (pageState.currentSecretPath.length != 0) {
       pageState.popCurrentSecretPath();
-      changePage(pages.KEY_VALUE_VIEW);
+      changePage("KEY_VALUE_VIEW");
     } else {
-      changePage(pages.HOME);
+      changePage("HOME");
     }
   }
   async render() {
@@ -25,7 +25,7 @@ export class KeyValueViewPage extends Page {
       text: "New",
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
       onclick: () => {
-        changePage(pages.KEY_VALUE_NEW_SECRET);
+        changePage("KEY_VALUE_NEW_SECRET");
       }
     });
     pageContent.appendChild(newButton);
@@ -46,10 +46,10 @@ export class KeyValueViewPage extends Page {
                 onclick: _ => {
                   if (secret.endsWith("/")) {
                     pageState.pushCurrentSecretPath(secret);
-                    changePage(pages.KEY_VALUE_VIEW);
+                    changePage("KEY_VALUE_VIEW");
                   } else {
                     pageState.currentSecret = secret;
-                    changePage(pages.KEY_VALUE_SECRETS);
+                    changePage("KEY_VALUE_SECRETS");
                   }
                 }
               })

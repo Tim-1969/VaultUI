@@ -8,7 +8,7 @@ export class TransitViewPage extends Page {
     super();
   }
   goBack() {
-    changePage(pages.HOME);
+    changePage("HOME");
   }
   async render() {
     pageState.currentSecret = "";
@@ -20,7 +20,7 @@ export class TransitViewPage extends Page {
       text: "New",
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
       onclick: () => {
-        changePage(pages.TRANSIT_NEW_KEY);
+        changePage("TRANSIT_NEW_KEY");
       }
     });
     pageContent.appendChild(newButton);
@@ -40,7 +40,7 @@ export class TransitViewPage extends Page {
                 text: secret,
                 onclick: _ => {
                   pageState.currentSecret = secret;
-                  changePage(pages.TRANSIT_VIEW_SECRET);
+                  changePage("TRANSIT_VIEW_SECRET");
                 }
               })
             });

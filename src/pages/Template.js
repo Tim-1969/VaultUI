@@ -7,7 +7,7 @@ export class TemplatePage extends Page {
     super();
   }
   goBack() {
-    changePage(pages.HOME);
+    changePage("HOME");
   }
   async render() {
     setTitleElement(pageState);

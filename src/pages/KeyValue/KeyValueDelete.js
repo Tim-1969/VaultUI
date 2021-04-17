@@ -10,10 +10,10 @@ export class KeyValueDeletePage extends Page {
   goBack() {
     if (pageState.currentSecretVersion != "0") {
       pageState.currentSecretVersion = "0";
-      changePage(pages.KEY_VALUE_SECRETS);
+      changePage("KEY_VALUE_SECRETS");
     } else {
       pageState.currentSecret = "";
-      changePage(pages.KEY_VALUE_VIEW);
+      changePage("KEY_VALUE_VIEW");
     }
   }
   render() {

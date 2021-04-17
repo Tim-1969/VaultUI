@@ -70,7 +70,7 @@ export class UnsealPage extends Page {
     progressBar.max = keysNeeded;
     if (!data.sealed) {
       progressBar.value = keysNeeded;
-      changePage(pages.HOME);
+      changePage("HOME");
     }
   }
 

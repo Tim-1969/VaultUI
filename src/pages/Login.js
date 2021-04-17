@@ -123,7 +123,7 @@ export class LoginPage extends Page {
       const token = formData.get("token");
       localStorage.setItem('token', token);
       lookupSelf().then(res => {
-        changePage(pages.HOME);
+        changePage("HOME");
       }).catch(e => {
         document.getElementById("tokenInput").classList.add("uk-form-danger");
         setErrorText(e.message);
@@ -134,7 +134,7 @@ export class LoginPage extends Page {
       let formData = new FormData(usernameLoginForm);
       usernameLogin(formData.get("username"), formData.get("password")).then(res => {
         localStorage.setItem("token", res);
-        changePage(pages.HOME);
+        changePage("HOME");
       }).catch(e => {
         document.getElementById("usernameInput").classList.add("uk-form-danger");
         document.getElementById("passwordInput").classList.add("uk-form-danger");

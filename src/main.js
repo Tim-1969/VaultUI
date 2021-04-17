@@ -60,7 +60,7 @@ const pages = {
 
 var pageState = new PageState();
 window.pageState = pageState;
-window.pages = pages;
+window.realPages = pages;
 window.changePage = changePage;
 
 function ListItem(children) {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ListItem(makeElement({
             tag: "a",
             text: "Home",
-            onclick: _ => { changePage(pages.HOME); }
+            onclick: _ => { changePage("HOME"); }
           })),
           ListItem(makeElement({
             tag: "a",
@@ -126,10 +126,10 @@ document.addEventListener('DOMContentLoaded', function () {
   renderPage();
 
   setInterval(async () => {
-    if (pageState.currentPage != pages.UNSEAL) {
+    if (pageState.currentPage != "UNSEAL") {
       let sealStatus = await getSealStatus();
       if (sealStatus.sealed) {
-        changePage(pages.UNSEAL);
+        changePage("UNSEAL");
         return;
       }
     }

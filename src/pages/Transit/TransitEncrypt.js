@@ -12,7 +12,7 @@ export class TransitEncryptPage extends Page {
     super();
   }
   goBack() {
-    changePage(pages.TRANSIT_VIEW_SECRET);
+    changePage("TRANSIT_VIEW_SECRET");
   }
   async render() {
     setTitleElement(pageState);

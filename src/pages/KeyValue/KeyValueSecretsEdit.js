@@ -10,7 +10,7 @@ export class KeyValueSecretsEditPage extends Page {
     super();
   }
   goBack() {
-    changePage(pages.KEY_VALUE_SECRETS);
+    changePage("KEY_VALUE_SECRETS");
   }
   render() {
     setTitleElement(pageState);
@@ -55,7 +55,7 @@ export class KeyValueSecretsEditPage extends Page {
           pageState.currentSecret,
           JSON.parse(jar.toString())
         ).then(resp => {
-          changePage(pages.KEY_VALUE_SECRETS);
+          changePage("KEY_VALUE_SECRETS");
           return;
         }).catch(e => {
           setErrorText(e.message);
