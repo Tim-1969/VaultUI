@@ -7,6 +7,9 @@ export class Page {
   get name() {
     return "Page";
   }
+  get titlePrefix() {
+    return "";
+  }
   goBack() {
     changePage(pages.HOME);
   }

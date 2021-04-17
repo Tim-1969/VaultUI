@@ -76,6 +76,9 @@ export class KeyValueNewPage extends Page {
     });
   }
 
+  get titlePrefix() {
+    return " (new)";
+  }
 
   get name() {
     return "K/V New";

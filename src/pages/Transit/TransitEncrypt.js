@@ -85,6 +85,10 @@ export class TransitEncryptPage extends Page {
     });
   }
 
+  get titlePrefix() {
+    return " (encrypt)";
+  }
+
   get name() {
     return "Transit Encrypt";
   }

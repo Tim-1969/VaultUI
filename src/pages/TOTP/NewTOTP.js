@@ -84,6 +84,11 @@ export class NewTOTPPage extends Page {
       });
     });
   }
+
+  get titlePrefix() {
+    return " (new)";
+  }
+
   get name() {
     return "Create New TOTP";
   }

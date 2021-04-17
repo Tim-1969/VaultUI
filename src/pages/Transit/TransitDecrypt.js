@@ -64,6 +64,10 @@ export class TransitDecryptPage extends Page {
     });
   }
 
+  get titlePrefix() {
+    return " (decrypt)";
+  }
+
   get name() {
     return "Transit Decrypt";
   }

@@ -38,7 +38,9 @@ export class KeyValueDeletePage extends Page {
       ]
     }));
   }
-
+  get titlePrefix() {
+    return " (delete)";
+  }
   get name() {
     return "K/V Delete";
   }

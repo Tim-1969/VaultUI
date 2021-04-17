@@ -64,6 +64,9 @@ export class KeyValueSecretsEditPage extends Page {
     });
   }
 
+  get titlePrefix() {
+    return " (edit)";
+  }
 
   get name() {
     return "K/V Secrets Edit";

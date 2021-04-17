@@ -39,7 +39,10 @@ export class KeyValueVersionsPage extends Page {
         })
       }));
     });
+  }
 
+  get titlePrefix() {
+    return " (versions)";
   }
 
   get name() {

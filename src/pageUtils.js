@@ -42,11 +42,8 @@ export function setPageTitle(title) {
 
 function currentTitleSecretText() {
   let currentSecretText = pageState.currentSecret;
-  if (pageState.currentPage == pages.KEY_VALUE_SECRETS_EDIT) currentSecretText += " (edit)";
-  if (pageState.currentPage == pages.KEY_VALUE_DELETE) currentSecretText += " (delete)";
-  if (pageState.currentPage == pages.KEY_VALUE_VERSIONS) currentSecretText += " (versions)";
-  if (pageState.currentPage == pages.NEW_TOTP) currentSecretText += " (new)";
-  if (pageState.currentPage == pages.TRANSIT_ENCRYPT) currentSecretText += " (encrypt)";
+  currentSecretText += pageState.currentPage.titlePrefix;
+
   if (pageState.currentSecretVersion != "0") currentSecretText += ` (v${pageState.currentSecretVersion})`;
   return currentSecretText;
 }
