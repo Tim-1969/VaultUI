@@ -61,7 +61,6 @@ const pages = {
 var pageState = new PageState();
 window.pageState = pageState;
 window.realPages = pages;
-window.changePage = changePage;
 
 function ListItem(children) {
   return makeElement({

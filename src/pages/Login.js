@@ -1,6 +1,6 @@
 import { Page } from "../types/Page.js";
 import { lookupSelf, usernameLogin } from "../api.js";
-import { setPageContent, setErrorText } from "../pageUtils.js";
+import { setPageContent, setErrorText, changePage } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 import { Margin } from "../elements/Margin.js";
 import { MarginInline } from "../elements/MarginInline.js";

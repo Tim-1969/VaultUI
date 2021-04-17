@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page.js";
 import { getTOTPKeys, getTOTPCode } from "../../api.js";
-import { setTitleElement, setPageContent } from "../../pageUtils.js";
+import { setTitleElement, setPageContent, changePage } from "../../pageUtils.js";
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { makeElement } from "../../htmlUtils.js";
 

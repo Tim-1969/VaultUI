@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page.js";
 import { transitDecrypt } from "../../api.js";
-import { setPageContent, setTitleElement, setErrorText } from "../../pageUtils.js";
+import { setPageContent, setTitleElement, setErrorText, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
 import { Margin } from "../../elements/Margin.js";
 import { CopyableModal } from "../../elements/CopyableModal.js";

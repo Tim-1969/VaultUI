@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page.js";
 import { DoesNotExistError, getSecrets } from "../../api.js";
-import { setErrorText, setTitleElement } from "../../pageUtils.js";
+import { setErrorText, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
 
 export class KeyValueViewPage extends Page {

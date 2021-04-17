@@ -2,7 +2,6 @@ import { Page } from "../types/Page.js";
 import { submitUnsealKey, getSealStatus } from "../api.js";
 import { setPageContent, setErrorText, changePage } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
-import { Margin } from "../elements/Margin.js";
 import { MarginInline } from "../elements/MarginInline.js";
 
 export class UnsealPage extends Page {

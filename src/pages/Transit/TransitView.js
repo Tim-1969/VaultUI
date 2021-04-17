@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page.js";
 import { DoesNotExistError, getTransitKeys } from "../../api.js";
-import { setErrorText, setTitleElement } from "../../pageUtils.js";
+import { setErrorText, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
 
 export class TransitViewPage extends Page {

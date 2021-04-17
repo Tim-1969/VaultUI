@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page.js";
 import { createOrUpdateSecret } from "../../api.js";
-import { setPageContent, setTitleElement, setErrorText } from "../../pageUtils.js";
+import { setPageContent, setTitleElement, setErrorText, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
 
 export class KeyValueNewPage extends Page {
