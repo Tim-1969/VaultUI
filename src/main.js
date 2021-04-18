@@ -169,7 +169,7 @@ function onLoad() {
 
 document.addEventListener('DOMContentLoaded', function () {
   i18next.init({
-    lng: 'de',
+    lng: 'en',
     debug: true,
     resources: {
       en: { translation: translation_en },
