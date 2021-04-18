@@ -73,7 +73,7 @@ export class NewTOTPPage extends Page {
       let formData = new FormData(totpForm);
       let parms = {
         url: formData.get("uri"),
-        key: formData.get("key"),
+        key: formData.get("key").replaceAll("-", "").replaceAll(" ", "").toUpperCase(),
         name: formData.get("name"),
         generate: false
       };
