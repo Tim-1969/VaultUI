@@ -4,15 +4,14 @@ import { makeElement } from "../htmlUtils.js";
 import { getToken } from "../utils.js";
 import { renewSelf } from "../api.js";
 import ClipboardJS from "clipboard";
+import i18next from 'i18next';
 
 
 export class MePage extends Page {
   constructor() {
     super();
   }
-  goBack() {
-    changePage("HOME");
-  }
+
   async render() {
     setPageContent(makeElement({
       tag: "ul",
@@ -22,7 +21,7 @@ export class MePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "a",
-            text: "Log Out",
+            text: i18next.t("log_out_btn"),
             onclick: () => {
               localStorage.removeItem("token");
               changePage("HOME");
@@ -33,7 +32,7 @@ export class MePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "a",
-            text: "Copy Token",
+            text: i18next.t("copy_token_btn"),
             attributes: {
               "data-clipboard-text": getToken(),
             },
@@ -46,7 +45,7 @@ export class MePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "a",
-            text: "Renew Lease",
+            text: i18next.t("renew_lease_btn"),
             onclick: () => {
               renewSelf().then(() => {
                 changePage("HOME");
@@ -61,6 +60,6 @@ export class MePage extends Page {
   }
 
   get name() {
-    return "Me";
+    return i18next.t("me_page_title");
   }
 }

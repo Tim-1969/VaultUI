@@ -3,7 +3,7 @@ import { setErrorText, changePage } from "../pageUtils.js";
 import { getAPIURL, getToken } from "../utils.js";
 import { makeElement } from "../htmlUtils.js";
 import { getSealStatus, lookupSelf, getMounts } from "../api.js";
-import formatDistance from 'date-fns/formatDistance';
+import i18next from 'i18next';
 
 export class HomePage extends Page {
   constructor() {
@@ -35,14 +35,14 @@ export class HomePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "span",
-            text: `VaultURL: ${getAPIURL()}`
+            html: i18next.t("vaulturl_text", {"text": getAPIURL()})
           })
         }),
         makeElement({
           tag: "li",
           children: makeElement({
             tag: "a",
-            text: "Password Generator",
+            text: i18next.t("password_generator_btn"),
             onclick: () => {
               changePage("PW_GEN");
             }
@@ -54,10 +54,9 @@ export class HomePage extends Page {
 
     try {
       let selfTokenInfo = await lookupSelf();
-      let expireTime = formatDistance(new Date(), new Date(selfTokenInfo.expire_time));
       textList.appendChild(makeElement({
         tag: "li",
-        text: `Your token expires in ${expireTime}`
+        text: i18next.t("your_token_expires_in", {"date": new Date(selfTokenInfo.expire_time)})
       }));
     } catch (e) {
       setErrorText(e.message);
@@ -128,6 +127,6 @@ export class HomePage extends Page {
     });
   }
   get name() {
-    return "Home";
+    return i18next.t("home_page_title");
   }
 }

@@ -67,6 +67,7 @@ const pages = {
 import i18next from 'i18next';
 import translation_en from './translations/en.js'
 import translation_de from './translations/de.js'
+import formatDistance from 'date-fns/formatDistance';
 
 
 
@@ -123,7 +124,7 @@ function onLoad() {
           children: [
             ListItem(makeElement({
               tag: "a",
-              text: "Me",
+              text: i18next.t("me_btn"),
               onclick: _ => { changePage("ME"); }
             }))
           ]
@@ -142,7 +143,7 @@ function onLoad() {
           tag: "h3",
           class: "uk-card-title",
           id: "pageTitle",
-          text: "Title"
+          text: ""
         }),
         makeElement({
           tag: "div",
@@ -174,7 +175,12 @@ document.addEventListener('DOMContentLoaded', function () {
     resources: {
       en: { translation: translation_en },
       de: { translation: translation_de },
-
+    },
+    interpolation: {
+      format: function (value, format, _) {
+        if (format === 'until_date' && value instanceof Date) return formatDistance(new Date(), new Date(value));
+        return value;
+      }
     }
   }).then(function (t) {
     onLoad();
