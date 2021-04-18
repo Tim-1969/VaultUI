@@ -1,5 +1,7 @@
 'use strict';
 
+// JS & CSS
+
 import "./scss/main.scss";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import Icons from 'uikit/dist/js/uikit-icons.min.js';
@@ -16,6 +18,8 @@ import {
 import { PageState } from "./PageState.js";
 import { makeElement } from "./htmlUtils.js";
 import { getSealStatus } from './api.js';
+
+// Pages
 
 import {
   HomePage,
@@ -59,6 +63,15 @@ const pages = {
   PW_GEN: new PwGenPage(),
 };
 
+// Translations
+import i18next from 'i18next';
+import translation_en from './translations/en.js'
+import translation_de from './translations/de.js'
+
+
+
+// Globals
+
 var pageState = new PageState();
 window.pageState = pageState;
 window.realPages = pages;
@@ -70,53 +83,53 @@ function ListItem(children) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function onLoad() {
   document.body.innerHTML = "";
   document.body.appendChild(makeElement({
     tag: "nav",
     class: ["uk-navbar", "uk-navbar-container"],
-    children: [ 
+    children: [
       makeElement({
-      tag: "div",
-      class: "uk-navbar-left",
-      children: makeElement({
-        tag: "ul",
-        class: "uk-navbar-nav",
-        children: [
-          ListItem(makeElement({
-            tag: "a",
-            text: "Home",
-            onclick: _ => { changePage("HOME"); }
-          })),
-          ListItem(makeElement({
-            tag: "a",
-            text: "Back",
-            onclick: _ => { pageState.currentPage.goBack(); }
-          })),
-          ListItem(makeElement({
-            tag: "a",
-            text: "Refresh",
-            onclick: _ => { changePage(pageState.currentPage); }
-          })),
-        ]
+        tag: "div",
+        class: "uk-navbar-left",
+        children: makeElement({
+          tag: "ul",
+          class: "uk-navbar-nav",
+          children: [
+            ListItem(makeElement({
+              tag: "a",
+              text: i18next.t("home_btn"),
+              onclick: _ => { changePage("HOME"); }
+            })),
+            ListItem(makeElement({
+              tag: "a",
+              text: i18next.t("back_btn"),
+              onclick: _ => { pageState.currentPage.goBack(); }
+            })),
+            ListItem(makeElement({
+              tag: "a",
+              text: i18next.t("refresh_btn"),
+              onclick: _ => { changePage(pageState.currentPage); }
+            })),
+          ]
+        })
+      }),
+      makeElement({
+        tag: "div",
+        class: "uk-navbar-right",
+        children: makeElement({
+          tag: "ul",
+          class: "uk-navbar-nav",
+          children: [
+            ListItem(makeElement({
+              tag: "a",
+              text: "Me",
+              onclick: _ => { changePage("ME"); }
+            }))
+          ]
+        })
       })
-    }),
-    makeElement({
-      tag: "div",
-      class: "uk-navbar-right",
-      children: makeElement({
-        tag: "ul",
-        class: "uk-navbar-nav",
-        children: [
-          ListItem(makeElement({
-            tag: "a",
-            text: "Me",
-            onclick: _ => { changePage("ME"); }
-          }))
-        ]
-      })
-    })
-  ]
+    ]
   }));
   document.body.appendChild(makeElement({
     tag: "div",
@@ -152,4 +165,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }, 5000);
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  i18next.init({
+    lng: 'de',
+    debug: true,
+    resources: {
+      en: { translation: translation_en },
+      de: { translation: translation_de },
+
+    }
+  }).then(function (t) {
+    onLoad();
+  });
 }, false);
