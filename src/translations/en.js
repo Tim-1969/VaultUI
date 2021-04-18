@@ -3,9 +3,9 @@ module.exports = {
   "home_btn": "Home",
   "back_btn": "Back",
   "refresh_btn": "Refresh",
-  "me_btn": "Me",
+  "me_btn": "Me/Settings",
   // These are the page titles
-  "me_page_title": "Me",
+  "me_page_title": "Me/Settings",
   "home_page_title": "Home",
 
   // These are all o the other translations
