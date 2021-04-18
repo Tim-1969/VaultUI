@@ -20,11 +20,12 @@ export class KeyValueViewPage extends Page {
 
     setTitleElement(pageState);
 
-    pageContent.appendChild(makeElement({
-      tag: "p",
-      condition: pageState.currentMountType == "cubbyhole",
-      text: "In cubbyhole, secrets can be stored as long as the lease of your token is valid. They will be deleted when lease is expired and can only be viewed by your current token.",
-    }));
+    if (pageState.currentMountType == "cubbyhole") {
+      pageContent.appendChild(makeElement({
+        tag: "p",
+        text: "In cubbyhole, secrets can be stored as long as the lease of your token is valid. They will be deleted when lease is expired and can only be viewed by your current token.",
+      }));
+    }
 
     let newButton = makeElement({
       tag: "button",
