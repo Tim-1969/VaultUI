@@ -15,3 +15,8 @@ Use whatever browser you want, I personally test on latest Microsoft Edge Dev bu
 npm install --save-dev
 WEBPACK_MODE=development BROWSER=google-chrome npx webpack serve
 ```
+
+## Translating
+Make sure to keep the order of comments and tags in the translation files `src/translations` the same.
+
+When you want to PR an update, title it "Changed wording in..." or "Synced translations in de" or something along those lines.
