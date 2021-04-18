@@ -4,7 +4,7 @@ import { getAPIURL, getToken } from "../utils.js";
 import { makeElement } from "../htmlUtils.js";
 import { getSealStatus, lookupSelf, getMounts, renewSelf } from "../api.js";
 import formatDistance from 'date-fns/formatDistance';
-
+import ClipboardJS from "clipboard";
 
 export class HomePage extends Page {
   constructor() {
@@ -47,6 +47,19 @@ export class HomePage extends Page {
             onclick: () => {
               localStorage.removeItem("token");
               changePage(pageState.currentPage);
+            }
+          })
+        }),
+        makeElement({
+          tag: "li",
+          children: makeElement({
+            tag: "a",
+            text: "Copy Token",
+            attributes: {
+              "data-clipboard-text": getToken(),
+            },
+            thenRun: (e) => {
+              new ClipboardJS(e);
             }
           })
         }),
