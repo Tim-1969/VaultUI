@@ -19,6 +19,7 @@ import { getSealStatus } from './api.js';
 
 import {
   HomePage,
+  MePage,
   TOTPViewPage,
   NewTOTPPage,
   LoginPage,
@@ -39,6 +40,7 @@ import {
 
 const pages = {
   HOME: new HomePage(),
+  ME: new MePage(),
   TOTP: new TOTPViewPage(),
   NEW_TOTP: new NewTOTPPage(),
   LOGIN: new LoginPage(),
@@ -73,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.appendChild(makeElement({
     tag: "nav",
     class: ["uk-navbar", "uk-navbar-container"],
-    children: makeElement({
+    children: [ 
+      makeElement({
       tag: "div",
       class: "uk-navbar-left",
       children: makeElement({
@@ -97,7 +100,23 @@ document.addEventListener('DOMContentLoaded', function () {
           })),
         ]
       })
+    }),
+    makeElement({
+      tag: "div",
+      class: "uk-navbar-right",
+      children: makeElement({
+        tag: "ul",
+        class: "uk-navbar-nav",
+        children: [
+          ListItem(makeElement({
+            tag: "a",
+            text: "Me",
+            onclick: _ => { changePage("ME"); }
+          }))
+        ]
+      })
     })
+  ]
   }));
   document.body.appendChild(makeElement({
     tag: "div",

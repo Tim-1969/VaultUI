@@ -2,9 +2,8 @@ import { Page } from "../types/Page.js";
 import { setErrorText, changePage } from "../pageUtils.js";
 import { getAPIURL, getToken } from "../utils.js";
 import { makeElement } from "../htmlUtils.js";
-import { getSealStatus, lookupSelf, getMounts, renewSelf } from "../api.js";
+import { getSealStatus, lookupSelf, getMounts } from "../api.js";
 import formatDistance from 'date-fns/formatDistance';
-import ClipboardJS from "clipboard";
 
 export class HomePage extends Page {
   constructor() {
@@ -37,44 +36,6 @@ export class HomePage extends Page {
           children: makeElement({
             tag: "span",
             text: `VaultURL: ${getAPIURL()}`
-          })
-        }),
-        makeElement({
-          tag: "li",
-          children: makeElement({
-            tag: "a",
-            text: "Log Out",
-            onclick: () => {
-              localStorage.removeItem("token");
-              changePage(pageState.currentPage);
-            }
-          })
-        }),
-        makeElement({
-          tag: "li",
-          children: makeElement({
-            tag: "a",
-            text: "Copy Token",
-            attributes: {
-              "data-clipboard-text": getToken(),
-            },
-            thenRun: (e) => {
-              new ClipboardJS(e);
-            }
-          })
-        }),
-        makeElement({
-          tag: "li",
-          children: makeElement({
-            tag: "a",
-            text: "Renew Lease",
-            onclick: () => {
-              renewSelf().then(() => {
-                changePage("HOME");
-              }).catch(e => {
-                setErrorText(e.message);
-              });
-            }
           })
         }),
         makeElement({

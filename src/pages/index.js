@@ -1,4 +1,5 @@
 export { HomePage } from "./Home.js";
+export { MePage } from "./Me.js";
 export { TOTPViewPage } from "./TOTP/TOTPView.js";
 export { NewTOTPPage } from "./TOTP/NewTOTP.js";
 export { LoginPage } from "./Login.js";
