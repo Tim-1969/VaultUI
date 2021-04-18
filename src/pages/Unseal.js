@@ -76,7 +76,7 @@ export class UnsealPage extends Page {
   async handleKeySubmit() {
     let formData = new FormData(this.unsealKeyForm);
 
-    submitUnsealKey(formData.get("key")).then(resp => {
+    submitUnsealKey(formData.get("key")).then(_ => {
       getSealStatus().then(data => {
         this.updateSealProgress(data);
       });

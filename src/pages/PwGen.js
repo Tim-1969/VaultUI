@@ -20,7 +20,7 @@ function random() {
 
 function genPw(len) {
   let pw = "";
-  const pwArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\]^_{|}~".split('');
+  const pwArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'()*+,-./:;<=>?@[]^_{|}~".split('');
   for (let i = 0; i < len; i++) {
     pw = pw.concat(pwArray[Math.floor(random() * pwArray.length)]);
   }

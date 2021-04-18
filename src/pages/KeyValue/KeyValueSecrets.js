@@ -108,7 +108,7 @@ export class KeyValueSecretsPage extends Page {
               pageState.currentSecretPath,
               pageState.currentSecret,
               pageState.currentSecretVersion
-            ).then(resp => {
+            ).then(_ => {
               changePage(pageState.currentPage);
             });
           },
@@ -118,7 +118,7 @@ export class KeyValueSecretsPage extends Page {
 
       const secretsMap = new Map(Object.entries(secretInfo).sort());
 
-      for (let [key, value] of secretsMap) {
+      for (let value of secretsMap.values()) {
         if (typeof value == 'object') isSecretNestedJson = true;
       }
 
@@ -130,7 +130,7 @@ export class KeyValueSecretsPage extends Page {
           html: Prism.highlight(jsonText, Prism.languages.json, 'json')
         }));
       } else {
-        secretsMap.forEach(function (value, key) {
+        secretsMap.forEach((value, key) => {
           let kvListElement = this.makeKVListElement(key, value);
           kvList.appendChild(kvListElement);
         }, this);

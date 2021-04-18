@@ -73,7 +73,7 @@ export class TransitEncryptPage extends Page {
 
   transitEncryptFormHandler() {
     let formData = new FormData(this.transitEncryptForm);
-    let encodedData = 
+    let encodedData =
       formData.get("base64Checkbox") == "on" ? formData.get("plaintext") : btoa(formData.get("plaintext"));
     transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, encodedData).then(res => {
       console.log(res);

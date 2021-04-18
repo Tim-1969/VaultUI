@@ -22,7 +22,7 @@ export class PageState extends Page {
     return localStorage.getItem('currentBaseMount') || "";
   }
   set currentBaseMount(value) {
-    return localStorage.setItem('currentBaseMount', value);
+    localStorage.setItem('currentBaseMount', value);
   }
 
 
@@ -43,28 +43,28 @@ export class PageState extends Page {
     return JSON.parse(localStorage.getItem('currentSecretPath') || "[]");
   }
   set currentSecretPath(value) {
-    return localStorage.setItem('currentSecretPath', JSON.stringify(value));
+    localStorage.setItem('currentSecretPath', JSON.stringify(value));
   }
 
   get currentSecretVersion() {
     return localStorage.getItem('currentSecretVersion') || "0";
   }
   set currentSecretVersion(value) {
-    return localStorage.setItem('currentSecretVersion', value);
+    localStorage.setItem('currentSecretVersion', value);
   }
 
   get currentSecret() {
     return localStorage.getItem('currentSecret') || "";
   }
   set currentSecret(value) {
-    return localStorage.setItem('currentSecret', value);
+    localStorage.setItem('currentSecret', value);
   }
 
   get currentMountType() {
     return localStorage.getItem('currentMountType') || "";
   }
   set currentMountType(value) {
-    return localStorage.setItem('currentMountType', value);
+    localStorage.setItem('currentMountType', value);
   }
   get currentPage() {
     let curPage = localStorage.getItem('currentPage') || "HOME";

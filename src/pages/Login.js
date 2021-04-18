@@ -122,7 +122,7 @@ export class LoginPage extends Page {
       let formData = new FormData(tokenLoginForm);
       const token = formData.get("token");
       localStorage.setItem('token', token);
-      lookupSelf().then(res => {
+      lookupSelf().then(_ => {
         changePage("HOME");
       }).catch(e => {
         document.getElementById("tokenInput").classList.add("uk-form-danger");

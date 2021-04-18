@@ -77,7 +77,7 @@ export class NewTOTPPage extends Page {
         name: formData.get("name"),
         generate: false
       };
-      addNewTOTP(pageState.currentBaseMount, parms).then(res => {
+      addNewTOTP(pageState.currentBaseMount, parms).then(_ => {
         changePage("TOTP");
       }).catch(e => {
         setErrorText(`API Error: ${e.message}`);

@@ -54,7 +54,7 @@ export class KeyValueSecretsEditPage extends Page {
           pageState.currentSecretPath,
           pageState.currentSecret,
           JSON.parse(jar.toString())
-        ).then(resp => {
+        ).then(_ => {
           changePage("KEY_VALUE_SECRETS");
           return;
         }).catch(e => {
