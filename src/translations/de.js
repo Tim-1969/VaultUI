@@ -16,4 +16,5 @@ module.exports = {
   "vaulturl_text": "Tresor-URL: {{text}}",
   "password_generator_btn": "Passwortgenerator",
   "your_token_expires_in": "Ihr Token läuft in {{date, until_date}} ab"
+
 }
