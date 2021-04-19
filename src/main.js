@@ -172,7 +172,8 @@ function onLoad() {
 
 document.addEventListener('DOMContentLoaded', function () {
   i18next.init({
-    lng: 'en',
+    lng: localStorage.getItem("language") || "en",
+    fallbackLng: 'en',
     debug: true,
     resources: {
       en: { translation: translation_en },

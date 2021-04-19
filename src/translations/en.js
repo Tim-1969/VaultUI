@@ -18,6 +18,11 @@ module.exports = {
 
   "vaulturl_text": "Vault URL: {{text}}",
   "password_generator_btn": "Password Generator",
-  "your_token_expires_in": "Your token expires in {{date, until_date}}"
+  "your_token_expires_in": "Your token expires in {{date, until_date}}",
+
+  "unseal_vault_text": "Unseal the Vault",
+  "submit_key_btn": "Submit Key",
+  "key_input_placeholder": "Key",
+  "unseal_keys_progress": "Keys: {{progress}}/{{keys_needed}}"
 
 }

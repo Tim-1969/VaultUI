@@ -19,5 +19,4 @@ module.exports = {
   "vaulturl_text": "Vault URL: {{text}}",
   "password_generator_btn": "Wachtwoordgenerator",
   "your_token_expires_in": "Uw token vervalt in {{date, until_date}}"
-
 }

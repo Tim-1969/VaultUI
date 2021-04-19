@@ -74,19 +74,6 @@ export class HomePage extends Page {
     const navList = makeElement({ tag: "ul", class: ["uk-nav", "uk-nav-default", "uk-margin-top"] });
     pageContent.appendChild(navList);
 
-    navList.appendChild(makeElement({
-      tag: "li",
-      children: makeElement({
-        tag: "a",
-        text: "Cubbyhole - /cubbyhole",
-        onclick: _ => {
-          pageState.currentBaseMount = "/cubbyhole";
-          pageState.currentMountType = "cubbyhole";
-          changePage("KEY_VALUE_VIEW");
-        }
-      })
-    }));
-
     let mounts = await getMounts();
     // sort it by secretPath so it's in alphabetical order consistantly. 
     const mountsMap = new Map(Object.entries(mounts).sort());
@@ -95,7 +82,7 @@ export class HomePage extends Page {
       if (typeof mount != 'object') return;
       if (mount == null) return;
       if (!("type" in mount)) return;
-      if (!(["kv", "totp", "transit"].includes(mount.type))) return;
+      if (!(["kv", "totp", "transit", "cubbyhole"].includes(mount.type))) return;
 
       let mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
 
@@ -110,6 +97,9 @@ export class HomePage extends Page {
       } else if (mount.type == "transit"){
         linkText = `Transit - ${baseMount}`;
         linkPage = "TRANSIT_VIEW"; 
+      } else if (mount.type == "cubbyhole"){
+        linkText = `Cubbyhole - ${baseMount}`;
+        linkPage = "KEY_VALUE_VIEW"; 
       }
 
       navList.appendChild(makeElement({

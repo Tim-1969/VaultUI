@@ -3,6 +3,7 @@ import { submitUnsealKey, getSealStatus } from "../api.js";
 import { setPageContent, setErrorText, changePage } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 import { MarginInline } from "../elements/MarginInline.js";
+import i18next from 'i18next';
 
 export class UnsealPage extends Page {
   constructor() {
@@ -18,14 +19,14 @@ export class UnsealPage extends Page {
           attributes: {
             required: true,
             type: "password",
-            placeholder: "Key",
+            placeholder: i18next.t("key_input_placeholder"),
             name: "key"
           }
         })),
         MarginInline(makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: "Submit Key"
+          text: i18next.t("submit_key_btn")
         })),
       ]
     });
@@ -37,7 +38,7 @@ export class UnsealPage extends Page {
     });
     this.unsealProgressText = makeElement({
       tag: "p",
-      text: "Keys: 0/0",
+      text: i18next.t("unseal_keys_progress", { progress: "0", keys_needed: "0" }),
     });
 
     setPageContent(makeElement({
@@ -63,7 +64,10 @@ export class UnsealPage extends Page {
     let progress = data.progress;
     let keysNeeded = data.t;
     let text = this.unsealProgressText;
-    text.innerText = `Keys: ${progress}/${keysNeeded}`;
+    text.innerText = i18next.t("unseal_keys_progress", {
+      progress: String(progress),
+      keys_needed: String(keysNeeded)
+    });
     let progressBar = this.unsealProgress;
     progressBar.value = progress;
     progressBar.max = keysNeeded;
@@ -85,6 +89,6 @@ export class UnsealPage extends Page {
     });
   }
   get name() {
-    return "Unseal";
+    return i18next.t("unseal_vault_text");
   }
 }
