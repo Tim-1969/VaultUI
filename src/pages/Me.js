@@ -54,7 +54,17 @@ export class MePage extends Page {
               });
             }
           })
-        })
+        }),
+        makeElement({
+          tag: "li",
+          children: makeElement({
+            tag: "a",
+            text: i18next.t("change_language_btn"),
+            onclick: () => {
+              changePage("SET_LANGUAGE");
+            }
+          })
+        }),
       ]
     }));
   }

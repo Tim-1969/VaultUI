@@ -15,8 +15,8 @@ export function setErrorText(text) {
   });
 }
 
-export function changePage(page) {
-  if (pageState.currentPage) {
+export function changePage(page, shouldSwitch = true) {
+  if (pageState.currentPage && shouldSwitch) {
     pageState.currentPage.cleanup();
   }
   if (typeof page == 'object') {
@@ -24,7 +24,9 @@ export function changePage(page) {
   } else {
     pageState.currentPage = realPages[page];
   }
-  renderPage();
+  if (shouldSwitch) {
+    renderPage();
+  }
 }
 
 export function renderPage() {

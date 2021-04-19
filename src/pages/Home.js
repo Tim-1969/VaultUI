@@ -11,6 +11,10 @@ export class HomePage extends Page {
   }
   async render() {
     pageContent.innerHTML = "";
+    if (!localStorage.getItem("language")) {
+      changePage("SET_LANGUAGE");
+      return;
+    }
     if (!getAPIURL()) {
       changePage("SET_VAULT_URL");
       return;

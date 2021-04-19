@@ -70,6 +70,10 @@ export class PageState extends Page {
     let curPage = localStorage.getItem('currentPage') || "HOME";
     return realPages[curPage];
   }
+  get currentPageString() {
+    let key = getKeyByObjectPropertyValue(realPages, this.currentPage);
+    return key;
+  }
   set currentPage(value) {
     let key = getKeyByObjectPropertyValue(realPages, value);
     localStorage.setItem('currentPage', key);

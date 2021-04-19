@@ -40,6 +40,7 @@ import {
   KeyValueDeletePage,
   KeyValueSecretsEditPage,
   PwGenPage,
+  SetLanguagePage,
 } from "./pages";
 
 const pages = {
@@ -50,6 +51,7 @@ const pages = {
   LOGIN: new LoginPage(),
   SET_VAULT_URL: new SetVaultURLPage(),
   UNSEAL: new UnsealPage(),
+  SET_LANGUAGE: new SetLanguagePage(),
   TRANSIT_VIEW: new TransitViewPage(),
   TRANSIT_VIEW_SECRET: new TransitViewSecretPage(),
   TRANSIT_ENCRYPT: new TransitEncryptPage(),
@@ -159,7 +161,7 @@ function onLoad() {
   renderPage();
 
   setInterval(async () => {
-    if (pageState.currentPage != "UNSEAL") {
+    if (pageState.currentPageString != "UNSEAL") {
       if (!localStorage.getItem('apiurl')) { return; }
       let sealStatus = await getSealStatus();
       if (sealStatus.sealed) {
