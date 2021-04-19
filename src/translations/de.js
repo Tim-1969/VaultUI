@@ -1,4 +1,7 @@
 module.exports = {
+  // The localised name for the language
+  "language_name": "Deutsche",
+
   // These are the buttons on the top bar.
   "home_btn": "Startseite",
   "back_btn": "Zurück",
