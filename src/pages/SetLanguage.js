@@ -25,7 +25,7 @@ export class SetLanguagePage extends Page {
             return makeElement({
               tag: "option",
               text: i18next.getFixedT(languageID, null)("language_name"),
-              value: languageID
+              attributes: {value: languageID}
             })
           })
         })
