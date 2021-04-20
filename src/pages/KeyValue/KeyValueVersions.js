@@ -41,7 +41,7 @@ export class KeyValueVersionsPage extends Page {
     });
   }
 
-  get titlePrefix() {
+  get titleSuffix() {
     return " (versions)";
   }
 

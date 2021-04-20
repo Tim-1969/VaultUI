@@ -85,7 +85,7 @@ export class TransitEncryptPage extends Page {
     });
   }
 
-  get titlePrefix() {
+  get titleSuffix() {
     return " (encrypt)";
   }
 

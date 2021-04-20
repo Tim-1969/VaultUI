@@ -86,7 +86,7 @@ export class TransitDecryptPage extends Page {
     });
   }
 
-  get titlePrefix() {
+  get titleSuffix() {
     return " (decrypt)";
   }
 

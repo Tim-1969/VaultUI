@@ -85,7 +85,7 @@ export class NewTOTPPage extends Page {
     });
   }
 
-  get titlePrefix() {
+  get titleSuffix() {
     return " (new)";
   }
 

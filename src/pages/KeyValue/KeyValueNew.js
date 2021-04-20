@@ -76,7 +76,7 @@ export class KeyValueNewPage extends Page {
     });
   }
 
-  get titlePrefix() {
+  get titleSuffix() {
     return " (new)";
   }
 

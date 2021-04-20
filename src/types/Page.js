@@ -7,7 +7,7 @@ export class Page {
   get name() {
     return "Page";
   }
-  get titlePrefix() {
+  get titleSuffix() {
     return "";
   }
   goBack() {

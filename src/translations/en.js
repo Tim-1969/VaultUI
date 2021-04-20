@@ -38,7 +38,12 @@ module.exports = {
   "token_input": "Token",
   "username_input": "Username",
   "password_input": "Password",
-  "log_in_btn": "Login"
+  "log_in_btn": "Login",
+
+  "kv_delete_title": "K/V Delete",
+  "kv_delete_text": "Are you sure you want to delete this?",
+  "kv_delete_btn": "Delete",
+  "kv_delete_suffix": " (delete)",
 
 
 }

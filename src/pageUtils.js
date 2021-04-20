@@ -48,7 +48,7 @@ export function setPageTitle(title) {
 
 function currentTitleSecretText() {
   let currentSecretText = pageState.currentSecret;
-  currentSecretText += pageState.currentPage.titlePrefix;
+  currentSecretText += pageState.currentPage.titleSuffix;
 
   if (pageState.currentSecretVersion != "0") currentSecretText += ` (v${pageState.currentSecretVersion})`;
   return currentSecretText;

@@ -2,6 +2,7 @@ import { Page } from "../../types/Page.js";
 import { deleteSecret } from "../../api.js";
 import { setPageContent, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
+import i18next from 'i18next';
 
 export class KeyValueDeletePage extends Page {
   constructor() {
@@ -23,12 +24,12 @@ export class KeyValueDeletePage extends Page {
       children: [
         makeElement({
           tag: "h5",
-          text: "Are you sure you want to delete this?"
+          text: i18next.t("kv_delete_text")
         }),
         makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-danger"],
-          text: "Delete",
+          text: i18next.t("kv_delete_btn"),
           onclick: _ => {
             deleteSecret(pageState.currentBaseMount, pageState.currentSecretPath, pageState.currentSecret, pageState.currentSecretVersion).then(() => {
               this.goBack();
@@ -38,10 +39,10 @@ export class KeyValueDeletePage extends Page {
       ]
     }));
   }
-  get titlePrefix() {
-    return " (delete)";
+  get titleSuffix() {
+    return i18next.t("kv_delete_suffix");
   }
   get name() {
-    return "K/V Delete";
+    return i18next.t("kv_delete_title");
   }
 }

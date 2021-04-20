@@ -64,7 +64,7 @@ export class KeyValueSecretsEditPage extends Page {
     });
   }
 
-  get titlePrefix() {
+  get titleSuffix() {
     return " (edit)";
   }
 
