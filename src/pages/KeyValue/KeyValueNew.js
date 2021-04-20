@@ -2,6 +2,7 @@ import { Page } from "../../types/Page.js";
 import { createOrUpdateSecret } from "../../api.js";
 import { setPageContent, setTitleElement, setErrorText, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
+import i18next from 'i18next';
 
 export class KeyValueNewPage extends Page {
   constructor() {
@@ -25,7 +26,7 @@ export class KeyValueNewPage extends Page {
             attributes: {
               required: true,
               type: "text",
-              placeholder: "Relative Path",
+              placeholder: i18next.t("kv_new_path"),
               name: "path"
             }
           })
@@ -38,7 +39,7 @@ export class KeyValueNewPage extends Page {
         makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: "Create Empty Secret",
+          text: i18next.t("kv_new_create_btn"),
           attributes: {
             type: "submit",
           }
@@ -77,10 +78,10 @@ export class KeyValueNewPage extends Page {
   }
 
   get titleSuffix() {
-    return " (new)";
+    return i18next.t("kv_new_suffix");
   }
 
   get name() {
-    return "K/V New";
+    return i18next.t("kv_new_title");
   }
 }

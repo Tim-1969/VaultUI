@@ -45,5 +45,8 @@ module.exports = {
   "kv_delete_btn": "Delete",
   "kv_delete_suffix": " (delete)",
 
-
+  "kv_new_title": "K/V New",
+  "kv_new_suffix": " (new)",
+  "kv_new_path": "Relative Path",
+  "kv_new_create_btn": "Create Empty Secret"
 }
