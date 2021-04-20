@@ -71,6 +71,7 @@ import translation_en from './translations/en.js'
 import translation_de from './translations/de.js'
 import translation_ru from './translations/ru.js'
 import translation_nl from './translations/nl.js'
+import translation_fr from './translations/fr.js'
 import formatDistance from 'date-fns/formatDistance';
 
 
@@ -190,6 +191,8 @@ document.addEventListener('DOMContentLoaded', function () {
       de: { translation: translation_de },
       ru: { translation: translation_ru },
       nl: { translation: translation_nl },
+      fr: { translation: translation_fr },
+
     },
     interpolation: {
       format: function (value, format, _) {

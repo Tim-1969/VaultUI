@@ -4,7 +4,7 @@ import { makeElement } from "../htmlUtils.js";
 import { Margin } from "../elements/Margin.js";
 import i18next from 'i18next';
 
-let languages = ["en", "de", "nl", "ru"];
+let languages = ["en", "de", "nl", "ru", "fr"];
 
 export class SetLanguagePage extends Page {
   constructor() {
