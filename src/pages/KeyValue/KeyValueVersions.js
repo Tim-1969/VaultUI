@@ -8,7 +8,7 @@ export class KeyValueVersionsPage extends Page {
     super();
   }
   goBack() {
-    changePage("KEY_VALUE_SECRETS");
+    changePage("KEY_VALUE_SECRET");
   }
   async render() {
     setTitleElement(pageState);
@@ -34,7 +34,7 @@ export class KeyValueVersionsPage extends Page {
           text: `v${ver}`,
           onclick: _ => {
             pageState.currentSecretVersion = ver;
-            changePage("KEY_VALUE_SECRETS");
+            changePage("KEY_VALUE_SECRET");
           }
         })
       }));

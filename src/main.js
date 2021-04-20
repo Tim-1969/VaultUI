@@ -34,11 +34,11 @@ import {
   TransitEncryptPage,
   TransitDecryptPage,
   KeyValueViewPage,
-  KeyValueSecretsPage,
+  KeyValueSecretPage,
   KeyValueVersionsPage,
   KeyValueNewPage,
   KeyValueDeletePage,
-  KeyValueSecretsEditPage,
+  KeyValueSecretEditPage,
   PwGenPage,
   SetLanguagePage,
 } from "./pages";
@@ -57,11 +57,11 @@ const pages = {
   TRANSIT_ENCRYPT: new TransitEncryptPage(),
   TRANSIT_DECRYPT: new TransitDecryptPage(),
   KEY_VALUE_VIEW: new KeyValueViewPage(),
-  KEY_VALUE_SECRETS: new KeyValueSecretsPage(),
+  KEY_VALUE_SECRET: new KeyValueSecretPage(),
   KEY_VALUE_VERSIONS: new KeyValueVersionsPage(),
   KEY_VALUE_NEW_SECRET: new KeyValueNewPage(),
   KEY_VALUE_DELETE: new KeyValueDeletePage(),
-  KEY_VALUE_SECRETS_EDIT: new KeyValueSecretsEditPage(),
+  KEY_VALUE_SECRET_EDIT: new KeyValueSecretEditPage(),
   PW_GEN: new PwGenPage(),
 };
 

@@ -4,9 +4,10 @@ import { setPageContent, setTitleElement, changePage } from "../../pageUtils.js"
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { makeElement } from "../../htmlUtils.js";
 import Prism from "prismjs";
+import i18next from 'i18next';
 
 
-export class KeyValueSecretsPage extends Page {
+export class KeyValueSecretPage extends Page {
   constructor() {
     super();
   }
@@ -32,7 +33,7 @@ export class KeyValueSecretsPage extends Page {
         }),
         makeElement({
           tag: "p",
-          text: "Loading..",
+          text: i18next.t("kv_secret_loading"),
           id: "loadingText"
         }),
         makeElement({
@@ -67,7 +68,7 @@ export class KeyValueSecretsPage extends Page {
           tag: "button",
           id: "editButton",
           class: ["uk-button", "uk-margin", "uk-button-primary"],
-          onclick: _ => { changePage("KEY_VALUE_SECRETS_EDIT"); },
+          onclick: _ => { changePage("KEY_VALUE_SECRET_EDIT"); },
           text: "Edit"
         }));
       }
@@ -94,12 +95,12 @@ export class KeyValueSecretsPage extends Page {
 
         kvList.appendChild(makeElement({
           tag: "p",
-          text: "This secret version has been soft deleted but remains restorable, do you want to restore it?"
+          text: i18next.t("kv_secret_deleted_text")
         }));
 
         kvList.appendChild(makeElement({
           tag: "button",
-          text: "Restore Secret Version",
+          text: i18next.t("kv_secret_restore_btn"),
           id: "restoreButton",
           class: ["uk-button", "uk-button-primary"],
           onclick: () => {
@@ -147,6 +148,6 @@ export class KeyValueSecretsPage extends Page {
   }
 
   get name() {
-    return "K/V Secret";
+    return i18next.t("kv_secret_title");
   }
 }

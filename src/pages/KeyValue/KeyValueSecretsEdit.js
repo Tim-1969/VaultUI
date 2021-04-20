@@ -5,12 +5,12 @@ import { setPageContent, setTitleElement, setErrorText, changePage } from "../..
 import { makeElement } from "../../htmlUtils.js";
 import { CodeJar } from "codejar";
 
-export class KeyValueSecretsEditPage extends Page {
+export class KeyValueSecretEditPage extends Page {
   constructor() {
     super();
   }
   goBack() {
-    changePage("KEY_VALUE_SECRETS");
+    changePage("KEY_VALUE_SECRET");
   }
   render() {
     setTitleElement(pageState);
@@ -55,7 +55,7 @@ export class KeyValueSecretsEditPage extends Page {
           pageState.currentSecret,
           JSON.parse(jar.toString())
         ).then(_ => {
-          changePage("KEY_VALUE_SECRETS");
+          changePage("KEY_VALUE_SECRET");
           return;
         }).catch(e => {
           setErrorText(e.message);

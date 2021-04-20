@@ -56,7 +56,7 @@ export class KeyValueViewPage extends Page {
                     changePage("KEY_VALUE_VIEW");
                   } else {
                     pageState.currentSecret = secret;
-                    changePage("KEY_VALUE_SECRETS");
+                    changePage("KEY_VALUE_SECRET");
                   }
                 }
               })
