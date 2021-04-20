@@ -93,6 +93,13 @@ module.exports = {
   "totp_view_empty": "You seem to have no TOTP codes here, would you like to create one?",
   "totp_view_loading_box": "Loading..",
 
+  // New TOTP Key Page
+  "totp_new_title": "New TOTP Key",
+  "totp_new_suffix": " (new)",
+  "totp_new_name_text": "TOTP Key Name",
+  "totp_new_info": "You need either a key or a URI, URI prefered but may not work. Just scan the QR code and copy the URL.",
+  "totp_new_uri_input": "URI",
+  "totp_new_key_input": "Key",
 
 
 }

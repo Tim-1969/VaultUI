@@ -4,6 +4,7 @@ import { setTitleElement, setPageContent, setErrorText, changePage } from "../..
 import { makeElement } from "../../htmlUtils.js";
 import { Margin } from "../../elements/Margin.js";
 import { MarginInline } from "../../elements/MarginInline.js";
+import i18next from 'i18next';
 
 export class NewTOTPPage extends Page {
   constructor() {
@@ -24,20 +25,20 @@ export class NewTOTPPage extends Page {
           attributes: {
             required: true,
             type: "text",
-            placeholder: "TOTP Name",
+            placeholder: i18next.t("totp_new_name_text"),
             name: "name"
           }
         })),
         makeElement({
           tag: "p",
-          text: "You need either a key or a URI, URI prefered. Just scan the QR code and copy the UI."
+          text: i18next.t("totp_new_info")
         }),
         Margin(makeElement({
           tag: "input",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
             type: "text",
-            placeholder: "URI",
+            placeholder: i18next.t("totp_new_uri_input"),
             name: "uri"
           }
         })),
@@ -46,7 +47,7 @@ export class NewTOTPPage extends Page {
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
             type: "text",
-            placeholder: "Key",
+            placeholder: i18next.t("totp_new_key_input"),
             name: "key"
           }
         })),
@@ -58,7 +59,7 @@ export class NewTOTPPage extends Page {
         MarginInline(makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: "Add",
+          text: i18next.t("totp_new_add_btn"),
           attributes: {
             type: "submit"
           }
@@ -86,10 +87,10 @@ export class NewTOTPPage extends Page {
   }
 
   get titleSuffix() {
-    return " (new)";
+    return i18next.t("totp_new_suffix");
   }
 
   get name() {
-    return "Create New TOTP";
+    return i18next.t("totp_new_title");
   }
 }
