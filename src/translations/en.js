@@ -65,7 +65,9 @@ module.exports = {
   "kv_secret_loading": "Loading Secret..",
   "kv_secret_delete_btn": "Delete",
   "kv_secret_delete_all_btn": "Delete All Versions",
-  "kv_secret_delete_version_btn": "Delete Version {{ version }}"
+  "kv_secret_delete_version_btn": "Delete Version {{ version }}",
+  "kv_secret_edit_btn": "Edit",
+  "kv_secret_versions_btn": "Versions"
 
 
 }
