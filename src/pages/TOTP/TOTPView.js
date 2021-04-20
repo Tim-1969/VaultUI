@@ -3,6 +3,7 @@ import { getTOTPKeys, getTOTPCode, DoesNotExistError } from "../../api.js";
 import { setTitleElement, setPageContent, changePage, setErrorText } from "../../pageUtils.js";
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { makeElement } from "../../htmlUtils.js";
+import i18next from 'i18next';
 
 export class TOTPViewPage extends Page {
   constructor() {
@@ -17,13 +18,13 @@ export class TOTPViewPage extends Page {
       children: [
         makeElement({
           tag: "a",
-          text: "Add new TOTP",
+          text: i18next.t("totp_view_new_btn"),
           onclick: _ => { changePage("NEW_TOTP"); }
         }),
         makeElement({
           tag: "p",
           id: "loadingText",
-          text: "Loading TOTP Codes..",
+          text: i18next.t("totp_view_loading"),
         }),
         makeElement({ tag: "br" }),
         makeElement({ tag: "br" }),
@@ -46,7 +47,7 @@ export class TOTPViewPage extends Page {
     }).catch(e => {
       if (e == DoesNotExistError) {
         let loadingText = document.getElementById("loadingText");
-        loadingText.innerText =  "You seem to have no TOTP codes here, would you like to create one?";
+        loadingText.innerText =  i18next.t("totp_view_empty");
       } else {
         setErrorText(e.message);
       }
@@ -60,7 +61,7 @@ export class TOTPViewPage extends Page {
 
   makeTOTPListElement(totpKeyName) {
     let totpKeyBox = CopyableInputBox(totpKeyName, false);
-    let totpValueBox = CopyableInputBox("Loading..");
+    let totpValueBox = CopyableInputBox(i18next.t("totp_view_loading_box"));
 
     let gridElement = makeElement({
       tag: "div",
@@ -73,6 +74,6 @@ export class TOTPViewPage extends Page {
     return gridElement;
   }
   get name() {
-    return "TOTP";
+    return i18next.t("totp_view_title");
   }
 }

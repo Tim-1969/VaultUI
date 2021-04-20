@@ -86,6 +86,13 @@ module.exports = {
   "kv_view_new_btn": "New",
   "kv_view_none_here_text": "You seem to have no secrets here, would you like to create one?",
 
+  // TOTP View Page
+  "totp_view_title": "TOTP",
+  "totp_view_new_btn": "Add new TOTP key",
+  "totp_view_loading": "Loading TOTP Codes..",
+  "totp_view_empty": "You seem to have no TOTP codes here, would you like to create one?",
+  "totp_view_loading_box": "Loading..",
+
 
 
 }
