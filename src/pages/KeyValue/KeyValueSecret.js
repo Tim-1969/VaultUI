@@ -48,11 +48,16 @@ export class KeyValueSecretPage extends Page {
     let isSecretNestedJson = false;
     let caps = await getCapabilities(pageState.currentBaseMount, pageState.currentSecretPath, pageState.currentSecret);
     if (caps.includes("delete")) {
-      let deleteButtonText = "Delete";
+      let deleteButtonText = i18next.t("kv_secret_delete_btn");
       if (pageState.currentMountType == "kv-v2" && pageState.currentSecretVersion == "0") {
-        deleteButtonText = `Delete All Versions`;
+        deleteButtonText = i18next.t("kv_secret_delete_all_btn");
       } else if (pageState.currentMountType == "kv-v2" && pageState.currentSecretVersion != "0") {
-        deleteButtonText = `Delete Version ${pageState.currentSecretVersion}`;
+        deleteButtonText = i18next.t(
+          "kv_secret_delete_version_btn",
+          {
+            "version": pageState.currentSecretVersion
+          }
+        );
       }
       buttonsBlock.appendChild(makeElement({
         tag: "button",
@@ -69,7 +74,7 @@ export class KeyValueSecretPage extends Page {
           id: "editButton",
           class: ["uk-button", "uk-margin", "uk-button-primary"],
           onclick: _ => { changePage("KEY_VALUE_SECRET_EDIT"); },
-          text: "Edit"
+          text: i18next.t("kv_secret_edit_btn")
         }));
       }
     }
@@ -79,7 +84,7 @@ export class KeyValueSecretPage extends Page {
         id: "versionsButton",
         class: ["uk-button", "uk-button-secondary"],
         onclick: _ => { changePage("KEY_VALUE_VERSIONS"); },
-        text: "Versions"
+        text: i18next.t("kv_secret_versions_btn")
       }));
     }
 

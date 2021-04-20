@@ -63,7 +63,9 @@ module.exports = {
   "kv_secret_deleted_text": "This secret version has been soft deleted but remains restorable, do you want to restore it?",
   "kv_secret_restore_btn": "Restore Secret Version",
   "kv_secret_loading": "Loading Secret..",
-  "kv_secret_delete_btn": ""
+  "kv_secret_delete_btn": "Delete",
+  "kv_secret_delete_all_btn": "Delete All Versions",
+  "kv_secret_delete_version_btn": "Delete Version {{ version }}"
 
 
 }
