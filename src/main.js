@@ -74,6 +74,14 @@ import translation_nl from './translations/nl.js'
 import formatDistance from 'date-fns/formatDistance';
 
 
+/*import "en-GB" as date_locale_en from 'date-fns/locale'
+
+function getDateLocale() {
+  let locales = {
+    en:
+  }
+}*/
+
 
 // Globals
 

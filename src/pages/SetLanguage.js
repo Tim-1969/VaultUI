@@ -25,7 +25,7 @@ export class SetLanguagePage extends Page {
             return makeElement({
               tag: "option",
               text: i18next.getFixedT(languageID, null)("language_name"),
-              attributes: {value: languageID}
+              attributes: { value: languageID }
             })
           })
         })
@@ -52,8 +52,8 @@ export class SetLanguagePage extends Page {
       let language = formData.get("language");
       localStorage.setItem('language', language);
       i18next.changeLanguage(language).then((t) => {
-          changePage("HOME", false);
-          location.reload();
+        changePage("HOME", false);
+        location.reload();
       });
     });
   }

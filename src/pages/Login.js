@@ -4,6 +4,7 @@ import { setPageContent, setErrorText, changePage } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 import { Margin } from "../elements/Margin.js";
 import { MarginInline } from "../elements/MarginInline.js";
+import i18next from 'i18next';
 
 export class LoginPage extends Page {
   constructor() {
@@ -19,14 +20,14 @@ export class LoginPage extends Page {
           attributes: {
             required: true,
             type: "password",
-            placeholder: "Token",
+            placeholder: i18next.t("token_input"),
             name: "token"
           }
         })),
         MarginInline(makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: "Log In",
+          text: i18next.t("log_in_btn"),
           attributes: {
             type: "submit"
           }
@@ -44,7 +45,7 @@ export class LoginPage extends Page {
           attributes: {
             required: true,
             type: "text",
-            placeholder: "Username",
+            placeholder: i18next.t("username_input"),
             name: "username"
           }
         })),
@@ -55,14 +56,14 @@ export class LoginPage extends Page {
           attributes: {
             required: true,
             type: "password",
-            placeholder: "Password",
+            placeholder: i18next.t("password_input"),
             name: "password"
           }
         })),
         MarginInline(makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: "Log In",
+          text: i18next.t("log_in_btn"),
           attributes: {
             type: "submit"
           }
@@ -83,14 +84,14 @@ export class LoginPage extends Page {
               id: "tokenInput",
               children: makeElement({
                 tag: "a",
-                text: "Token"
+                text: i18next.t("log_in_with_token")
               })
             }),
             makeElement({
               tag: "li",
               children: makeElement({
                 tag: "a",
-                text: "Username"
+                text: i18next.t("log_in_with_username")
               })
             })
           ]
@@ -144,6 +145,6 @@ export class LoginPage extends Page {
   }
 
   get name() {
-    return "Login";
+    return i18next.t("log_in_title");
   }
 }

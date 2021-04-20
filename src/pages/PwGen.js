@@ -1,8 +1,9 @@
 import { Page } from "../types/Page.js";
 import { setPageContent } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
-
 import { CopyableInputBox } from "../elements/CopyableInputBox.js";
+import i18next from 'i18next';
+
 
 function random() {
   const {
@@ -40,7 +41,7 @@ export class PwGenPage extends Page {
         inputBox,
         makeElement({
           tag: "button",
-          text: "Gen New Password",
+          text: i18next.t("gen_password_btn"),
           class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
           onclick: () => {
             inputBox.setText(genPw(24));
@@ -51,6 +52,6 @@ export class PwGenPage extends Page {
   }
 
   get name() {
-    return "Password Generator";
+    return i18next.t("password_generator_title");
   }
 }

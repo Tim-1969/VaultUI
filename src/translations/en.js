@@ -28,4 +28,17 @@ module.exports = {
 
   "set_language_title": "Set Language",
   "set_language_btn": "Set Language",
+
+  "password_generator_title": "Password Generator",
+  "gen_password_btn": "Generate Password",
+
+  "log_in_title": "Login",
+  "log_in_with_token": "Token",
+  "log_in_with_username": "Username",
+  "token_input": "Token",
+  "username_input": "Username",
+  "password_input": "Password",
+  "log_in_btn": "Login"
+
+
 }
