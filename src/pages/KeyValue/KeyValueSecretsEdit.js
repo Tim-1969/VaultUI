@@ -4,6 +4,8 @@ import { verifyJSONString } from "../../utils.js";
 import { setPageContent, setTitleElement, setErrorText, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
 import { CodeJar } from "codejar";
+import i18next from 'i18next';
+
 
 export class KeyValueSecretEditPage extends Page {
   constructor() {
@@ -14,7 +16,10 @@ export class KeyValueSecretEditPage extends Page {
   }
   render() {
     setTitleElement(pageState);
-    let loadingText = makeElement({ tag: "p", text: "Loading.." });
+    let loadingText = makeElement({
+      tag: "p",
+      text: i18next.t("kv_sec_edit_loading")
+    });
     let editor = makeElement({
       tag: "div",
       class: ["editor", "language-json"]
@@ -22,7 +27,7 @@ export class KeyValueSecretEditPage extends Page {
     let saveButton = makeElement({
       tag: "button",
       class: ["uk-button", "uk-button-primary"],
-      text: "Save"
+      text: i18next.t("kv_sec_edit_btn")
     });
     setPageContent(makeElement({
       tag: "div",
@@ -46,7 +51,7 @@ export class KeyValueSecretEditPage extends Page {
       jar.updateCode(secretsJSON);
       saveButton.onclick = function () {
         if (!verifyJSONString(jar.toString())) {
-          setErrorText("Invalid JSON");
+          setErrorText(i18next.t("kv_sec_edit_invalid_json_err"));
           return;
         }
         createOrUpdateSecret(
@@ -65,10 +70,10 @@ export class KeyValueSecretEditPage extends Page {
   }
 
   get titleSuffix() {
-    return " (edit)";
+    return i18next.t("kv_sec_edit_suffix");
   }
 
   get name() {
-    return "K/V Secrets Edit";
+    return i18next.t("kv_sec_edit_title");
   }
 }

@@ -67,7 +67,13 @@ module.exports = {
   "kv_secret_delete_all_btn": "Delete All Versions",
   "kv_secret_delete_version_btn": "Delete Version {{ version }}",
   "kv_secret_edit_btn": "Edit",
-  "kv_secret_versions_btn": "Versions"
+  "kv_secret_versions_btn": "Versions",
 
+  // Key Value Secret Editor Page
+  "kv_sec_edit_title": "K/V Edit",
+  "kv_sec_edit_btn": "Edit",
+  "kv_sec_edit_loading": "Loading Editor..",
+  "kv_sec_edit_invalid_json_err": "Invalid JSON",
+  "kv_sec_edit_suffix": " (edit)",
 
 }

@@ -8,7 +8,7 @@ export { SetLanguagePage } from "./SetLanguage.js";
 export { TOTPViewPage } from "./TOTP/TOTPView.js";
 export { NewTOTPPage } from "./TOTP/NewTOTP.js";
 export { KeyValueViewPage } from "./KeyValue/KeyValueView.js";
-export { KeyValueSecretPage } from "./KeyValue/KeyValueSecrets.js";
+export { KeyValueSecretPage } from "./KeyValue/KeyValueSecret.js";
 export { KeyValueVersionsPage } from "./KeyValue/KeyValueVersions.js";
 export { KeyValueNewPage } from "./KeyValue/KeyValueNew.js";
 export { KeyValueDeletePage } from "./KeyValue/KeyValueDelete.js";
