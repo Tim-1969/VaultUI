@@ -100,6 +100,7 @@ module.exports = {
   "totp_new_info": "You need either a key or a URI, URI prefered but may not work. Just scan the QR code and copy the URL.",
   "totp_new_uri_input": "URI",
   "totp_new_key_input": "Key",
+  "totp_new_add_btn": "Add TOTP Key",
 
 
 }
