@@ -2,6 +2,8 @@ import { Page } from "../../types/Page.js";
 import { getSecretMetadata } from "../../api.js";
 import { setPageContent, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
+import i18next from 'i18next';
+
 
 export class KeyValueVersionsPage extends Page {
   constructor() {
@@ -42,10 +44,10 @@ export class KeyValueVersionsPage extends Page {
   }
 
   get titleSuffix() {
-    return " (versions)";
+    return i18next.t("kv_sec_versions_suffix");
   }
 
   get name() {
-    return "K/V Versions";
+    return i18next.t("kv_sec_versions_title");
   }
 }

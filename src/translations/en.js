@@ -76,4 +76,11 @@ module.exports = {
   "kv_sec_edit_invalid_json_err": "Invalid JSON",
   "kv_sec_edit_suffix": " (edit)",
 
+  // Key Value Secret Versions Page
+  "kv_sec_versions_title": "K/V Edit",
+  "kv_sec_edit_btn": "Edit",
+  "kv_sec_edit_loading": "Loading Editor..",
+  "kv_sec_edit_invalid_json_err": "Invalid JSON",
+  "kv_sec_versions_suffix": " (edit)",
+
 }
