@@ -6,7 +6,6 @@ import { makeElement } from "../../htmlUtils.js";
 import { CodeJar } from "codejar";
 import i18next from 'i18next';
 
-
 export class KeyValueSecretEditPage extends Page {
   constructor() {
     super();

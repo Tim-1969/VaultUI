@@ -2,6 +2,7 @@ import { Page } from "../../types/Page.js";
 import { DoesNotExistError, getSecrets } from "../../api.js";
 import { setErrorText, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
+import i18next from 'i18next';
 
 export class KeyValueViewPage extends Page {
   constructor() {
@@ -23,13 +24,13 @@ export class KeyValueViewPage extends Page {
     if (pageState.currentMountType == "cubbyhole") {
       pageContent.appendChild(makeElement({
         tag: "p",
-        text: "In cubbyhole, secrets can be stored as long as the lease of your token is valid. They will be deleted when lease is expired and can only be viewed by your current token.",
+        text: i18next.t("kv_view_cubbyhole_text"),
       }));
     }
 
     let newButton = makeElement({
       tag: "button",
-      text: "New",
+      text: i18next.t("kv_view_new_btn"),
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
       onclick: () => {
         changePage("KEY_VALUE_NEW_SECRET");
@@ -72,7 +73,7 @@ export class KeyValueViewPage extends Page {
         } else {
           pageContent.appendChild(makeElement({
             tag: "p",
-            text: "You seem to have no secrets here, would you like to create one?"
+            text: i18next.t("kv_view_none_here_text")
           }));
         }
       } else {
@@ -82,6 +83,6 @@ export class KeyValueViewPage extends Page {
   }
 
   get name() {
-    return "K/V View";
+    return i18next.t("kv_view_title");
   }
 }

@@ -77,10 +77,15 @@ module.exports = {
   "kv_sec_edit_suffix": " (edit)",
 
   // Key Value Secret Versions Page
-  "kv_sec_versions_title": "K/V Edit",
-  "kv_sec_edit_btn": "Edit",
-  "kv_sec_edit_loading": "Loading Editor..",
-  "kv_sec_edit_invalid_json_err": "Invalid JSON",
+  "kv_sec_versions_title": "K/V Versions",
   "kv_sec_versions_suffix": " (edit)",
+
+  // Key Value View/List Secrets Page
+  "kv_view_title": "K/V View",
+  "kv_view_cubbyhole_text": "In cubbyhole, secrets can be stored as long as the lease of your token is valid. They will be deleted when lease is expired and can only be viewed by your current token.",
+  "kv_view_new_btn": "New",
+  "kv_view_none_here_text": "You seem to have no secrets here, would you like to create one?",
+
+
 
 }
