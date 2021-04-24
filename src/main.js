@@ -179,7 +179,7 @@ function onLoad() {
       }
     }
   }, 5000);
-};
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   i18next.init({
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return value;
       }
     }
-  }).then(function (t) {
+  }).then(function (_) {
     onLoad();
   });
 }, false);

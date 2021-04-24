@@ -12,6 +12,7 @@ globals:
   pageState: writable
   pageContent: writable
   realPages: writable
+  module: writable
 
 
 rules: 
