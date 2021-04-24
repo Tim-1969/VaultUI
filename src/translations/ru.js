@@ -1,25 +1,27 @@
 module.exports = {
   // The localised name for the language
   "language_name": "русский",
-
+  
   // These are the buttons on the top bar.
   "home_btn": "Главная страница",
   "back_btn": "Назад",
   "refresh_btn": "Обновить",
   "me_btn": "Профиль/параметры",
+
   // These are the page titles
   "home_page_title": "Главная страница",
+
   // Me Page
   "me_page_title": "Профиль/параметры",
   "log_out_btn": "Выход",
-  "copy_token_btn": "Копировать код",
-  "renew_lease_btn": "Продлить действие кода",
+  "copy_token_btn": "Копировать код доступа",
+  "renew_lease_btn": "Продлить действие кода доступа",
   "change_language_btn": "Выбор языка",
 
   // Home Page
   "vaulturl_text": "Адрес хранилища: {{text}}",
   "password_generator_btn": "Генератор паролей",
-  "your_token_expires_in": "Ключ годен до: {{date, until_date}}"
+  "your_token_expires_in": "Код доступа годен до: {{date, until_date}}"
 
   // Unseal Page
   "unseal_vault_text": "Раскрыть хранилище",
@@ -39,9 +41,9 @@ module.exports = {
 
   // Login Page
   "log_in_title": "Вход",
-  "log_in_with_token": "Вход с ключём",
+  "log_in_with_token": "Вход с кодом доступа",
   "log_in_with_username": "Вход по имени",
-  "token_input": "Ключ",
+  "token_input": "Код доступа",
   "username_input": "Имя пользователя",
   "password_input": "Пароль",
   "log_in_btn": "Войти",
@@ -97,6 +99,10 @@ module.exports = {
   "totp_new_title": "Новый ключ TOTP",
   "totp_new_suffix": " (новый)",
   "totp_new_name_text": "Имя ключа TOTP",
+  "totp_new_info": "Необходим либо ключ, либо адрес URI. Лучше всего использовать URI, но он может не сработать. Отсканируйте QR-код и скопируйте его адрес.",
+  "totp_new_uri_input": "URI",
+  "totp_new_key_input": "Ключ",
+  "totp_new_add_btn": "Добавить ключ TOTP",
 
 
 }
