@@ -7,7 +7,7 @@ import { MarginInline } from "../elements/MarginInline.js";
 import i18next from 'i18next';
 import QrScanner from 'qr-scanner';
 
- /* eslint-disable import/no-unresolved */ 
+/* eslint-disable import/no-unresolved */ 
 import qrScannerWorkerSource from '!!raw-loader!qr-scanner/qr-scanner-worker.min.js';
 QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
 
