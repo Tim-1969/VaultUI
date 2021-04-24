@@ -72,7 +72,7 @@ import translation_de from './translations/de.js'
 import translation_ru from './translations/ru.js'
 import translation_nl from './translations/nl.js'
 import translation_fr from './translations/fr.js'
-import formatDistance from 'date-fns/formatDistance';
+import {formatDistance} from './formatDistance.js';
 
 
 /*import "en-GB" as date_locale_en from 'date-fns/locale'

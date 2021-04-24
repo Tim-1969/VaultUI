@@ -28,7 +28,6 @@ module.exports = {
   "submit_key_btn": "Submit Key",
   "unseal_input_btn": "Switch to Manual Key Input",
   "unseal_qr_btn": "Switch to QR Key Input",
-
   "key_input_placeholder": "Key",
   "unseal_keys_progress": "Keys: {{progress}}/{{keys_needed}}",
 

@@ -26,6 +26,8 @@ module.exports = {
   // Unseal Page
   "unseal_vault_text": "Ouvrir le Vault",
   "submit_key_btn": "Ajouter la clé",
+  "unseal_input_btn": "Basculer en entrée de clé manuelle",
+  "unseal_qr_btn": "Basculer en entrée de QR code",
   "key_input_placeholder": "Clé",
   "unseal_keys_progress": "Clés: {{progress}}/{{keys_needed}}",
 
