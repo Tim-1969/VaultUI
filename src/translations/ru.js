@@ -21,7 +21,7 @@ module.exports = {
   // Home Page
   "vaulturl_text": "Адрес хранилища: {{text}}",
   "password_generator_btn": "Генератор паролей",
-  "your_token_expires_in": "Продолжительность ключа: {{date, until_date}}"
+  "your_token_expires_in": "Продолжительность ключа: {{date, until_date}}",
 
   // Unseal Page
   "unseal_vault_text": "Раскрыть хранилище",
