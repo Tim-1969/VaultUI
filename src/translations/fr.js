@@ -8,9 +8,6 @@ module.exports = {
   "refresh_btn": "Rafraichir",
   "me_btn": "Profil/Paramètres",
 
-  // These are the page titles
-  "home_page_title": "Accueil",
-
   // Me Page
   "me_page_title": "Profil/Paramètres",
   "log_out_btn": "Déconnexion",
@@ -19,6 +16,7 @@ module.exports = {
   "change_language_btn": "Changer la langue",
 
   // Home Page
+  "home_page_title": "Accueil",
   "vaulturl_text": "Adresse du Vault: {{text}}",
   "password_generator_btn": "Générateur de mot de passe",
   "your_token_expires_in": "Votre jeton expire dans {{date, until_date}}",

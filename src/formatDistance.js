@@ -1,4 +1,4 @@
-import { de, enGB, fr, nl, ru } from 'date-fns/locale'
+import { de, enGB, fr, nl, ru, it } from 'date-fns/locale'
 import { formatDistance as formatDistanceReal} from 'date-fns';
 
 function getLocale() {
@@ -8,6 +8,7 @@ function getLocale() {
     "nl": nl,
     "ru": ru,
     "de": de,
+    "it": it,
   }[localStorage.getItem("language") || "en"];
 }
 

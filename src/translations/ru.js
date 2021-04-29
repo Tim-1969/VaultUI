@@ -8,9 +8,6 @@ module.exports = {
   "refresh_btn": "Обновить",
   "me_btn": "Профиль/параметры",
 
-  // These are the page titles
-  "home_page_title": "Главная страница",
-
   // Me Page
   "me_page_title": "Профиль/параметры",
   "log_out_btn": "Выход",
@@ -19,6 +16,7 @@ module.exports = {
   "change_language_btn": "Выбор языка",
 
   // Home Page
+  "home_page_title": "Главная страница",
   "vaulturl_text": "Адрес хранилища: {{text}}",
   "password_generator_btn": "Генератор паролей",
   "your_token_expires_in": "Продолжительность ключа: {{date, until_date}}",

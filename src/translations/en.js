@@ -8,9 +8,6 @@ module.exports = {
   "refresh_btn": "Refresh",
   "me_btn": "Me/Settings",
 
-  // These are the page titles
-  "home_page_title": "Home",
-
   // Me Page
   "me_page_title": "Me/Settings",
   "log_out_btn": "Log Out",
@@ -19,6 +16,7 @@ module.exports = {
   "change_language_btn": "Change Language",
 
   // Home Page
+  "home_page_title": "Home",
   "vaulturl_text": "Vault URL: {{text}}",
   "password_generator_btn": "Password Generator",
   "your_token_expires_in": "Your token expires in {{date, until_date}}",
