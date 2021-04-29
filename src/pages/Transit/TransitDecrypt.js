@@ -5,6 +5,7 @@ import { makeElement } from "../../htmlUtils.js";
 import { Margin } from "../../elements/Margin.js";
 import { CopyableModal } from "../../elements/CopyableModal.js";
 import UIkit from 'uikit/dist/js/uikit.min.js';
+import i18next from "i18next";
 
 
 export class TransitDecryptPage extends Page {
@@ -26,7 +27,7 @@ export class TransitDecryptPage extends Page {
           tag: "textarea",
           class: ["uk-textarea", "uk-form-width-medium"],
           attributes: {
-            placeholder: "Ciphertext",
+            placeholder: i18next.t("transit_decrypt_input_placeholder"),
             name: "ciphertext",
           }
         })),
@@ -34,7 +35,7 @@ export class TransitDecryptPage extends Page {
           makeElement({
             tag: "div",
             class: "uk-form-label",
-            text: "Should the plaintext be base64 decoded?",
+            text: i18next.t("transit_decrypt_decode_checkbox"),
           }),
           makeElement({
             tag: "div",
@@ -56,7 +57,7 @@ export class TransitDecryptPage extends Page {
         makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: "Decrypt",
+          text: i18next.t("transit_decrypt_decrypt_btn"),
           attributes: {
             type: "submit",
           }
@@ -78,7 +79,7 @@ export class TransitDecryptPage extends Page {
       if (formData.get("decodeBase64Checkbox") == "on") {
         plaintext = atob(plaintext);
       }
-      let modal = CopyableModal("Decryption Result", plaintext);
+      let modal = CopyableModal(i18next.t("transit_decrypt_decryption_result_modal_title"), plaintext);
       pageContent.appendChild(modal);
       UIkit.modal(modal).show();
     }).catch(e => {
@@ -87,10 +88,10 @@ export class TransitDecryptPage extends Page {
   }
 
   get titleSuffix() {
-    return " (decrypt)";
+    return i18next.t("transit_decrypt_suffix");
   }
 
   get name() {
-    return "Transit Decrypt";
+    return i18next.t("transit_decrypt_title");
   }
 }

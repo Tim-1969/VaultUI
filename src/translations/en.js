@@ -124,5 +124,19 @@ module.exports = {
   "transit_view_decrypt_description": "Decrypt some cyphertext.",
   "transit_view_decrypt_icon_text": "Decryption Icon",
 
+  // Transit Encrypt Page
+  "transit_encrypt_title": "Transit Encrypt",
+  "transit_encrypt_suffix": " (encrypt)",  
+  "transit_encrypt_input_placeholder": "Plaintext or base64",
+  "transit_encrypt_already_encoded_checkbox": "Is the data already encoded in base64?",  
+  "transit_encrypt_encrypt_btn": "Encrypt",  
+  "transit_encrypt_encryption_result_modal_title": "Encryption Result",  
 
+  // Transit decrypt Page
+  "transit_decrypt_title": "Transit Decrypt",
+  "transit_decrypt_suffix": " (decrypt)",  
+  "transit_decrypt_input_placeholder": "Cyphertext",
+  "transit_decrypt_decode_checkbox": "Should the plaintext be base64 decoded?",  
+  "transit_decrypt_decrypt_btn": "Decrypt",  
+  "transit_decrypt_decryption_result_modal_title": "Decryption Result",  
 }

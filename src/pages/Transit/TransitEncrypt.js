@@ -5,6 +5,7 @@ import { makeElement } from "../../htmlUtils.js";
 import { Margin } from "../../elements/Margin.js";
 import { CopyableModal } from "../../elements/CopyableModal.js";
 import UIkit from 'uikit/dist/js/uikit.min.js';
+import i18next from "i18next";
 
 
 export class TransitEncryptPage extends Page {
@@ -26,7 +27,7 @@ export class TransitEncryptPage extends Page {
           tag: "textarea",
           class: ["uk-textarea", "uk-form-width-medium"],
           attributes: {
-            placeholder: "Plaintext or base64",
+            placeholder: i18next.t("transit_encrypt_input_placeholder"),
             name: "plaintext",
           }
         })),
@@ -34,7 +35,7 @@ export class TransitEncryptPage extends Page {
           makeElement({
             tag: "div",
             class: "uk-form-label",
-            text: "Is the data already encoded in base64?",
+            text: i18next.t("transit_encrypt_already_encoded_checkbox"),
           }),
           makeElement({
             tag: "div",
@@ -56,7 +57,7 @@ export class TransitEncryptPage extends Page {
         makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: "Encrypt",
+          text: i18next.t("transit_encrypt_encrypt_btn"),
           attributes: {
             type: "submit",
           }
@@ -77,7 +78,7 @@ export class TransitEncryptPage extends Page {
       formData.get("base64Checkbox") == "on" ? formData.get("plaintext") : btoa(formData.get("plaintext"));
     transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, encodedData).then(res => {
       console.log(res);
-      let modal = CopyableModal("Encryption Result", res.ciphertext);
+      let modal = CopyableModal(i18next.t("transit_encrypt_encryption_result_modal_title"), res.ciphertext);
       pageContent.appendChild(modal);
       UIkit.modal(modal).show();
     }).catch(e => {
@@ -86,10 +87,10 @@ export class TransitEncryptPage extends Page {
   }
 
   get titleSuffix() {
-    return " (encrypt)";
+    return i18next.t("transit_encrypt_suffix");
   }
 
   get name() {
-    return "Transit Encrypt";
+    return i18next.t("transit_encrypt_title");
   }
 }
