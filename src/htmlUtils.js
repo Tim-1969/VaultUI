@@ -34,7 +34,3 @@ export function setElementAttributes(element, attributes) {
     element.setAttribute(key, attributes[key]);
   }
 }
-
-export function makeFormIcon(icon) {
-  return makeElement({ tag: "a", class: "uk-form-icon", attributes: { "uk-icon": `icon: ${icon}` } });
-}

@@ -1,13 +1,22 @@
 import ClipboardJS from "clipboard";
 import { addClipboardNotifications } from "../pageUtils.js";
-import { makeFormIcon, makeElement } from "../htmlUtils.js";
+import { makeElement } from "../htmlUtils.js";
 import { MarginInline } from "./MarginInline.js";
+import i18next from "i18next";
 
 export function CopyableInputBox(text, copyable = true) {
   let inputBoxDiv = makeElement({ tag: "div" });
   let inputBoxCopyButton = null;
   if (copyable) {
-    inputBoxCopyButton = makeFormIcon("copy");
+    inputBoxCopyButton = makeElement({
+      tag: "a",
+      class: "uk-form-icon",
+      attributes: {
+        "uk-icon": "icon: copy",
+        "role": "img",
+        "aria-label": i18next.t("copy_input_box_copy_icon_text")
+      }
+    });
     let clipboard = new ClipboardJS(inputBoxCopyButton);
     addClipboardNotifications(clipboard, 600);
   }

@@ -16,6 +16,8 @@ module.exports = {
   "copy_modal_copy_btn": "Copy",
   "copy_modal_close_btn": "Close",
 
+  // Copyable Input Box
+  "copy_input_box_copy_icon_text": "Copy Button",
 
   // Me Page
   "me_page_title": "Me/Settings",
