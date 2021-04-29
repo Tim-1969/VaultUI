@@ -2,14 +2,9 @@ import { Page } from "../types/Page.js";
 import { submitUnsealKey, getSealStatus } from "../api.js";
 import { setPageContent, setErrorText, changePage } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
-import { Margin } from "../elements/Margin.js";
 import { MarginInline } from "../elements/MarginInline.js";
+import { QRScanner } from "../elements/QRScanner.js";
 import i18next from 'i18next';
-import QrScanner from 'qr-scanner';
-
-/* eslint-disable import/no-unresolved */ 
-import qrScannerWorkerSource from '!!raw-loader!qr-scanner/qr-scanner-worker.min.js';
-QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
 
 const UnsealInputModes = {
   FORM_INPUT: "FORM_INPUT",
@@ -19,7 +14,6 @@ const UnsealInputModes = {
 export class UnsealPage extends Page {
   constructor() {
     super();
-    //this.mode = UnsealInputModes.QR_INPUT;
     this.mode = UnsealInputModes.FORM_INPUT;
   }
   cleanup() {
@@ -29,13 +23,10 @@ export class UnsealPage extends Page {
 
   deinitWebcam() {
     try {
-      this.stream.getTracks().forEach(function (track) {
-        track.stop();
-      });
+      this.qrScanner.deinit();
     } catch (_) {
-      console.log("");
+      ()=>{};
     }
-
   }
 
   makeRefresher() {
@@ -128,34 +119,11 @@ export class UnsealPage extends Page {
   }
 
   async makeQRInput() {
-    let webcamVideo = makeElement({
-      tag: "video"
-    })
-
-    let QRInput = makeElement({
-      tag: "div",
-      children: [
-        Margin(webcamVideo),
-      ]
-    })
-    this.unsealInputContent.appendChild(QRInput);
-
-
-    this.stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: 'environment',
-      },
-      audio: false,
-    });
-    webcamVideo.srcObject = this.stream;
-    let lastSeenCode = "";
-    const qrScanner = new QrScanner(webcamVideo, function (code) {
-      if (lastSeenCode == code) return;
-      lastSeenCode = code;
+    this.qrScanner = await QRScanner(function (code) {
       this.submitKey(code);
       console.log('decoded qr code:', code)
     }.bind(this));
-    qrScanner.start();
+    this.unsealInputContent.appendChild(this.qrScanner);
   }
 
   updateSealProgress(data) {
