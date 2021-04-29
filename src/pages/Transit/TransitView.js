@@ -2,6 +2,7 @@ import { Page } from "../../types/Page.js";
 import { DoesNotExistError, getTransitKeys } from "../../api.js";
 import { setErrorText, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
+import i18next from 'i18next';
 
 export class TransitViewPage extends Page {
   constructor() {
@@ -51,7 +52,7 @@ export class TransitViewPage extends Page {
       if (e == DoesNotExistError) {
         pageContent.appendChild(makeElement({
           tag: "p",
-          text: "You seem to have no transit keys here, would you like to create one?"
+          text: i18next.t("transit_view_none_here_text")
         }));
       } else {
         setErrorText(e.message);
@@ -60,6 +61,6 @@ export class TransitViewPage extends Page {
   }
 
   get name() {
-    return "Transit View";
+    return i18next.t("transit_view_title");
   }
 }

@@ -111,5 +111,18 @@ module.exports = {
   "totp_new_key_input": "Key",
   "totp_new_add_btn": "Add TOTP Key",
 
+  // Transit View Page
+  "transit_view_title": "Transit View",
+  "transit_view_none_here_text": "You seem to have no transit keys here, would you like to create one?",
+
+  // Transit View Secret Page
+  "transit_view_secret_title": "Transit Secret View",
+  "transit_view_encrypt_text": "Encrypt",
+  "transit_view_encrypt_icon_text": "Encryption Icon",
+  "transit_view_encrypt_description": "Encrypt some plaintext or base64 encoded binary.",
+  "transit_view_decrypt_text": "Decrypt",
+  "transit_view_decrypt_description": "Decrypt some cyphertext.",
+  "transit_view_decrypt_icon_text": "Decryption Icon",
+
 
 }
