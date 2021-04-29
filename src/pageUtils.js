@@ -1,6 +1,23 @@
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import { makeElement } from "./htmlUtils.js";
+import i18next from 'i18next';
 
+export function addClipboardNotifications(clipboard, timeout = 1000) {
+  clipboard.on('success', _ => {
+    UIkit.notification(i18next.t("notification_copy_success"), {
+      status: 'success',
+      timeout: timeout
+    });
+  });
+  clipboard.on('error', function (e) {
+    UIkit.notification(i18next.t("notification_copy_error", {
+      "error": e.message
+    }), {
+      status: 'danger',
+      timeout: timeout
+    });
+  });
+}
 
 export function setErrorText(text) {
   let errorTextElement = document.querySelector("#errorText");
@@ -68,7 +85,7 @@ export function setTitleElement(pageState) {
 
           if (pageState.currentMountType.startsWith("kv") || pageState.currentMountType == "cubbyhole") {
             changePage("KEY_VALUE_VIEW");
-          } else if (pageState.currentMountType == "totp"){
+          } else if (pageState.currentMountType == "totp") {
             changePage("TOTP");
           } else if (pageState.currentMountType == "transit") {
             changePage("TRANSIT_VIEW");

@@ -1,5 +1,5 @@
 import { Page } from "../types/Page.js";
-import { setErrorText, setPageContent, changePage } from "../pageUtils.js";
+import { addClipboardNotifications, setErrorText, setPageContent, changePage } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 import { getToken } from "../utils.js";
 import { renewSelf } from "../api.js";
@@ -37,7 +37,8 @@ export class MePage extends Page {
               "data-clipboard-text": getToken(),
             },
             thenRun: (e) => {
-              new ClipboardJS(e);
+              let clipboard = new ClipboardJS(e);
+              addClipboardNotifications(clipboard);
             }
           })
         }),

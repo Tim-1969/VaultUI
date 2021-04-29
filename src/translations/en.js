@@ -8,6 +8,15 @@ module.exports = {
   "refresh_btn": "Refresh",
   "me_btn": "Me/Settings",
 
+  // General Notification Messages
+  "notification_copy_success": "Copied to clipboard.",
+
+  // Copyable Modal
+  "copy_modal_download_btn": "Download",
+  "copy_modal_copy_btn": "Copy",
+  "copy_modal_close_btn": "Close",
+
+
   // Me Page
   "me_page_title": "Me/Settings",
   "log_out_btn": "Log Out",

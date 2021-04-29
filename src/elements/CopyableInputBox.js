@@ -1,6 +1,5 @@
 import ClipboardJS from "clipboard";
-import UIkit from 'uikit/dist/js/uikit.min.js';
-
+import { addClipboardNotifications } from "../pageUtils.js";
 import { makeFormIcon, makeElement } from "../htmlUtils.js";
 import { MarginInline } from "./MarginInline.js";
 
@@ -10,9 +9,7 @@ export function CopyableInputBox(text, copyable = true) {
   if (copyable) {
     inputBoxCopyButton = makeFormIcon("copy");
     let clipboard = new ClipboardJS(inputBoxCopyButton);
-    clipboard.on('success', _ => {
-      UIkit.notification("Copied to clipboard.", { status: 'success', timeout: 600 });
-    });
+    addClipboardNotifications(clipboard, 600);
   }
 
   let inputBoxInput = makeElement({

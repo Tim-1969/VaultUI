@@ -1,7 +1,8 @@
 import { makeElement } from "../htmlUtils.js";
+import { addClipboardNotifications } from "../pageUtils.js";
 import ClipboardJS from "clipboard";
-import UIkit from 'uikit/dist/js/uikit.min.js';
 import FileSaver from 'file-saver';
+import i18next from 'i18next';
 
 export function CopyableModal(name, contentString) {
   return makeElement({
@@ -51,7 +52,7 @@ export function CopyableModal(name, contentString) {
                 type: "button",
                 "data-clipboard-text": contentString
               },
-              text: "Download",
+              text: i18next.t("copy_modal_download_btn"),
               onclick: _ => {
                 var blob = new Blob([contentString], {type: "text/plain;charset=utf-8"});
                 FileSaver.saveAs(blob, "result.txt");
@@ -64,19 +65,17 @@ export function CopyableModal(name, contentString) {
                 type: "button",
                 "data-clipboard-text": contentString
               },
-              text: "Copy",
+              text: i18next.t("copy_modal_copy_btn"),
               thenRun: (e) => {
                 let clipboard = new ClipboardJS(e);
-                clipboard.on('success', _ => {
-                  UIkit.notification("Copied to clipboard.", { status: 'success', timeout: 1000 });
-                });
+                addClipboardNotifications(clipboard);
               }
             }),
             makeElement({
               tag: "button",
               class: ["uk-button", "uk-button-secondary", "uk-modal-close"],
               attributes: { type: "button" },
-              text: "Close"
+              text: i18next.t("copy_modal_close_btn")
             }),
 
           ]
