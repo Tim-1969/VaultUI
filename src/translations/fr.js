@@ -1,12 +1,23 @@
 module.exports = {
   // The localised name for the language
   "language_name": "Français",
-  
+
   // These are the buttons on the top bar.
   "home_btn": "Accueil",
   "back_btn": "Retour",
   "refresh_btn": "Rafraichir",
   "me_btn": "Profil/Paramètres",
+
+  // General Notification Messages
+  "notification_copy_success": "Copié dans le presse-papiers.",
+
+  // Copyable Modal
+  "copy_modal_download_btn": "Télécharger",
+  "copy_modal_copy_btn": "Copier",
+  "copy_modal_close_btn": "Fermer",
+
+  // Copyable Input Box
+  "copy_input_box_copy_icon_text": "Bouton Copier",
 
   // Me Page
   "me_page_title": "Profil/Paramètres",
@@ -102,5 +113,32 @@ module.exports = {
   "totp_new_key_input": "Clé",
   "totp_new_add_btn": "Ajouter clé TOTP",
 
+  // Transit View Page
+  "transit_view_title": "Fenêtre Transit",
+  "transit_view_none_here_text": "Vous semblez ne pas avoir de clés de transit ici, voulez-vous en créer une ?",
 
+  // Transit View Secret Page
+  "transit_view_secret_title": "Transit Secret",
+  "transit_view_encrypt_text": "Chiffrer",
+  "transit_view_encrypt_icon_text": "Icône chiffrement",
+  "transit_view_encrypt_description": "Chiffrer du texte brut ou données binaires encodées en base64.",
+  "transit_view_decrypt_text": "Déchiffrer",
+  "transit_view_decrypt_description": "Déchiffrer du texte chiffré.",
+  "transit_view_decrypt_icon_text": "Icône déchiffrement",
+
+  // Transit Encrypt Page
+  "transit_encrypt_title": "Chiffrement Transit",
+  "transit_encrypt_suffix": " (chiffrer)",
+  "transit_encrypt_input_placeholder": "Texte brut ou base64",
+  "transit_encrypt_already_encoded_checkbox": "Les données sont-elles déjà encodées en base64 ?",
+  "transit_encrypt_encrypt_btn": "Chiffrer",
+  "transit_encrypt_encryption_result_modal_title": "Résultat chiffré",
+
+  // Transit decrypt Page
+  "transit_decrypt_title": "Déchiffrement Transit",
+  "transit_decrypt_suffix": " (déchiffrer)",
+  "transit_decrypt_input_placeholder": "Message chiffré",
+  "transit_decrypt_decode_checkbox": "Est-ce que le texte brut doit être encodé en base64 ?",
+  "transit_decrypt_decrypt_btn": "Déchiffrer",
+  "transit_decrypt_decryption_result_modal_title": "Résultat déchiffré",
 }
