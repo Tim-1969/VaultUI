@@ -8,6 +8,17 @@ module.exports = {
   "refresh_btn": "Обновить",
   "me_btn": "Профиль/параметры",
 
+  // General Notification Messages
+  "notification_copy_success": "Текст скопирован в буфер обмена.",
+
+  // Copyable Modal
+  "copy_modal_download_btn": "Загрузить",
+  "copy_modal_copy_btn": "Копировать",
+  "copy_modal_close_btn": "Закрыть",
+
+  // Copyable Input Box
+  "copy_input_box_copy_icon_text": "Копировать",
+
   // Me Page
   "me_page_title": "Профиль/параметры",
   "log_out_btn": "Выход",
@@ -102,5 +113,32 @@ module.exports = {
   "totp_new_key_input": "Ключ",
   "totp_new_add_btn": "Добавить ключ TOTP",
 
+  // Transit View Page
+  "transit_view_title": "Ключи Transit",
+  "transit_view_none_here_text": "У вас нет ключей Transit, хотите ли вы их создать?",
 
+  // Transit View Secret Page
+  "transit_view_secret_title": "Просмотр тайных данных Transit",
+  "transit_view_encrypt_text": "Зашифровать",
+  "transit_view_encrypt_icon_text": "Значок шифрования",
+  "transit_view_encrypt_description": "Зашифровать текст или двоичные данные, закодированные base64.",
+  "transit_view_decrypt_text": "Расшифровать",
+  "transit_view_decrypt_description": "Расшифровать шифр-текст.",
+  "transit_view_decrypt_icon_text": "Значок расшифрования",
+
+  // Transit Encrypt Page
+  "transit_encrypt_title": "Шифрование Transit",
+  "transit_encrypt_suffix": " (шифр.)",
+  "transit_encrypt_input_placeholder": "Текст или base64",
+  "transit_encrypt_already_encoded_checkbox": "Данные уже закодированы в base64?",
+  "transit_encrypt_encrypt_btn": "Зашифровать",
+  "transit_encrypt_encryption_result_modal_title": "Результат шифрования",
+
+  // Transit decrypt Page
+  "transit_decrypt_title": "Расшифрование Transit",
+  "transit_decrypt_suffix": " (расшифр.)",
+  "transit_decrypt_input_placeholder": "Шифр-текст",
+  "transit_decrypt_decode_checkbox": "Нужно ли раскодировать текст из base64?",
+  "transit_decrypt_decrypt_btn": "Расшифровать",
+  "transit_decrypt_decryption_result_modal_title": "Результат расшифрования",
 }
