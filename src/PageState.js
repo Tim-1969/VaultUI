@@ -18,6 +18,27 @@ export class PageState extends Page {
   // by using a bunch of functions and modifying localStorage in order to remove some of
   // the clunkyness of this approach, but for now, this works.
 
+  get apiURL() {
+    return localStorage.getItem('apiURL') || "";
+  }
+  set apiURL(value) {
+    localStorage.setItem('apiURL', value);
+  }
+  
+  get token() {
+    return localStorage.getItem('token') || "";
+  }
+  set token(value) {
+    localStorage.setItem('token', value);
+  }
+
+  get language() {
+    return localStorage.getItem('language') || "";
+  }
+  set language(value) {
+    localStorage.setItem('language', value);
+  }
+
   get currentBaseMount() {
     return localStorage.getItem('currentBaseMount') || "";
   }

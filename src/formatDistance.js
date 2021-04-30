@@ -9,7 +9,7 @@ function getLocale() {
     "ru": ru,
     "de": de,
     "it": it,
-  }[localStorage.getItem("language") || "en"];
+  }[pageState.language];
 }
 
 export function formatDistance(d1, d2) {

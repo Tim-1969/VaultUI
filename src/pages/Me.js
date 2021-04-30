@@ -23,7 +23,7 @@ export class MePage extends Page {
             tag: "a",
             text: i18next.t("log_out_btn"),
             onclick: () => {
-              localStorage.removeItem("token");
+              pageState.token = "";
               changePage("HOME");
             }
           })

@@ -11,7 +11,7 @@ export class HomePage extends Page {
   }
   async render() {
     pageContent.innerHTML = "";
-    if (!localStorage.getItem("language")) {
+    if (pageState.language.length == 0) {
       changePage("SET_LANGUAGE");
       return;
     }
@@ -20,7 +20,7 @@ export class HomePage extends Page {
       return;
     }
     if (!getToken()) {
-      localStorage.removeItem("token");
+      pageState.token = "";
       changePage("LOGIN");
       return;
     }
@@ -65,7 +65,7 @@ export class HomePage extends Page {
     } catch (e) {
       setErrorText(e.message);
       if (e.message == "permission denied") {
-        localStorage.removeItem("token");
+        pageState.token = "";
         changePage("LOGIN");
       }
     }

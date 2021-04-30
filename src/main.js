@@ -171,7 +171,7 @@ function onLoad() {
 
   setInterval(async () => {
     if (pageState.currentPageString != "UNSEAL") {
-      if (!localStorage.getItem('apiurl')) { return; }
+      if (pageState.apiURL.length != 0) { return; }
       let sealStatus = await getSealStatus();
       if (sealStatus.sealed) {
         changePage("UNSEAL");
@@ -183,7 +183,7 @@ function onLoad() {
 
 document.addEventListener('DOMContentLoaded', function () {
   i18next.init({
-    lng: localStorage.getItem("language") || "en",
+    lng: pageState.language,
     fallbackLng: 'en',
     debug: true,
     resources: {
@@ -192,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
       ru: { translation: translation_ru },
       nl: { translation: translation_nl },
       fr: { translation: translation_fr },
-
     },
     interpolation: {
       format: function (value, format, _) {

@@ -43,7 +43,7 @@ export class SetVaultURLPage extends Page {
     document.getElementById("setVaultURLForm").addEventListener("submit", function (e) {
       e.preventDefault();
       let formData = new FormData(document.querySelector('#setVaultURLForm'));
-      localStorage.setItem('apiurl', formData.get("vaultURL"));
+      pageState.apiURL = formData.get("vaultURL");
       changePage("HOME");
     });
   }

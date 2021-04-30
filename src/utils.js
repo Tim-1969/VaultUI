@@ -19,9 +19,9 @@ export function verifyJSONString(str) {
 }
 
 export function getToken() {
-  return localStorage.getItem('token');
+  return pageState.token.length > 0 ? pageState.token : null;
 }
 
 export function getAPIURL() {
-  return localStorage.getItem('apiurl');
+  return pageState.apiURL.length > 0 ? pageState.apiURL : null
 }
