@@ -42,6 +42,7 @@ export class TransitDecryptPage extends Page {
             class: ["uk-form-controls", "uk-form-controls-text"],
             children: makeElement({
               tag: "input",
+              class: "uk-checkbox",
               attributes: {
                 type: "checkbox",
                 name: "decodeBase64Checkbox",
