@@ -29,10 +29,11 @@ for (let lang_num in langs) {
   let lang_keys = [...lang.keys()];
   let di = arrayDiff(en_keys, [...lang.keys()])
   console.log("Language:", langs[lang_num])
+  console.log("\tPercent Translated:", Math.round( (en_keys.length - di.missing.length) / en_keys.length * 100))
   if (di.missing.length > 0) {
-    console.log("Missing: ", di.missing.join(", "))
+    console.log("\tMissing: ", di.missing.join(", "))
   } 
   if (di.extra.length > 0) {
-    console.log("Extra Keys (maybe deprecated, renamed or no longer exists, check git log): ", di.extra.join(", "))
+    console.log("\tExtra Keys (maybe deprecated, renamed or no longer exists, check git log): ", di.extra.join(", "))
   }
 }
