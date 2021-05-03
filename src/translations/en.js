@@ -90,7 +90,7 @@ module.exports = {
 
   // Key Value Secret Versions Page
   "kv_sec_versions_title": "K/V Versions",
-  "kv_sec_versions_suffix": " (edit)",
+  "kv_sec_versions_suffix": " (versions)",
 
   // Key Value View/List Secrets Page
   "kv_view_title": "K/V View",
