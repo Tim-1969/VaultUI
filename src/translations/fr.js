@@ -22,6 +22,7 @@ module.exports = {
   // Me Page
   "me_page_title": "Profil/Paramètres",
   "log_out_btn": "Déconnexion",
+  "seal_vault_btn": "Verrouiller le coffre",
   "copy_token_btn": "Copier le jeton",
   "renew_lease_btn": "Renouveler le jeton",
   "change_language_btn": "Changer la langue",
@@ -89,7 +90,7 @@ module.exports = {
 
   // Key Value Secret Versions Page
   "kv_sec_versions_title": "Versions clé/valeur",
-  "kv_sec_versions_suffix": " (édité)",
+  "kv_sec_versions_suffix": " (versions)",
 
   // Key Value View/List Secrets Page
   "kv_view_title": "Visionneuse clé/valeur",
