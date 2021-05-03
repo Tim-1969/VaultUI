@@ -42,5 +42,5 @@ export async function QRScanner(onScan) {
     }
   };
 
-  return;
+  return QRInput;
 }

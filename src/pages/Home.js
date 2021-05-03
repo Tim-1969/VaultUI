@@ -1,5 +1,5 @@
 import { Page } from "../types/Page.js";
-import { setErrorText, changePage } from "../pageUtils.js";
+import { setErrorText, changePage, prePageChecks } from "../pageUtils.js";
 import { getAPIURL, getToken } from "../utils.js";
 import { makeElement } from "../htmlUtils.js";
 import { getSealStatus, lookupSelf, getMounts } from "../api.js";
@@ -11,25 +11,7 @@ export class HomePage extends Page {
   }
   async render() {
     pageContent.innerHTML = "";
-    if (pageState.language.length == 0) {
-      changePage("SET_LANGUAGE");
-      return;
-    }
-    if (!getAPIURL()) {
-      changePage("SET_VAULT_URL");
-      return;
-    }
-    if (!getToken()) {
-      pageState.token = "";
-      changePage("LOGIN");
-      return;
-    }
-    let sealStatus = await getSealStatus();
-    if (sealStatus.sealed) {
-      changePage("UNSEAL");
-      return;
-    }
-
+    if (!(await prePageChecks())) return;
 
     const textList = makeElement({
       tag: "ul",

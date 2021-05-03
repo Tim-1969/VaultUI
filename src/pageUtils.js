@@ -1,6 +1,49 @@
-import UIkit from 'uikit/dist/js/uikit.min.js';
 import { makeElement } from "./htmlUtils.js";
+import { lookupSelf, getSealStatus } from './api.js';
+import { getAPIURL } from "./utils.js";
+
+import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from 'i18next';
+
+async function prePageChecksReal() {
+  if (pageState.language.length == 0) {
+    changePage("SET_LANGUAGE");
+    throw new Error("Language Not Set");
+  }
+  if (!getAPIURL()) {
+    changePage("SET_VAULT_URL");
+    throw new Error("Vault URL Not Set");
+  }
+
+  try {
+    let sealStatus = await getSealStatus();
+    if (sealStatus.sealed) {
+      changePage("UNSEAL");
+      throw new Error("Vault Sealed");
+    }
+  } catch (e) {
+    throw e;
+  }
+
+  try {
+    await lookupSelf();
+  } catch (e) {
+    changePage("LOGIN")
+    throw e;
+  }
+}
+
+export async function prePageChecks() {
+  try {
+    await prePageChecksReal();
+  } catch (e) {
+    console.log("OHNO", e)
+    return false;
+  }
+  return true;
+}
+
+
 
 export function addClipboardNotifications(clipboard, timeout = 1000) {
   clipboard.on('success', _ => {

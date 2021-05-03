@@ -22,6 +22,7 @@ module.exports = {
   // Me Page
   "me_page_title": "Me/Settings",
   "log_out_btn": "Log Out",
+  "seal_vault_btn": "Seal Vault",
   "copy_token_btn": "Copy Token",
   "renew_lease_btn": "Renew Token Lease",
   "change_language_btn": "Change Language",

@@ -1,7 +1,5 @@
-
 import { getAPIURL, getToken, removeDoubleSlash } from "./utils.js";
-
-export const DoesNotExistError = new Error("Does not exist.");
+import { DoesNotExistError } from "./types/internalErrors.js";
 
 export async function lookupSelf() {
   const request = new Request(getAPIURL() + "/v1/auth/token/lookup-self", {
@@ -28,6 +26,22 @@ export async function renewSelf() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({})
+  });
+  return fetch(request).then(response => {
+    return response.json();
+  }).then(data => {
+    if ("errors" in data) {
+      throw new Error(data.errors[0]);
+    }
+  });
+}
+
+export async function sealVault() {
+  const request = new Request(getAPIURL() + "/v1/sys/seal", {
+    method: 'PUT',
+    headers: {
+      "X-Vault-Token": getToken(),
+    },
   });
   return fetch(request).then(response => {
     return response.json();
@@ -97,6 +111,10 @@ export async function submitUnsealKey(key) {
 }
 
 export async function getCapabilities(baseMount, secretPath, name) {
+  return await getCapabilitiesPath(removeDoubleSlash(baseMount + secretPath.join("/") + "/" + name))
+}
+
+export async function getCapabilitiesPath(path) {
   const request = new Request(getAPIURL() + "/v1/sys/capabilities-self", {
     method: "POST",
     headers: {
@@ -105,7 +123,7 @@ export async function getCapabilities(baseMount, secretPath, name) {
     },
     body: JSON.stringify(
       {
-        "paths": [removeDoubleSlash(baseMount + secretPath.join("/") + "/" + name)]
+        "paths": [removeDoubleSlash(path)]
       }
     )
   });

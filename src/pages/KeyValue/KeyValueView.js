@@ -1,8 +1,10 @@
 import { Page } from "../../types/Page.js";
-import { DoesNotExistError, getSecrets } from "../../api.js";
+import { getSecrets } from "../../api.js";
 import { setErrorText, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
+import { DoesNotExistError } from "../../types/internalErrors.js";
 import i18next from 'i18next';
+
 
 export class KeyValueViewPage extends Page {
   constructor() {

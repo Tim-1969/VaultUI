@@ -1,8 +1,8 @@
 import { Page } from "../types/Page.js";
-import { addClipboardNotifications, setErrorText, setPageContent, changePage } from "../pageUtils.js";
+import { addClipboardNotifications, setErrorText, setPageContent, changePage, prePageChecks } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 import { getToken } from "../utils.js";
-import { renewSelf } from "../api.js";
+import { renewSelf, getCapabilitiesPath, sealVault } from "../api.js";
 import ClipboardJS from "clipboard";
 import i18next from 'i18next';
 
@@ -13,6 +13,9 @@ export class MePage extends Page {
   }
 
   async render() {
+    console.log("owo", await prePageChecks());
+
+    if (!(await prePageChecks())) return;
     setPageContent(makeElement({
       tag: "ul",
       class: "uk-nav",
@@ -53,6 +56,25 @@ export class MePage extends Page {
               }).catch(e => {
                 setErrorText(e.message);
               });
+            }
+          })
+        }),
+        makeElement({
+          tag: "li",
+          children: makeElement({
+            tag: "a",
+            condition: await (async () => {
+              try {
+                let caps = await getCapabilitiesPath("sys/seal");
+                return caps.includes("sudo") && caps.includes("update");
+              } catch (e) {
+                return !true;
+              }
+            })(),
+            text: i18next.t("seal_vault_btn"),
+            onclick: async () => {
+              await sealVault();
+              changePage("UNSEAL_VAULT");
             }
           })
         }),
