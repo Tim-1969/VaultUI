@@ -4,6 +4,9 @@ extends:
   - plugin:import/errors
   - plugin:import/warnings
 
+plugins:
+  - sort-imports-es6-autofix
+
 parserOptions:
   ecmaVersion: 8
   sourceType: module
@@ -19,6 +22,8 @@ rules:
   no-unused-vars:
     - 2
     - argsIgnorePattern: ^_
+  sort-imports-es6-autofix/sort-imports-es6: 
+    - 2
 
 env:
   browser: true

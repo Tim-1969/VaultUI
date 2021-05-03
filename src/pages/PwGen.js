@@ -1,7 +1,7 @@
-import { Page } from "../types/Page.js";
-import { setPageContent } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
 import { CopyableInputBox } from "../elements/CopyableInputBox.js";
+import { Page } from "../types/Page.js";
+import { makeElement } from "../htmlUtils.js";
+import { setPageContent } from "../pageUtils.js";
 import i18next from 'i18next';
 
 

@@ -1,8 +1,8 @@
 import { Page } from "../types/Page.js";
-import { setErrorText, changePage, prePageChecks } from "../pageUtils.js";
-import { getAPIURL, getToken } from "../utils.js";
+import { changePage, prePageChecks, setErrorText } from "../pageUtils.js";
+import { getAPIURL } from "../utils.js";
+import { getMounts, lookupSelf } from "../api.js";
 import { makeElement } from "../htmlUtils.js";
-import { getSealStatus, lookupSelf, getMounts } from "../api.js";
 import i18next from 'i18next';
 
 export class HomePage extends Page {

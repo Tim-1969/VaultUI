@@ -1,5 +1,5 @@
-import { getAPIURL, getToken, removeDoubleSlash } from "./utils.js";
 import { DoesNotExistError } from "./types/internalErrors.js";
+import { getAPIURL, getToken, removeDoubleSlash } from "./utils.js";
 
 export async function lookupSelf() {
   const request = new Request(getAPIURL() + "/v1/auth/token/lookup-self", {

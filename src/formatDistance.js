@@ -1,4 +1,4 @@
-import { de, enGB, fr, nl, ru, it } from 'date-fns/locale'
+import { de, enGB, fr, it, nl, ru } from 'date-fns/locale'
 import { formatDistance as formatDistanceReal} from 'date-fns';
 
 function getLocale() {

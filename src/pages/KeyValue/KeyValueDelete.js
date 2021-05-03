@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page.js";
+import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { deleteSecret } from "../../api.js";
-import { setPageContent, setTitleElement, changePage } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
 import i18next from 'i18next';
 

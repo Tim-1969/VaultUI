@@ -1,8 +1,8 @@
-import { Page } from "../../types/Page.js";
-import { getSecrets } from "../../api.js";
-import { setErrorText, setTitleElement, changePage } from "../../pageUtils.js";
-import { makeElement } from "../../htmlUtils.js";
 import { DoesNotExistError } from "../../types/internalErrors.js";
+import { Page } from "../../types/Page.js";
+import { changePage, setErrorText, setTitleElement } from "../../pageUtils.js";
+import { getSecrets } from "../../api.js";
+import { makeElement } from "../../htmlUtils.js";
 import i18next from 'i18next';
 
 

@@ -1,5 +1,5 @@
 import { Page } from "../types/Page.js";
-import { setPageContent, setTitleElement, changePage } from "../pageUtils.js";
+import { changePage, setPageContent, setTitleElement } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 
 export class TemplatePage extends Page {

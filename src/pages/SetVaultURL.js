@@ -1,5 +1,5 @@
 import { Page } from "../types/Page.js";
-import { setPageContent, changePage } from "../pageUtils.js";
+import { changePage, setPageContent } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 
 export class SetVaultURLPage extends Page {

@@ -1,6 +1,6 @@
-import { makeElement } from "./htmlUtils.js";
-import { lookupSelf, getSealStatus } from './api.js';
 import { getAPIURL } from "./utils.js";
+import { getSealStatus, lookupSelf } from './api.js';
+import { makeElement } from "./htmlUtils.js";
 
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from 'i18next';
@@ -15,14 +15,10 @@ async function prePageChecksReal() {
     throw new Error("Vault URL Not Set");
   }
 
-  try {
-    let sealStatus = await getSealStatus();
-    if (sealStatus.sealed) {
-      changePage("UNSEAL");
-      throw new Error("Vault Sealed");
-    }
-  } catch (e) {
-    throw e;
+  let sealStatus = await getSealStatus();
+  if (sealStatus.sealed) {
+    changePage("UNSEAL");
+    throw new Error("Vault Sealed");
   }
 
   try {

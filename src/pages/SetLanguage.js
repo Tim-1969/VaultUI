@@ -1,7 +1,7 @@
-import { Page } from "../types/Page.js";
-import { setPageContent, changePage } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
 import { Margin } from "../elements/Margin.js";
+import { Page } from "../types/Page.js";
+import { changePage, setPageContent } from "../pageUtils.js";
+import { makeElement } from "../htmlUtils.js";
 import i18next from 'i18next';
 
 let languages = ["en", "de", "nl", "ru", "fr"];

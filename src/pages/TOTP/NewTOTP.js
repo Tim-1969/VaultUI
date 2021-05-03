@@ -1,9 +1,9 @@
-import { Page } from "../../types/Page.js";
-import { addNewTOTP } from "../../api.js";
-import { setTitleElement, setPageContent, setErrorText, changePage } from "../../pageUtils.js";
-import { makeElement } from "../../htmlUtils.js";
 import { Margin } from "../../elements/Margin.js";
 import { MarginInline } from "../../elements/MarginInline.js";
+import { Page } from "../../types/Page.js";
+import { addNewTOTP } from "../../api.js";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { makeElement } from "../../htmlUtils.js";
 import i18next from 'i18next';
 
 export class NewTOTPPage extends Page {

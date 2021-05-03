@@ -1,7 +1,7 @@
-import ClipboardJS from "clipboard";
+import { MarginInline } from "./MarginInline.js";
 import { addClipboardNotifications } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
-import { MarginInline } from "./MarginInline.js";
+import ClipboardJS from "clipboard";
 import i18next from "i18next";
 
 export function CopyableInputBox(text, copyable = true) {

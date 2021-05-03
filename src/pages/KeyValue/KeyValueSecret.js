@@ -1,7 +1,7 @@
-import { Page } from "../../types/Page.js";
-import { getSecret, undeleteSecret, getCapabilities } from "../../api.js";
-import { setPageContent, setTitleElement, changePage } from "../../pageUtils.js";
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
+import { Page } from "../../types/Page.js";
+import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { getCapabilities, getSecret, undeleteSecret } from "../../api.js";
 import { makeElement } from "../../htmlUtils.js";
 import Prism from "prismjs";
 import i18next from 'i18next';

@@ -1,9 +1,9 @@
-import { Page } from "../../types/Page.js";
-import { getTOTPKeys, getTOTPCode } from "../../api.js";
-import { setTitleElement, setPageContent, changePage, setErrorText } from "../../pageUtils.js";
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
-import { makeElement } from "../../htmlUtils.js";
 import { DoesNotExistError } from "../../types/internalErrors.js";
+import { Page } from "../../types/Page.js";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { getTOTPCode, getTOTPKeys } from "../../api.js";
+import { makeElement } from "../../htmlUtils.js";
 import i18next from 'i18next';
 
 export class TOTPViewPage extends Page {

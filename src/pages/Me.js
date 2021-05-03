@@ -1,8 +1,8 @@
 import { Page } from "../types/Page.js";
-import { addClipboardNotifications, setErrorText, setPageContent, changePage, prePageChecks } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
+import { addClipboardNotifications, changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils.js";
+import { getCapabilitiesPath, renewSelf, sealVault } from "../api.js";
 import { getToken } from "../utils.js";
-import { renewSelf, getCapabilitiesPath, sealVault } from "../api.js";
+import { makeElement } from "../htmlUtils.js";
 import ClipboardJS from "clipboard";
 import i18next from 'i18next';
 

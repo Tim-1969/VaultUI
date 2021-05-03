@@ -3,44 +3,44 @@
 // JS & CSS
 
 import "./scss/main.scss";
-import UIkit from 'uikit/dist/js/uikit.min.js';
 import Icons from 'uikit/dist/js/uikit-icons.min.js';
+import UIkit from 'uikit/dist/js/uikit.min.js';
 UIkit.use(Icons);
 
-import Prism from "prismjs";
 import "prismjs/components/prism-json";
+import Prism from "prismjs";
 Prism.highlightAll();
 
+import { PageState } from "./PageState.js";
 import {
   changePage,
   renderPage,
 } from "./pageUtils.js";
-import { PageState } from "./PageState.js";
-import { makeElement } from "./htmlUtils.js";
 import { getSealStatus } from './api.js';
+import { makeElement } from "./htmlUtils.js";
 
 // Pages
 
 import {
   HomePage,
-  MePage,
-  TOTPViewPage,
-  NewTOTPPage,
-  LoginPage,
-  SetVaultURLPage,
-  UnsealPage,
-  TransitViewPage,
-  TransitViewSecretPage,
-  TransitEncryptPage,
-  TransitDecryptPage,
-  KeyValueViewPage,
+  KeyValueDeletePage,
+  KeyValueNewPage,
+  KeyValueSecretEditPage,
   KeyValueSecretPage,
   KeyValueVersionsPage,
-  KeyValueNewPage,
-  KeyValueDeletePage,
-  KeyValueSecretEditPage,
+  KeyValueViewPage,
+  LoginPage,
+  MePage,
+  NewTOTPPage,
   PwGenPage,
   SetLanguagePage,
+  SetVaultURLPage,
+  TOTPViewPage,
+  TransitDecryptPage,
+  TransitEncryptPage,
+  TransitViewPage,
+  TransitViewSecretPage,
+  UnsealPage,
 } from "./pages";
 
 const pages = {
@@ -66,13 +66,13 @@ const pages = {
 };
 
 // Translations
-import i18next from 'i18next';
-import translation_en from './translations/en.js'
-import translation_de from './translations/de.js'
-import translation_ru from './translations/ru.js'
-import translation_nl from './translations/nl.js'
-import translation_fr from './translations/fr.js'
 import {formatDistance} from './formatDistance.js';
+import i18next from 'i18next';
+import translation_de from './translations/de.js'
+import translation_en from './translations/en.js'
+import translation_fr from './translations/fr.js'
+import translation_nl from './translations/nl.js'
+import translation_ru from './translations/ru.js'
 
 
 /*import "en-GB" as date_locale_en from 'date-fns/locale'
