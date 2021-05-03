@@ -1,20 +1,8 @@
-import translation_en from './src/translations/en.js'
-import translation_de from './src/translations/de.js'
-import translation_ru from './src/translations/ru.js'
-import translation_nl from './src/translations/nl.js'
-import translation_fr from './src/translations/fr.js'
+import translations from './src/translations/index.mjs'
 
-const langs = ["en", "de", "ru", "nl", "fr"];
+const langs = Object.getOwnPropertyNames(translations);
 
-const translations_dict = {
-  en: translation_en,
-  de: translation_de,
-  ru: translation_ru,
-  nl: translation_nl,
-  fr: translation_fr,
-}
-
-let en_keys = [...new Map(Object.entries(translations_dict.en)).keys()];
+let en_keys = [...new Map(Object.entries(translations.en)).keys()];
 
 function arrayDiff(a, b) {
   return {
@@ -24,7 +12,7 @@ function arrayDiff(a, b) {
 }
 
 for (let lang_num in langs) {
-  let lang = new Map(Object.entries(translations_dict[langs[lang_num]]));
+  let lang = new Map(Object.entries(translations[langs[lang_num]]));
   if (lang == "en") continue;
   let lang_keys = [...lang.keys()];
   let di = arrayDiff(en_keys, [...lang.keys()])

@@ -3,8 +3,9 @@ import { Page } from "../types/Page.js";
 import { changePage, setPageContent } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
 import i18next from 'i18next';
+import translations from "../translations/index.mjs";
 
-let languages = ["en", "de", "nl", "ru", "fr"];
+let languageIDs = Object.getOwnPropertyNames(translations);
 
 export class SetLanguagePage extends Page {
   constructor() {
@@ -21,7 +22,7 @@ export class SetLanguagePage extends Page {
           attributes: {
             name: "language"
           },
-          children: languages.map(function (languageID) {
+          children: languageIDs.map(function (languageID) {
             return makeElement({
               tag: "option",
               text: i18next.getFixedT(languageID, null)("language_name"),

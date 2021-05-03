@@ -68,14 +68,9 @@ const pages = {
 };
 
 // Translations
-import {formatDistance} from './formatDistance.js';
+import { formatDistance } from './formatDistance.js';
 import i18next from 'i18next';
-import translation_de from './translations/de.js'
-import translation_en from './translations/en.js'
-import translation_fr from './translations/fr.js'
-import translation_nl from './translations/nl.js'
-import translation_ru from './translations/ru.js'
-
+import translations from './translations/index.mjs'
 
 /*import "en-GB" as date_locale_en from 'date-fns/locale'
 
@@ -188,13 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
     lng: pageState.language,
     fallbackLng: 'en',
     debug: true,
-    resources: {
-      en: { translation: translation_en },
-      de: { translation: translation_de },
-      ru: { translation: translation_ru },
-      nl: { translation: translation_nl },
-      fr: { translation: translation_fr },
-    },
+    resources: Object.fromEntries(Object.entries(translations).map(([k, v]) => [k, { translation: v }])),
     interpolation: {
       format: function (value, format, _) {
         if (format === 'until_date' && value instanceof Date) return formatDistance(new Date(), new Date(value));
