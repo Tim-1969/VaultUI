@@ -34,7 +34,6 @@ export async function prePageChecks() {
     await prePageChecksReal();
   } catch (e) {
     console.log("OHNO", e)
-    setErrorText(e.message);
     return false;
   }
   return true;
