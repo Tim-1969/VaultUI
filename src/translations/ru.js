@@ -22,6 +22,7 @@ module.exports = {
   // Me Page
   "me_page_title": "Профиль/параметры",
   "log_out_btn": "Выход",
+  "seal_vault_btn": "Закрыть хранилище",
   "copy_token_btn": "Копировать код доступа",
   "renew_lease_btn": "Продлить действие кода доступа",
   "change_language_btn": "Выбор языка",
@@ -89,7 +90,7 @@ module.exports = {
 
   // Key Value Secret Versions Page
   "kv_sec_versions_title": "Версии ключей/значений",
-  "kv_sec_versions_suffix": " (редакт.)",
+  "kv_sec_versions_suffix": " (версии)",
 
   // Key Value View/List Secrets Page
   "kv_view_title": "Просмотр ключей/значений",
