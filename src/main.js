@@ -7,9 +7,11 @@ import Icons from 'uikit/dist/js/uikit-icons.min.js';
 import UIkit from 'uikit/dist/js/uikit.min.js';
 UIkit.use(Icons);
 
-import "prismjs/components/prism-json";
+/* eslint-disable */
 import Prism from "prismjs";
+import "prismjs/components/prism-json";
 Prism.highlightAll();
+/* eslint-enable */
 
 import { PageState } from "./PageState.js";
 import {
