@@ -50,8 +50,8 @@ export class KeyValueNewPage extends Page {
 
     this.addKVNewForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      pageState.currentPage.newKVSecretHandleForm();
-    });
+      this.newKVSecretHandleForm();
+    }.bind(this));
   }
 
   newKVSecretHandleForm() {
