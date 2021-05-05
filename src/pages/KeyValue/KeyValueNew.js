@@ -64,10 +64,11 @@ export class KeyValueNewPage extends Page {
       keyData = { "key": "value" };
     }
 
+      console.log(splitPath)
     createOrUpdateSecret(
       pageState.currentBaseMount,
       pageState.currentSecretPath,
-      splitPath[splitPath.length - 1],
+      path,
       keyData
     ).then(_ => {
       changePage("KEY_VALUE_VIEW");

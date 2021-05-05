@@ -256,10 +256,10 @@ export async function createOrUpdateSecret(baseMount, secretPath, name, data) {
   let APIData = {};
 
   if (pageState.currentMountType == "kv-v2") {
-    secretURL = `/v1/${baseMount}/data/${secretPath.join("")}/${name}`;
+    secretURL = `/v1/${baseMount}/data/${secretPath.join("/")}/${name}`;
     APIData = { "data": data };
   } else {
-    secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
+    secretURL = `/v1/${baseMount}/${secretPath.join("/")}/${name}`;
     APIData = data;
   }
 
