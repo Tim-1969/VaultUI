@@ -89,6 +89,7 @@ export class KeyValueSecretPage extends Page {
 
     getSecret(
       pageState.currentBaseMount,
+      pageState.currentMountType,
       pageState.currentSecretPath,
       pageState.currentSecret,
       pageState.currentSecretVersion

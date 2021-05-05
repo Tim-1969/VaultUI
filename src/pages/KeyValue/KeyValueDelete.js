@@ -31,7 +31,13 @@ export class KeyValueDeletePage extends Page {
           class: ["uk-button", "uk-button-danger"],
           text: i18next.t("kv_delete_btn"),
           onclick: _ => {
-            deleteSecret(pageState.currentBaseMount, pageState.currentSecretPath, pageState.currentSecret, pageState.currentSecretVersion).then(() => {
+            deleteSecret(
+              pageState.currentBaseMount,
+              pageState.currentMountType,
+              pageState.currentSecretPath,
+              pageState.currentSecret,
+              pageState.currentSecretVersion,
+            ).then(() => {
               this.goBack();
             });
           }

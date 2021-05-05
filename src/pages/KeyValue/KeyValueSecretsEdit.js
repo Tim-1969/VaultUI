@@ -41,7 +41,12 @@ export class KeyValueSecretEditPage extends Page {
         saveButton
       ]
     }));
-    getSecret(pageState.currentBaseMount, pageState.currentSecretPath, pageState.currentSecret).then(secretInfo => {
+    getSecret(
+      pageState.currentBaseMount,
+      pageState.currentMountType,
+      pageState.currentSecretPath,
+      pageState.currentSecret,
+    ).then(secretInfo => {
       loadingText.remove();
 
       const secretsJSON = JSON.stringify(Object.fromEntries(new Map(Object.entries(secretInfo).sort())), null, 4);

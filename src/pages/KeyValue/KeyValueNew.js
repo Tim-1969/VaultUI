@@ -65,6 +65,8 @@ export class KeyValueNewPage extends Page {
 
     createOrUpdateSecret(
       pageState.currentBaseMount,
+      pageState.currentMountType,
+      pageState.currentSecretPath,
       pageState.currentSecretPath,
       path,
       keyData

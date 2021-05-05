@@ -134,9 +134,9 @@ export async function getCapabilitiesPath(path) {
   });
 }
 
-export async function getSecrets(baseMount, secretPath) {
+export async function getSecrets(baseMount, mountType, secretPath) {
   let secretURL = "";
-  if (pageState.currentMountType == "kv-v2") {
+  if (mountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/metadata/${secretPath.join("")}?list=true`;
   } else {
     // cubbyhole and v1 are identical
@@ -177,9 +177,9 @@ export async function undeleteSecret(baseMount, secretPath, name, version = null
   secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
   if (version == null) {
     let meta = await getSecretMetadata(
-      pageState.currentBaseMount,
-      pageState.currentSecretPath,
-      pageState.currentSecret
+      baseMount,
+      secretPath,
+      name
     );
     let versions = getObjectKeys(meta.versions);
     version = String(versions[versions.length-1]);
@@ -201,9 +201,9 @@ export async function undeleteSecret(baseMount, secretPath, name, version = null
 }
 
 
-export async function getSecret(baseMount, secretPath, name, version = null) {
+export async function getSecret(baseMount, mountType, secretPath, name, version = null) {
   let secretURL = "";
-  if (pageState.currentMountType == "kv-v2") {
+  if (mountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/data/${secretPath.join("")}/${name}`;
     if (version != null) secretURL += `?version=${version}`;
   } else {
@@ -218,16 +218,16 @@ export async function getSecret(baseMount, secretPath, name, version = null) {
   return fetch(request).then(response => {
     return response.json();
   }).then(data => {
-    return pageState.currentMountType == "kv-v2" ? data.data.data : data.data;
+    return mountType == "kv-v2" ? data.data.data : data.data;
   });
 }
 
-export async function deleteSecret(baseMount, secretPath, name, version = null) {
+export async function deleteSecret(baseMount, mountType, secretPath, name, version = null) {
   let secretURL = "";
 
   let request;
 
-  if (pageState.currentMountType == "kv-v2" && version != null) {
+  if (mountType == "kv-v2" && version != null) {
     secretURL = `/v1/${baseMount}/delete/${secretPath.join("")}/${name}`;
     secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
     request = new Request(getAPIURL() + secretURL, {
@@ -239,7 +239,7 @@ export async function deleteSecret(baseMount, secretPath, name, version = null) 
       body: version != null ? JSON.stringify({ "versions": [version] }) : "{}"
     });
   } else {
-    if (pageState.currentMountType == "kv-v2") {
+    if (mountType == "kv-v2") {
       secretURL = `/v1/${baseMount}/metadata/${secretPath.join("")}/${name}`;
     } else {
       secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
@@ -261,11 +261,11 @@ export async function deleteSecret(baseMount, secretPath, name, version = null) 
   }
 }
 
-export async function createOrUpdateSecret(baseMount, secretPath, name, data) {
+export async function createOrUpdateSecret(baseMount, mountType, secretPath, name, data) {
   let secretURL = "";
   let APIData = {};
 
-  if (pageState.currentMountType == "kv-v2") {
+  if (mountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/data/${secretPath.join("/")}/${name}`;
     APIData = { "data": data };
   } else {

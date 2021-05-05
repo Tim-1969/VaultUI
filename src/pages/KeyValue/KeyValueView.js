@@ -41,7 +41,11 @@ export class KeyValueViewPage extends Page {
     pageContent.appendChild(newButton);
 
     try {
-      let res = await getSecrets(pageState.currentBaseMount, pageState.currentSecretPath);
+      let res = await getSecrets(
+        pageState.currentBaseMount,
+        pageState.currentMountType,
+        pageState.currentSecretPath,
+      );
 
       pageContent.appendChild(makeElement({
         tag: "ul",
