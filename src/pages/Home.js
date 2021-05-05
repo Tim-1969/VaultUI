@@ -55,7 +55,7 @@ export class HomePage extends Page {
     pageState.currentBaseMount = "";
     pageState.currentSecretPath = [];
     pageState.currentSecret = "";
-    pageState.currentSecretVersion = "0";
+    pageState.currentSecretVersion = null;
 
     const navList = makeElement({ tag: "ul", class: ["uk-nav", "uk-nav-default", "uk-margin-top"] });
     pageContent.appendChild(navList);

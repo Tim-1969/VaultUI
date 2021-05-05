@@ -64,7 +64,6 @@ export class KeyValueNewPage extends Page {
       keyData = { "key": "value" };
     }
 
-      console.log(splitPath)
     createOrUpdateSecret(
       pageState.currentBaseMount,
       pageState.currentSecretPath,

@@ -68,10 +68,12 @@ export class PageState extends Page {
   }
 
   get currentSecretVersion() {
-    return localStorage.getItem('currentSecretVersion') || "0";
+    let result = localStorage.getItem('currentSecretVersion')
+
+    return result != "null" ? result || null : null;
   }
   set currentSecretVersion(value) {
-    localStorage.setItem('currentSecretVersion', value);
+    localStorage.setItem('currentSecretVersion', String(value));
   }
 
   get currentSecret() {

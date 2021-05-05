@@ -106,7 +106,7 @@ function currentTitleSecretText() {
   let currentSecretText = pageState.currentSecret;
   currentSecretText += pageState.currentPage.titleSuffix;
 
-  if (pageState.currentSecretVersion != "0") currentSecretText += ` (v${pageState.currentSecretVersion})`;
+  if (pageState.currentSecretVersion !== null) currentSecretText += ` (v${pageState.currentSecretVersion})`;
   return currentSecretText;
 }
 
@@ -120,7 +120,7 @@ export function setTitleElement(pageState) {
         onclick: _ => {
           pageState.currentSecretPath = [];
           pageState.currentSecret = "";
-          pageState.currentSecretVersion = "0";
+          pageState.currentSecretVersion = null;
 
           if (pageState.currentMountType.startsWith("kv") || pageState.currentMountType == "cubbyhole") {
             changePage("KEY_VALUE_VIEW");
@@ -136,7 +136,7 @@ export function setTitleElement(pageState) {
           tag: "a",
           text: secretPath + " ",
           onclick: _ => {
-            pageState.currentSecretVersion = "0";
+            pageState.currentSecretVersion = null;
             if (pageState.currentMountType.startsWith("kv")) {
               pageState.currentSecretPath = secretPaths.slice(0, index + 1);
               changePage("KEY_VALUE_VIEW");

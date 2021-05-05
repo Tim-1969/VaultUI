@@ -172,9 +172,20 @@ export async function getSecretMetadata(baseMount, secretPath, name) {
   });
 }
 
-export async function undeleteSecret(baseMount, secretPath, name, version) {
-  let secretURL = `/v1/${baseMount}/undelete/${secretPath.join("")}/${name}`;
+export async function undeleteSecret(baseMount, secretPath, name, version = null) {
+  let secretURL = `/v1/${baseMount}/undelete/${secretPath.join("/")}/${name}`;
   secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
+  if (version == null) {
+    let meta = await getSecretMetadata(
+      pageState.currentBaseMount,
+      pageState.currentSecretPath,
+      pageState.currentSecret
+    );
+    console.log(meta.versions);
+    let versions = Array.from(new Map(Object.entries(meta.versions)).keys())
+    version = String(versions[versions.length-1])
+  }
+
   let request = new Request(getAPIURL() + secretURL, {
     method: "POST",
     headers: {
@@ -191,11 +202,11 @@ export async function undeleteSecret(baseMount, secretPath, name, version) {
 }
 
 
-export async function getSecret(baseMount, secretPath, name, version = "0") {
+export async function getSecret(baseMount, secretPath, name, version = null) {
   let secretURL = "";
   if (pageState.currentMountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/data/${secretPath.join("")}/${name}`;
-    if (version != 0) secretURL += `?version=${version}`;
+    if (version != null) secretURL += `?version=${version}`;
   } else {
     secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
   }
@@ -212,12 +223,12 @@ export async function getSecret(baseMount, secretPath, name, version = "0") {
   });
 }
 
-export async function deleteSecret(baseMount, secretPath, name, version) {
+export async function deleteSecret(baseMount, secretPath, name, version = null) {
   let secretURL = "";
 
   let request;
 
-  if (pageState.currentMountType == "kv-v2" && version != "0") {
+  if (pageState.currentMountType == "kv-v2" && version != null) {
     secretURL = `/v1/${baseMount}/delete/${secretPath.join("")}/${name}`;
     secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
     request = new Request(getAPIURL() + secretURL, {
@@ -226,7 +237,7 @@ export async function deleteSecret(baseMount, secretPath, name, version) {
         'X-Vault-Token': getToken(),
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ "versions": [version] })
+      body: version != null ? JSON.stringify({ "versions": [version] }) : "{}"
     });
   } else {
     if (pageState.currentMountType == "kv-v2") {
