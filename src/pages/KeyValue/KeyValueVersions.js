@@ -10,6 +10,9 @@ export class KeyValueVersionsPage extends Page {
     super();
   }
   goBack() {
+    if (pageState.currentSecretVersion != "0") {
+      pageState.currentSecretVersion = "0";
+    }
     changePage("KEY_VALUE_SECRET");
   }
   async render() {

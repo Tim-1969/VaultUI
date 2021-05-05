@@ -136,6 +136,7 @@ export function setTitleElement(pageState) {
           tag: "a",
           text: secretPath + " ",
           onclick: _ => {
+            pageState.currentSecretVersion = "0";
             if (pageState.currentMountType.startsWith("kv")) {
               pageState.currentSecretPath = secretPaths.slice(0, index + 1);
               changePage("KEY_VALUE_VIEW");

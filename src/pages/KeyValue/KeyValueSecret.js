@@ -15,7 +15,6 @@ export class KeyValueSecretPage extends Page {
     if (pageState.currentSecretVersion != "0") {
       pageState.currentSecretVersion = "0";
       changePage("KEY_VALUE_VERSIONS");
-
     } else {
       pageState.currentSecret = "";
       changePage("KEY_VALUE_VIEW");
