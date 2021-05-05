@@ -57,7 +57,6 @@ export class KeyValueNewPage extends Page {
   newKVSecretHandleForm() {
     let formData = new FormData(this.addKVNewForm);
     let path = formData.get("path");
-    let splitPath = path.split("/");
     let keyData = {};
 
     if (["kv-v1", "cubbyhole"].includes(pageState.currentMountType)) {
