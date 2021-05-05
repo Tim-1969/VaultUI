@@ -33,19 +33,19 @@ Means those two missing things need to be added to french.
 f
 ## Screenshots
 ### Home
-![The home page with listings for all mounted secrets engines.][screenshots/home.jpg]
+![The home page with listings for all mounted secrets engines.](screenshots/home.jpg)
 ### Cubbyhole Engine
-![The cubbyhole page with info on how to use it.][screenshots/cubbyhole.jpg]
+![The cubbyhole page with info on how to use it.](screenshots/cubbyhole.jpg)
 ### K/V v1 Engine
-![The view screen on the key value v1 screen with delete and edit buttons.][screenshots/kv1.jpg]
+![The view screen on the key value v1 screen with delete and edit buttons.](screenshots/kv1.jpg)
 ### K/V v2 Engine
-![The view screen on the key value v2 screen with delete all, edit and versions buttons.][screenshots/kv2.jpg]
-![Viewing a secret that can only be displayed as syntax highlighted JSON.][screenshots/kv2json.jpg]
-![The versions list of a secret.][screenshots/kv2versions.jpg]
-![A soft deleted secret with option to undelete.][screenshots/kv2undelete.jpg]
+![The view screen on the key value v2 screen with delete all, edit and versions buttons.](screenshots/kv2.jpg)
+![Viewing a secret that can only be displayed as syntax highlighted JSON.](screenshots/kv2json.jpg)
+![The versions list of a secret.](screenshots/kv2versions.jpg)
+![A soft deleted secret with option to undelete.](screenshots/kv2undelete.jpg)
 ### TOTP Engine
 We don't yet support `generate: true` TOTP secrets but probably will in the future.
-![A copyable list of TOTP codes with option to add a new one.][screenshots/totp.jpg]
-![A screen where you can add a new TOTP code.][screenshots/totpnew.jpg]
+![A copyable list of TOTP codes with option to add a new one.](screenshots/totp.jpg)
+![A screen where you can add a new TOTP code.](screenshots/totpnew.jpg)
 ### Transit Engine
-![Options to encrypt and decrypt using the transit engine.][screenshots/transit.jpg]
+![Options to encrypt and decrypt using the transit engine.](screenshots/transit.jpg)
