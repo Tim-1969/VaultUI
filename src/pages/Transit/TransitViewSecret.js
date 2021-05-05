@@ -18,7 +18,7 @@ export class TransitViewSecretPage extends Page {
       onclick: onclick,
       children: makeElement({
         tag: "div",
-        class: ["uk-tile", "uk-tile-default", "uk-tile-primary", "uk-padding-small"],
+        class: ["uk-padding-small", "uk-background-primary"],
         children: [
           makeElement({
             tag: "p",
@@ -48,29 +48,34 @@ export class TransitViewSecretPage extends Page {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div",
-      class: ["uk-child-width-1-2", "uk-grid-collapse", "uk-grid-small"],
+      class: ["uk-grid", "uk-child-width-expand@s"],
       attributes: { "uk-grid": "" },
-      children: [
-        makeElement({
-          tag: "div",
-          children: [
-            this.makeTile(
-              i18next.t("transit_view_encrypt_text"),
-              i18next.t("transit_view_encrypt_description"),
-              "lock",
-              i18next.t("transit_view_encrypt_icon_text"),
-              _ => { changePage("TRANSIT_ENCRYPT"); }
-            ),
-            this.makeTile(
-              i18next.t("transit_view_decrypt_text"),
-              i18next.t("transit_view_decrypt_description"),
-              "mail",
-              i18next.t("transit_view_decrypt_icon_text"),
-              _ => { changePage("TRANSIT_DECRYPT"); }
-            ),
-          ]
-        }),
-      ]
+      children: makeElement({
+        tag: "div",
+        class: ["uk-list", "uk-width-2-3@s"],
+        attributes: { "uk-grid": "" },
+        children: [
+          makeElement({
+            tag: "div",
+            children: [
+              this.makeTile(
+                i18next.t("transit_view_encrypt_text"),
+                i18next.t("transit_view_encrypt_description"),
+                "lock",
+                i18next.t("transit_view_encrypt_icon_text"),
+                _ => { changePage("TRANSIT_ENCRYPT"); }
+              ),
+              this.makeTile(
+                i18next.t("transit_view_decrypt_text"),
+                i18next.t("transit_view_decrypt_description"),
+                "mail",
+                i18next.t("transit_view_decrypt_icon_text"),
+                _ => { changePage("TRANSIT_DECRYPT"); }
+              ),
+            ]
+          }),
+        ]
+      })
     }));
   }
 
