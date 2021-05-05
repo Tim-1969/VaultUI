@@ -67,7 +67,6 @@ export class KeyValueNewPage extends Page {
       pageState.currentBaseMount,
       pageState.currentMountType,
       pageState.currentSecretPath,
-      pageState.currentSecretPath,
       path,
       keyData
     ).then(_ => {
