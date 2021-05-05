@@ -2,8 +2,10 @@ export function removeDoubleSlash(str) {
   return str.replace(/\/\/+/g, "/");
 }
 
+export const getObjectKeys = (obj) => Object.getOwnPropertyNames(obj);
+
 export function getKeyByObjectPropertyValue(map, searchValue) {
-  for (let key of Object.getOwnPropertyNames(map)) {
+  for (let key of getObjectKeys(map)) {
     if (map[key] === searchValue)
       return key;
   }
@@ -23,5 +25,5 @@ export function getToken() {
 }
 
 export function getAPIURL() {
-  return pageState.apiURL.length > 0 ? pageState.apiURL : null
+  return pageState.apiURL.length > 0 ? pageState.apiURL : null;
 }

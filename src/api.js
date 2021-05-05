@@ -1,5 +1,5 @@
 import { DoesNotExistError } from "./types/internalErrors.js";
-import { getAPIURL, getToken, removeDoubleSlash } from "./utils.js";
+import { getAPIURL, getObjectKeys, getToken, removeDoubleSlash } from "./utils.js";
 
 export async function lookupSelf() {
   const request = new Request(getAPIURL() + "/v1/auth/token/lookup-self", {
@@ -181,8 +181,8 @@ export async function undeleteSecret(baseMount, secretPath, name, version = null
       pageState.currentSecretPath,
       pageState.currentSecret
     );
-    let versions = Array.from(new Map(Object.entries(meta.versions)).keys())
-    version = String(versions[versions.length-1])
+    let versions = getObjectKeys(meta.versions);
+    version = String(versions[versions.length-1]);
   }
 
   let request = new Request(getAPIURL() + secretURL, {
