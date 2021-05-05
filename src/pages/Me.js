@@ -13,8 +13,6 @@ export class MePage extends Page {
   }
 
   async render() {
-    console.log("owo", await prePageChecks());
-
     if (!(await prePageChecks())) return;
     setPageContent(makeElement({
       tag: "ul",

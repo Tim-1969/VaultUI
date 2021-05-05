@@ -181,7 +181,6 @@ export async function undeleteSecret(baseMount, secretPath, name, version = null
       pageState.currentSecretPath,
       pageState.currentSecret
     );
-    console.log(meta.versions);
     let versions = Array.from(new Map(Object.entries(meta.versions)).keys())
     version = String(versions[versions.length-1])
   }
