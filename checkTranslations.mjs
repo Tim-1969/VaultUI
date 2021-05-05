@@ -16,7 +16,9 @@ for (let lang_num in langs) {
   if (lang == "en") continue;
   let lang_keys = [...lang.keys()];
   let di = arrayDiff(en_keys, [...lang.keys()])
-  console.log("Language:", langs[lang_num])
+  console.log("Language Code:", langs[lang_num])
+  console.log("Language Name:", translations[langs[lang_num]]["language_name"])
+
   console.log("\tPercent Translated:", Math.round((en_keys.length - di.missing.length) / en_keys.length * 100))
   if (di.missing.length > 0) {
     console.log("\tMissing: ", di.missing.join(", "))
