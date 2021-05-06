@@ -19,7 +19,6 @@ $button-primary-background: #5e81ac;
 $progress-bar-background: #5e81ac;
 $form-radio-background: $global-secondary-background;
 
-
 // Keep these in same order as https://github.com/uikit/uikit/blob/develop/src/scss/components/_import.scss
 @import "uikit/src/scss/variables.scss";
 @import "uikit/src/scss/mixins.scss";
@@ -75,3 +74,6 @@ $form-radio-background: $global-secondary-background;
 @import "uikit/src/scss/components/padding.scss";
 @import "uikit/src/scss/components/position.scss";
 @import "uikit/src/scss/components/inverse.scss";
+
+// TODO: replace this with a better solution to https://github.com/uikit/uikit/discussions/4458
+.uk-input { padding-right: $form-icon-width !important; }
