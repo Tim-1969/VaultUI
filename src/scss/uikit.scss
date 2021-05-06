@@ -76,4 +76,4 @@ $form-radio-background: $global-secondary-background;
 @import "uikit/src/scss/components/inverse.scss";
 
 // TODO: replace this with a better solution to https://github.com/uikit/uikit/discussions/4458
-.uk-input { padding-right: $form-icon-width !important; }
+.uk-input { padding-left: $form-icon-width !important; }
