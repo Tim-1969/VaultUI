@@ -1,8 +1,8 @@
 import { CodeJar } from "codejar";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
-import { createOrUpdateSecret } from "../../api/createOrUpdateSecret.js";
-import { getSecret } from "../../api/getSecret.js";
+import { createOrUpdateSecret } from "../../api/createOrUpdateSecret";
+import { getSecret } from "../../api/getSecret";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState.ts";
 import { verifyJSONString } from "../../utils";

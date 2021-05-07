@@ -1,8 +1,7 @@
 import { DoesNotExistError } from "../types/internalErrors";
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 
-
-export async function getTransitKeys(baseMount) {
+export async function getTransitKeys(baseMount: string): Promise<string[]> {
   const request = new Request(appendAPIURL(`/v1/${baseMount}/keys?list=true`), {
     headers: getHeaders(),
   });

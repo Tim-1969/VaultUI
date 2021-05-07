@@ -2,9 +2,9 @@ import { MarginInline } from "../elements/MarginInline.js";
 import { Page } from "../types/Page";
 import { QRScanner } from "../elements/QRScanner.js";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";
-import { getSealStatus } from "../api/getSealStatus.js";
+import { getSealStatus } from "../api/getSealStatus";
 import { makeElement } from "../htmlUtils";
-import { submitUnsealKey } from "../api/submitUnsealKey.js";
+import { submitUnsealKey } from "../api/submitUnsealKey";
 import i18next from 'i18next';
 
 

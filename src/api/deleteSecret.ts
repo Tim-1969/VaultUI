@@ -1,8 +1,14 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 import { removeDoubleSlash } from "../utils";
 
 
-export async function deleteSecret(baseMount, mountType, secretPath, name, version = null) {
+export async function deleteSecret(
+  baseMount: string,
+  mountType: string,
+  secretPath: string[],
+  name: string,
+  version: string | null = null
+): Promise<void> {
   let secretURL = "";
 
   let request;
@@ -27,12 +33,12 @@ export async function deleteSecret(baseMount, mountType, secretPath, name, versi
     secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
     request = new Request(appendAPIURL(secretURL), {
       method: "DELETE",
-      headers: getHeaders(),
+      headers: (getHeaders() as any),
     });
   }
-  let response = await fetch(request);
+  const response = await fetch(request);
   if (!response.ok) {
-    let json = await response.json();
+    const json = await response.json();
     throw new Error(json.errors[0]);
   }
 }

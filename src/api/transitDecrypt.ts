@@ -1,8 +1,15 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 import { removeDoubleSlash } from "../utils";
 
+type DecryptionResult = {
+  plaintext: string;
+}
 
-export async function transitDecrypt(baseMount, name, data) {
+export async function transitDecrypt(
+  baseMount: string,
+  name: string,
+  data: string
+): Promise<DecryptionResult> {
   const request = new Request(appendAPIURL(removeDoubleSlash(`/v1/${baseMount}/decrypt/${name}`)), {
     method: 'POST',
     headers: {
@@ -11,12 +18,12 @@ export async function transitDecrypt(baseMount, name, data) {
     },
     body: JSON.stringify({ ciphertext: data })
   });
-  let response = await fetch(request);
+  const response = await fetch(request);
   if (!response.ok) {
-    let json = await response.json();
+    const json = await response.json();
     throw new Error(json.errors[0]);
   } else {
-    let json = await response.json();
+    const json = await response.json();
     return json.data;
   }
 }

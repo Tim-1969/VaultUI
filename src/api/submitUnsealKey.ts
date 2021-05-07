@@ -1,7 +1,6 @@
-import { appendAPIURL } from "./apiUtils.js";
+import { appendAPIURL } from "./apiUtils";
 
-
-export async function submitUnsealKey(key) {
+export async function submitUnsealKey(key: string): Promise<void> {
   const request = new Request(appendAPIURL("/v1/sys/unseal"), {
     method: "POST",
     headers: {
@@ -11,9 +10,9 @@ export async function submitUnsealKey(key) {
       "key": key
     })
   });
-  let response = await fetch(request);
+  const response = await fetch(request);
   if (!response.ok) {
-    let json = await response.json();
+    const json = await response.json();
     throw new Error(json.errors[0]);
   }
 }

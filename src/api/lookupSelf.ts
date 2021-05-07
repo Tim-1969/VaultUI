@@ -1,7 +1,10 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 
+type TokenInfo = {
+  expire_time: string;
+}
 
-export async function lookupSelf() {
+export async function lookupSelf(): Promise<TokenInfo> {
   const request = new Request(appendAPIURL("/v1/auth/token/lookup-self"), {
     headers: getHeaders(),
   });

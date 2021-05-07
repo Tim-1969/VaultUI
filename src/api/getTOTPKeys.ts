@@ -1,8 +1,8 @@
 import { DoesNotExistError } from "../types/internalErrors";
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 
 
-export async function getTOTPKeys(baseMount) {
+export async function getTOTPKeys(baseMount: string): Promise<string[]> {
   const request = new Request(appendAPIURL(`/v1/${baseMount}/keys?list=true`), {
     headers: getHeaders(),
   });

@@ -1,7 +1,13 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 
 
-export async function getSecret(baseMount, mountType, secretPath, name, version = null) {
+export async function getSecret(
+  baseMount: string,
+  mountType: string,
+  secretPath: string[],
+  name: string,
+  version: string|null = null
+): Promise<Record<any, any>> {
   let secretURL = "";
   if (mountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/data/${secretPath.join("")}/${name}`;
@@ -11,7 +17,7 @@ export async function getSecret(baseMount, mountType, secretPath, name, version 
     secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
   }
   const request = new Request(appendAPIURL(secretURL), {
-    headers: getHeaders(),
+    headers: (getHeaders() as any),
   });
 
   return fetch(request).then(response => {

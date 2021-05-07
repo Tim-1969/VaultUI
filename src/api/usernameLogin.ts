@@ -1,7 +1,6 @@
-import { appendAPIURL } from "./apiUtils.js";
+import { appendAPIURL } from "./apiUtils";
 
-
-export async function usernameLogin(username, password) {
+export async function usernameLogin(username: string, password: string): Promise<string> {
   const request = new Request(appendAPIURL(`/v1/auth/userpass/login/${username}`), {
     method: 'POST',
     headers: {

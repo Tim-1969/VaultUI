@@ -1,7 +1,7 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 
 
-export async function sealVault() {
+export async function sealVault(): Promise<void> {
   const request = new Request(appendAPIURL("/v1/sys/seal"), {
     method: 'PUT',
     headers: getHeaders(),

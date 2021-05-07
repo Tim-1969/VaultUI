@@ -1,7 +1,6 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 
-
-export async function renewSelf() {
+export async function renewSelf(): Promise<void> {
   const request = new Request(appendAPIURL("/v1/auth/token/renew-self"), {
     method: 'POST',
     headers: {

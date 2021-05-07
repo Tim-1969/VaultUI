@@ -1,8 +1,14 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 import { removeDoubleSlash } from "../utils";
 
 
-export async function createOrUpdateSecret(baseMount, mountType, secretPath, name, data) {
+export async function createOrUpdateSecret(
+  baseMount: string,
+  mountType: string,
+  secretPath: string[],
+  name: string,
+  data: Record<string, unknown>
+): Promise<void> {
   let secretURL = "";
   let APIData = {};
 
@@ -23,9 +29,9 @@ export async function createOrUpdateSecret(baseMount, mountType, secretPath, nam
     },
     body: JSON.stringify(APIData, null, 0)
   });
-  let response = await fetch(request);
+  const response = await fetch(request);
   if (!response.ok) {
-    let json = await response.json();
+    const json = await response.json();
     throw new Error(json.errors[0]);
   }
 }

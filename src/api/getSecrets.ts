@@ -1,8 +1,11 @@
 import { DoesNotExistError } from "../types/internalErrors";
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 
-
-export async function getSecrets(baseMount, mountType, secretPath) {
+export async function getSecrets(
+  baseMount: string, 
+  mountType: string, 
+  secretPath: string[]
+): Promise<string[]> {
   let secretURL = "";
   if (mountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/metadata/${secretPath.join("")}?list=true`;
@@ -11,7 +14,7 @@ export async function getSecrets(baseMount, mountType, secretPath) {
     secretURL = `/v1/${baseMount}/${secretPath.join("")}?list=true`;
   }
   const request = new Request(appendAPIURL(secretURL), {
-    headers: getHeaders(),
+    headers: (getHeaders() as any),
   });
   return fetch(request).then(response => {
     if (response.status == 404) {

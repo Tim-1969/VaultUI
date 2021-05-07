@@ -1,8 +1,8 @@
-import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { appendAPIURL, getHeaders } from "./apiUtils";
 import { removeDoubleSlash } from "../utils";
 
 
-export async function addNewTOTP(baseMount, parms) {
+export async function addNewTOTP(baseMount: string, parms: {name: string}): Promise<void>  {
   const request = new Request(appendAPIURL(removeDoubleSlash(`/v1/${baseMount}/keys/${parms.name}`)), {
     method: 'POST',
     headers: {
@@ -11,9 +11,9 @@ export async function addNewTOTP(baseMount, parms) {
     },
     body: JSON.stringify(parms)
   });
-  let response = await fetch(request);
+  const response = await fetch(request);
   if (!response.ok) {
-    let json = await response.json();
+    const json = await response.json();
     throw new Error(json.errors[0]);
   }
 }
