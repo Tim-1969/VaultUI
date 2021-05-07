@@ -1,11 +1,11 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { DoesNotExistError } from "../../types/internalErrors.js";
 import { Page } from "../../types/Page.js";
-import { objectToMap } from "../../utils.js";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { getTOTPCode } from "../../api/getTOTPCode";
 import { getTOTPKeys } from "../../api/getTOTPKeys";
 import { makeElement } from "../../htmlUtils.js";
+import { objectToMap } from "../../utils.js";
 import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 
