@@ -59,7 +59,7 @@ function onLoad() {
             ListItem(makeElement({
               tag: "a",
               text: i18next.t("refresh_btn"),
-              onclick: _ => { changePage(pageState.currentPage); }
+              onclick: _ => { changePage(pageState.currentPageString); }
             })),
           ]
         })
