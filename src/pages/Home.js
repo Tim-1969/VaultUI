@@ -2,9 +2,9 @@ import { Page } from "../types/Page.js";
 import { changePage, prePageChecks, setErrorText } from "../pageUtils.js";
 import { getMounts } from "../api/getMounts";
 import { lookupSelf } from "../api/lookupSelf";
-import { makeElement } from "../htmlUtils.js";
+import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState.js";
-import { sortedObjectMap } from "../utils.js";
+import { sortedObjectMap } from "../utils";
 import i18next from 'i18next';
 
 export class HomePage extends Page {

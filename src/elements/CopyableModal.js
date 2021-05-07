@@ -1,5 +1,5 @@
 import { addClipboardNotifications } from "../pageUtils.js";
-import { makeElement } from "../htmlUtils.js";
+import { makeElement } from "../htmlUtils";
 import ClipboardJS from "clipboard";
 import FileSaver from 'file-saver';
 import i18next from 'i18next';

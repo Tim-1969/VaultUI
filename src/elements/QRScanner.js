@@ -1,5 +1,5 @@
 import { Margin } from "./Margin.js";
-import { makeElement } from "../htmlUtils.js";
+import { makeElement } from "../htmlUtils";
 import QrScanner from 'qr-scanner';
 
 /* eslint-disable import/no-unresolved */ 

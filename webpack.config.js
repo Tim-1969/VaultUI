@@ -26,7 +26,9 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
+
   module: {
     rules: [
       {
@@ -37,6 +39,7 @@ module.exports = {
           "sass-loader"
         ],
       },
+      { test: /\.tsx?$/, loader: "ts-loader" }
     ],
   },
 };

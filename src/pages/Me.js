@@ -1,7 +1,7 @@
 import { Page } from "../types/Page.js";
 import { addClipboardNotifications, changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils.js";
 import { getCapabilitiesPath } from "../api/getCapabilities.js";
-import { makeElement } from "../htmlUtils.js";
+import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState.js";
 import { renewSelf } from "../api/renewSelf.js";
 import { sealVault } from "../api/sealVault.js";

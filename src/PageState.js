@@ -2,7 +2,7 @@ import { Page } from "./types/Page.js";
 import { allPages } from "./allPages.js"
 import {
   getKeyByObjectPropertyValue,
-} from "./utils.js";
+} from "./utils";
 
 export class PageState extends Page {
   constructor() {

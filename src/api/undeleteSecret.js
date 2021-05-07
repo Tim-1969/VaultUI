@@ -1,5 +1,5 @@
 import { appendAPIURL, getHeaders } from "./apiUtils.js";
-import { getObjectKeys, removeDoubleSlash } from "../utils.js";
+import { getObjectKeys, removeDoubleSlash } from "../utils";
 import { getSecretMetadata } from "./getSecretMetadata";
 
 

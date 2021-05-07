@@ -3,7 +3,7 @@ import { MarginInline } from "../elements/MarginInline.js";
 import { Page } from "../types/Page.js";
 import { changePage, setErrorText, setPageContent } from "../pageUtils.js";
 import { lookupSelf } from "../api/lookupSelf";
-import { makeElement } from "../htmlUtils.js";
+import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState.js";
 import { usernameLogin } from "../api/usernameLogin";
 import i18next from 'i18next';

@@ -1,5 +1,5 @@
 import { appendAPIURL, getHeaders } from "./apiUtils.js";
-import { removeDoubleSlash } from "../utils.js";
+import { removeDoubleSlash } from "../utils";
 
 
 export async function transitEncrypt(baseMount, name, data) {

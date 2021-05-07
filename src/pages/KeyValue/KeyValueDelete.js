@@ -1,7 +1,7 @@
 import { Page } from "../../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { deleteSecret } from "../../api/deleteSecret";
-import { makeElement } from "../../htmlUtils.js";
+import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 

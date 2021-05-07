@@ -1,8 +1,8 @@
 import { Page } from "../../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { getSecretMetadata } from "../../api/getSecretMetadata.js";
-import { makeElement } from "../../htmlUtils.js";
-import { objectToMap } from "../../utils.js";
+import { makeElement } from "../../htmlUtils";
+import { objectToMap } from "../../utils";
 import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 

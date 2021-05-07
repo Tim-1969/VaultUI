@@ -1,4 +1,4 @@
-import { makeElement } from "../htmlUtils.js";
+import { makeElement } from "../htmlUtils";
 
 export function MarginInline(children, marginOptions = {}, inlineOptions = {}) {
   return makeElement({

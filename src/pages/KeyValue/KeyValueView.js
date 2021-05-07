@@ -2,7 +2,7 @@ import { DoesNotExistError } from "../../types/internalErrors.js";
 import { Page } from "../../types/Page.js";
 import { changePage, setErrorText, setTitleElement } from "../../pageUtils.js";
 import { getSecrets } from "../../api/getSecrets";
-import { makeElement } from "../../htmlUtils.js";
+import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 
