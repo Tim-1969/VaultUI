@@ -9,7 +9,6 @@ const passwordLengthMin = 1;
 const passwordLengthMax = 64;
 const passwordLengthDefault = 24;
 
-
 function random() {
   if (typeof window.crypto?.getRandomValues === 'function' && typeof window.Uint32Array === 'function') {
     return window.crypto.getRandomValues(new Uint32Array(1))[0] / 4294967295;
@@ -18,17 +17,41 @@ function random() {
   return Math.random();
 }
 
+const lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const numbers = '1234567890';
+const special = '!#$%&()*+,-./:;<=>?@[]^_{|}~';
+
+const alphabets = {
+  SECURE: lowerCase + upperCase + numbers + special,
+  SMOL: lowerCase + numbers,
+  HEX: '123456789ABCDEF',
+}
+
 const passwordOptionsDefault = {
-  length: passwordLengthDefault
+  length: passwordLengthDefault,
+  alphabet: alphabets.SECURE,
 }
 
 function genPassword(options = passwordOptionsDefault) {
   let pw = "";
-  const pwArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'()*+,-./:;<=>?@[]^_{|}~".split('');
+  options = {...passwordOptionsDefault, ...options}
+  const pwArray = options.alphabet.split('');
   for (let i = 0; i < options.length; i++) {
     pw = pw.concat(pwArray[Math.floor(random() * pwArray.length)]);
   }
   return pw;
+}
+
+function Option(label, value) {
+  return makeElement({
+    tag: "option",
+    text: label,
+    attributes: {
+      label: label,
+      value: value, 
+    }
+  })
 }
 
 
@@ -49,7 +72,7 @@ export class PwGenPage extends Page {
     this.passwordLengthRange = makeElement({
       tag: "input",
       name: "length",
-      class: "uk-range",
+      class: ["uk-range", "uk-width-1-2"],
       attributes: {
         type: "range",
         value: passwordLengthDefault,
@@ -59,12 +82,23 @@ export class PwGenPage extends Page {
     })
     this.passwordLengthRange.addEventListener('input', this.updatePassword.bind(this));
 
+    this.passwordAlphabet = makeElement({
+      tag: "select",
+      class: ["uk-select", "uk-width-1-2"],
+      children: [
+        Option("a-z a-Z 0-9 specials", alphabets.SECURE),
+        Option("a-z 0-9", alphabets.SMOL),
+        Option("A-F 1-9", alphabets.HEX),
+      ]
+    })
+
     this.passwordForm = makeElement({
       tag: "form",
       children: [
-        this.passwordBox,
         this.passwordLengthTitle,
-        this.passwordLengthRange,
+        Margin(this.passwordLengthRange),
+        Margin(this.passwordAlphabet),
+        Margin(this.passwordBox),
         Margin(makeElement({
           tag: "button",
           text: i18next.t("gen_password_btn"),
@@ -92,9 +126,10 @@ export class PwGenPage extends Page {
 
   updatePassword() {
     this.passwordLengthTitle.innerText = this.getPasswordLengthText();
-    this.passwordBox.setText(
-      genPassword({length: this.passwordLengthRange.value})
-    );
+    this.passwordBox.setText(genPassword({
+      length: this.passwordLengthRange.value,
+      alphabet: this.passwordAlphabet.value,
+    }));
   }
 
   get name() {
