@@ -62,6 +62,7 @@ export class PwGenPage extends Page {
 
 
   async render() {
+    setPageContent("");
     this.passwordBox = CopyableInputBox(genPassword(passwordOptionsDefault));
 
     this.passwordLengthTitle = makeElement({
@@ -130,6 +131,14 @@ export class PwGenPage extends Page {
       length: this.passwordLengthRange.value,
       alphabet: this.passwordAlphabet.value,
     }));
+  }
+
+  cleanup() {
+    this.passwordBox = undefined;
+    this.passwordLengthTitle = undefined;
+    this.passwordLengthRange = undefined;
+    this.passwordAlphabet = undefined;
+    this.passwordForm = undefined;
   }
 
   get name() {
