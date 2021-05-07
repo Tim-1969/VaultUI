@@ -1,29 +1,38 @@
+import {getObjectKeys} from "./utils.js";
+
+const optionsFunctions = {
+  class: (e, arg) => {
+    if (Array.isArray(arg)) {
+      e.classList.add(...arg);
+    } else {
+      e.classList.add(arg);
+    }
+  },
+  id: (e, arg) => e.id = arg,
+  html: (e, arg) => e.innerHTML = arg,
+  onclick: (e, arg) => e.onclick = arg,
+  attributes: setElementAttributes,
+  text: (e, arg) => e.innerText = arg,
+  children: (e, arg) => {
+    if (Array.isArray(arg)) {
+      arg.forEach(child => {
+        if (child != null) e.appendChild(child);
+      });
+    } else {
+      if (arg != null) e.appendChild(arg);
+    }
+  },
+  thenRun: (e, arg) => arg(e),
+}
+
 export function makeElement(elementInfo) {
   if ("condition" in elementInfo) { if (!elementInfo.condition) { return null; } }
   let element = document.createElement(elementInfo.tag);
-  if ("class" in elementInfo) {
-    if (Array.isArray(elementInfo.class)) {
-      element.classList.add(...elementInfo.class);
-    } else {
-      element.classList.add(elementInfo.class);
+
+  for (let key of Object.getOwnPropertyNames(elementInfo)) {
+    if (getObjectKeys(optionsFunctions).includes(key)) {
+      optionsFunctions[key](element, elementInfo[key]);
     }
-  }
-  if ("id" in elementInfo) element.id = elementInfo.id;
-  if ("html" in elementInfo) element.innerHTML = elementInfo.html;
-  if ("onclick" in elementInfo) element.onclick = elementInfo.onclick;
-  if ("attributes" in elementInfo) setElementAttributes(element, elementInfo.attributes);
-  if ("text" in elementInfo) element.innerText = elementInfo.text;
-  if ("children" in elementInfo) {
-    if (Array.isArray(elementInfo.children)) {
-      elementInfo.children.forEach(child => {
-        if (child != null) element.appendChild(child);
-      });
-    } else {
-      if (elementInfo.children != null) element.appendChild(elementInfo.children);
-    }
-  }
-  if ("thenRun" in elementInfo) {
-    elementInfo.thenRun(element);
   }
 
   return element;
