@@ -1,4 +1,4 @@
-import { Page } from "../types/Page.js";
+import { Page } from "../types/Page";
 import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState.ts";

@@ -1,5 +1,5 @@
 import { DoesNotExistError } from "../../types/internalErrors.js";
-import { Page } from "../../types/Page.js";
+import { Page } from "../../types/Page";
 import { changePage, setErrorText, setTitleElement } from "../../pageUtils";
 import { getSecrets } from "../../api/getSecrets";
 import { makeElement } from "../../htmlUtils";

@@ -1,4 +1,4 @@
-import { Page } from "../../types/Page.js";
+import { Page } from "../../types/Page";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { deleteSecret } from "../../api/deleteSecret";
 import { makeElement } from "../../htmlUtils";

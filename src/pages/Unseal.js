@@ -1,5 +1,5 @@
 import { MarginInline } from "../elements/MarginInline.js";
-import { Page } from "../types/Page.js";
+import { Page } from "../types/Page";
 import { QRScanner } from "../elements/QRScanner.js";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";
 import { getSealStatus } from "../api/getSealStatus.js";

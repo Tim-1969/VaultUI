@@ -4,19 +4,19 @@ export class Page {
   constructor() {
     // Do Nothing
   }
-  render() {
+  render(): any {
     // Do Nothing
   }
-  get name() {
+  get name(): string {
     return "Page";
   }
-  get titleSuffix() {
+  get titleSuffix(): string {
     return "";
   }
-  goBack() {
+  goBack(): void {
     changePage("HOME");
   }
-  cleanup() {
+  cleanup(): void {
     // Do Nothing
   }
 }

@@ -1,6 +1,6 @@
 import { CopyableInputBox } from "../elements/CopyableInputBox.js";
 import { Margin } from "../elements/Margin.js";
-import { Page } from "../types/Page.js";
+import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
 import { setPageContent } from "../pageUtils";
 import i18next from 'i18next';

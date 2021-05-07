@@ -1,4 +1,4 @@
-import { Page } from "../types/Page.js";
+import { Page } from "../types/Page";
 import { changePage, prePageChecks, setErrorText } from "../pageUtils";
 import { getMounts } from "../api/getMounts";
 import { lookupSelf } from "../api/lookupSelf";

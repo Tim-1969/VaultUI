@@ -8,6 +8,7 @@ import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView.js";
 import { LoginPage } from "./pages/Login.js";
 import { MePage } from "./pages/Me.js";
 import { NewTOTPPage } from "./pages/TOTP/NewTOTP.js";
+import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen.js";
 import { SetLanguagePage } from "./pages/SetLanguage.js";
 import { SetVaultURLPage } from "./pages/SetVaultURL.js";
@@ -17,7 +18,6 @@ import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt.js";
 import { TransitViewPage } from "./pages/Transit/TransitView.js";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret.js";
 import { UnsealPage } from "./pages/Unseal.js";
-import { Page } from "./types/Page.js";
 
 type pagesList = {
   [key: string]: Page

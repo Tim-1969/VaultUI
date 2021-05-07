@@ -1,4 +1,4 @@
-import { Page } from "./types/Page.js";
+import { Page } from "./types/Page";
 import { allPages } from "./allPages"
 import {
   getKeyByObjectPropertyValue,

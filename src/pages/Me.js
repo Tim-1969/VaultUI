@@ -1,4 +1,4 @@
-import { Page } from "../types/Page.js";
+import { Page } from "../types/Page";
 import { addClipboardNotifications, changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils";
 import { getCapabilitiesPath } from "../api/getCapabilities.js";
 import { makeElement } from "../htmlUtils";

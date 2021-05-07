@@ -1,6 +1,6 @@
 import { CopyableModal } from "../../elements/CopyableModal.js";
 import { Margin } from "../../elements/Margin.js";
-import { Page } from "../../types/Page.js";
+import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState.ts";
