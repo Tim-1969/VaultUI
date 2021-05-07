@@ -1,6 +1,7 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { DoesNotExistError } from "../../types/internalErrors.js";
 import { Page } from "../../types/Page.js";
+import { objectToMap } from "../../utils.js";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { getTOTPCode } from "../../api/getTOTPCode";
 import { getTOTPKeys } from "../../api/getTOTPKeys";
@@ -11,9 +12,10 @@ import i18next from 'i18next';
 export class TOTPViewPage extends Page {
   constructor() {
     super();
-    this.refreshers = [];
+    this.refresher = undefined;
+    this.totpListElements = {};
   }
-  render() {
+  async render() {
     setTitleElement(pageState);
     let totpList = makeElement({ tag: "div" });
     setPageContent(makeElement({
@@ -37,14 +39,11 @@ export class TOTPViewPage extends Page {
 
 
     getTOTPKeys(pageState.currentBaseMount, pageState.currentSecretPath).then(res => {
-      res.forEach(function (totpKeyName) {
+      res.forEach(async function (totpKeyName) {
         let totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
-        let totpRefresher = async function (totpKeyName, totpListElement) {
-          totpListElement.setCode(await getTOTPCode(pageState.currentBaseMount, totpKeyName));
-        };
-        totpRefresher(totpKeyName, totpListElement);
-        this.refreshers.push(setInterval(totpRefresher, 3000, totpKeyName, totpListElement));
+        this.totpListElements[totpKeyName] = totpListElement;
+        await this.updateTOTPElement(totpKeyName, totpListElement);
       }, this);
       document.getElementById("loadingText").remove();
     }).catch(e => {
@@ -56,10 +55,22 @@ export class TOTPViewPage extends Page {
       }
     });
 
+    let totpRefresher = async () => {
+      await Promise.all(Array.from(objectToMap(this.totpListElements)).map((kv) => {
+        return this.updateTOTPElement(...kv);
+      }))
+    }
+    await totpRefresher();
+    this.refresher = setInterval(totpRefresher, 3000);
   }
 
   cleanup() {
-    this.refreshers.forEach(refresher => clearInterval(refresher));
+    clearInterval(this.refresher);
+    this.totpListElements = {};
+  }
+
+  async updateTOTPElement(totpKeyName, totpListElement) {
+    totpListElement.setCode(await getTOTPCode(pageState.currentBaseMount, totpKeyName));
   }
 
   makeTOTPListElement(totpKeyName) {
