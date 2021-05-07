@@ -1,5 +1,5 @@
-import { removeDoubleSlash } from "../utils.js";
 import { appendAPIURL, getHeaders } from "./apiUtils.js";
+import { removeDoubleSlash } from "../utils.js";
 
 
 export async function createOrUpdateSecret(baseMount, mountType, secretPath, name, data) {
