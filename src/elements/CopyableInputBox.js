@@ -15,10 +15,12 @@ export function CopyableInputBox(text, copyable = true) {
         "uk-icon": "icon: copy",
         "role": "img",
         "aria-label": i18next.t("copy_input_box_copy_icon_text")
+      },
+      thenRun: (e) => {
+        let clipboard = new ClipboardJS(e);
+        addClipboardNotifications(clipboard, 600);
       }
     });
-    let clipboard = new ClipboardJS(inputBoxCopyButton);
-    addClipboardNotifications(clipboard, 600);
   }
 
   let inputBoxInput = makeElement({
