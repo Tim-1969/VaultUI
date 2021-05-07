@@ -1,4 +1,4 @@
-import { DoesNotExistError } from "../types/internalErrors.js";
+import { DoesNotExistError } from "../types/internalErrors";
 import { appendAPIURL, getHeaders } from "./apiUtils.js";
 
 

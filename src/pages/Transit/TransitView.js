@@ -1,4 +1,4 @@
-import { DoesNotExistError } from "../../types/internalErrors.js";
+import { DoesNotExistError } from "../../types/internalErrors";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setTitleElement } from "../../pageUtils";
 import { getTransitKeys } from "../../api/getTransitKeys";

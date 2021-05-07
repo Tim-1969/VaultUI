@@ -1,5 +1,5 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
-import { DoesNotExistError } from "../../types/internalErrors.js";
+import { DoesNotExistError } from "../../types/internalErrors";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { getTOTPCode } from "../../api/getTOTPCode";
