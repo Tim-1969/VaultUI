@@ -17,8 +17,13 @@ import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt.js";
 import { TransitViewPage } from "./pages/Transit/TransitView.js";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret.js";
 import { UnsealPage } from "./pages/Unseal.js";
+import { Page } from "./types/Page.js";
 
-export const allPages = {
+type pagesList = {
+  [key: string]: Page
+}
+
+export const allPages: pagesList = {
   HOME: new HomePage(),
   ME: new MePage(),
   TOTP: new TOTPViewPage(),
