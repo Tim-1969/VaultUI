@@ -105,7 +105,7 @@ async function onLoad() {
   window.pageContent = document.querySelector("#pageContent");
 
   if (process.env.NODE_ENV == "development") {
-    await (await import("./playground.js")).playground();
+    await (await import("./playground.ts")).playground();
   }
 
   renderPage();

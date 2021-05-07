@@ -45,7 +45,7 @@ export async function prePageChecks(): Promise<boolean> {
 
 
 export function addClipboardNotifications(clipboard: ClipboardJS, timeout = 1000): void {
-  clipboard.on('success', _ => {
+  clipboard.on('success', () => {
     (UIkit as any).notification(i18next.t("notification_copy_success"), {
       status: 'success',
       timeout: timeout
@@ -116,7 +116,7 @@ export function setTitleElement(pageState: PageState): void {
       makeElement({
         tag: "a",
         text: pageState.currentBaseMount + " ",
-        onclick: _ => {
+        onclick: () => {
           pageState.currentSecretPath = [];
           pageState.currentSecret = "";
           pageState.currentSecretVersion = null;
@@ -134,7 +134,7 @@ export function setTitleElement(pageState: PageState): void {
         return makeElement({
           tag: "a",
           text: secretPath + " ",
-          onclick: _ => {
+          onclick: () => {
             pageState.currentSecretVersion = null;
             if (pageState.currentMountType.startsWith("kv")) {
               pageState.currentSecretPath = secretPaths.slice(0, index + 1);
