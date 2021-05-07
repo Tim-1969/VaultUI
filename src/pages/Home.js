@@ -4,6 +4,7 @@ import { getMounts } from "../api/getMounts";
 import { lookupSelf } from "../api/lookupSelf";
 import { makeElement } from "../htmlUtils.js";
 import { pageState } from "../globalPageState.js";
+import { sortedObjectMap } from "../utils.js";
 import i18next from 'i18next';
 
 export class HomePage extends Page {
@@ -63,7 +64,7 @@ export class HomePage extends Page {
 
     let mounts = await getMounts();
     // sort it by secretPath so it's in alphabetical order consistantly. 
-    const mountsMap = new Map(Object.entries(mounts).sort());
+    const mountsMap = sortedObjectMap(mounts);
 
     mountsMap.forEach(function (mount, baseMount) {
       if (typeof mount != 'object') return;

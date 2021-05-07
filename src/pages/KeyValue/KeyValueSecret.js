@@ -5,6 +5,7 @@ import { getCapabilities } from "../../api/getCapabilities";
 import { getSecret } from "../../api/getSecret";
 import { makeElement } from "../../htmlUtils.js";
 import { pageState } from "../../globalPageState.js";
+import { sortedObjectMap } from "../../utils.js";
 import { undeleteSecret } from "../../api/undeleteSecret";
 import Prism from "prismjs";
 import i18next from 'i18next';
@@ -125,7 +126,7 @@ export class KeyValueSecretPage extends Page {
         return;
       }
 
-      const secretsMap = new Map(Object.entries(secretInfo).sort());
+      const secretsMap = sortedObjectMap(secretInfo);
 
       for (let value of secretsMap.values()) {
         if (typeof value == 'object') isSecretNestedJson = true;

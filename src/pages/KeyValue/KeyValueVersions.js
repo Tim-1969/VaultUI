@@ -2,6 +2,7 @@ import { Page } from "../../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { getSecretMetadata } from "../../api/getSecretMetadata.js";
 import { makeElement } from "../../htmlUtils.js";
+import { objectToMap } from "../../utils.js";
 import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 
@@ -32,7 +33,7 @@ export class KeyValueVersionsPage extends Page {
       pageState.currentSecret
     );
 
-    new Map(Object.entries(metadata.versions)).forEach((_, ver) => {
+    objectToMap(metadata.versions).forEach((_, ver) => {
       versionsList.appendChild(makeElement({
         tag: "li",
         children: makeElement({
