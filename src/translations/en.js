@@ -47,6 +47,7 @@ module.exports = {
 
   // Password Generator Page
   "password_generator_title": "Password Generator",
+  "password_length_title": "Password Length ({{min}}/{{max}})",
   "gen_password_btn": "Generate Password",
 
   // Login Page

@@ -1,28 +1,31 @@
 import { CopyableInputBox } from "../elements/CopyableInputBox.js";
+import { Margin } from "../elements/Margin.js";
 import { Page } from "../types/Page.js";
 import { makeElement } from "../htmlUtils.js";
 import { setPageContent } from "../pageUtils.js";
 import i18next from 'i18next';
 
+const passwordLengthMin = 1;
+const passwordLengthMax = 64;
+const passwordLengthDefault = 24;
+
 
 function random() {
-  const {
-    crypto,
-    Uint32Array
-  } = window;
-
-  if (typeof (crypto === null || crypto === void 0 ? void 0 : crypto.getRandomValues) === 'function' && typeof Uint32Array === 'function') {
+  if (typeof window.crypto?.getRandomValues === 'function' && typeof window.Uint32Array === 'function') {
     return window.crypto.getRandomValues(new Uint32Array(1))[0] / 4294967295;
   }
 
   return Math.random();
 }
 
+const passwordOptionsDefault = {
+  length: passwordLengthDefault
+}
 
-function genPw(len) {
+function genPassword(options = passwordOptionsDefault) {
   let pw = "";
   const pwArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'()*+,-./:;<=>?@[]^_{|}~".split('');
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < options.length; i++) {
     pw = pw.concat(pwArray[Math.floor(random() * pwArray.length)]);
   }
   return pw;
@@ -33,22 +36,65 @@ export class PwGenPage extends Page {
   constructor() {
     super();
   }
+
+
   async render() {
-    let inputBox = CopyableInputBox(genPw(24));
-    setPageContent(makeElement({
-      tag: "div",
+    this.passwordBox = CopyableInputBox(genPassword(passwordOptionsDefault));
+
+    this.passwordLengthTitle = makeElement({
+      tag: "h4",
+      text: this.getPasswordLengthText()
+    })
+
+    this.passwordLengthRange = makeElement({
+      tag: "input",
+      name: "length",
+      class: "uk-range",
+      attributes: {
+        type: "range",
+        value: passwordLengthDefault,
+        max: passwordLengthMax,
+        min: passwordLengthMin,
+      },
+    })
+    this.passwordLengthRange.addEventListener('input', this.updatePassword.bind(this));
+
+    this.passwordForm = makeElement({
+      tag: "form",
       children: [
-        inputBox,
-        makeElement({
+        this.passwordBox,
+        this.passwordLengthTitle,
+        this.passwordLengthRange,
+        Margin(makeElement({
           tag: "button",
           text: i18next.t("gen_password_btn"),
           class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
-          onclick: () => {
-            inputBox.setText(genPw(24));
-          }
-        })
+          attributes: {type: "submit"},
+        }))
       ]
-    }));
+    });
+
+    this.passwordForm.addEventListener("submit", (e) => this.formEvent(e));
+    setPageContent(this.passwordForm);
+  }
+
+  getPasswordLengthText() {
+    return i18next.t("password_length_title", {
+      min: this?.passwordLengthRange?.value || 24,
+      max: passwordLengthMax
+    });
+  }
+
+  formEvent(e) {
+    e.preventDefault();
+    this.updatePassword();
+  }
+
+  updatePassword() {
+    this.passwordLengthTitle.innerText = this.getPasswordLengthText();
+    this.passwordBox.setText(
+      genPassword({length: this.passwordLengthRange.value})
+    );
   }
 
   get name() {
