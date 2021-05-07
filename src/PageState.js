@@ -1,4 +1,5 @@
 import { Page } from "./types/Page.js";
+import { allPages } from "./allPages.js"
 import {
   getKeyByObjectPropertyValue,
 } from "./utils.js";
@@ -19,14 +20,16 @@ export class PageState extends Page {
   // the clunkyness of this approach, but for now, this works.
 
   get apiURL() {
-    return localStorage.getItem('apiURL') || "";
+    let apiurl = localStorage.getItem('apiURL') || "";
+    return apiurl.length > 0 ? apiurl : null;
   }
   set apiURL(value) {
     localStorage.setItem('apiURL', value);
   }
   
   get token() {
-    return localStorage.getItem('token') || "";
+    let tok = localStorage.getItem('token') || "";
+    return tok.length > 0 ? tok : null;
   }
   set token(value) {
     localStorage.setItem('token', value);
@@ -91,14 +94,18 @@ export class PageState extends Page {
   }
   get currentPage() {
     let curPage = localStorage.getItem('currentPage') || "HOME";
-    return realPages[curPage];
+    return allPages[curPage];
   }
   get currentPageString() {
-    let key = getKeyByObjectPropertyValue(realPages, this.currentPage);
+    let key = getKeyByObjectPropertyValue(allPages, this.currentPage);
     return key;
   }
   set currentPage(value) {
-    let key = getKeyByObjectPropertyValue(realPages, value);
-    localStorage.setItem('currentPage', key);
+    if (typeof page == 'object') {
+      let key = getKeyByObjectPropertyValue(allPages, value);
+      localStorage.setItem('currentPage', key);
+    } else {
+      localStorage.setItem('currentPage', value);
+    }
   }
 }

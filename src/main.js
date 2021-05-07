@@ -13,79 +13,18 @@ import "prismjs/components/prism-json";
 Prism.highlightAll();
 /* eslint-enable */
 
-import { PageState } from "./PageState.js";
 import {
   changePage,
   renderPage,
 } from "./pageUtils.js";
 import { getSealStatus } from './api.js';
 import { makeElement } from "./htmlUtils.js";
-
-// Pages
-
-import {
-  HomePage,
-  KeyValueDeletePage,
-  KeyValueNewPage,
-  KeyValueSecretEditPage,
-  KeyValueSecretPage,
-  KeyValueVersionsPage,
-  KeyValueViewPage,
-  LoginPage,
-  MePage,
-  NewTOTPPage,
-  PwGenPage,
-  SetLanguagePage,
-  SetVaultURLPage,
-  TOTPViewPage,
-  TransitDecryptPage,
-  TransitEncryptPage,
-  TransitViewPage,
-  TransitViewSecretPage,
-  UnsealPage,
-} from "./pages";
-
-const pages = {
-  HOME: new HomePage(),
-  ME: new MePage(),
-  TOTP: new TOTPViewPage(),
-  NEW_TOTP: new NewTOTPPage(),
-  LOGIN: new LoginPage(),
-  SET_VAULT_URL: new SetVaultURLPage(),
-  UNSEAL: new UnsealPage(),
-  SET_LANGUAGE: new SetLanguagePage(),
-  TRANSIT_VIEW: new TransitViewPage(),
-  TRANSIT_VIEW_SECRET: new TransitViewSecretPage(),
-  TRANSIT_ENCRYPT: new TransitEncryptPage(),
-  TRANSIT_DECRYPT: new TransitDecryptPage(),
-  KEY_VALUE_VIEW: new KeyValueViewPage(),
-  KEY_VALUE_SECRET: new KeyValueSecretPage(),
-  KEY_VALUE_VERSIONS: new KeyValueVersionsPage(),
-  KEY_VALUE_NEW_SECRET: new KeyValueNewPage(),
-  KEY_VALUE_DELETE: new KeyValueDeletePage(),
-  KEY_VALUE_SECRET_EDIT: new KeyValueSecretEditPage(),
-  PW_GEN: new PwGenPage(),
-};
+import { pageState } from "./globalPageState.js";
 
 // Translations
 import { formatDistance } from './formatDistance.js';
 import i18next from 'i18next';
 import translations from './translations/index.mjs'
-
-/*import "en-GB" as date_locale_en from 'date-fns/locale'
-
-function getDateLocale() {
-  let locales = {
-    en:
-  }
-}*/
-
-
-// Globals
-
-var pageState = new PageState();
-window.pageState = pageState;
-window.realPages = pages;
 
 function ListItem(children) {
   return makeElement({

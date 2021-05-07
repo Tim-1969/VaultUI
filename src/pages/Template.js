@@ -1,6 +1,7 @@
 import { Page } from "../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
+import { pageState } from "../globalPageState.js";
 
 export class TemplatePage extends Page {
   constructor() {

@@ -1,12 +1,11 @@
-import i18next from 'i18next';
-
-import { changePage, setErrorText, setPageContent } from "../pageUtils.js";
-import { getSealStatus, submitUnsealKey } from "../api.js";
-
 import { MarginInline } from "../elements/MarginInline.js";
 import { Page } from "../types/Page.js";
 import { QRScanner } from "../elements/QRScanner.js";
+import { changePage, setErrorText, setPageContent } from "../pageUtils.js";
+import { getSealStatus, submitUnsealKey } from "../api.js";
 import { makeElement } from "../htmlUtils.js";
+import i18next from 'i18next';
+
 
 const UnsealInputModes = {
   FORM_INPUT: "FORM_INPUT",

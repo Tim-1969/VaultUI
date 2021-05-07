@@ -2,6 +2,7 @@ import { Page } from "../../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { getSecretMetadata } from "../../api.js";
 import { makeElement } from "../../htmlUtils.js";
+import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 
 

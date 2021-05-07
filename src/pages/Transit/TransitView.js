@@ -3,6 +3,7 @@ import { Page } from "../../types/Page.js";
 import { changePage, setErrorText, setTitleElement } from "../../pageUtils.js";
 import { getTransitKeys } from "../../api.js";
 import { makeElement } from "../../htmlUtils.js";
+import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 
 export class TransitViewPage extends Page {

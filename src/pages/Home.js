@@ -1,8 +1,8 @@
 import { Page } from "../types/Page.js";
 import { changePage, prePageChecks, setErrorText } from "../pageUtils.js";
-import { getAPIURL } from "../utils.js";
 import { getMounts, lookupSelf } from "../api.js";
 import { makeElement } from "../htmlUtils.js";
+import { pageState } from "../globalPageState.js";
 import i18next from 'i18next';
 
 export class HomePage extends Page {
@@ -21,7 +21,7 @@ export class HomePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "span",
-            html: i18next.t("vaulturl_text", {"text": getAPIURL()})
+            html: i18next.t("vaulturl_text", {"text": pageState.apiURL})
           })
         }),
         makeElement({

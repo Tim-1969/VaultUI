@@ -1,7 +1,6 @@
-import { getAPIURL } from "./utils.js";
 import { getSealStatus, lookupSelf } from './api.js';
 import { makeElement } from "./htmlUtils.js";
-
+import { pageState } from "./globalPageState.js";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from 'i18next';
 
@@ -10,7 +9,7 @@ async function prePageChecksReal() {
     changePage("SET_LANGUAGE");
     throw new Error("Language Not Set");
   }
-  if (!getAPIURL()) {
+  if (!pageState.apiURL) {
     changePage("SET_VAULT_URL");
     throw new Error("Vault URL Not Set");
   }
@@ -75,11 +74,7 @@ export function changePage(page, shouldSwitch = true) {
   if (pageState.currentPage && shouldSwitch) {
     pageState.currentPage.cleanup();
   }
-  if (typeof page == 'object') {
-    pageState.currentPage = page;
-  } else {
-    pageState.currentPage = realPages[page];
-  }
+  pageState.currentPage = page;
   if (shouldSwitch) {
     renderPage();
   }

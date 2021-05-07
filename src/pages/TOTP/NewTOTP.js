@@ -4,6 +4,7 @@ import { Page } from "../../types/Page.js";
 import { addNewTOTP } from "../../api.js";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
+import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
 
 export class NewTOTPPage extends Page {

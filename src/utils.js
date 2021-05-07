@@ -19,11 +19,3 @@ export function verifyJSONString(str) {
   }
   return true;
 }
-
-export function getToken() {
-  return pageState.token.length > 0 ? pageState.token : null;
-}
-
-export function getAPIURL() {
-  return pageState.apiURL.length > 0 ? pageState.apiURL : null;
-}

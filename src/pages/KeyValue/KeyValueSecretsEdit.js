@@ -3,6 +3,7 @@ import { Page } from "../../types/Page.js";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { createOrUpdateSecret, getSecret } from "../../api.js";
 import { makeElement } from "../../htmlUtils.js";
+import { pageState } from "../../globalPageState.js";
 import { verifyJSONString } from "../../utils.js";
 import i18next from 'i18next';
 

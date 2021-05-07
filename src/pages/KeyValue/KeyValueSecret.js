@@ -3,6 +3,7 @@ import { Page } from "../../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { getCapabilities, getSecret, undeleteSecret } from "../../api.js";
 import { makeElement } from "../../htmlUtils.js";
+import { pageState } from "../../globalPageState.js";
 import Prism from "prismjs";
 import i18next from 'i18next';
 

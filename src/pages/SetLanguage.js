@@ -2,6 +2,7 @@ import { Margin } from "../elements/Margin.js";
 import { Page } from "../types/Page.js";
 import { changePage, setPageContent } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils.js";
+import { pageState } from "../globalPageState.js";
 import i18next from 'i18next';
 import translations from "../translations/index.mjs";
 

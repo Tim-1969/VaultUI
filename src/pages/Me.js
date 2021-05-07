@@ -1,8 +1,8 @@
 import { Page } from "../types/Page.js";
 import { addClipboardNotifications, changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils.js";
 import { getCapabilitiesPath, renewSelf, sealVault } from "../api.js";
-import { getToken } from "../utils.js";
 import { makeElement } from "../htmlUtils.js";
+import { pageState } from "../globalPageState.js";
 import ClipboardJS from "clipboard";
 import i18next from 'i18next';
 
@@ -35,7 +35,7 @@ export class MePage extends Page {
             tag: "a",
             text: i18next.t("copy_token_btn"),
             attributes: {
-              "data-clipboard-text": getToken(),
+              "data-clipboard-text": pageState.token,
             },
             thenRun: (e) => {
               let clipboard = new ClipboardJS(e);
