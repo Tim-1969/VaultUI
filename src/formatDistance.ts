@@ -1,8 +1,8 @@
 import { de, enGB, fr, it, nl, ru } from 'date-fns/locale'
 import { formatDistance as formatDistanceReal} from 'date-fns';
-import { pageState } from "./globalPageState.ts";
+import { pageState } from "./globalPageState";
 
-function getLocale() {
+function getLocale(): any {
   return {
     "en": enGB,
     "fr": fr,
@@ -13,6 +13,6 @@ function getLocale() {
   }[pageState.language];
 }
 
-export function formatDistance(d1, d2) {
+export function formatDistance(d1: Date, d2: Date): string {
   return formatDistanceReal(d1, d2, { locale: getLocale() });
 } 

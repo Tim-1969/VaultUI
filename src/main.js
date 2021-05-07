@@ -22,7 +22,7 @@ import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState.ts";
 
 // Translations
-import { formatDistance } from './formatDistance.js';
+import { formatDistance } from './formatDistance';
 import i18next from 'i18next';
 import translations from './translations/index.mjs'
 
