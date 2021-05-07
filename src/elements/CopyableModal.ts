@@ -4,7 +4,7 @@ import ClipboardJS from "clipboard";
 import FileSaver from 'file-saver';
 import i18next from 'i18next';
 
-export function CopyableModal(name, contentString) {
+export function CopyableModal(name: string, contentString: string): Element {
   return makeElement({
     tag: "div",
     class: "modal-sections",
@@ -54,7 +54,7 @@ export function CopyableModal(name, contentString) {
               },
               text: i18next.t("copy_modal_download_btn"),
               onclick: _ => {
-                var blob = new Blob([contentString], {type: "text/plain;charset=utf-8"});
+                const blob = new Blob([contentString], {type: "text/plain;charset=utf-8"});
                 FileSaver.saveAs(blob, "result.txt");
               }
             }),
@@ -67,7 +67,7 @@ export function CopyableModal(name, contentString) {
               },
               text: i18next.t("copy_modal_copy_btn"),
               thenRun: (e) => {
-                let clipboard = new ClipboardJS(e);
+                const clipboard = new ClipboardJS(e);
                 addClipboardNotifications(clipboard);
               }
             }),

@@ -1,4 +1,4 @@
-import { CopyableModal } from "../../elements/CopyableModal.js";
+import { CopyableModal } from "../../elements/CopyableModal";
 import { Margin } from "../../elements/Margin.js";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
