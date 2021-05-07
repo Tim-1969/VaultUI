@@ -1,7 +1,7 @@
 import { Margin } from "../elements/Margin.js";
 import { MarginInline } from "../elements/MarginInline.js";
 import { Page } from "../types/Page.js";
-import { changePage, setErrorText, setPageContent } from "../pageUtils.js";
+import { changePage, setErrorText, setPageContent } from "../pageUtils";
 import { lookupSelf } from "../api/lookupSelf";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState.ts";

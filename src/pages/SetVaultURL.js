@@ -1,5 +1,5 @@
 import { Page } from "../types/Page.js";
-import { changePage, setPageContent } from "../pageUtils.js";
+import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState.ts";
 

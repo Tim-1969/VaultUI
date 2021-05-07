@@ -1,7 +1,7 @@
 import { CopyableModal } from "../../elements/CopyableModal.js";
 import { Margin } from "../../elements/Margin.js";
 import { Page } from "../../types/Page.js";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState.ts";
 import { transitDecrypt } from "../../api/transitDecrypt";

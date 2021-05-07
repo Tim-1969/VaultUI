@@ -1,6 +1,6 @@
 import { CodeJar } from "codejar";
 import { Page } from "../../types/Page.js";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { createOrUpdateSecret } from "../../api/createOrUpdateSecret.js";
 import { getSecret } from "../../api/getSecret.js";
 import { makeElement } from "../../htmlUtils";

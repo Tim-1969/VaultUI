@@ -1,7 +1,10 @@
+import { Page } from "./types/Page";
+import { PageState } from "./PageState";
 import { getSealStatus } from "./api/getSealStatus";
 import { lookupSelf } from "./api/lookupSelf";
 import { makeElement } from "./htmlUtils";
-import { pageState } from "./globalPageState.ts";
+import { pageState } from "./globalPageState";
+import ClipboardJS from "clipboard";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from 'i18next';
 
@@ -15,7 +18,7 @@ async function prePageChecksReal() {
     throw new Error("Vault URL Not Set");
   }
 
-  let sealStatus = await getSealStatus();
+  const sealStatus = await getSealStatus();
   if (sealStatus.sealed) {
     changePage("UNSEAL");
     throw new Error("Vault Sealed");
@@ -29,7 +32,7 @@ async function prePageChecksReal() {
   }
 }
 
-export async function prePageChecks() {
+export async function prePageChecks(): Promise<boolean> {
   try {
     await prePageChecksReal();
   } catch (e) {
@@ -41,15 +44,15 @@ export async function prePageChecks() {
 
 
 
-export function addClipboardNotifications(clipboard, timeout = 1000) {
+export function addClipboardNotifications(clipboard: ClipboardJS, timeout = 1000): void {
   clipboard.on('success', _ => {
-    UIkit.notification(i18next.t("notification_copy_success"), {
+    (UIkit as any).notification(i18next.t("notification_copy_success"), {
       status: 'success',
       timeout: timeout
     });
   });
-  clipboard.on('error', function (e) {
-    UIkit.notification(i18next.t("notification_copy_error", {
+  clipboard.on('error', function (e: Error) {
+    (UIkit as any).notification(i18next.t("notification_copy_error", {
       "error": e.message
     }), {
       status: 'danger',
@@ -58,12 +61,12 @@ export function addClipboardNotifications(clipboard, timeout = 1000) {
   });
 }
 
-export function setErrorText(text) {
-  let errorTextElement = document.querySelector("#errorText");
+export function setErrorText(text: string): void {
+  const errorTextElement = document.querySelector("#errorText");
   if (errorTextElement) {
-    document.querySelector("#errorText").innerText = `Error: ${text}`;
+    (document.querySelector("#errorText") as HTMLElement).innerText = `Error: ${text}`;
   }
-  UIkit.notification({
+  (UIkit as any).notification({
     message: `Error: ${text}`,
     status: 'danger',
     pos: 'top-center',
@@ -71,9 +74,9 @@ export function setErrorText(text) {
   });
 }
 
-export function changePage(page, shouldSwitch = true) {
+export function changePage(page: string, shouldSwitch = true): void {
   if (pageState.currentPage && shouldSwitch) {
-    pageState.currentPage.cleanup();
+    (pageState.currentPage as Page).cleanup();
   }
   pageState.currentPage = page;
   if (shouldSwitch) {
@@ -81,19 +84,19 @@ export function changePage(page, shouldSwitch = true) {
   }
 }
 
-export function renderPage() {
+export function renderPage(): void {
   document.documentElement.dir = pageState.pageDirection;
-  console.log("Rendering Page: ", pageState.currentPage.name);
-  document.querySelector("#pageContent").innerHTML = "";
-  setPageTitle(pageState.currentPage.name);
-  pageState.currentPage.render();
+  console.log("Rendering Page: ", (pageState.currentPage as Page).name);
+  (document.querySelector("#pageContent") as HTMLElement).innerHTML = "";
+  setPageTitle((pageState.currentPage as Page).name);
+  (pageState.currentPage as Page).render();
 }
 
-export function setPageTitle(title) {
-  let pageTitle = document.getElementById("pageTitle");
+export function setPageTitle(title: string | HTMLElement): void {
+  const pageTitle = (document.getElementById("pageTitle") as HTMLElement);
   pageTitle.innerHTML = "";
-  if (typeof title === "string" || title instanceof String) {
-    pageTitle.innerText = title;
+  if (typeof title === "string") {
+    pageTitle.innerText = title.toString();
   } else {
     pageTitle.appendChild(title);
   }
@@ -101,13 +104,12 @@ export function setPageTitle(title) {
 
 function currentTitleSecretText() {
   let currentSecretText = pageState.currentSecret;
-  currentSecretText += pageState.currentPage.titleSuffix;
-
+  currentSecretText += (pageState.currentPage as Page).titleSuffix;
   if (pageState.currentSecretVersion !== null) currentSecretText += ` (v${pageState.currentSecretVersion})`;
   return currentSecretText;
 }
 
-export function setTitleElement(pageState) {
+export function setTitleElement(pageState: PageState): void {
   const titleElement = makeElement({
     tag: "div",
     children: [
@@ -149,12 +151,11 @@ export function setTitleElement(pageState) {
     ]
   });
   setPageTitle(titleElement);
-  return titleElement;
 }
 
-export function setPageContent(content) {
-  let pageContent = document.getElementById("pageContent");
-  if (typeof content === "string" || content instanceof String) {
+export function setPageContent(content: string | HTMLElement): void {
+  const pageContent = (document.getElementById("pageContent") as HTMLElement);
+  if (typeof content === "string") {
     pageContent.innerHTML = content;
   } else {
     pageContent.innerHTML = "";

@@ -1,6 +1,6 @@
 import { DoesNotExistError } from "../../types/internalErrors.js";
 import { Page } from "../../types/Page.js";
-import { changePage, setErrorText, setTitleElement } from "../../pageUtils.js";
+import { changePage, setErrorText, setTitleElement } from "../../pageUtils";
 import { getSecrets } from "../../api/getSecrets";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState.ts";

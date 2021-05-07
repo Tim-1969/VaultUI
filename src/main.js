@@ -16,7 +16,7 @@ Prism.highlightAll();
 import {
   changePage,
   renderPage,
-} from "./pageUtils.js";
+} from "./pageUtils";
 import { getSealStatus } from "./api/getSealStatus";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState.ts";

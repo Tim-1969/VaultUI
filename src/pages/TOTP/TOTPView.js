@@ -1,7 +1,7 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { DoesNotExistError } from "../../types/internalErrors.js";
 import { Page } from "../../types/Page.js";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { getTOTPCode } from "../../api/getTOTPCode";
 import { getTOTPKeys } from "../../api/getTOTPKeys";
 import { makeElement } from "../../htmlUtils";

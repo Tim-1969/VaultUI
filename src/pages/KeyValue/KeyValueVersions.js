@@ -1,5 +1,5 @@
 import { Page } from "../../types/Page.js";
-import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { getSecretMetadata } from "../../api/getSecretMetadata.js";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";

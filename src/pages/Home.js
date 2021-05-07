@@ -1,5 +1,5 @@
 import { Page } from "../types/Page.js";
-import { changePage, prePageChecks, setErrorText } from "../pageUtils.js";
+import { changePage, prePageChecks, setErrorText } from "../pageUtils";
 import { getMounts } from "../api/getMounts";
 import { lookupSelf } from "../api/lookupSelf";
 import { makeElement } from "../htmlUtils";

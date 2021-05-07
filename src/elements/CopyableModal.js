@@ -1,4 +1,4 @@
-import { addClipboardNotifications } from "../pageUtils.js";
+import { addClipboardNotifications } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import ClipboardJS from "clipboard";
 import FileSaver from 'file-saver';

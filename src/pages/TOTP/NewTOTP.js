@@ -2,7 +2,7 @@ import { Margin } from "../../elements/Margin.js";
 import { MarginInline } from "../../elements/MarginInline.js";
 import { Page } from "../../types/Page.js";
 import { addNewTOTP } from "../../api/addNewTOTP";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState.ts";
 import i18next from 'i18next';
