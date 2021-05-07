@@ -4,8 +4,12 @@ import { makeElement } from "../htmlUtils";
 import ClipboardJS from "clipboard";
 import i18next from "i18next";
 
-export function CopyableInputBox(text, copyable = true) {
-  let inputBoxDiv = makeElement({ tag: "div" });
+interface CopyableInputBoxType extends HTMLElement {
+  setText(text: string): void;
+}
+
+export function CopyableInputBox(text: string, copyable = true): CopyableInputBoxType {
+  const inputBoxDiv = (makeElement({ tag: "div" }) as CopyableInputBoxType);
   let inputBoxCopyButton = null;
   if (copyable) {
     inputBoxCopyButton = makeElement({
@@ -17,26 +21,26 @@ export function CopyableInputBox(text, copyable = true) {
         "aria-label": i18next.t("copy_input_box_copy_icon_text")
       },
       thenRun: (e) => {
-        let clipboard = new ClipboardJS(e);
+        const clipboard = new ClipboardJS(e);
         addClipboardNotifications(clipboard, 600);
       }
     });
   }
 
-  let inputBoxInput = makeElement({
+  const inputBoxInput = makeElement({
     tag: "input",
     class: ["uk-input"],
     attributes: { "readonly": true, "type": "text" },
   });
 
-  let inputBoxInner = MarginInline([
+  const inputBoxInner = MarginInline([
     inputBoxCopyButton,
     inputBoxInput
   ]);
   inputBoxDiv.appendChild(inputBoxInner);
 
   inputBoxDiv.setText = function (text) {
-    inputBoxInput.value = `${text}`;
+    (inputBoxInput as HTMLInputElement).value = `${text}`;
     if (copyable) {
       inputBoxCopyButton.dataset.clipboardText = `${text}`;
     }

@@ -1,4 +1,4 @@
-import { CopyableInputBox } from "../elements/CopyableInputBox.js";
+import { CopyableInputBox } from "../elements/CopyableInputBox";
 import { Margin } from "../elements/Margin.js";
 import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";

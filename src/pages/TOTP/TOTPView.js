@@ -1,4 +1,4 @@
-import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
+import { CopyableInputBox } from "../../elements/CopyableInputBox";
 import { DoesNotExistError } from "../../types/internalErrors";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";

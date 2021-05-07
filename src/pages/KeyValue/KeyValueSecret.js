@@ -1,4 +1,4 @@
-import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
+import { CopyableInputBox } from "../../elements/CopyableInputBox";
 import { Page } from "../../types/Page";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { getCapabilities } from "../../api/getCapabilities";
