@@ -1,4 +1,4 @@
-import { MarginInline } from "../elements/MarginInline.js";
+import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
 import { QRScanner } from "../elements/QRScanner.js";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";

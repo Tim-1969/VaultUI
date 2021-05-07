@@ -17,7 +17,7 @@ const optionsFunctions: optionsFunctionsObject = {
   "onclick": (e: HTMLButtonElement, arg: any) => e.onclick = arg,
   "attributes": setElementAttributes,
   "text": (e: HTMLParagraphElement, arg: string) => e.innerText = arg,
-  "children": (e: Element, arg: null | Element | (Element | null[])) => {
+  "children": (e: Element, arg: Element | Element[]) => {
     if (Array.isArray(arg)) {
       arg.forEach(child => {
         if (child != null) e.appendChild(child);
@@ -38,6 +38,7 @@ interface ElementInfo {
   attributes?: {
     [propName: string]: any
   };
+  children?: Element | Element[];
   text?: string;
   thenRun?: (e: Element) => void;
   [propName: string]: any;

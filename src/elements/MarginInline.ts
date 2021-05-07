@@ -1,6 +1,6 @@
 import { makeElement } from "../htmlUtils";
 
-export function MarginInline(children, marginOptions = {}, inlineOptions = {}) {
+export function MarginInline(children: null | Element | (Element | null[])): Element {
   return makeElement({
     tag: "div",
     class: "uk-margin",
@@ -8,8 +8,6 @@ export function MarginInline(children, marginOptions = {}, inlineOptions = {}) {
       tag: "div",
       class: "uk-inline",
       children: children,
-      ...inlineOptions,
     }),
-    ...marginOptions,
   });
 }

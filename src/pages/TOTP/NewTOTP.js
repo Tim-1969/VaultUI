@@ -1,5 +1,5 @@
-import { Margin } from "../../elements/Margin.js";
-import { MarginInline } from "../../elements/MarginInline.js";
+import { Margin } from "../../elements/Margin";
+import { MarginInline } from "../../elements/MarginInline";
 import { Page } from "../../types/Page";
 import { addNewTOTP } from "../../api/addNewTOTP";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";

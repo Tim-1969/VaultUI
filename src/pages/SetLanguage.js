@@ -1,4 +1,4 @@
-import { Margin } from "../elements/Margin.js";
+import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
 import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";

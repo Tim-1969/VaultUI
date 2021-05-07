@@ -1,4 +1,4 @@
-import { Margin } from "./Margin.js";
+import { Margin } from "./Margin";
 import { makeElement } from "../htmlUtils";
 import QrScanner from 'qr-scanner';
 

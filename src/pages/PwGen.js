@@ -1,5 +1,5 @@
 import { CopyableInputBox } from "../elements/CopyableInputBox";
-import { Margin } from "../elements/Margin.js";
+import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
 import { setPageContent } from "../pageUtils";
