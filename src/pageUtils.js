@@ -1,4 +1,5 @@
-import { getSealStatus, lookupSelf } from './api.js';
+import { getSealStatus } from "./api/getSealStatus";
+import { lookupSelf } from "./api/lookupSelf";
 import { makeElement } from "./htmlUtils.js";
 import { pageState } from "./globalPageState.js";
 import UIkit from 'uikit/dist/js/uikit.min.js';

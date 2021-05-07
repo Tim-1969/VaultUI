@@ -17,7 +17,7 @@ import {
   changePage,
   renderPage,
 } from "./pageUtils.js";
-import { getSealStatus } from './api.js';
+import { getSealStatus } from "./api/getSealStatus";
 import { makeElement } from "./htmlUtils.js";
 import { pageState } from "./globalPageState.js";
 

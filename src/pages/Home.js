@@ -1,6 +1,7 @@
 import { Page } from "../types/Page.js";
 import { changePage, prePageChecks, setErrorText } from "../pageUtils.js";
-import { getMounts, lookupSelf } from "../api.js";
+import { getMounts } from "../api/getMounts";
+import { lookupSelf } from "../api/lookupSelf";
 import { makeElement } from "../htmlUtils.js";
 import { pageState } from "../globalPageState.js";
 import i18next from 'i18next';

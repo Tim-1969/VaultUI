@@ -1,11 +1,12 @@
 import { Margin } from "../../elements/Margin.js";
 import { MarginInline } from "../../elements/MarginInline.js";
 import { Page } from "../../types/Page.js";
-import { addNewTOTP } from "../../api.js";
+import { addNewTOTP } from "../../api/addNewTOTP";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils.js";
 import { pageState } from "../../globalPageState.js";
 import i18next from 'i18next';
+
 
 export class NewTOTPPage extends Page {
   constructor() {

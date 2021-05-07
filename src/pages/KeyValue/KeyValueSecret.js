@@ -1,7 +1,9 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox.js";
 import { Page } from "../../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
-import { getCapabilities, getSecret, undeleteSecret } from "../../api.js";
+import { getSecret } from "../../api/getSecret";
+import { undeleteSecret } from "../../api/undeleteSecret";
+import { getCapabilities } from "../../api/getCapabilities";
 import { makeElement } from "../../htmlUtils.js";
 import { pageState } from "../../globalPageState.js";
 import Prism from "prismjs";
