@@ -4,6 +4,7 @@ import { Page } from "../types/Page.js";
 import { changePage, setErrorText, setPageContent } from "../pageUtils.js";
 import { lookupSelf, usernameLogin } from "../api.js";
 import { makeElement } from "../htmlUtils.js";
+import { pageState } from "../globalPageState.js";
 import i18next from 'i18next';
 
 export class LoginPage extends Page {
