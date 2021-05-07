@@ -3,7 +3,7 @@ import { Margin } from "../../elements/Margin.js";
 import { Page } from "../../types/Page.js";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import { transitDecrypt } from "../../api/transitDecrypt";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from "i18next";

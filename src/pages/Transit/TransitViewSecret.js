@@ -1,7 +1,7 @@
 import { Page } from "../../types/Page.js";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import i18next from 'i18next';
 
 export class TransitViewSecretPage extends Page {

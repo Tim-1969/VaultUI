@@ -30,7 +30,7 @@ const optionsFunctions: optionsFunctionsObject = {
 }
 
 interface ElementInfo {
-  condition?: Boolean;
+  condition?: boolean;
   tag: string;
   class?: string | string[];
   id?: string;
@@ -45,9 +45,9 @@ interface ElementInfo {
 
 export function makeElement(elementInfo: ElementInfo) {
   if ("condition" in elementInfo) { if (!elementInfo.condition) { return null; } }
-  let element = document.createElement(elementInfo.tag);
+  const element = document.createElement(elementInfo.tag);
 
-  for (let key of Object.getOwnPropertyNames(elementInfo)) {
+  for (const key of Object.getOwnPropertyNames(elementInfo)) {
     if (getObjectKeys(optionsFunctions).includes(key)) {
       (optionsFunctions as any)[key](element, elementInfo[key]);
     }
@@ -57,7 +57,7 @@ export function makeElement(elementInfo: ElementInfo) {
 }
 
 export function setElementAttributes(element: Element, attributes: {[propName: string]: any}) {
-  for (let key of Object.getOwnPropertyNames(attributes)) {
+  for (const key of Object.getOwnPropertyNames(attributes)) {
     element.setAttribute(key, attributes[key]);
   }
 }

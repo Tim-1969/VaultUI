@@ -19,7 +19,7 @@ import {
 } from "./pageUtils.js";
 import { getSealStatus } from "./api/getSealStatus";
 import { makeElement } from "./htmlUtils";
-import { pageState } from "./globalPageState.js";
+import { pageState } from "./globalPageState.ts";
 
 // Translations
 import { formatDistance } from './formatDistance.js';

@@ -4,7 +4,7 @@ import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js"
 import { getCapabilities } from "../../api/getCapabilities";
 import { getSecret } from "../../api/getSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import { sortedObjectMap } from "../../utils";
 import { undeleteSecret } from "../../api/undeleteSecret";
 import Prism from "prismjs";

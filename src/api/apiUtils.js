@@ -1,4 +1,4 @@
-import { pageState } from "../globalPageState.js";
+import { pageState } from "../globalPageState.ts";
 
 export function getHeaders() {
   return {

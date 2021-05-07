@@ -1,0 +1,61 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "sort-imports-es6-autofix",
+    "@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "experimentalObjectRestSpread": true
+  },
+  "globals": {
+    "pageContent": "writable",
+    "module": "writable",
+    "process": "writable"
+  },
+  "rules": {
+    "no-unused-vars": [
+      "off"
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      {
+        "allow": ["arrowFunctions"]
+      }
+    ],
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      2
+    ],
+    "@typescript-eslint/no-explicit-any": [
+      0
+    ]
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".ts"
+        ]
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { pageState } from "./globalPageState.js";
+import { pageState } from "./globalPageState.ts";
 import i18next from 'i18next';
 
 // Playground is a way to debug and test things.

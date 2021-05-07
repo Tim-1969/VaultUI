@@ -4,7 +4,7 @@ import { changePage, setErrorText, setPageContent, setTitleElement } from "../..
 import { createOrUpdateSecret } from "../../api/createOrUpdateSecret.js";
 import { getSecret } from "../../api/getSecret.js";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import { verifyJSONString } from "../../utils";
 import i18next from 'i18next';
 

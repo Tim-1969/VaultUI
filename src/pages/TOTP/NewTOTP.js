@@ -4,7 +4,7 @@ import { Page } from "../../types/Page.js";
 import { addNewTOTP } from "../../api/addNewTOTP";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import i18next from 'i18next';
 
 

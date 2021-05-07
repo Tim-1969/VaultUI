@@ -1,7 +1,7 @@
 import { getSealStatus } from "./api/getSealStatus";
 import { lookupSelf } from "./api/lookupSelf";
 import { makeElement } from "./htmlUtils";
-import { pageState } from "./globalPageState.js";
+import { pageState } from "./globalPageState.ts";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from 'i18next';
 

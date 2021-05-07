@@ -1,8 +1,11 @@
 import { changePage } from "../pageUtils.js";
 
 export class Page {
-  constructor() { }
+  constructor() {
+    // Do Nothing
+  }
   render() {
+    // Do Nothing
   }
   get name() {
     return "Page";
@@ -14,5 +17,6 @@ export class Page {
     changePage("HOME");
   }
   cleanup() {
+    // Do Nothing
   }
 }

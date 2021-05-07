@@ -1,7 +1,7 @@
 import { Page } from "../types/Page.js";
 import { changePage, setPageContent } from "../pageUtils.js";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState.js";
+import { pageState } from "../globalPageState.ts";
 
 export class SetVaultURLPage extends Page {
   constructor() {

@@ -2,7 +2,7 @@ import { Page } from "../../types/Page.js";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils.js";
 import { createOrUpdateSecret } from "../../api/createOrUpdateSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import i18next from 'i18next';
 
 export class KeyValueNewPage extends Page {

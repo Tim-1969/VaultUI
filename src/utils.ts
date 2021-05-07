@@ -2,18 +2,18 @@ export function removeDoubleSlash(str: string): string {
   return str.replace(/\/\/+/g, "/");
 }
 
-export const getObjectKeys = (obj: Object) => Object.getOwnPropertyNames(obj);
-export const objectToMap = (obj: Object) => new Map(Object.entries(obj));
-export const sortedObjectMap = (obj: Object) => new Map(Object.entries(obj).sort());
+export const getObjectKeys = (obj: Record<string, unknown>) => Object.getOwnPropertyNames(obj);
+export const objectToMap = (obj: Record<string, unknown>) => new Map(Object.entries(obj));
+export const sortedObjectMap = (obj: Record<string, unknown>) => new Map(Object.entries(obj).sort());
 
-export function getKeyByObjectPropertyValue(map: object, searchValue: any) {
-  for (let key of getObjectKeys(map)) {
+export function getKeyByObjectPropertyValue(map: Record<string, unknown>, searchValue: any) {
+  for (const key of getObjectKeys(map)) {
     if ((map as any)[key] === searchValue)
       return key;
   }
 }
 
-export function verifyJSONString(str: string): Boolean {
+export function verifyJSONString(str: string): boolean {
   try {
     JSON.parse(str);
   } catch (e) {

@@ -3,7 +3,7 @@ import { changePage, setPageContent, setTitleElement } from "../../pageUtils.js"
 import { getSecretMetadata } from "../../api/getSecretMetadata.js";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import i18next from 'i18next';
 
 

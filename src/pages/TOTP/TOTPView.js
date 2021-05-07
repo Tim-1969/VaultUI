@@ -6,7 +6,7 @@ import { getTOTPCode } from "../../api/getTOTPCode";
 import { getTOTPKeys } from "../../api/getTOTPKeys";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { pageState } from "../../globalPageState.js";
+import { pageState } from "../../globalPageState.ts";
 import i18next from 'i18next';
 
 export class TOTPViewPage extends Page {

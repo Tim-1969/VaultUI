@@ -27,7 +27,7 @@ export class UnsealPage extends Page {
     try {
       this.qrScanner.deinit();
     } catch (_) {
-      ()=>{};
+      // Do Nothing
     }
   }
 

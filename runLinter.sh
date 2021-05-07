@@ -1,3 +1,3 @@
 #!/bin/bash
 
-npx eslint -c .eslintrc.yml src
+npx eslint -c .eslintrc.json "$@" --fix src/ --ext .js,.ts

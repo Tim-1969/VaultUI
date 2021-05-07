@@ -3,7 +3,7 @@ import { changePage, prePageChecks, setErrorText } from "../pageUtils.js";
 import { getMounts } from "../api/getMounts";
 import { lookupSelf } from "../api/lookupSelf";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState.js";
+import { pageState } from "../globalPageState.ts";
 import { sortedObjectMap } from "../utils";
 import i18next from 'i18next';
 
