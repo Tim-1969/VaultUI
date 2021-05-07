@@ -2,11 +2,17 @@ import { DoesNotExistError } from "./types/internalErrors.js";
 import { getObjectKeys, removeDoubleSlash } from "./utils.js";
 import { pageState } from "./globalPageState.js";
 
+function getHeaders() {
+  return {
+    "X-Vault-Token": pageState.token,
+  }
+}
+
+const appendAPIURL = (url) => pageState.apiURL + url;
+
 export async function lookupSelf() {
-  const request = new Request(pageState.apiURL + "/v1/auth/token/lookup-self", {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL("/v1/auth/token/lookup-self"), {
+    headers: getHeaders(),
   });
   return fetch(request).then(response => {
     return response.json();
@@ -20,10 +26,10 @@ export async function lookupSelf() {
 }
 
 export async function renewSelf() {
-  const request = new Request(pageState.apiURL + "/v1/auth/token/renew-self", {
+  const request = new Request(appendAPIURL("/v1/auth/token/renew-self"), {
     method: 'POST',
     headers: {
-      "X-Vault-Token": pageState.token,
+      ...getHeaders(),
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({})
@@ -38,11 +44,9 @@ export async function renewSelf() {
 }
 
 export async function sealVault() {
-  const request = new Request(pageState.apiURL + "/v1/sys/seal", {
+  const request = new Request(appendAPIURL("/v1/sys/seal"), {
     method: 'PUT',
-    headers: {
-      "X-Vault-Token": pageState.token,
-    },
+    headers: getHeaders(),
   });
   return fetch(request).then(response => {
     return response.json();
@@ -54,7 +58,7 @@ export async function sealVault() {
 }
 
 export async function usernameLogin(username, password) {
-  const request = new Request(pageState.apiURL + `/v1/auth/userpass/login/${username}`, {
+  const request = new Request(appendAPIURL(`/v1/auth/userpass/login/${username}`), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -73,10 +77,8 @@ export async function usernameLogin(username, password) {
 }
 
 export async function getMounts() {
-  const request = new Request(pageState.apiURL + "/v1/sys/internal/ui/mounts", {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL("/v1/sys/internal/ui/mounts"), {
+    headers: getHeaders(),
   });
   return fetch(request).then(response => {
     return response.json();
@@ -86,7 +88,7 @@ export async function getMounts() {
 }
 
 export async function getSealStatus() {
-  const request = new Request(pageState.apiURL + "/v1/sys/seal-status");
+  const request = new Request(appendAPIURL("/v1/sys/seal-status"));
   return fetch(request).then(response => {
     return response.json();
   }).then(data => {
@@ -95,7 +97,7 @@ export async function getSealStatus() {
 }
 
 export async function submitUnsealKey(key) {
-  const request = new Request(pageState.apiURL + "/v1/sys/unseal", {
+  const request = new Request(appendAPIURL("/v1/sys/unseal"), {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
@@ -116,11 +118,11 @@ export async function getCapabilities(baseMount, secretPath, name) {
 }
 
 export async function getCapabilitiesPath(path) {
-  const request = new Request(pageState.apiURL + "/v1/sys/capabilities-self", {
+  const request = new Request(appendAPIURL("/v1/sys/capabilities-self"), {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
-      "X-Vault-Token": pageState.token,
+      ...getHeaders(),
     },
     body: JSON.stringify(
       {
@@ -143,10 +145,8 @@ export async function getSecrets(baseMount, mountType, secretPath) {
     // cubbyhole and v1 are identical
     secretURL = `/v1/${baseMount}/${secretPath.join("")}?list=true`;
   }
-  const request = new Request(pageState.apiURL + secretURL, {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL(secretURL), {
+    headers: getHeaders(),
   });
   return fetch(request).then(response => {
     if (response.status == 404) {
@@ -160,10 +160,8 @@ export async function getSecrets(baseMount, mountType, secretPath) {
 }
 
 export async function getSecretMetadata(baseMount, secretPath, name) {
-  const request = new Request(pageState.apiURL + `/v1/${baseMount}/metadata/${secretPath.join("")}/${name}`, {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL(`/v1/${baseMount}/metadata/${secretPath.join("")}/${name}`), {
+    headers: getHeaders(),
   });
 
   return fetch(request).then(response => {
@@ -186,10 +184,10 @@ export async function undeleteSecret(baseMount, secretPath, name, version = null
     version = String(versions[versions.length-1]);
   }
 
-  let request = new Request(pageState.apiURL + secretURL, {
+  let request = new Request(appendAPIURL(secretURL), {
     method: "POST",
     headers: {
-      'X-Vault-Token': pageState.token,
+      ...getHeaders(),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ "versions": [version] })
@@ -210,10 +208,8 @@ export async function getSecret(baseMount, mountType, secretPath, name, version 
   } else {
     secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
   }
-  const request = new Request(pageState.apiURL + secretURL, {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL(secretURL), {
+    headers: getHeaders(),
   });
 
   return fetch(request).then(response => {
@@ -231,10 +227,10 @@ export async function deleteSecret(baseMount, mountType, secretPath, name, versi
   if (mountType == "kv-v2" && version != null) {
     secretURL = `/v1/${baseMount}/delete/${secretPath.join("")}/${name}`;
     secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
-    request = new Request(pageState.apiURL + secretURL, {
+    request = new Request(appendAPIURL(secretURL), {
       method: "POST",
       headers: {
-        'X-Vault-Token': pageState.token,
+        ...getHeaders(),
         'Content-Type': 'application/json',
       },
       body: version != null ? JSON.stringify({ "versions": [version] }) : "{}"
@@ -246,11 +242,9 @@ export async function deleteSecret(baseMount, mountType, secretPath, name, versi
       secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
     }
     secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
-    request = new Request(pageState.apiURL + secretURL, {
+    request = new Request(appendAPIURL(secretURL), {
       method: "DELETE",
-      headers: {
-        'X-Vault-Token': pageState.token
-      },
+      headers: getHeaders(),
     });
   }
 
@@ -275,11 +269,11 @@ export async function createOrUpdateSecret(baseMount, mountType, secretPath, nam
   }
 
   secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
-  const request = new Request(pageState.apiURL + secretURL, {
+  const request = new Request(appendAPIURL(secretURL), {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
-      'X-Vault-Token': pageState.token
+      ...getHeaders(),
     },
     body: JSON.stringify(APIData, null, 0)
   });
@@ -291,10 +285,8 @@ export async function createOrUpdateSecret(baseMount, mountType, secretPath, nam
 }
 
 export async function getTransitKeys(baseMount) {
-  const request = new Request(pageState.apiURL + `/v1/${baseMount}/keys?list=true`, {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL(`/v1/${baseMount}/keys?list=true`), {
+    headers: getHeaders(),
   });
   return fetch(request).then(response => {
     if (response.status == 404) {
@@ -307,11 +299,11 @@ export async function getTransitKeys(baseMount) {
 }
 
 export async function transitEncrypt(baseMount, name, data) {
-  const request = new Request(pageState.apiURL + removeDoubleSlash(`/v1/${baseMount}/encrypt/${name}`), {
+  const request = new Request(appendAPIURL(removeDoubleSlash(`/v1/${baseMount}/encrypt/${name}`)), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Vault-Token': pageState.token
+      ...getHeaders(),
     },
     body: JSON.stringify({plaintext: data})
   });
@@ -326,11 +318,11 @@ export async function transitEncrypt(baseMount, name, data) {
 }
 
 export async function transitDecrypt(baseMount, name, data) {
-  const request = new Request(pageState.apiURL + removeDoubleSlash(`/v1/${baseMount}/decrypt/${name}`), {
+  const request = new Request(appendAPIURL(removeDoubleSlash(`/v1/${baseMount}/decrypt/${name}`)), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Vault-Token': pageState.token
+      ...getHeaders(),
     },
     body: JSON.stringify({ciphertext: data})
   });
@@ -346,10 +338,8 @@ export async function transitDecrypt(baseMount, name, data) {
 
 
 export async function getTOTPKeys(baseMount) {
-  const request = new Request(pageState.apiURL + `/v1/${baseMount}/keys?list=true`, {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL(`/v1/${baseMount}/keys?list=true`), {
+    headers: getHeaders(),
   });
   return fetch(request).then(response => {
     if (response.status == 404) {
@@ -362,10 +352,8 @@ export async function getTOTPKeys(baseMount) {
 }
 
 export async function getTOTPCode(baseMount, name) {
-  const request = new Request(pageState.apiURL + `/v1/${baseMount}/code/${name}`, {
-    headers: {
-      "X-Vault-Token": pageState.token,
-    }
+  const request = new Request(appendAPIURL(`/v1/${baseMount}/code/${name}`), {
+    headers: getHeaders(),
   });
   return fetch(request).then(response => {
     return response.json();
@@ -375,11 +363,11 @@ export async function getTOTPCode(baseMount, name) {
 }
 
 export async function addNewTOTP(baseMount, parms) {
-  const request = new Request(pageState.apiURL + removeDoubleSlash(`/v1/${baseMount}/keys/${parms.name}`), {
+  const request = new Request(appendAPIURL(removeDoubleSlash(`/v1/${baseMount}/keys/${parms.name}`)), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Vault-Token': pageState.token
+      ...getHeaders(),
     },
     body: JSON.stringify(parms)
   });
