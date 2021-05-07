@@ -35,6 +35,9 @@
         "allow": ["arrowFunctions"]
       }
     ],
+    "@typescript-eslint/ban-ts-comment": [
+      "off"
+    ],
     "sort-imports-es6-autofix/sort-imports-es6": [
       2
     ],

@@ -2,30 +2,35 @@ import { Margin } from "./Margin";
 import { makeElement } from "../htmlUtils";
 import QrScanner from 'qr-scanner';
 
-/* eslint-disable import/no-unresolved */ 
+/* eslint-disable import/no-unresolved */
+// @ts-ignore
 import qrScannerWorkerSource from '!!raw-loader!qr-scanner/qr-scanner-worker.min.js';
 QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
 
-export async function QRScanner(onScan) {
-  let webcamVideo = makeElement({
-    tag: "video"
-  })
+interface QRScannerType extends HTMLElement {
+  deinit(): void;
+}
 
-  let QRInput = makeElement({
+export async function QRScanner(onScan: (code: string) => void): Promise<QRScannerType>  {
+  const webcamVideo = makeElement({
+    tag: "video"
+  }) as HTMLVideoElement;
+
+  const QRInput = makeElement({
     tag: "div",
     children: [
       Margin(webcamVideo),
     ]
-  });
+  }) as QRScannerType;
 
-  let stream = await navigator.mediaDevices.getUserMedia({
+  const stream = await navigator.mediaDevices.getUserMedia({
     video: {
       facingMode: 'environment',
     },
     audio: false,
   });
   webcamVideo.srcObject = stream;
-  let lastSeenValue = "";
+  const lastSeenValue = "";
   const qrScanner = new QrScanner(webcamVideo, function (value) {
     if (lastSeenValue == value) return;
     onScan(value);
