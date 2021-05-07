@@ -82,6 +82,7 @@ export function changePage(page, shouldSwitch = true) {
 }
 
 export function renderPage() {
+  document.documentElement.dir = pageState.pageDirection;
   console.log("Rendering Page: ", pageState.currentPage.name);
   document.querySelector("#pageContent").innerHTML = "";
   setPageTitle(pageState.currentPage.name);

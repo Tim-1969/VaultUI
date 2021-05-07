@@ -15,6 +15,7 @@ parserOptions:
 globals:
   pageContent: writable
   module: writable
+  process: writable
 
 
 rules: 

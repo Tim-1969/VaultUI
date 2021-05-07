@@ -33,7 +33,7 @@ function ListItem(children) {
   });
 }
 
-function onLoad() {
+async function onLoad() {
   document.body.innerHTML = "";
   document.body.appendChild(makeElement({
     tag: "nav",
@@ -103,6 +103,11 @@ function onLoad() {
   }));
 
   window.pageContent = document.querySelector("#pageContent");
+
+  if (process.env.NODE_ENV == "development") {
+    await (await import("./playground.js")).playground();
+  }
+
   renderPage();
 
   setInterval(async () => {
@@ -117,7 +122,7 @@ function onLoad() {
   }, 5000);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   i18next.init({
     lng: pageState.language,
     fallbackLng: 'en',
@@ -129,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return value;
       }
     }
-  }).then(function (_) {
-    onLoad();
+  }).then(async function (_) {
+    await onLoad();
   });
 }, false);

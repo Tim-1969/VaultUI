@@ -35,6 +35,13 @@ export class PageState extends Page {
     localStorage.setItem('token', value);
   }
 
+  get pageDirection() {
+    return localStorage.getItem('pageDirection') || "ltr";
+  }
+  set pageDirection(value) {
+    localStorage.setItem('pageDirection', value);
+  }
+
   get language() {
     return localStorage.getItem('language') || "";
   }

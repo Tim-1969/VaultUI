@@ -1,6 +1,8 @@
 module.exports = {
   // The localised name for the language
   "language_name": "Deutsche",
+  // Internal: The direction of text (ltr or rtl)
+  "language_direction": "ltr",
 
   // These are the buttons on the top bar.
   "home_btn": "Startseite",
