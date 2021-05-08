@@ -1,13 +1,13 @@
 import { Page } from "../types/Page";
 import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState.ts";
+import { pageState } from "../globalPageState";
 
 export class SetVaultURLPage extends Page {
   constructor() {
     super();
   }
-  render() {
+  render(): void {
     setPageContent(makeElement({
       tag: "form",
       id: "setVaultURLForm",
@@ -43,12 +43,12 @@ export class SetVaultURLPage extends Page {
     }));
     document.getElementById("setVaultURLForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      let formData = new FormData(document.querySelector('#setVaultURLForm'));
-      pageState.apiURL = formData.get("vaultURL");
+      const formData = new FormData(document.querySelector('#setVaultURLForm'));
+      pageState.apiURL = formData.get("vaultURL") as string;
       changePage("HOME");
     });
   }
-  get name() {
+  get name(): string {
     return "Set Vault URL";
   }
 }
