@@ -8,8 +8,8 @@ import UIkit from 'uikit/dist/js/uikit.min.js';
 UIkit.use(Icons);
 
 /* eslint-disable */
-import Prism from "prismjs";
 import "prismjs/components/prism-json";
+import Prism from "prismjs";
 Prism.highlightAll();
 /* eslint-enable */
 
@@ -19,11 +19,14 @@ import {
 } from "./pageUtils";
 import { getSealStatus } from "./api/getSealStatus";
 import { makeElement } from "./htmlUtils";
-import { pageState } from "./globalPageState.ts";
+import { pageState } from "./globalPageState";
+import { playground } from "./playground";
 
 // Translations
+import { Page } from "./types/Page";
 import { formatDistance } from './formatDistance';
 import i18next from 'i18next';
+// @ts-ignore
 import translations from './translations/index.mjs'
 
 function ListItem(children) {
@@ -54,7 +57,7 @@ async function onLoad() {
             ListItem(makeElement({
               tag: "a",
               text: i18next.t("back_btn"),
-              onclick: _ => { pageState.currentPage.goBack(); }
+              onclick: _ => { (pageState.currentPage as Page).goBack(); }
             })),
             ListItem(makeElement({
               tag: "a",
@@ -102,10 +105,10 @@ async function onLoad() {
     })
   }));
 
-  window.pageContent = document.querySelector("#pageContent");
+  (window as any).pageContent = document.querySelector("#pageContent");
 
   if (process.env.NODE_ENV == "development") {
-    await (await import("./playground.ts")).playground();
+    await playground();
   }
 
   renderPage();
@@ -113,7 +116,7 @@ async function onLoad() {
   setInterval(async () => {
     if (pageState.currentPageString != "UNSEAL") {
       if (pageState.apiURL.length != 0) { return; }
-      let sealStatus = await getSealStatus();
+      const sealStatus = await getSealStatus();
       if (sealStatus.sealed) {
         changePage("UNSEAL");
         return;
@@ -127,6 +130,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     lng: pageState.language,
     fallbackLng: 'en',
     debug: true,
+    // @ts-ignore
     resources: Object.fromEntries(Object.entries(translations).map(([k, v]) => [k, { translation: v }])),
     interpolation: {
       format: function (value, format, _) {

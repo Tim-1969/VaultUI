@@ -10,7 +10,7 @@ const DEBUG = MODE != "production";
 module.exports = {
   mode: MODE,
   cache: DEBUG,
-  entry: './src/main.js',
+  entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
