@@ -1,5 +1,5 @@
 import { HomePage } from "./pages/Home";
-import { KeyValueDeletePage } from "./pages/KeyValue/KeyValueDelete.js";
+import { KeyValueDeletePage } from "./pages/KeyValue/KeyValueDelete";
 import { KeyValueNewPage } from "./pages/KeyValue/KeyValueNew";
 import { KeyValueSecretEditPage } from "./pages/KeyValue/KeyValueSecretsEdit";
 import { KeyValueSecretPage } from "./pages/KeyValue/KeyValueSecret";

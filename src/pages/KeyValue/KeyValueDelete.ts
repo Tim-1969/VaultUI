@@ -2,14 +2,14 @@ import { Page } from "../../types/Page";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { deleteSecret } from "../../api/deleteSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 
 export class KeyValueDeletePage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+  goBack(): void {
     if (pageState.currentSecretVersion != null) {
       pageState.currentSecretVersion = null;
       changePage("KEY_VALUE_SECRET");
@@ -18,7 +18,7 @@ export class KeyValueDeletePage extends Page {
       changePage("KEY_VALUE_VIEW");
     }
   }
-  render() {
+  render(): void {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div",
@@ -46,10 +46,10 @@ export class KeyValueDeletePage extends Page {
       ]
     }));
   }
-  get titleSuffix() {
+  get titleSuffix(): string {
     return i18next.t("kv_delete_suffix");
   }
-  get name() {
+  get name(): string {
     return i18next.t("kv_delete_title");
   }
 }
