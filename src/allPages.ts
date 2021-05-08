@@ -14,7 +14,7 @@ import { SetLanguagePage } from "./pages/SetLanguage";
 import { SetVaultURLPage } from "./pages/SetVaultURL";
 import { TOTPViewPage } from "./pages/TOTP/TOTPView";
 import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt";
-import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt.js";
+import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt";
 import { TransitViewPage } from "./pages/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";

@@ -3,7 +3,7 @@ import { Margin } from "../../elements/Margin";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import { transitEncrypt } from "../../api/transitEncrypt";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from "i18next";
@@ -13,10 +13,15 @@ export class TransitEncryptPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+
+  goBack(): void {
     changePage("TRANSIT_VIEW_SECRET");
   }
-  async render() {
+
+  transitEncryptForm: HTMLFormElement;
+
+
+  async render(): Promise<void> {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div"
@@ -65,7 +70,7 @@ export class TransitEncryptPage extends Page {
           }
         })
       ]
-    });
+    }) as HTMLFormElement;
     setPageContent(this.transitEncryptForm);
 
     this.transitEncryptForm.addEventListener("submit", function (e) {
@@ -74,25 +79,24 @@ export class TransitEncryptPage extends Page {
     }.bind(this));
   }
 
-  transitEncryptFormHandler() {
-    let formData = new FormData(this.transitEncryptForm);
-    let encodedData =
-      formData.get("base64Checkbox") == "on" ? formData.get("plaintext") : btoa(formData.get("plaintext"));
+  transitEncryptFormHandler(): void {
+    const formData = new FormData(this.transitEncryptForm);
+    const encodedData =
+      formData.get("base64Checkbox") as string == "on" ? formData.get("plaintext") as string : btoa(formData.get("plaintext") as string);
     transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, encodedData).then(res => {
-      console.log(res);
-      let modal = CopyableModal(i18next.t("transit_encrypt_encryption_result_modal_title"), res.ciphertext);
-      pageContent.appendChild(modal);
+      const modal = CopyableModal(i18next.t("transit_encrypt_encryption_result_modal_title"), res.ciphertext);
+      document.body.querySelector("#pageContent").appendChild(modal);
       UIkit.modal(modal).show();
     }).catch(e => {
       setErrorText(`API Error: ${e.message}`);
     });
   }
 
-  get titleSuffix() {
+  get titleSuffix(): string {
     return i18next.t("transit_encrypt_suffix");
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("transit_encrypt_title");
   }
 }
