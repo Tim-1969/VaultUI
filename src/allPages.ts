@@ -2,7 +2,7 @@ import { HomePage } from "./pages/Home";
 import { KeyValueDeletePage } from "./pages/KeyValue/KeyValueDelete.js";
 import { KeyValueNewPage } from "./pages/KeyValue/KeyValueNew.js";
 import { KeyValueSecretEditPage } from "./pages/KeyValue/KeyValueSecretsEdit";
-import { KeyValueSecretPage } from "./pages/KeyValue/KeyValueSecret.js";
+import { KeyValueSecretPage } from "./pages/KeyValue/KeyValueSecret";
 import { KeyValueVersionsPage } from "./pages/KeyValue/KeyValueVersions";
 import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView";
 import { LoginPage } from "./pages/Login";

@@ -5,7 +5,7 @@ export function removeDoubleSlash(str: string): string {
 export const getObjectKeys =
   (obj: Record<string, unknown>): string[] => Object.getOwnPropertyNames(obj);
 export const objectToMap =
-  (obj: Record<string, unknown>): Map<any, any> => new Map(Object.entries(obj));
+  (obj: Record<any, any>): Map<any, any> => new Map(Object.entries(obj));
 export const sortedObjectMap =
   (obj: Record<string, unknown>): Map<any, any> => new Map(Object.entries(obj).sort());
 

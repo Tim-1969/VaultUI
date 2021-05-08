@@ -4,7 +4,7 @@ import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { getCapabilities } from "../../api/getCapabilities";
 import { getSecret } from "../../api/getSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import { sortedObjectMap } from "../../utils";
 import { undeleteSecret } from "../../api/undeleteSecret";
 import Prism from "prismjs";
@@ -15,7 +15,7 @@ export class KeyValueSecretPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+  goBack(): void {
     if (pageState.currentSecretVersion != null) {
       pageState.currentSecretVersion = null;
       changePage("KEY_VALUE_VERSIONS");
@@ -25,7 +25,7 @@ export class KeyValueSecretPage extends Page {
     }
 
   }
-  async render() {
+  async render(): Promise<void> {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div",
@@ -46,10 +46,10 @@ export class KeyValueSecretPage extends Page {
       ]
     }));
 
-    let buttonsBlock = document.querySelector("#buttonsBlock");
-    let kvList = document.querySelector("#kvList");
+    const buttonsBlock = document.querySelector("#buttonsBlock");
+    const kvList = document.querySelector("#kvList");
     let isSecretNestedJson = false;
-    let caps = await getCapabilities(pageState.currentBaseMount, pageState.currentSecretPath, pageState.currentSecret);
+    const caps = await getCapabilities(pageState.currentBaseMount, pageState.currentSecretPath, pageState.currentSecret);
     if (caps.includes("delete")) {
       let deleteButtonText = i18next.t("kv_secret_delete_btn");
       if (pageState.currentMountType == "kv-v2" && pageState.currentSecretVersion == null) {
@@ -119,7 +119,7 @@ export class KeyValueSecretPage extends Page {
               pageState.currentSecret,
               pageState.currentSecretVersion
             ).then(_ => {
-              changePage(pageState.currentPage);
+              changePage(pageState.currentPageString);
             });
           },
         }));
@@ -128,12 +128,12 @@ export class KeyValueSecretPage extends Page {
 
       const secretsMap = sortedObjectMap(secretInfo);
 
-      for (let value of secretsMap.values()) {
+      for (const value of secretsMap.values()) {
         if (typeof value == 'object') isSecretNestedJson = true;
       }
 
       if (isSecretNestedJson) {
-        let jsonText = JSON.stringify(Object.fromEntries(secretsMap), null, 4);
+        const jsonText = JSON.stringify(sortedObjectMap(secretsMap as Record<any, any>), null, 4);
         kvList.appendChild(makeElement({
           tag: "pre",
           class: ["code-block", "language-json", "line-numbers"],
@@ -141,14 +141,14 @@ export class KeyValueSecretPage extends Page {
         }));
       } else {
         secretsMap.forEach((value, key) => {
-          let kvListElement = this.makeKVListElement(key, value);
+          const kvListElement = this.makeKVListElement(key, value);
           kvList.appendChild(kvListElement);
         }, this);
       }
       document.getElementById("loadingText").remove();
     });
   }
-  makeKVListElement(key, value) {
+  makeKVListElement(key: string, value: string): HTMLElement {
     return makeElement({
       tag: "div",
       class: ["uk-grid", "uk-grid-small", "uk-text-left"],
@@ -156,7 +156,7 @@ export class KeyValueSecretPage extends Page {
     });
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("kv_secret_title");
   }
 }
