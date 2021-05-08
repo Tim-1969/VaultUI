@@ -1,9 +1,9 @@
 import { Page } from "../types/Page";
-import { changePage, prePageChecks, setErrorText } from "../pageUtils";
+import { changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils";
 import { getMounts } from "../api/getMounts";
 import { lookupSelf } from "../api/lookupSelf";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState.ts";
+import { pageState } from "../globalPageState";
 import { sortedObjectMap } from "../utils";
 import i18next from 'i18next';
 
@@ -11,10 +11,12 @@ export class HomePage extends Page {
   constructor() {
     super();
   }
-  async render() {
-    pageContent.innerHTML = "";
+  async render(): Promise<void> {
+    setPageContent("");
     if (!(await prePageChecks())) return;
 
+    const homePageContent = makeElement({tag: "div"});
+    setPageContent(homePageContent);
     const textList = makeElement({
       tag: "ul",
       class: "uk-nav",
@@ -38,10 +40,10 @@ export class HomePage extends Page {
         })
       ]
     });
-    pageContent.appendChild(textList);
+    homePageContent.appendChild(textList);
 
     try {
-      let selfTokenInfo = await lookupSelf();
+      const selfTokenInfo = await lookupSelf();
       textList.appendChild(makeElement({
         tag: "li",
         text: i18next.t("your_token_expires_in", {"date": new Date(selfTokenInfo.expire_time)})
@@ -60,9 +62,9 @@ export class HomePage extends Page {
     pageState.currentSecretVersion = null;
 
     const navList = makeElement({ tag: "ul", class: ["uk-nav", "uk-nav-default", "uk-margin-top"] });
-    pageContent.appendChild(navList);
+    homePageContent.appendChild(navList);
 
-    let mounts = await getMounts();
+    const mounts = await getMounts();
     // sort it by secretPath so it's in alphabetical order consistantly. 
     const mountsMap = sortedObjectMap(mounts);
 
@@ -72,7 +74,7 @@ export class HomePage extends Page {
       if (!("type" in mount)) return;
       if (!(["kv", "totp", "transit", "cubbyhole"].includes(mount.type))) return;
 
-      let mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
+      const mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
 
       let linkText = "";
       let linkPage;
@@ -104,7 +106,7 @@ export class HomePage extends Page {
       }));
     });
   }
-  get name() {
+  get name(): string {
     return i18next.t("home_page_title");
   }
 }

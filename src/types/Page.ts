@@ -15,8 +15,8 @@ export class Page {
   }
   goBack(): void {
     changePage("HOME");
-  }
+  };
   cleanup(): void {
     // Do Nothing
-  }
+  };
 }

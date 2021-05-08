@@ -1,4 +1,4 @@
-import { CopyableInputBox } from "../elements/CopyableInputBox";
+import { CopyableInputBox, CopyableInputBoxType } from "../elements/CopyableInputBox";
 import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
@@ -35,7 +35,7 @@ const passwordOptionsDefault = {
 
 function genPassword(options = passwordOptionsDefault) {
   let pw = "";
-  options = {...passwordOptionsDefault, ...options}
+  options = { ...passwordOptionsDefault, ...options }
   const pwArray = options.alphabet.split('');
   for (let i = 0; i < options.length; i++) {
     pw = pw.concat(pwArray[Math.floor(random() * pwArray.length)]);
@@ -49,26 +49,30 @@ function Option(label, value) {
     text: label,
     attributes: {
       label: label,
-      value: value, 
+      value: value,
     }
   })
 }
-
 
 export class PwGenPage extends Page {
   constructor() {
     super();
   }
 
+  passwordBox: CopyableInputBoxType;
+  passwordLengthTitle: HTMLTitleElement;
+  passwordLengthRange: HTMLInputElement;
+  passwordAlphabet: HTMLSelectElement;
+  passwordForm: HTMLFormElement;
 
-  async render() {
+  async render(): Promise<void> {
     setPageContent("");
-    this.passwordBox = CopyableInputBox(genPassword(passwordOptionsDefault));
+    this.passwordBox = CopyableInputBox(genPassword(passwordOptionsDefault)) ;
 
     this.passwordLengthTitle = makeElement({
       tag: "h4",
       text: this.getPasswordLengthText()
-    })
+    }) as HTMLTitleElement;
 
     this.passwordLengthRange = makeElement({
       tag: "input",
@@ -80,7 +84,8 @@ export class PwGenPage extends Page {
         max: passwordLengthMax,
         min: passwordLengthMin,
       },
-    })
+    }) as HTMLInputElement;
+
     this.passwordLengthRange.addEventListener('input', this.updatePassword.bind(this));
 
     this.passwordAlphabet = makeElement({
@@ -91,7 +96,7 @@ export class PwGenPage extends Page {
         Option("a-z 0-9", alphabets.SMOL),
         Option("A-F 1-9", alphabets.HEX),
       ]
-    })
+    }) as HTMLSelectElement;
 
     this.passwordForm = makeElement({
       tag: "form",
@@ -104,36 +109,36 @@ export class PwGenPage extends Page {
           tag: "button",
           text: i18next.t("gen_password_btn"),
           class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
-          attributes: {type: "submit"},
+          attributes: { type: "submit" },
         }))
       ]
-    });
+    }) as HTMLFormElement;
 
     this.passwordForm.addEventListener("submit", (e) => this.formEvent(e));
     setPageContent(this.passwordForm);
   }
 
-  getPasswordLengthText() {
+  getPasswordLengthText(): string {
     return i18next.t("password_length_title", {
       min: this?.passwordLengthRange?.value || 24,
       max: passwordLengthMax
     });
   }
 
-  formEvent(e) {
+  formEvent(e: Event): void {
     e.preventDefault();
     this.updatePassword();
   }
 
-  updatePassword() {
+  updatePassword(): void {
     this.passwordLengthTitle.innerText = this.getPasswordLengthText();
     this.passwordBox.setText(genPassword({
-      length: this.passwordLengthRange.value,
-      alphabet: this.passwordAlphabet.value,
+      length: (this.passwordLengthRange.value as unknown) as number,
+      alphabet: this.passwordAlphabet.value as string,
     }));
   }
 
-  cleanup() {
+  cleanup(): void {
     this.passwordBox = undefined;
     this.passwordLengthTitle = undefined;
     this.passwordLengthRange = undefined;
@@ -141,7 +146,7 @@ export class PwGenPage extends Page {
     this.passwordForm = undefined;
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("password_generator_title");
   }
 }

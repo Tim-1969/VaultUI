@@ -4,7 +4,7 @@ import { Page } from "../types/Page";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";
 import { lookupSelf } from "../api/lookupSelf";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState.ts";
+import { pageState } from "../globalPageState";
 import { usernameLogin } from "../api/usernameLogin";
 import i18next from 'i18next';
 
@@ -12,8 +12,8 @@ export class LoginPage extends Page {
   constructor() {
     super();
   }
-  render() {
-    let tokenLoginForm = makeElement({
+  render(): void {
+    const tokenLoginForm = makeElement({
       tag: "form",
       children: [
         Margin(makeElement({
@@ -35,9 +35,9 @@ export class LoginPage extends Page {
           }
         }))
       ]
-    });
+    }) as HTMLFormElement;
 
-    let usernameLoginForm = makeElement({
+    const usernameLoginForm = makeElement({
       tag: "form",
       children: [
         Margin(makeElement({
@@ -71,7 +71,7 @@ export class LoginPage extends Page {
           }
         }))
       ]
-    });
+    }) as HTMLFormElement;
 
     setPageContent(makeElement({
       tag: "div",
@@ -122,9 +122,9 @@ export class LoginPage extends Page {
 
     tokenLoginForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      let formData = new FormData(tokenLoginForm);
+      const formData = new FormData(tokenLoginForm);
       const token = formData.get("token");
-      pageState.token = token;
+      pageState.token = token as string;
       lookupSelf().then(_ => {
         changePage("HOME");
       }).catch(e => {
@@ -134,8 +134,11 @@ export class LoginPage extends Page {
     });
     usernameLoginForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      let formData = new FormData(usernameLoginForm);
-      usernameLogin(formData.get("username"), formData.get("password")).then(res => {
+      const formData = new FormData(usernameLoginForm);
+      usernameLogin(
+        formData.get("username") as string,
+        formData.get("password") as string,
+      ).then(res => {
         pageState.token = res;
         changePage("HOME");
       }).catch(e => {
@@ -146,7 +149,7 @@ export class LoginPage extends Page {
     });
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("log_in_title");
   }
 }

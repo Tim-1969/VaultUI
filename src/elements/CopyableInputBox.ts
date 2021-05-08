@@ -4,7 +4,7 @@ import { makeElement } from "../htmlUtils";
 import ClipboardJS from "clipboard";
 import i18next from "i18next";
 
-interface CopyableInputBoxType extends HTMLElement {
+export interface CopyableInputBoxType extends HTMLElement {
   setText(text: string): void;
 }
 

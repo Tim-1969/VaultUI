@@ -2,7 +2,7 @@ import { Page } from "../types/Page";
 import { addClipboardNotifications, changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils";
 import { getCapabilitiesPath } from "../api/getCapabilities";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState.ts";
+import { pageState } from "../globalPageState";
 import { renewSelf } from "../api/renewSelf";
 import { sealVault } from "../api/sealVault";
 import ClipboardJS from "clipboard";
@@ -14,7 +14,7 @@ export class MePage extends Page {
     super();
   }
 
-  async render() {
+  async render(): Promise<void> {
     if (!(await prePageChecks())) return;
     setPageContent(makeElement({
       tag: "ul",
@@ -40,7 +40,7 @@ export class MePage extends Page {
               "data-clipboard-text": pageState.token,
             },
             thenRun: (e) => {
-              let clipboard = new ClipboardJS(e);
+              const clipboard = new ClipboardJS(e);
               addClipboardNotifications(clipboard);
             }
           })
@@ -65,7 +65,7 @@ export class MePage extends Page {
             tag: "a",
             condition: await (async () => {
               try {
-                let caps = await getCapabilitiesPath("sys/seal");
+                const caps = await getCapabilitiesPath("sys/seal");
                 return caps.includes("sudo") && caps.includes("update");
               } catch (e) {
                 return !true;
@@ -92,7 +92,7 @@ export class MePage extends Page {
     }));
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("me_page_title");
   }
 }
