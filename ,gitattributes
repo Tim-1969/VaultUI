@@ -1,1 +1,2 @@
-src/translations/* linguist-vendored
+src/translations/* linguist-vendored -linguist-detectable
+checkTranslations.mjs -linguist-detectable
