@@ -2,17 +2,21 @@ import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { createOrUpdateSecret } from "../../api/createOrUpdateSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 
 export class KeyValueNewPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+
+  goBack(): void {
     changePage("KEY_VALUE_VIEW");
   }
-  render() {
+
+  addKVNewForm: HTMLFormElement;
+
+  render(): void {
     setTitleElement(pageState);
     this.addKVNewForm = makeElement({
       tag: "form",
@@ -46,7 +50,7 @@ export class KeyValueNewPage extends Page {
           }
         })
       ]
-    });
+    }) as HTMLFormElement;
     setPageContent(this.addKVNewForm);
 
     this.addKVNewForm.addEventListener("submit", function (e) {
@@ -55,9 +59,9 @@ export class KeyValueNewPage extends Page {
     }.bind(this));
   }
 
-  newKVSecretHandleForm() {
-    let formData = new FormData(this.addKVNewForm);
-    let path = formData.get("path");
+  newKVSecretHandleForm(): void {
+    const formData = new FormData(this.addKVNewForm);
+    const path = formData.get("path") as string;
     let keyData = {};
 
     if (["kv-v1", "cubbyhole"].includes(pageState.currentMountType)) {
@@ -78,11 +82,11 @@ export class KeyValueNewPage extends Page {
     });
   }
 
-  get titleSuffix() {
+  get titleSuffix(): string {
     return i18next.t("kv_new_suffix");
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("kv_new_title");
   }
 }
