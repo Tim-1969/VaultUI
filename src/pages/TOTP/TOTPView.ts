@@ -6,8 +6,13 @@ import { getTOTPCode } from "../../api/getTOTPCode";
 import { getTOTPKeys } from "../../api/getTOTPKeys";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
+
+export interface TOTPListElement extends HTMLElement {
+  setCode(code: string): void;
+}
+
 
 export class TOTPViewPage extends Page {
   constructor() {
@@ -15,9 +20,13 @@ export class TOTPViewPage extends Page {
     this.refresher = undefined;
     this.totpListElements = {};
   }
-  async render() {
+
+  refresher: number;
+  totpListElements: Record<string, TOTPListElement>;
+
+  async render(): Promise<void> {
     setTitleElement(pageState);
-    let totpList = makeElement({ tag: "div" });
+    const totpList = makeElement({ tag: "div" });
     setPageContent(makeElement({
       tag: "div",
       children: [
@@ -38,9 +47,9 @@ export class TOTPViewPage extends Page {
     }));
 
 
-    getTOTPKeys(pageState.currentBaseMount, pageState.currentSecretPath).then(res => {
+    getTOTPKeys(pageState.currentBaseMount).then(res => {
       res.forEach(async function (totpKeyName) {
-        let totpListElement = this.makeTOTPListElement(totpKeyName);
+        const totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
         this.totpListElements[totpKeyName] = totpListElement;
         await this.updateTOTPElement(totpKeyName, totpListElement);
@@ -48,46 +57,47 @@ export class TOTPViewPage extends Page {
       document.getElementById("loadingText").remove();
     }).catch(e => {
       if (e == DoesNotExistError) {
-        let loadingText = document.getElementById("loadingText");
-        loadingText.innerText =  i18next.t("totp_view_empty");
+        const loadingText = document.getElementById("loadingText");
+        loadingText.innerText = i18next.t("totp_view_empty");
       } else {
         setErrorText(e.message);
       }
     });
 
-    let totpRefresher = async () => {
+    const totpRefresher = async () => {
       await Promise.all(Array.from(objectToMap(this.totpListElements)).map((kv) => {
         return this.updateTOTPElement(...kv);
       }))
     }
     await totpRefresher();
-    this.refresher = setInterval(totpRefresher, 3000);
+    this.refresher = setInterval(totpRefresher, 3000) as unknown as number;
   }
 
-  cleanup() {
+  cleanup(): void {
     clearInterval(this.refresher);
     this.totpListElements = {};
   }
 
-  async updateTOTPElement(totpKeyName, totpListElement) {
+  async updateTOTPElement(totpKeyName: string, totpListElement: TOTPListElement): Promise<void> {
     totpListElement.setCode(await getTOTPCode(pageState.currentBaseMount, totpKeyName));
   }
 
-  makeTOTPListElement(totpKeyName) {
-    let totpKeyBox = CopyableInputBox(totpKeyName, false);
-    let totpValueBox = CopyableInputBox(i18next.t("totp_view_loading_box"));
+  makeTOTPListElement(totpKeyName: string): TOTPListElement {
+    const totpKeyBox = CopyableInputBox(totpKeyName, false);
+    const totpValueBox = CopyableInputBox(i18next.t("totp_view_loading_box"));
 
-    let gridElement = makeElement({
+    const gridElement = makeElement({
       tag: "div",
       class: ["uk-grid", "uk-grid-small", "uk-text-expand"],
       children: [totpKeyBox, totpValueBox]
-    });
+    }) as TOTPListElement;
 
     gridElement.setCode = totpValueBox.setText;
 
     return gridElement;
   }
-  get name() {
+
+  get name(): string {
     return i18next.t("totp_view_title");
   }
 }

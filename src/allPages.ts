@@ -12,7 +12,7 @@ import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
 import { SetLanguagePage } from "./pages/SetLanguage";
 import { SetVaultURLPage } from "./pages/SetVaultURL";
-import { TOTPViewPage } from "./pages/TOTP/TOTPView.js";
+import { TOTPViewPage } from "./pages/TOTP/TOTPView";
 import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt.js";
 import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt.js";
 import { TransitViewPage } from "./pages/Transit/TransitView.js";
