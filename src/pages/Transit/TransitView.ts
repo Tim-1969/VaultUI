@@ -1,24 +1,29 @@
 import { DoesNotExistError } from "../../types/internalErrors";
 import { Page } from "../../types/Page";
-import { changePage, setErrorText, setTitleElement } from "../../pageUtils";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { getTransitKeys } from "../../api/getTransitKeys";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 
 export class TransitViewPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+
+  goBack(): void {
     changePage("HOME");
   }
-  async render() {
+
+  async render(): Promise<void> {
     pageState.currentSecret = "";
 
     setTitleElement(pageState);
 
-    let newButton = makeElement({
+    const transitViewContent = makeElement({ tag: "div" });
+    setPageContent(transitViewContent);
+
+    const newButton = makeElement({
       tag: "button",
       text: "New",
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
@@ -26,12 +31,12 @@ export class TransitViewPage extends Page {
         changePage("TRANSIT_NEW_KEY");
       }
     });
-    pageContent.appendChild(newButton);
+    transitViewContent.appendChild(newButton);
 
     try {
-      let res = await getTransitKeys(pageState.currentBaseMount);
+      const res = await getTransitKeys(pageState.currentBaseMount);
 
-      pageContent.appendChild(makeElement({
+      transitViewContent.appendChild(makeElement({
         tag: "ul",
         class: ["uk-nav", "uk-nav-default"],
         children: [
@@ -52,7 +57,7 @@ export class TransitViewPage extends Page {
       }));
     } catch (e) {
       if (e == DoesNotExistError) {
-        pageContent.appendChild(makeElement({
+        transitViewContent.appendChild(makeElement({
           tag: "p",
           text: i18next.t("transit_view_none_here_text")
         }));
@@ -62,7 +67,7 @@ export class TransitViewPage extends Page {
     }
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("transit_view_title");
   }
 }
