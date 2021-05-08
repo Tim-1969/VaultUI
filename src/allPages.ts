@@ -17,7 +17,7 @@ import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt.js";
 import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt.js";
 import { TransitViewPage } from "./pages/Transit/TransitView.js";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret.js";
-import { UnsealPage } from "./pages/Unseal.js";
+import { UnsealPage } from "./pages/Unseal";
 
 type pagesList = {
   [key: string]: Page

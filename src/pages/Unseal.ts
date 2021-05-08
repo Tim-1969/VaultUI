@@ -1,8 +1,8 @@
 import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
-import { QRScanner } from "../elements/QRScanner";
+import { QRScanner, QRScannerType } from "../elements/QRScanner";
+import { SealStatusType, getSealStatus } from "../api/getSealStatus";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";
-import { getSealStatus } from "../api/getSealStatus";
 import { makeElement } from "../htmlUtils";
 import { submitUnsealKey } from "../api/submitUnsealKey";
 import i18next from 'i18next';
@@ -18,12 +18,21 @@ export class UnsealPage extends Page {
     super();
     this.mode = UnsealInputModes.FORM_INPUT;
   }
-  cleanup() {
-    this.deinitWebcam()
+
+  mode: string;
+  refresher: number;
+  qrScanner: QRScannerType;
+  unsealProgress: HTMLProgressElement;
+  unsealProgressText: HTMLParagraphElement;
+  unsealInputContent: HTMLElement;
+  unsealKeyForm: HTMLFormElement;
+
+  cleanup(): void {
+    this.deinitWebcam();
     clearInterval(this.refresher);
   }
 
-  deinitWebcam() {
+  deinitWebcam(): void {
     try {
       this.qrScanner.deinit();
     } catch (_) {
@@ -31,25 +40,25 @@ export class UnsealPage extends Page {
     }
   }
 
-  makeRefresher() {
+  makeRefresher(): void {
     this.refresher = setInterval(async function () {
       this.updateSealProgress(await getSealStatus());
-    }.bind(this), 1000);
+    }.bind(this), 1000) as unknown as number;
   }
 
-  async render() {
+  async render(): Promise<void> {
     this.unsealProgress = makeElement({
       tag: "progress",
       class: "uk-progress",
       attributes: { value: "0", max: "0" }
-    });
+    }) as HTMLProgressElement;
     this.unsealProgressText = makeElement({
       tag: "p",
       text: i18next.t("unseal_keys_progress", { progress: "0", keys_needed: "0" }),
-    });
+    }) as HTMLParagraphElement;
     this.unsealInputContent = makeElement({
       tag: "div"
-    })
+    }) as HTMLElement;
     setPageContent(makeElement({
       tag: "div",
       children: [
@@ -68,11 +77,17 @@ export class UnsealPage extends Page {
     this.makeRefresher();
   }
 
-  setButtons(method) {
-    let newMethod;
-    let buttonText;
-    newMethod = method == UnsealInputModes.FORM_INPUT ? UnsealInputModes.QR_INPUT : UnsealInputModes.FORM_INPUT;
-    buttonText = newMethod == UnsealInputModes.FORM_INPUT ? i18next.t("unseal_input_btn") : i18next.t("unseal_qr_btn");
+  setButtons(method: string): void {
+    const newMethod: string =
+      method == UnsealInputModes.FORM_INPUT ?
+        UnsealInputModes.QR_INPUT
+        :
+        UnsealInputModes.FORM_INPUT;
+    const buttonText: string =
+      newMethod == UnsealInputModes.FORM_INPUT ?
+        i18next.t("unseal_input_btn")
+        :
+        i18next.t("unseal_qr_btn");
     this.unsealInputContent.appendChild(makeElement({
       tag: "button",
       class: ["uk-button", "uk-button-primary"],
@@ -84,7 +99,7 @@ export class UnsealPage extends Page {
   }
 
 
-  switchInputMode(method) {
+  switchInputMode(method: string): void {
     this.deinitWebcam();
     this.unsealInputContent.querySelectorAll('*').forEach(n => n.remove())
     if (method == UnsealInputModes.FORM_INPUT) this.makeUnsealForm();
@@ -92,7 +107,7 @@ export class UnsealPage extends Page {
     this.setButtons(method);
   }
 
-  makeUnsealForm() {
+  makeUnsealForm(): void {
     this.unsealKeyForm = makeElement({
       tag: "form",
       children: [
@@ -112,7 +127,7 @@ export class UnsealPage extends Page {
           text: i18next.t("submit_key_btn")
         })),
       ]
-    });
+    }) as HTMLFormElement;
     this.unsealInputContent.appendChild(this.unsealKeyForm);
     this.unsealKeyForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -120,23 +135,23 @@ export class UnsealPage extends Page {
     }.bind(this));
   }
 
-  async makeQRInput() {
-    this.qrScanner = await QRScanner(function (code) {
+  async makeQRInput(): Promise<void> {
+    this.qrScanner = await QRScanner(function (code: string) {
       this.submitKey(code);
       console.log('decoded qr code:', code)
     }.bind(this));
     this.unsealInputContent.appendChild(this.qrScanner);
   }
 
-  updateSealProgress(data) {
-    let progress = data.progress;
-    let keysNeeded = data.t;
-    let text = this.unsealProgressText;
+  updateSealProgress(data: SealStatusType): void {
+    const progress = data.progress;
+    const keysNeeded = data.t;
+    const text = this.unsealProgressText;
     text.innerText = i18next.t("unseal_keys_progress", {
       progress: String(progress),
       keys_needed: String(keysNeeded)
     });
-    let progressBar = this.unsealProgress;
+    const progressBar = this.unsealProgress;
     progressBar.value = progress;
     progressBar.max = keysNeeded;
     if (!data.sealed) {
@@ -145,7 +160,7 @@ export class UnsealPage extends Page {
     }
   }
 
-  submitKey(key) {
+  submitKey(key: string): void {
     submitUnsealKey(key).then(_ => {
       getSealStatus().then(data => {
         this.updateSealProgress(data);
@@ -155,12 +170,12 @@ export class UnsealPage extends Page {
     });
   }
 
-  async handleKeySubmit() {
-    let formData = new FormData(this.unsealKeyForm);
+  async handleKeySubmit(): Promise<void> {
+    const formData = new FormData(this.unsealKeyForm);
 
-    this.submitKey(formData.get("key"))
+    this.submitKey(formData.get("key") as string)
   }
-  get name() {
+  get name(): string {
     return i18next.t("unseal_vault_text");
   }
 }

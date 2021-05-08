@@ -1,6 +1,6 @@
 import { appendAPIURL } from "./apiUtils";
 
-type SealStatusType = {
+export type SealStatusType = {
   progress: number;
   t: number;
   sealed: boolean;

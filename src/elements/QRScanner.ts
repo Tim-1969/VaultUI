@@ -7,7 +7,7 @@ import QrScanner from 'qr-scanner';
 import qrScannerWorkerSource from '!!raw-loader!qr-scanner/qr-scanner-worker.min.js';
 QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
 
-interface QRScannerType extends HTMLElement {
+export interface QRScannerType extends HTMLElement {
   deinit(): void;
 }
 
