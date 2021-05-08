@@ -3,7 +3,7 @@ import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { getSecretMetadata } from "../../api/getSecretMetadata";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 
 
@@ -11,23 +11,23 @@ export class KeyValueVersionsPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+  goBack(): void {
     if (pageState.currentSecretVersion != null) {
       pageState.currentSecretVersion = null;
     }
     changePage("KEY_VALUE_SECRET");
   }
-  async render() {
+  async render(): Promise<void> {
     setTitleElement(pageState);
 
-    let versionsList = makeElement({
+    const versionsList = makeElement({
       tag: "ul",
       id: "versionsList",
       class: ["uk-nav", "uk-nav-default"]
     });
     setPageContent(versionsList);
 
-    let metadata = await getSecretMetadata(
+    const metadata = await getSecretMetadata(
       pageState.currentBaseMount,
       pageState.currentSecretPath,
       pageState.currentSecret
@@ -48,11 +48,11 @@ export class KeyValueVersionsPage extends Page {
     });
   }
 
-  get titleSuffix() {
+  get titleSuffix(): string {
     return i18next.t("kv_sec_versions_suffix");
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("kv_sec_versions_title");
   }
 }
