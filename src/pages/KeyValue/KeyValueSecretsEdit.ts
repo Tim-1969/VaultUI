@@ -4,28 +4,28 @@ import { changePage, setErrorText, setPageContent, setTitleElement } from "../..
 import { createOrUpdateSecret } from "../../api/createOrUpdateSecret";
 import { getSecret } from "../../api/getSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
-import { verifyJSONString } from "../../utils";
+import { pageState } from "../../globalPageState";
+import { sortedObjectMap, verifyJSONString } from "../../utils";
 import i18next from 'i18next';
 
 export class KeyValueSecretEditPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+  goBack(): void {
     changePage("KEY_VALUE_SECRET");
   }
-  render() {
+  render(): void {
     setTitleElement(pageState);
-    let loadingText = makeElement({
+    const loadingText = makeElement({
       tag: "p",
       text: i18next.t("kv_sec_edit_loading")
     });
-    let editor = makeElement({
+    const editor = makeElement({
       tag: "div",
       class: ["editor", "language-json"]
     });
-    let saveButton = makeElement({
+    const saveButton = makeElement({
       tag: "button",
       class: ["uk-button", "uk-button-primary"],
       text: i18next.t("kv_sec_edit_btn")
@@ -51,17 +51,19 @@ export class KeyValueSecretEditPage extends Page {
     ).then(secretInfo => {
       loadingText.remove();
 
-      const secretsJSON = JSON.stringify(Object.fromEntries(new Map(Object.entries(secretInfo).sort())), null, 4);
+      const secretsJSON = JSON.stringify(sortedObjectMap(secretInfo), null, 4);
 
-      let jar = CodeJar(editor, () => { }, { tab: ' '.repeat(4) });
+      const jar = CodeJar(editor, () => { }, { tab: ' '.repeat(4) });
       jar.updateCode(secretsJSON);
       saveButton.onclick = function () {
         if (!verifyJSONString(jar.toString())) {
           setErrorText(i18next.t("kv_sec_edit_invalid_json_err"));
           return;
         }
+
         createOrUpdateSecret(
           pageState.currentBaseMount,
+          pageState.currentMountType,
           pageState.currentSecretPath,
           pageState.currentSecret,
           JSON.parse(jar.toString())
@@ -75,11 +77,11 @@ export class KeyValueSecretEditPage extends Page {
     });
   }
 
-  get titleSuffix() {
+  get titleSuffix(): string {
     return i18next.t("kv_sec_edit_suffix");
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("kv_sec_edit_title");
   }
 }
