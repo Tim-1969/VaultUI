@@ -3,7 +3,7 @@ import { Margin } from "../../elements/Margin";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import { transitDecrypt } from "../../api/transitDecrypt";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from "i18next";
@@ -12,10 +12,14 @@ export class TransitDecryptPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+
+  goBack(): void {
     changePage("TRANSIT_VIEW_SECRET");
   }
-  async render() {
+
+  transitDecryptForm: HTMLFormElement;
+
+  async render(): Promise<void> {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div"
@@ -64,35 +68,35 @@ export class TransitDecryptPage extends Page {
           }
         })
       ]
-    });
+    }) as HTMLFormElement;
     setPageContent(this.transitDecryptForm);
-    this.transitDecryptForm.addEventListener("submit", function (e) {
+    this.transitDecryptForm.addEventListener("submit", function (e: Event) {
       e.preventDefault();
       this.transitEncryptFormHandler();
     }.bind(this));
   }
 
-  transitEncryptFormHandler() {
-    let formData = new FormData(this.transitDecryptForm);
+  transitEncryptFormHandler(): void {
+    const formData = new FormData(this.transitDecryptForm);
 
-    transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, formData.get("ciphertext")).then(res => {
+    transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, formData.get("ciphertext") as string).then(res => {
       let plaintext = res.plaintext;
-      if (formData.get("decodeBase64Checkbox") == "on") {
+      if (formData.get("decodeBase64Checkbox") as string == "on") {
         plaintext = atob(plaintext);
       }
-      let modal = CopyableModal(i18next.t("transit_decrypt_decryption_result_modal_title"), plaintext);
-      pageContent.appendChild(modal);
+      const modal = CopyableModal(i18next.t("transit_decrypt_decryption_result_modal_title"), plaintext);
+      document.body.querySelector("#pageContent").appendChild(modal);
       UIkit.modal(modal).show();
     }).catch(e => {
       setErrorText(`API Error: ${e.message}`);
     });
   }
 
-  get titleSuffix() {
+  get titleSuffix(): string {
     return i18next.t("transit_decrypt_suffix");
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("transit_decrypt_title");
   }
 }
