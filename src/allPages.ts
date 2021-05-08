@@ -10,7 +10,7 @@ import { MePage } from "./pages/Me";
 import { NewTOTPPage } from "./pages/TOTP/NewTOTP.js";
 import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
-import { SetLanguagePage } from "./pages/SetLanguage.js";
+import { SetLanguagePage } from "./pages/SetLanguage";
 import { SetVaultURLPage } from "./pages/SetVaultURL.js";
 import { TOTPViewPage } from "./pages/TOTP/TOTPView.js";
 import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt.js";
