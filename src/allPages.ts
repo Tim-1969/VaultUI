@@ -7,7 +7,7 @@ import { KeyValueVersionsPage } from "./pages/KeyValue/KeyValueVersions.js";
 import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView.js";
 import { LoginPage } from "./pages/Login";
 import { MePage } from "./pages/Me";
-import { NewTOTPPage } from "./pages/TOTP/NewTOTP.js";
+import { NewTOTPPage } from "./pages/TOTP/NewTOTP";
 import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
 import { SetLanguagePage } from "./pages/SetLanguage";

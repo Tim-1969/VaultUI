@@ -4,21 +4,29 @@ import { Page } from "../../types/Page";
 import { addNewTOTP } from "../../api/addNewTOTP";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 
+function replaceAll(str: string, replace: string, replaceWith: string): string {
+  return str.replace(new RegExp(replace, 'g'), replaceWith);
+}
+function removeDashSpaces(str: string): string {
+  str = replaceAll(str, "-", "");
+  str = replaceAll(str, " ", "");
+  return str;
+}
 
 export class NewTOTPPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+  goBack(): void {
     changePage("TOTP");
   }
-  render() {
+  render(): void {
     setTitleElement(pageState);
 
-    let totpForm = makeElement({
+    const totpForm = makeElement({
       tag: "form",
       children: [
         Margin(makeElement({
@@ -67,17 +75,16 @@ export class NewTOTPPage extends Page {
           }
         }))
       ]
-
-    });
+    }) as HTMLFormElement;
     setPageContent(totpForm);
 
     totpForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      let formData = new FormData(totpForm);
-      let parms = {
-        url: formData.get("uri"),
-        key: formData.get("key").replaceAll("-", "").replaceAll(" ", "").toUpperCase(),
-        name: formData.get("name"),
+      const formData = new FormData(totpForm);
+      const parms = {
+        url: formData.get("uri") as string,
+        key: removeDashSpaces(formData.get("key") as string).toUpperCase(),
+        name: formData.get("name") as string,
         generate: false
       };
       addNewTOTP(pageState.currentBaseMount, parms).then(_ => {
@@ -88,11 +95,11 @@ export class NewTOTPPage extends Page {
     });
   }
 
-  get titleSuffix() {
+  get titleSuffix(): string {
     return i18next.t("totp_new_suffix");
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("totp_new_title");
   }
 }
