@@ -4,7 +4,7 @@ import { KeyValueNewPage } from "./pages/KeyValue/KeyValueNew.js";
 import { KeyValueSecretEditPage } from "./pages/KeyValue/KeyValueSecretsEdit.js";
 import { KeyValueSecretPage } from "./pages/KeyValue/KeyValueSecret.js";
 import { KeyValueVersionsPage } from "./pages/KeyValue/KeyValueVersions";
-import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView.js";
+import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView";
 import { LoginPage } from "./pages/Login";
 import { MePage } from "./pages/Me";
 import { NewTOTPPage } from "./pages/TOTP/NewTOTP";

@@ -1,9 +1,9 @@
 import { DoesNotExistError } from "../../types/internalErrors";
 import { Page } from "../../types/Page";
-import { changePage, setErrorText, setTitleElement } from "../../pageUtils";
+import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { getSecrets } from "../../api/getSecrets";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 
 
@@ -11,7 +11,7 @@ export class KeyValueViewPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+  goBack(): void {
     if (pageState.currentSecretPath.length != 0) {
       pageState.popCurrentSecretPath();
       changePage("KEY_VALUE_VIEW");
@@ -19,13 +19,16 @@ export class KeyValueViewPage extends Page {
       changePage("HOME");
     }
   }
-  async render() {
+  async render(): Promise<void> {
     pageState.currentSecret = "";
 
     setTitleElement(pageState);
 
+    let kvViewPageContent = makeElement({ tag: "div" });
+    setPageContent(kvViewPageContent);
+
     if (pageState.currentMountType == "cubbyhole") {
-      pageContent.appendChild(makeElement({
+      kvViewPageContent.appendChild(makeElement({
         tag: "p",
         text: i18next.t("kv_view_cubbyhole_text"),
       }));
@@ -39,7 +42,7 @@ export class KeyValueViewPage extends Page {
         changePage("KEY_VALUE_NEW_SECRET");
       }
     });
-    pageContent.appendChild(newButton);
+    kvViewPageContent.appendChild(newButton);
 
     try {
       let res = await getSecrets(
@@ -48,7 +51,7 @@ export class KeyValueViewPage extends Page {
         pageState.currentSecretPath,
       );
 
-      pageContent.appendChild(makeElement({
+      kvViewPageContent.appendChild(makeElement({
         tag: "ul",
         class: ["uk-nav", "uk-nav-default"],
         children: [
@@ -78,7 +81,7 @@ export class KeyValueViewPage extends Page {
         if (pageState.currentSecretPath.length != 0) {
           return this.goBack();
         } else {
-          pageContent.appendChild(makeElement({
+          kvViewPageContent.appendChild(makeElement({
             tag: "p",
             text: i18next.t("kv_view_none_here_text")
           }));
@@ -89,7 +92,7 @@ export class KeyValueViewPage extends Page {
     }
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("kv_view_title");
   }
 }
