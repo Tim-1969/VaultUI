@@ -24,7 +24,7 @@ export class KeyValueViewPage extends Page {
 
     setTitleElement(pageState);
 
-    let kvViewPageContent = makeElement({ tag: "div" });
+    const kvViewPageContent = makeElement({ tag: "div" });
     setPageContent(kvViewPageContent);
 
     if (pageState.currentMountType == "cubbyhole") {
@@ -34,7 +34,7 @@ export class KeyValueViewPage extends Page {
       }));
     }
 
-    let newButton = makeElement({
+    const newButton = makeElement({
       tag: "button",
       text: i18next.t("kv_view_new_btn"),
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
@@ -45,7 +45,7 @@ export class KeyValueViewPage extends Page {
     kvViewPageContent.appendChild(newButton);
 
     try {
-      let res = await getSecrets(
+      const res = await getSecrets(
         pageState.currentBaseMount,
         pageState.currentMountType,
         pageState.currentSecretPath,

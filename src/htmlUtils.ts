@@ -44,7 +44,7 @@ interface ElementInfo {
   [propName: string]: any;
 }
 
-export function makeElement(elementInfo: ElementInfo) {
+export function makeElement(elementInfo: ElementInfo): HTMLElement {
   if ("condition" in elementInfo) { if (!elementInfo.condition) { return null; } }
   const element = document.createElement(elementInfo.tag);
 
@@ -57,7 +57,7 @@ export function makeElement(elementInfo: ElementInfo) {
   return element;
 }
 
-export function setElementAttributes(element: Element, attributes: {[propName: string]: any}) {
+export function setElementAttributes(element: Element, attributes: {[propName: string]: any}): void {
   for (const key of Object.getOwnPropertyNames(attributes)) {
     element.setAttribute(key, attributes[key]);
   }
