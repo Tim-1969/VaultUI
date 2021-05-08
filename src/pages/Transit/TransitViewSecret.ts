@@ -1,18 +1,25 @@
 import { Page } from "../../types/Page";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState.ts";
+import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 
 export class TransitViewSecretPage extends Page {
   constructor() {
     super();
   }
-  goBack() {
+
+  goBack(): void {
     changePage("TRANSIT_VIEW");
   }
 
-  makeTile(title, description, icon, iconText, onclick = _ => { }) {
+  makeTile(
+    title: string,
+    description: string,
+    icon: string,
+    iconText: string,
+    onclick: () => void = () => { }
+  ): HTMLElement {
     return makeElement({
       tag: "a",
       class: "uk-link-heading",
@@ -45,7 +52,7 @@ export class TransitViewSecretPage extends Page {
     });
   }
 
-  async render() {
+  async render(): Promise<void> {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div",
@@ -64,14 +71,14 @@ export class TransitViewSecretPage extends Page {
                 i18next.t("transit_view_encrypt_description"),
                 "lock",
                 i18next.t("transit_view_encrypt_icon_text"),
-                _ => { changePage("TRANSIT_ENCRYPT"); }
+                () => { changePage("TRANSIT_ENCRYPT"); }
               ),
               this.makeTile(
                 i18next.t("transit_view_decrypt_text"),
                 i18next.t("transit_view_decrypt_description"),
                 "mail",
                 i18next.t("transit_view_decrypt_icon_text"),
-                _ => { changePage("TRANSIT_DECRYPT"); }
+                () => { changePage("TRANSIT_DECRYPT"); }
               ),
             ]
           }),
@@ -80,7 +87,7 @@ export class TransitViewSecretPage extends Page {
     }));
   }
 
-  get name() {
+  get name(): string {
     return i18next.t("transit_view_secret_title");
   }
 }

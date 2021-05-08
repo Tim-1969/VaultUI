@@ -16,7 +16,7 @@ import { TOTPViewPage } from "./pages/TOTP/TOTPView";
 import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt.js";
 import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt.js";
 import { TransitViewPage } from "./pages/Transit/TransitView";
-import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret.js";
+import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
 
 type pagesList = {
