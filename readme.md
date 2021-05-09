@@ -1,5 +1,5 @@
 # VaultUI
-![CI Status](https://ci.phoenix.qcx.io/api/v1/teams/phoenix/pipelines/vaultui/badge)]
+![CI Status](https://ci.phoenix.qcx.io/api/v1/teams/phoenix/pipelines/vaultui/badge)
 
 This is a very simple UI for working with secrets in [Hashicorp Vault](https://www.hashicorp.com/products/vault)
 
