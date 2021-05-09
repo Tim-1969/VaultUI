@@ -41,6 +41,14 @@ export class TransitViewSecretPage extends Page {
           iconText: i18next.t("transit_view_decrypt_icon_text"),
           onclick: () => { changePage("TRANSIT_DECRYPT"); }
         }),
+        Tile({
+          condition: transitKey.supports_decryption,
+          title: i18next.t("transit_view_rewrap_text"),
+          description: i18next.t("transit_view_rewrap_description"),
+          icon: "code",
+          iconText: i18next.t("transit_view_rewrap_icon_text"),
+          onclick: () => { changePage("TRANSIT_REWRAP"); }
+        }),
       ]
     }));
   }

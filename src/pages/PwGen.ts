@@ -4,6 +4,7 @@ import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
 import { setPageContent } from "../pageUtils";
 import i18next from 'i18next';
+import { Option } from "../elements/Option";
 
 const passwordLengthMin = 1;
 const passwordLengthMax = 64;
@@ -41,17 +42,6 @@ function genPassword(options = passwordOptionsDefault) {
     pw = pw.concat(pwArray[Math.floor(random() * pwArray.length)]);
   }
   return pw;
-}
-
-function Option(label, value) {
-  return makeElement({
-    tag: "option",
-    text: label,
-    attributes: {
-      label: label,
-      value: value,
-    }
-  })
 }
 
 export class PwGenPage extends Page {

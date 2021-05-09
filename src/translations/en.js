@@ -133,6 +133,9 @@ module.exports = {
   "transit_view_decrypt_text": "Decrypt",
   "transit_view_decrypt_description": "Decrypt some cyphertext.",
   "transit_view_decrypt_icon_text": "Decryption Icon",
+  "transit_view_rewrap_text": "Rewrap",
+  "transit_view_rewrap_description": "Rewrap ciphertext using a different key version.",
+  "transit_view_rewrap_icon_text": "Rewrap Icon",
 
   // Transit Encrypt Page
   "transit_encrypt_title": "Transit Encrypt",
@@ -142,11 +145,20 @@ module.exports = {
   "transit_encrypt_encrypt_btn": "Encrypt",
   "transit_encrypt_encryption_result_modal_title": "Encryption Result",
 
-  // Transit decrypt Page
+  // Transit Decrypt Page
   "transit_decrypt_title": "Transit Decrypt",
   "transit_decrypt_suffix": " (decrypt)",
   "transit_decrypt_input_placeholder": "Cyphertext",
   "transit_decrypt_decode_checkbox": "Should the plaintext be base64 decoded?",
   "transit_decrypt_decrypt_btn": "Decrypt",
   "transit_decrypt_decryption_result_modal_title": "Decryption Result",
+
+  // Transit Rewrap Page
+  "transit_rewrap_title": "Transit Rewrap",
+  "transit_rewrap_suffix": " (rewrap)",
+  "transit_rewrap_version_option_text": "{{version_num}}",
+  "transit_rewrap_latest_version_option_text": "{{version_num}} (latest)",
+  "transit_rewrap_input_placeholder": "Cyphertext",
+  "transit_rewrap_rewrap_btn": "Rewrap",
+  "transit_rewrap_result_modal_title": "Rewrap Result",
 }

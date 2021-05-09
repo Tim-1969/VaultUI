@@ -15,6 +15,7 @@ import { SetVaultURLPage } from "./pages/SetVaultURL";
 import { TOTPViewPage } from "./pages/TOTP/TOTPView";
 import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt";
 import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt";
+import { TransitRewrapPage } from "./pages/Transit/TransitRewrap";
 import { TransitViewPage } from "./pages/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
@@ -36,6 +37,7 @@ export const allPages: pagesList = {
   TRANSIT_VIEW_SECRET: new TransitViewSecretPage(),
   TRANSIT_ENCRYPT: new TransitEncryptPage(),
   TRANSIT_DECRYPT: new TransitDecryptPage(),
+  TRANSIT_REWRAP: new TransitRewrapPage(),
   KEY_VALUE_VIEW: new KeyValueViewPage(),
   KEY_VALUE_SECRET: new KeyValueSecretPage(),
   KEY_VALUE_VERSIONS: new KeyValueVersionsPage(),

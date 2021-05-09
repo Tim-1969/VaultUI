@@ -24,7 +24,7 @@ export type TransitKeyBaseType = {
 // Type returned when calling getTransitKey
 export type TransitKeyType = TransitKeyBaseType & {
   keys: {
-    [version: string]: number;
+    [version: number]: number;
   };
   min_decryption_version: number;
   min_encryption_version: number;
