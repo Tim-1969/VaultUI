@@ -11,6 +11,7 @@ export const enum TransitKeyTypes {
   RSA_4096 = "rsa-4096",
 }
 
+// Type when used to make new transit keys.
 export type TransitKeyBaseType = {
   name: string;
   convergent_encryption: Boolean;
@@ -20,10 +21,11 @@ export type TransitKeyBaseType = {
   type: keyof typeof TransitKeyTypes;
 }
 
+// Type returned when calling getTransitKey
 export type TransitKeyType = TransitKeyBaseType & {
-  keys?: {
+  keys: {
     [version: string]: number;
-  },
+  };
   min_decryption_version: number;
   min_encryption_version: number;
   supports_encryption: Boolean;
