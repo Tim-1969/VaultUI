@@ -60,6 +60,7 @@ module.exports = {
   "username_input": "Username",
   "password_input": "Password",
   "log_in_btn": "Login",
+  "token_login_error": "Invalid Token",
 
   // Key Value Delete Page
   "kv_delete_title": "K/V Delete",

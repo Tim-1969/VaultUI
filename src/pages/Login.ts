@@ -129,7 +129,11 @@ export class LoginPage extends Page {
         changePage("HOME");
       }).catch(e => {
         document.getElementById("tokenInput").classList.add("uk-form-danger");
-        setErrorText(e.message);
+        if (e.message == "permission denied") {
+          setErrorText(i18next.t("token_login_error"));    
+        } else {
+          setErrorText(e.message);
+        }
       });
     });
     usernameLoginForm.addEventListener("submit", function (e) {
