@@ -126,6 +126,8 @@ async function onLoad() {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
+  // @ts-expect-error
+  console.log("Loading Version:", __COMMIT_HASH__);
   i18next.init({
     lng: pageState.language,
     fallbackLng: 'en',

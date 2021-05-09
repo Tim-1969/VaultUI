@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -6,6 +8,9 @@ const VERBOSE = Object.getOwnPropertyNames(process.env).includes("VERBOSE") || !
 const MODE  = process.env.WEBPACK_MODE || "production" 
 const DEBUG = MODE != "production";
 
+let commitHash = require('child_process')
+  .execSync('git rev-parse --short HEAD')
+  .toString();
 
 module.exports = {
   mode: MODE,
@@ -20,7 +25,13 @@ module.exports = {
     colors: true,
     timings: true,
   },
-  plugins: [new MiniCssExtractPlugin(), new HtmlWebpackPlugin({ title: "VaultUI" })],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({ title: "VaultUI" }),
+    new webpack.DefinePlugin({
+      __COMMIT_HASH__: JSON.stringify(commitHash),
+    })
+  ],
   devServer: {
     open: process.env.BROWSER || "microsoft-edge-dev",
   },

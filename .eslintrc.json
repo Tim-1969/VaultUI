@@ -17,7 +17,8 @@
   "globals": {
     "pageContent": "writable",
     "module": "writable",
-    "process": "writable"
+    "process": "writable",
+    "__COMMIT_HASH__": "writable"
   },
   "rules": {
     "no-unused-vars": [
