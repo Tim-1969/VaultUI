@@ -62,7 +62,6 @@ export class TransitViewSecretPage extends Page {
 
     let transitKey = await getTransitKey(pageState.currentBaseMount, pageState.currentSecret);
 
-    console.log(transitKey.supports_encryption);
     setPageContent(makeElement({
       tag: "div",
       class: ["uk-grid", "uk-child-width-expand@s"],
