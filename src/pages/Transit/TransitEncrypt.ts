@@ -81,7 +81,7 @@ export class TransitEncryptPage extends Page {
     }.bind(this));
   }
 
- async transitEncryptFormHandler(): Promise<void> {
+  async transitEncryptFormHandler(): Promise<void> {
     const formData = new FormData(this.transitEncryptForm);
 
     const base64Checkbox = formData.get("base64Checkbox") as string;
@@ -96,14 +96,18 @@ export class TransitEncryptPage extends Page {
       plaintext = base64Checkbox == "on" ? plaintext : btoa(plaintext);
     }
 
-
-    transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, plaintext).then(res => {
+    try {
+      let res = await transitEncrypt(
+        pageState.currentBaseMount,
+        pageState.currentSecret,
+        { plaintext: plaintext }
+      );
       const modal = CopyableModal(i18next.t("transit_encrypt_encryption_result_modal_title"), res.ciphertext);
       document.body.querySelector("#pageContent").appendChild(modal);
       UIkit.modal(modal).show();
-    }).catch(e => {
+    } catch (e) {
       setErrorText(`API Error: ${e.message}`);
-    });
+    }
   }
 
   get titleSuffix(): string {

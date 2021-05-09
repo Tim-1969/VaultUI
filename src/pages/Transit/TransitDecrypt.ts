@@ -80,7 +80,7 @@ export class TransitDecryptPage extends Page {
 
   async transitDecryptFormHandler(): Promise<void> {
     const formData = new FormData(this.transitDecryptForm);
-  
+
     const decodeBase64 = formData.get("decodeBase64Checkbox") as string;
 
     let ciphertext = formData.get("ciphertext") as string;
@@ -90,7 +90,12 @@ export class TransitDecryptPage extends Page {
       ciphertext = atob((await fileToBase64(ciphertext_file) as string).replace("data:text/plain;base64,", ""));
     }
 
-    transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, ciphertext).then(res => {
+    try {
+      let res = await transitDecrypt(
+        pageState.currentBaseMount,
+        pageState.currentSecret,
+        { ciphertext: ciphertext },
+      );
       let plaintext = res.plaintext;
       if (decodeBase64 == "on") {
         plaintext = atob(plaintext);
@@ -98,9 +103,9 @@ export class TransitDecryptPage extends Page {
       const modal = CopyableModal(i18next.t("transit_decrypt_decryption_result_modal_title"), plaintext);
       document.body.querySelector("#pageContent").appendChild(modal);
       UIkit.modal(modal).show();
-    }).catch(e => {
+    } catch (e) {
       setErrorText(`API Error: ${e.message}`);
-    });
+    }
   }
 
   get titleSuffix(): string {

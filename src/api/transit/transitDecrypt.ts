@@ -5,10 +5,14 @@ type DecryptionResult = {
   plaintext: string;
 }
 
+type DecryptionPayload = {
+  ciphertext: string;
+}
+
 export async function transitDecrypt(
   baseMount: string,
   name: string,
-  data: string
+  payload: DecryptionPayload
 ): Promise<DecryptionResult> {
   const request = new Request(appendAPIURL(removeDoubleSlash(`/v1/${baseMount}/decrypt/${name}`)), {
     method: 'POST',
@@ -16,7 +20,7 @@ export async function transitDecrypt(
       'Content-Type': 'application/json',
       ...getHeaders(),
     },
-    body: JSON.stringify({ ciphertext: data })
+    body: JSON.stringify(payload)
   });
   const response = await fetch(request);
   if (!response.ok) {
