@@ -1,0 +1,33 @@
+export const enum TransitKeyTypes {
+  AES128_GCM96 = "aes128-gcm96",
+  AES256_GCM96 = "aes256-gcm96",
+  CHACHA20_POLY1305 = "chacha20-poly1305",
+  ED25519 = "ed25519",
+  ECDSA_P256 = "ecdsa-p256",
+  ECDSA_P384 = "ecdsa-p384",
+  ECDSA_P521 = "ecdsa-p521",
+  RSA_2048 = "rsa-2048",
+  RSA_3072 = "rsa-3072",
+  RSA_4096 = "rsa-4096",
+}
+
+export type TransitKeyBaseType = {
+  name: string;
+  convergent_encryption: Boolean;
+  derived: Boolean;
+  exportable: Boolean;
+  allow_plaintext_backup: Boolean;
+  type: keyof typeof TransitKeyTypes;
+}
+
+export type TransitKeyType = TransitKeyBaseType & {
+  keys?: {
+    [version: string]: number;
+  },
+  min_decryption_version: number;
+  min_encryption_version: number;
+  supports_encryption: Boolean;
+  supports_decryption: Boolean;
+  supports_derivation: Boolean;
+  supports_signing: Boolean;
+}
