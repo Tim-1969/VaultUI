@@ -8,8 +8,8 @@ import UIkit from 'uikit/dist/js/uikit.min.js';
 UIkit.use(Icons);
 
 /* eslint-disable */
-import "prismjs/components/prism-json";
 import Prism from "prismjs";
+import "prismjs/components/prism-json";
 Prism.highlightAll();
 /* eslint-enable */
 
