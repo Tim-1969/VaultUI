@@ -21,6 +21,9 @@ module.exports = {
   // Copyable Input Box
   "copy_input_box_copy_icon_text": "Копировать",
 
+  // File Upload Input
+  "file_upload_input_btn": "Загрузить файл",
+
   // Me Page
   "me_page_title": "Профиль/параметры",
   "log_out_btn": "Выход",
@@ -49,6 +52,7 @@ module.exports = {
 
   // Password Generator Page
   "password_generator_title": "Генератор паролей",
+  "password_length_title": "Длина пароля ({{min}}/{{max}})",
   "gen_password_btn": "Генерировать",
 
   // Login Page
@@ -59,6 +63,7 @@ module.exports = {
   "username_input": "Имя пользователя",
   "password_input": "Пароль",
   "log_in_btn": "Войти",
+  "token_login_error": "Неправильный код доступа",
 
   // Key Value Delete Page
   "kv_delete_title": "Удаление ключа/значения",
@@ -128,6 +133,9 @@ module.exports = {
   "transit_view_decrypt_text": "Расшифровать",
   "transit_view_decrypt_description": "Расшифровать шифр-текст.",
   "transit_view_decrypt_icon_text": "Значок расшифрования",
+  "transit_view_rewrap_text": "Перешифровать",
+  "transit_view_rewrap_description": "Перешифровать шифр-текст, используя другую версию ключа.",
+  "transit_view_rewrap_icon_text": "Значок перешифрования",
 
   // Transit Encrypt Page
   "transit_encrypt_title": "Шифрование Transit",
@@ -137,11 +145,20 @@ module.exports = {
   "transit_encrypt_encrypt_btn": "Зашифровать",
   "transit_encrypt_encryption_result_modal_title": "Результат шифрования",
 
-  // Transit decrypt Page
+  // Transit Decrypt Page
   "transit_decrypt_title": "Расшифрование Transit",
   "transit_decrypt_suffix": " (расшифр.)",
   "transit_decrypt_input_placeholder": "Шифр-текст",
   "transit_decrypt_decode_checkbox": "Нужно ли раскодировать текст из base64?",
   "transit_decrypt_decrypt_btn": "Расшифровать",
   "transit_decrypt_decryption_result_modal_title": "Результат расшифрования",
+
+  // Transit Rewrap Page
+  "transit_rewrap_title": "Перешифрование Transit",
+  "transit_rewrap_suffix": " (перешифр.)",
+  "transit_rewrap_version_option_text": "{{version_num}}",
+  "transit_rewrap_latest_version_option_text": "{{version_num}} (последняя версия)",
+  "transit_rewrap_input_placeholder": "Шифр-текст",
+  "transit_rewrap_rewrap_btn": "Перешифровать",
+  "transit_rewrap_result_modal_title": "Результат перешифрования",
 }
