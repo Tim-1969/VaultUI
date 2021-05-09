@@ -29,7 +29,7 @@ export function CopyableInputBox(text: string, copyable = true): CopyableInputBo
 
   const inputBoxInput = makeElement({
     tag: "input",
-    class: ["uk-input-copyable"],
+    class: ["uk-input", "uk-input-copyable"],
     attributes: { "readonly": true, "type": "text" },
   });
 
