@@ -20,7 +20,6 @@ export class TransitViewSecretPage extends Page {
   }
 
   goBack(): void {
-    pageState.currentSecret = "";
     changePage("TRANSIT_VIEW");
   }
 
@@ -29,7 +28,7 @@ export class TransitViewSecretPage extends Page {
     return makeElement({
       tag: "a",
       class: "uk-link-heading",
-      onclick: onclick,
+      onclick: params.onclick,
       children: makeElement({
         tag: "div",
         class: ["uk-padding-small", "uk-background-primary"],
@@ -63,6 +62,7 @@ export class TransitViewSecretPage extends Page {
 
     let transitKey = await getTransitKey(pageState.currentBaseMount, pageState.currentSecret);
 
+    console.log(transitKey.supports_encryption);
     setPageContent(makeElement({
       tag: "div",
       class: ["uk-grid", "uk-child-width-expand@s"],
