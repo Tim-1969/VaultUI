@@ -1,10 +1,10 @@
 import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
 import { QRScanner, QRScannerType } from "../elements/QRScanner";
-import { SealStatusType, getSealStatus } from "../api/getSealStatus";
+import { SealStatusType, getSealStatus } from "../api/sys/getSealStatus";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
-import { submitUnsealKey } from "../api/submitUnsealKey";
+import { submitUnsealKey } from "../api/sys/submitUnsealKey";
 import i18next from 'i18next';
 
 

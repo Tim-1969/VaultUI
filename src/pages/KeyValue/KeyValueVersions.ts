@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
-import { getSecretMetadata } from "../../api/getSecretMetadata";
+import { getSecretMetadata } from "../../api/kv/getSecretMetadata";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
 import { pageState } from "../../globalPageState";

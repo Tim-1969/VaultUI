@@ -17,7 +17,7 @@ import {
   changePage,
   renderPage,
 } from "./pageUtils";
-import { getSealStatus } from "./api/getSealStatus";
+import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";

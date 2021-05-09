@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "./apiUtils";
+import { appendAPIURL, getHeaders } from "../apiUtils";
 
 type TokenInfo = {
   expire_time: string;

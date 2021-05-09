@@ -1,7 +1,7 @@
 import { Page } from "./types/Page";
 import { PageState } from "./PageState";
-import { getSealStatus } from "./api/getSealStatus";
-import { lookupSelf } from "./api/lookupSelf";
+import { getSealStatus } from "./api/sys/getSealStatus";
+import { lookupSelf } from "./api/sys/lookupSelf";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import ClipboardJS from "clipboard";

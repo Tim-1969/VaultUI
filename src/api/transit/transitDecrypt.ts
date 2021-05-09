@@ -1,5 +1,5 @@
-import { appendAPIURL, getHeaders } from "./apiUtils";
-import { removeDoubleSlash } from "../utils";
+import { appendAPIURL, getHeaders } from "../apiUtils";
+import { removeDoubleSlash } from "../../utils";
 
 type DecryptionResult = {
   plaintext: string;

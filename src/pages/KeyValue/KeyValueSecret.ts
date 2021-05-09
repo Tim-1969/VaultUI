@@ -1,12 +1,12 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox";
 import { Page } from "../../types/Page";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
-import { getCapabilities } from "../../api/getCapabilities";
-import { getSecret } from "../../api/getSecret";
+import { getCapabilities } from "../../api/sys/getCapabilities";
+import { getSecret } from "../../api/kv/getSecret";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import { sortedObjectMap } from "../../utils";
-import { undeleteSecret } from "../../api/undeleteSecret";
+import { undeleteSecret } from "../../api/kv/undeleteSecret";
 import Prism from "prismjs";
 import i18next from 'i18next';
 

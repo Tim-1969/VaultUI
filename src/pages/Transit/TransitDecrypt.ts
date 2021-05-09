@@ -5,7 +5,7 @@ import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { fileToBase64, makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
-import { transitDecrypt } from "../../api/transitDecrypt";
+import { transitDecrypt } from "../../api/transit/transitDecrypt";
 import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from "i18next";
 

@@ -1,4 +1,4 @@
-import { appendAPIURL } from "./apiUtils";
+import { appendAPIURL } from "../apiUtils";
 
 export type SealStatusType = {
   progress: number;

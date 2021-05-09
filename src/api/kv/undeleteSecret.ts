@@ -1,5 +1,5 @@
-import { appendAPIURL, getHeaders } from "./apiUtils";
-import { getObjectKeys, removeDoubleSlash } from "../utils";
+import { appendAPIURL, getHeaders } from "../apiUtils";
+import { getObjectKeys, removeDoubleSlash } from "../../utils";
 import { getSecretMetadata } from "./getSecretMetadata";
 
 export async function undeleteSecret(

@@ -1,7 +1,7 @@
 import { DoesNotExistError } from "../../types/internalErrors";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
-import { getSecrets } from "../../api/getSecrets";
+import { getSecrets } from "../../api/kv/getSecrets";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import i18next from 'i18next';

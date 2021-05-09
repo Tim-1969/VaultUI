@@ -1,5 +1,5 @@
-import { appendAPIURL, getHeaders } from "./apiUtils";
-import { removeDoubleSlash } from "../utils";
+import { appendAPIURL, getHeaders } from "../apiUtils";
+import { removeDoubleSlash } from "../../utils";
 
 
 export async function getCapabilitiesPath(path: string): Promise<string[]>  {

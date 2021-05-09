@@ -1,6 +1,6 @@
 import { Page } from "../../types/Page";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
-import { deleteSecret } from "../../api/deleteSecret";
+import { deleteSecret } from "../../api/kv/deleteSecret";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import i18next from 'i18next';

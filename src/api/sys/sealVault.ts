@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "./apiUtils";
+import { appendAPIURL, getHeaders } from "../apiUtils";
 
 
 export async function sealVault(): Promise<void> {

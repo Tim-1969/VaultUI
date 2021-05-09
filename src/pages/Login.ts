@@ -2,10 +2,10 @@ import { Margin } from "../elements/Margin";
 import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";
-import { lookupSelf } from "../api/lookupSelf";
+import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
-import { usernameLogin } from "../api/usernameLogin";
+import { usernameLogin } from "../api/auth/usernameLogin";
 import i18next from 'i18next';
 
 export class LoginPage extends Page {

@@ -1,6 +1,5 @@
-import { appendAPIURL, getHeaders } from "./apiUtils";
-import { removeDoubleSlash } from "../utils";
-
+import { appendAPIURL, getHeaders } from "../apiUtils";
+import { removeDoubleSlash } from "../../utils";
 
 export async function deleteSecret(
   baseMount: string,

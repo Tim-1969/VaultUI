@@ -1,8 +1,8 @@
 import { CodeJar } from "codejar";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
-import { createOrUpdateSecret } from "../../api/createOrUpdateSecret";
-import { getSecret } from "../../api/getSecret";
+import { createOrUpdateSecret } from "../../api/kv/createOrUpdateSecret";
+import { getSecret } from "../../api/kv/getSecret";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import { sortedObjectMap, verifyJSONString } from "../../utils";

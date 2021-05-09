@@ -1,4 +1,4 @@
-import { appendAPIURL } from "./apiUtils";
+import { appendAPIURL } from "../apiUtils";
 
 export async function submitUnsealKey(key: string): Promise<void> {
   const request = new Request(appendAPIURL("/v1/sys/unseal"), {

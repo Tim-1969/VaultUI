@@ -1,5 +1,5 @@
-import { DoesNotExistError } from "../types/internalErrors";
-import { appendAPIURL, getHeaders } from "./apiUtils";
+import { DoesNotExistError } from "../../types/internalErrors";
+import { appendAPIURL, getHeaders } from "../apiUtils";
 
 export async function getSecrets(
   baseMount: string, 

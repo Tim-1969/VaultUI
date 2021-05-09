@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "./apiUtils";
+import { appendAPIURL, getHeaders } from "../apiUtils";
 
 export async function getTOTPCode(baseMount: string, name: string): Promise<string> {
   const request = 
