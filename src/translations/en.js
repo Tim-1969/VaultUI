@@ -21,6 +21,9 @@ module.exports = {
   // Copyable Input Box
   "copy_input_box_copy_icon_text": "Copy Button",
 
+  // File Upload Input
+  "file_upload_input_btn": "Upload File",
+
   // Me Page
   "me_page_title": "Me/Settings",
   "log_out_btn": "Log Out",

@@ -1,8 +1,9 @@
 import { CopyableModal } from "../../elements/CopyableModal";
+import { FileUploadInput } from "../../elements/FileUploadInput";
 import { Margin } from "../../elements/Margin";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
-import { makeElement } from "../../htmlUtils";
+import { fileToBase64, makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import { transitDecrypt } from "../../api/transitDecrypt";
 import UIkit from 'uikit/dist/js/uikit.min.js';
@@ -35,6 +36,7 @@ export class TransitDecryptPage extends Page {
             name: "ciphertext",
           }
         })),
+        Margin(FileUploadInput("ciphertext_file")),
         Margin([
           makeElement({
             tag: "div",
@@ -70,18 +72,27 @@ export class TransitDecryptPage extends Page {
       ]
     }) as HTMLFormElement;
     setPageContent(this.transitDecryptForm);
-    this.transitDecryptForm.addEventListener("submit", function (e: Event) {
+    this.transitDecryptForm.addEventListener("submit", async function (e: Event) {
       e.preventDefault();
-      this.transitEncryptFormHandler();
+      await this.transitDecryptFormHandler();
     }.bind(this));
   }
 
-  transitEncryptFormHandler(): void {
+  async transitDecryptFormHandler(): Promise<void> {
     const formData = new FormData(this.transitDecryptForm);
+  
+    const decodeBase64 = formData.get("decodeBase64Checkbox") as string;
 
-    transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, formData.get("ciphertext") as string).then(res => {
+    let ciphertext = formData.get("ciphertext") as string;
+
+    const ciphertext_file = formData.get("ciphertext_file") as File;
+    if (ciphertext_file.size > 0) {
+      ciphertext = atob((await fileToBase64(ciphertext_file) as string).replace("data:text/plain;base64,", ""));
+    }
+
+    transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, ciphertext).then(res => {
       let plaintext = res.plaintext;
-      if (formData.get("decodeBase64Checkbox") as string == "on") {
+      if (decodeBase64 == "on") {
         plaintext = atob(plaintext);
       }
       const modal = CopyableModal(i18next.t("transit_decrypt_decryption_result_modal_title"), plaintext);
