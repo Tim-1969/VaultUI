@@ -6,11 +6,10 @@ type optionsFunctionsObject = {
 
 const optionsFunctions: optionsFunctionsObject = {
   "class": (e: Element, arg: string | string[]) => {
-    if (Array.isArray(arg)) {
-      e.classList.add(...arg);
-    } else {
-      e.classList.add(arg);
+    if (!Array.isArray(arg)) {
+      arg = String(arg).split(" ");
     }
+    e.classList.add(...arg);
   },
   "id": (e: Element, arg: string) => e.id = arg,
   "html": (e: Element, arg: string) => e.innerHTML = arg,
@@ -57,7 +56,7 @@ export function makeElement(elementInfo: ElementInfo): HTMLElement {
   return element;
 }
 
-export function setElementAttributes(element: Element, attributes: {[propName: string]: any}): void {
+export function setElementAttributes(element: Element, attributes: { [propName: string]: any }): void {
   for (const key of Object.getOwnPropertyNames(attributes)) {
     element.setAttribute(key, attributes[key]);
   }
