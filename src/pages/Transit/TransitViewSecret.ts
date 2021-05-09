@@ -4,6 +4,7 @@ import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
 import { getTransitKey } from "../../api/transit/getTransitKey";
+import { Tile } from "../../elements/Tile";
 
 type TileParams = {
   condition: Boolean;
@@ -23,40 +24,6 @@ export class TransitViewSecretPage extends Page {
     changePage("TRANSIT_VIEW");
   }
 
-  makeTile(params: TileParams): HTMLElement {
-    if (!params.condition) return;
-    return makeElement({
-      tag: "a",
-      class: "uk-link-heading",
-      onclick: params.onclick,
-      children: makeElement({
-        tag: "div",
-        class: ["uk-padding-small", "uk-background-primary"],
-        children: [
-          makeElement({
-            tag: "p",
-            class: "uk-h4",
-            text: params.title,
-            children: makeElement({
-              tag: "span",
-              class: ["uk-icon", "uk-margin-small-left"],
-              attributes: {
-                "uk-icon": `icon: ${params.icon}`,
-                "role": "img",
-                "aria-label": params.iconText
-              }
-            })
-          }),
-          makeElement({
-            tag: "span",
-            class: "uk-text-muted",
-            text: params.description
-          })
-        ]
-      })
-    });
-  }
-
   async render(): Promise<void> {
     setTitleElement(pageState);
 
@@ -64,36 +31,31 @@ export class TransitViewSecretPage extends Page {
 
     setPageContent(makeElement({
       tag: "div",
-      class: ["uk-grid", "uk-child-width-expand@s"],
+      class: ["uk-list", "uk-width-1-1@s"],
       attributes: { "uk-grid": "" },
-      children: makeElement({
-        tag: "div",
-        class: ["uk-list", "uk-width-2-3@s"],
-        attributes: { "uk-grid": "" },
-        children: [
-          makeElement({
-            tag: "div",
-            children: [
-              this.makeTile({
-                condition: transitKey.supports_encryption,
-                title: i18next.t("transit_view_encrypt_text"),
-                description: i18next.t("transit_view_encrypt_description"),
-                icon: "lock",
-                iconText: i18next.t("transit_view_encrypt_icon_text"),
-                onclick: () => { changePage("TRANSIT_ENCRYPT"); }
-              }),
-              this.makeTile({
-                condition: transitKey.supports_decryption,
-                title: i18next.t("transit_view_decrypt_text"),
-                description: i18next.t("transit_view_decrypt_description"),
-                icon: "mail",
-                iconText: i18next.t("transit_view_decrypt_icon_text"),
-                onclick: () => { changePage("TRANSIT_DECRYPT"); }
-              }),
-            ]
-          }),
-        ]
-      })
+      children: [
+        makeElement({
+          tag: "div",
+          children: [
+            Tile({
+              condition: transitKey.supports_encryption,
+              title: i18next.t("transit_view_encrypt_text"),
+              description: i18next.t("transit_view_encrypt_description"),
+              icon: "lock",
+              iconText: i18next.t("transit_view_encrypt_icon_text"),
+              onclick: () => { changePage("TRANSIT_ENCRYPT"); }
+            }),
+            Tile({
+              condition: transitKey.supports_decryption,
+              title: i18next.t("transit_view_decrypt_text"),
+              description: i18next.t("transit_view_decrypt_description"),
+              icon: "mail",
+              iconText: i18next.t("transit_view_decrypt_icon_text"),
+              onclick: () => { changePage("TRANSIT_DECRYPT"); }
+            }),
+          ]
+        }),
+      ]
     }));
   }
 
