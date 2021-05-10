@@ -1,10 +1,10 @@
 import { CopyableInputBox, CopyableInputBoxType } from "../elements/CopyableInputBox";
 import { Margin } from "../elements/Margin";
+import { Option } from "../elements/Option";
 import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
 import { setPageContent } from "../pageUtils";
 import i18next from 'i18next';
-import { Option } from "../elements/Option";
 
 const passwordLengthMin = 1;
 const passwordLengthMax = 64;
@@ -55,7 +55,7 @@ export class PwGenPage extends Page {
   passwordAlphabet: HTMLSelectElement;
   passwordForm: HTMLFormElement;
 
-  async render(): Promise<void> {
+  render(): void {
     setPageContent("");
     this.passwordBox = CopyableInputBox(genPassword(passwordOptionsDefault)) ;
 
@@ -70,9 +70,9 @@ export class PwGenPage extends Page {
       class: ["uk-range", "uk-width-1-2"],
       attributes: {
         type: "range",
-        value: passwordLengthDefault,
-        max: passwordLengthMax,
-        min: passwordLengthMin,
+        value: passwordLengthDefault.toString(),
+        max: passwordLengthMax.toString(),
+        min: passwordLengthMin.toString(),
       },
     }) as HTMLInputElement;
 
@@ -124,7 +124,7 @@ export class PwGenPage extends Page {
     this.passwordLengthTitle.innerText = this.getPasswordLengthText();
     this.passwordBox.setText(genPassword({
       length: (this.passwordLengthRange.value as unknown) as number,
-      alphabet: this.passwordAlphabet.value as string,
+      alphabet: this.passwordAlphabet.value ,
     }));
   }
 

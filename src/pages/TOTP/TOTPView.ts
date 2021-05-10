@@ -24,7 +24,7 @@ export class TOTPViewPage extends Page {
   refresher: number;
   totpListElements: Record<string, TOTPListElement>;
 
-  async render(): Promise<void> {
+  render(): void {
     setTitleElement(pageState);
     const totpList = makeElement({ tag: "div" });
     setPageContent(makeElement({
@@ -33,7 +33,7 @@ export class TOTPViewPage extends Page {
         makeElement({
           tag: "a",
           text: i18next.t("totp_view_new_btn"),
-          onclick: _ => { changePage("NEW_TOTP"); }
+          onclick: () => { changePage("NEW_TOTP"); }
         }),
         makeElement({
           tag: "p",
@@ -48,14 +48,14 @@ export class TOTPViewPage extends Page {
 
 
     getTOTPKeys(pageState.currentBaseMount).then(res => {
-      res.forEach(async function (totpKeyName) {
-        const totpListElement = this.makeTOTPListElement(totpKeyName);
+      res.forEach(function (totpKeyName) {
+        const totpListElement = (this as TOTPViewPage).makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
-        this.totpListElements[totpKeyName] = totpListElement;
-        await this.updateTOTPElement(totpKeyName, totpListElement);
+        (this as TOTPViewPage).totpListElements[totpKeyName] = totpListElement;
+        void (this as TOTPViewPage).updateTOTPElement(totpKeyName, totpListElement);
       }, this);
       document.getElementById("loadingText").remove();
-    }).catch(e => {
+    }).catch((e: Error) => {
       if (e == DoesNotExistError) {
         const loadingText = document.getElementById("loadingText");
         loadingText.innerText = i18next.t("totp_view_empty");
@@ -64,12 +64,12 @@ export class TOTPViewPage extends Page {
       }
     });
 
-    const totpRefresher = async () => {
-      await Promise.all(Array.from(objectToMap(this.totpListElements)).map((kv) => {
+    const totpRefresher = () => {
+      void Promise.all(Array.from(objectToMap(this.totpListElements)).map((kv: [string, TOTPListElement]) => {
         return this.updateTOTPElement(...kv);
       }))
     }
-    await totpRefresher();
+    void totpRefresher();
     this.refresher = setInterval(totpRefresher, 3000) as unknown as number;
   }
 
@@ -92,7 +92,7 @@ export class TOTPViewPage extends Page {
       children: [totpKeyBox, totpValueBox]
     }) as TOTPListElement;
 
-    gridElement.setCode = totpValueBox.setText;
+    gridElement.setCode = (code: string) => totpValueBox.setText(code);
 
     return gridElement;
   }

@@ -33,7 +33,7 @@ export class NewTOTPPage extends Page {
           tag: "input",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
-            required: true,
+            required: "true",
             type: "text",
             placeholder: i18next.t("totp_new_name_text"),
             name: "name"
@@ -89,7 +89,7 @@ export class NewTOTPPage extends Page {
       };
       addNewTOTP(pageState.currentBaseMount, parms).then(_ => {
         changePage("TOTP");
-      }).catch(e => {
+      }).catch((e: Error) => {
         setErrorText(`API Error: ${e.message}`);
       });
     });

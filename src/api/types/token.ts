@@ -9,11 +9,11 @@ export type TokenInfo = {
   id: string;
   identity_policies: string[];
   issue_time: string;
-  meta: any;
+  meta: Record<string, string>;
   num_uses: number;
-  orphan: Boolean;
+  orphan: boolean;
   path: string;
   policies: string[];
-  renewable: Boolean;
+  renewable: boolean;
   ttl: number;
 }

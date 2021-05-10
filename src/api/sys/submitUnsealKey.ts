@@ -10,9 +10,11 @@ export async function submitUnsealKey(key: string): Promise<void> {
       "key": key
     })
   });
-  const response = await fetch(request);
-  if (!response.ok) {
-    const json = await response.json();
-    throw new Error(json.errors[0]);
+  const resp = await fetch(request)
+  if (!resp.ok) {
+    const data = await resp.json() as { errors?: string[] };
+    if ("errors" in data) {
+      throw new Error(data.errors[0]);
+    }
   }
 }

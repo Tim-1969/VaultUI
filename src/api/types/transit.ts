@@ -14,10 +14,10 @@ export const enum TransitKeyTypes {
 // Type when used to make new transit keys.
 export type TransitKeyBaseType = {
   name: string;
-  convergent_encryption: Boolean;
-  derived: Boolean;
-  exportable: Boolean;
-  allow_plaintext_backup: Boolean;
+  convergent_encryption: boolean;
+  derived: boolean;
+  exportable: boolean;
+  allow_plaintext_backup: boolean;
   type: keyof typeof TransitKeyTypes;
 }
 
@@ -28,8 +28,8 @@ export type TransitKeyType = TransitKeyBaseType & {
   };
   min_decryption_version: number;
   min_encryption_version: number;
-  supports_encryption: Boolean;
-  supports_decryption: Boolean;
-  supports_derivation: Boolean;
-  supports_signing: Boolean;
+  supports_encryption: boolean;
+  supports_decryption: boolean;
+  supports_derivation: boolean;
+  supports_signing: boolean;
 }

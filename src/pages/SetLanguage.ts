@@ -55,7 +55,7 @@ export class SetLanguagePage extends Page {
       const language = formData.get("language") as string;
       pageState.language = language;
       console.log(pageState.language);
-      i18next.changeLanguage(language).then((t) => {
+      void i18next.changeLanguage(language).then((t) => {
         changePage("HOME", false);
         pageState.pageDirection = t("language_direction");
         location.reload();

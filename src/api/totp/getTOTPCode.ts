@@ -5,9 +5,7 @@ export async function getTOTPCode(baseMount: string, name: string): Promise<stri
   new Request(appendAPIURL(`/v1/${baseMount}/code/${name}`), {
     headers: getHeaders(),
   });
-  return fetch(request).then(response => {
-    return response.json();
-  }).then(data => {
-    return data.data.code;
-  });
+  const resp = await fetch(request)
+  const data = await resp.json() as {data: {code: string}};
+  return data.data.code;
 }

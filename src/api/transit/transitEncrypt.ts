@@ -22,12 +22,12 @@ export async function transitEncrypt(
     },
     body: JSON.stringify(payload)
   });
+
   const response = await fetch(request);
+  const data = await response.json() as { errors?: string[]; data?: EncryptionResult; };
   if (!response.ok) {
-    const json = await response.json();
-    throw new Error(json.errors[0]);
+    throw new Error(data.errors[0]);
   } else {
-    const json = await response.json();
-    return json.data;
+    return data.data;
   }
 }

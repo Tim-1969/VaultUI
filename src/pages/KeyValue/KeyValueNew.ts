@@ -29,7 +29,7 @@ export class KeyValueNewPage extends Page {
             tag: "input",
             class: ["uk-input", "uk-form-width-medium"],
             attributes: {
-              required: true,
+              required: "true",
               type: "text",
               placeholder: i18next.t("kv_new_path"),
               name: "path"
@@ -53,9 +53,9 @@ export class KeyValueNewPage extends Page {
     }) as HTMLFormElement;
     setPageContent(this.addKVNewForm);
 
-    this.addKVNewForm.addEventListener("submit", function (e) {
+    this.addKVNewForm.addEventListener("submit", function (e: Event) {
       e.preventDefault();
-      this.newKVSecretHandleForm();
+      (this as KeyValueNewPage).newKVSecretHandleForm();
     }.bind(this));
   }
 
@@ -77,7 +77,7 @@ export class KeyValueNewPage extends Page {
     ).then(_ => {
       changePage("KEY_VALUE_VIEW");
       return;
-    }).catch(e => {
+    }).catch((e: Error) => {
       setErrorText(e.message);
     });
   }

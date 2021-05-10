@@ -2,7 +2,7 @@ import { de, enGB, fr, it, nl, ru } from 'date-fns/locale'
 import { formatDistance as formatDistanceReal} from 'date-fns';
 import { pageState } from "./globalPageState";
 
-function getLocale(): any {
+function getLocale(): Locale {
   return {
     "en": enGB,
     "fr": fr,

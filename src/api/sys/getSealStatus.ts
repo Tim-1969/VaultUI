@@ -8,9 +8,7 @@ export type SealStatusType = {
 
 export async function getSealStatus(): Promise<SealStatusType> {
   const request = new Request(appendAPIURL("/v1/sys/seal-status"));
-  return fetch(request).then(response => {
-    return response.json();
-  }).then(data => {
-    return data;
-  });
+  const resp = await fetch(request)
+  const data = await resp.json() as SealStatusType;
+  return data;
 }

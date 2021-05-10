@@ -71,7 +71,7 @@ export class PageState {
   }
 
   get currentSecretPath(): string[] {
-    return JSON.parse(localStorage.getItem('currentSecretPath') || "[]");
+    return JSON.parse(localStorage.getItem('currentSecretPath') || "[]") as string[];
   }
   set currentSecretPath(value: string[]) {
     localStorage.setItem('currentSecretPath', JSON.stringify(value));
@@ -104,14 +104,14 @@ export class PageState {
   }
   get currentPage(): Page | string {
     const curPage = localStorage.getItem('currentPage') || "HOME";
-    return (allPages as any)[curPage];
+    return allPages[curPage];
   }
   set currentPage(value: Page | string) {
     if (typeof value == 'object') {
       const key = getKeyByObjectPropertyValue(allPages, value);
       localStorage.setItem('currentPage', key);
     } else {
-      localStorage.setItem('currentPage', (value as string));
+      localStorage.setItem('currentPage', value);
     }
   }
 }

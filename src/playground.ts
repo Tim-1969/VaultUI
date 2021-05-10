@@ -1,3 +1,4 @@
+import { PageState } from "./PageState";
 import { pageState } from "./globalPageState";
 import i18next from 'i18next';
 
@@ -6,9 +7,13 @@ import i18next from 'i18next';
 // before rendering.
 // Also it only runs when process.env.NODE_ENV == "development"
 
+declare global {
+  interface Window { pageState: PageState; i18next: unknown; }
+}
+
 // Please empty this function before committing.
-export async function playground(): Promise<void> {
+export function playground(): void {
   console.log("Welcome to Playground!");
-  (window as any).pageState = pageState;
-  (window as any).i18next = i18next;
+  window.pageState = pageState;
+  window.i18next = i18next;
 }

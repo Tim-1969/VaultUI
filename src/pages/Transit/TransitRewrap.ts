@@ -1,16 +1,14 @@
 import { CopyableModal } from "../../elements/CopyableModal";
-import { FileUploadInput } from "../../elements/FileUploadInput";
 import { Margin } from "../../elements/Margin";
+import { Option } from "../../elements/Option";
 import { Page } from "../../types/Page";
 import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
-import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState";
-import UIkit from 'uikit/dist/js/uikit.min.js';
-import i18next from "i18next";
 import { getTransitKey } from "../../api/transit/getTransitKey";
+import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { Option } from "../../elements/Option";
+import { pageState } from "../../globalPageState";
 import { transitRewrap } from "../../api/transit/transitRewrap";
+import i18next from "i18next";
 
 type versionOption = { version: string; label: string }
 
@@ -27,17 +25,17 @@ export class TransitRewrapPage extends Page {
 
   async render(): Promise<void> {
     setTitleElement(pageState);
-    let transitKey = await getTransitKey(pageState.currentBaseMount, pageState.currentSecret);
+    const transitKey = await getTransitKey(pageState.currentBaseMount, pageState.currentSecret);
 
-    let stringVersions = Array.from(objectToMap(transitKey.keys).keys()).reverse() as any as string[];
-    let versions = stringVersions.map((val) => parseInt(val, 10)) as any as number[];
+    const stringVersions = Array.from(objectToMap(transitKey.keys).keys()).reverse() as unknown as string[];
+    const versions = stringVersions.map((val): number => parseInt(val, 10));
 
     // get the selectable version options in the same 
     // format the official UI uses. 
     // e.g: ["2 (latest)", "1"]
 
-    let options: versionOption[] = versions.map((val): versionOption => {
-      let i18nkey = val == Math.max(...versions) ?
+    const options: versionOption[] = versions.map((val): versionOption => {
+      const i18nkey = val == Math.max(...versions) ?
         "transit_rewrap_latest_version_option_text"
         :
         "transit_rewrap_version_option_text";
@@ -83,15 +81,14 @@ export class TransitRewrapPage extends Page {
     setPageContent(this.transitRewrapForm);
     this.transitRewrapForm.addEventListener("submit", async function (e: Event) {
       e.preventDefault();
-      await this.transitRewrapFormHandler();
+      await (this as TransitRewrapPage).transitRewrapFormHandler();
     }.bind(this));
   }
 
   async transitRewrapFormHandler(): Promise<void> {
     const formData = new FormData(this.transitRewrapForm);
-    const ciphertext = formData.get("ciphertext") as string;
     try {
-      let res = await transitRewrap(
+      const res = await transitRewrap(
         pageState.currentBaseMount,
         pageState.currentSecret,
         { 
@@ -101,9 +98,10 @@ export class TransitRewrapPage extends Page {
       );
       const modal = CopyableModal(i18next.t("transit_rewrap_result_modal_title"), res.ciphertext);
       document.body.querySelector("#pageContent").appendChild(modal);
-      UIkit.modal(modal).show();
-    } catch (e) {
-      setErrorText(`API Error: ${e.message}`);
+      modal.show();
+    } catch (e: unknown) {
+      const error = e as Error;
+      setErrorText(`API Error: ${error.message}`);
     }
   }
 

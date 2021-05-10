@@ -53,7 +53,7 @@ export class MePage extends Page {
             onclick: () => {
               renewSelf().then(() => {
                 changePage("HOME");
-              }).catch(e => {
+              }).catch((e: Error) => {
                 setErrorText(e.message);
               });
             }

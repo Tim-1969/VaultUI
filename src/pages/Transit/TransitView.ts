@@ -46,7 +46,7 @@ export class TransitViewPage extends Page {
               children: makeElement({
                 tag: "a",
                 text: secret,
-                onclick: _ => {
+                onclick: () => {
                   pageState.currentSecret = secret;
                   changePage("TRANSIT_VIEW_SECRET");
                 }
@@ -55,14 +55,15 @@ export class TransitViewPage extends Page {
           })
         ]
       }));
-    } catch (e) {
-      if (e == DoesNotExistError) {
+    } catch (e: unknown) {
+      const error = e as Error;
+      if (error == DoesNotExistError) {
         transitViewContent.appendChild(makeElement({
           tag: "p",
           text: i18next.t("transit_view_none_here_text")
         }));
       } else {
-        setErrorText(e.message);
+        setErrorText(error.message);
       }
     }
   }

@@ -9,11 +9,9 @@ export async function renewSelf(): Promise<void> {
     },
     body: JSON.stringify({})
   });
-  return fetch(request).then(response => {
-    return response.json();
-  }).then(data => {
-    if ("errors" in data) {
-      throw new Error(data.errors[0]);
-    }
-  });
+  const resp = await fetch(request)
+  const data = await resp.json() as { errors?: string[] };
+  if ("errors" in data) {
+    throw new Error(data.errors[0]);
+  }
 }

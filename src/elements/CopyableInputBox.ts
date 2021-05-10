@@ -10,7 +10,7 @@ export interface CopyableInputBoxType extends HTMLElement {
 
 export function CopyableInputBox(text: string, copyable = true): CopyableInputBoxType {
   const inputBoxDiv = (makeElement({ tag: "div" }) as CopyableInputBoxType);
-  let inputBoxCopyButton = null;
+  let inputBoxCopyButton: HTMLElement = null;
   if (copyable) {
     inputBoxCopyButton = makeElement({
       tag: "a",
@@ -30,8 +30,8 @@ export function CopyableInputBox(text: string, copyable = true): CopyableInputBo
   const inputBoxInput = makeElement({
     tag: "input",
     class: ["uk-input", "uk-input-copyable"],
-    attributes: { "readonly": true, "type": "text" },
-  });
+    attributes: { "readonly": "true", "type": "text" },
+  }) as HTMLInputElement;
 
   const inputBoxInner = MarginInline([
     inputBoxCopyButton,
@@ -40,7 +40,7 @@ export function CopyableInputBox(text: string, copyable = true): CopyableInputBo
   inputBoxDiv.appendChild(inputBoxInner);
 
   inputBoxDiv.setText = function (text) {
-    (inputBoxInput as HTMLInputElement).value = `${text}`;
+    inputBoxInput.value = `${text}`;
     if (copyable) {
       inputBoxCopyButton.dataset.clipboardText = `${text}`;
     }

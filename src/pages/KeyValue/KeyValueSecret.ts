@@ -66,7 +66,7 @@ export class KeyValueSecretPage extends Page {
         tag: "button",
         id: "deleteButton",
         class: ["uk-button", "uk-button-danger"],
-        onclick: _ => { changePage("KEY_VALUE_DELETE"); },
+        onclick: () => { changePage("KEY_VALUE_DELETE"); },
         text: deleteButtonText
       }));
     }
@@ -76,7 +76,7 @@ export class KeyValueSecretPage extends Page {
           tag: "button",
           id: "editButton",
           class: ["uk-button", "uk-margin", "uk-button-primary"],
-          onclick: _ => { changePage("KEY_VALUE_SECRET_EDIT"); },
+          onclick: () => { changePage("KEY_VALUE_SECRET_EDIT"); },
           text: i18next.t("kv_secret_edit_btn")
         }));
       }
@@ -86,12 +86,12 @@ export class KeyValueSecretPage extends Page {
         tag: "button",
         id: "versionsButton",
         class: ["uk-button", "uk-button-secondary"],
-        onclick: _ => { changePage("KEY_VALUE_VERSIONS"); },
+        onclick: () => { changePage("KEY_VALUE_VERSIONS"); },
         text: i18next.t("kv_secret_versions_btn")
       }));
     }
 
-    getSecret(
+    void getSecret(
       pageState.currentBaseMount,
       pageState.currentMountType,
       pageState.currentSecretPath,
@@ -113,7 +113,7 @@ export class KeyValueSecretPage extends Page {
           id: "restoreButton",
           class: ["uk-button", "uk-button-primary"],
           onclick: () => {
-            undeleteSecret(
+            void undeleteSecret(
               pageState.currentBaseMount,
               pageState.currentSecretPath,
               pageState.currentSecret,
@@ -133,14 +133,18 @@ export class KeyValueSecretPage extends Page {
       }
 
       if (isSecretNestedJson) {
-        const jsonText = JSON.stringify(sortedObjectMap(secretsMap as Record<any, any>), null, 4);
+        const jsonText = JSON.stringify(
+          sortedObjectMap(secretsMap as unknown as Record<string, unknown>),
+          null,
+          4
+        );
         kvList.appendChild(makeElement({
           tag: "pre",
           class: ["code-block", "language-json", "line-numbers"],
-          html: Prism.highlight(jsonText, Prism.languages.json, 'json')
+          html: (Prism as { highlight: (text: string, language: null, languageStr: string) => string }).highlight(jsonText, null, 'json')
         }));
       } else {
-        secretsMap.forEach((value, key) => {
+        secretsMap.forEach((value: string, key: string) => {
           const kvListElement = this.makeKVListElement(key, value);
           kvList.appendChild(kvListElement);
         }, this);

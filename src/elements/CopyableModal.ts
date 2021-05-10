@@ -2,10 +2,19 @@ import { addClipboardNotifications } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import ClipboardJS from "clipboard";
 import FileSaver from 'file-saver';
+import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from 'i18next';
 
-export function CopyableModal(name: string, contentString: string): Element {
-  return makeElement({
+type FileSaverType = {
+  saveAs: (blob: Blob, name: string) => void;
+}
+
+type ModalType = HTMLElement & {
+  show: () => void;
+}
+
+export function CopyableModal(name: string, contentString: string): ModalType {
+  const modal = makeElement({
     tag: "div",
     class: "modal-sections",
     attributes: {
@@ -53,9 +62,9 @@ export function CopyableModal(name: string, contentString: string): Element {
                 "data-clipboard-text": contentString
               },
               text: i18next.t("copy_modal_download_btn"),
-              onclick: _ => {
-                const blob = new Blob([contentString], {type: "text/plain;charset=utf-8"});
-                FileSaver.saveAs(blob, "result.txt");
+              onclick: () => {
+                const blob = new Blob([contentString], { type: "text/plain;charset=utf-8" });
+                (FileSaver as FileSaverType).saveAs(blob, "result.txt");
               }
             }),
             makeElement({
@@ -82,5 +91,9 @@ export function CopyableModal(name: string, contentString: string): Element {
         }),
       ]
     })
-  });
+  }) as ModalType;
+  modal.show = () => {
+    (UIkit as { modal: (ModalType) => { show: () => void } }).modal(modal).show();
+  }
+  return modal;
 }

@@ -43,7 +43,7 @@ export class KeyValueSecretEditPage extends Page {
         saveButton
       ]
     }));
-    getSecret(
+    void getSecret(
       pageState.currentBaseMount,
       pageState.currentMountType,
       pageState.currentSecretPath,
@@ -70,7 +70,7 @@ export class KeyValueSecretEditPage extends Page {
         ).then(_ => {
           changePage("KEY_VALUE_SECRET");
           return;
-        }).catch(e => {
+        }).catch((e: Error) => {
           setErrorText(e.message);
         });
       };

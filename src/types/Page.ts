@@ -4,8 +4,9 @@ export class Page {
   constructor() {
     // Do Nothing
   }
-  render(): any {
+  render(): unknown {
     // Do Nothing
+    return null;
   }
   get name(): string {
     return "Page";

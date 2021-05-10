@@ -1,10 +1,10 @@
 import { Page } from "../../types/Page";
+import { Tile } from "../../elements/Tile";
 import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
+import { getTransitKey } from "../../api/transit/getTransitKey";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import i18next from 'i18next';
-import { getTransitKey } from "../../api/transit/getTransitKey";
-import { Tile } from "../../elements/Tile";
 
 export class TransitViewSecretPage extends Page {
   constructor() {
@@ -18,7 +18,7 @@ export class TransitViewSecretPage extends Page {
   async render(): Promise<void> {
     setTitleElement(pageState);
 
-    let transitKey = await getTransitKey(pageState.currentBaseMount, pageState.currentSecret);
+    const transitKey = await getTransitKey(pageState.currentBaseMount, pageState.currentSecret);
 
     setPageContent(makeElement({
       tag: "div",

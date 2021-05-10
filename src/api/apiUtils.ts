@@ -1,6 +1,6 @@
 import { pageState } from "../globalPageState";
 
-export function getHeaders(): any {
+export function getHeaders(): Record<string, string> {
   return {
     "X-Vault-Token": pageState.token,
   }

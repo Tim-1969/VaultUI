@@ -41,9 +41,16 @@ export class UnsealPage extends Page {
   }
 
   makeRefresher(): void {
-    this.refresher = setInterval(async function () {
-      this.updateSealProgress(await getSealStatus());
-    }.bind(this), 1000) as unknown as number;
+    const id = setInterval(() => {
+      void (this as UnsealPage).doRefresh().then(() => {});
+      return;
+    }, 1000);
+    this.refresher = id as unknown as number;
+  }
+
+  async doRefresh(): Promise<void> {
+    const status = await getSealStatus();
+    this.updateSealProgress(status);
   }
 
   async render(): Promise<void> {
@@ -58,7 +65,7 @@ export class UnsealPage extends Page {
     }) as HTMLParagraphElement;
     this.unsealInputContent = makeElement({
       tag: "div"
-    }) as HTMLElement;
+    });
     setPageContent(makeElement({
       tag: "div",
       children: [
@@ -103,7 +110,7 @@ export class UnsealPage extends Page {
     this.deinitWebcam();
     this.unsealInputContent.querySelectorAll('*').forEach(n => n.remove())
     if (method == UnsealInputModes.FORM_INPUT) this.makeUnsealForm();
-    if (method == UnsealInputModes.QR_INPUT) this.makeQRInput();
+    if (method == UnsealInputModes.QR_INPUT) void this.makeQRInput();
     this.setButtons(method);
   }
 
@@ -115,7 +122,7 @@ export class UnsealPage extends Page {
           tag: "input",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
-            required: true,
+            required: "true",
             type: "password",
             placeholder: i18next.t("key_input_placeholder"),
             name: "key"
@@ -129,15 +136,15 @@ export class UnsealPage extends Page {
       ]
     }) as HTMLFormElement;
     this.unsealInputContent.appendChild(this.unsealKeyForm);
-    this.unsealKeyForm.addEventListener("submit", function (e) {
+    this.unsealKeyForm.addEventListener("submit", function (e: Event) {
       e.preventDefault();
-      this.handleKeySubmit();
+      void (this as UnsealPage).handleKeySubmit();
     }.bind(this));
   }
 
   async makeQRInput(): Promise<void> {
     this.qrScanner = await QRScanner(function (code: string) {
-      this.submitKey(code);
+      (this as UnsealPage).submitKey(code);
       console.log('decoded qr code:', code)
     }.bind(this));
     this.unsealInputContent.appendChild(this.qrScanner);
@@ -162,15 +169,15 @@ export class UnsealPage extends Page {
 
   submitKey(key: string): void {
     submitUnsealKey(key).then(_ => {
-      getSealStatus().then(data => {
-        this.updateSealProgress(data);
+      void getSealStatus().then(data => {
+        void this.updateSealProgress(data);
       });
-    }).catch(e => {
+    }).catch((e: Error) => {
       setErrorText(e.message);
     });
   }
 
-  async handleKeySubmit(): Promise<void> {
+  handleKeySubmit(): void {
     const formData = new FormData(this.unsealKeyForm);
 
     this.submitKey(formData.get("key") as string)

@@ -19,7 +19,7 @@ export class SetVaultURLPage extends Page {
             tag: "input",
             class: ["uk-input", "uk-form-width-medium"],
             attributes: {
-              required: true,
+              required: "true",
               type: "text",
               placeholder: "Vault URL",
               name: "vaultURL"

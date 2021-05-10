@@ -1,6 +1,6 @@
+import { MountType, getMounts } from "../api/sys/getMounts";
 import { Page } from "../types/Page";
 import { changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils";
-import { getMounts } from "../api/sys/getMounts";
 import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
@@ -48,9 +48,10 @@ export class HomePage extends Page {
         tag: "li",
         text: i18next.t("your_token_expires_in", {"date": new Date(selfTokenInfo.expire_time)})
       }));
-    } catch (e) {
-      setErrorText(e.message);
-      if (e.message == "permission denied") {
+    } catch (e: unknown) {
+      const error = e as Error;
+      setErrorText(error.message);
+      if (error.message == "permission denied") {
         pageState.token = "";
         changePage("LOGIN");
       }
@@ -68,7 +69,7 @@ export class HomePage extends Page {
     // sort it by secretPath so it's in alphabetical order consistantly. 
     const mountsMap = sortedObjectMap(mounts);
 
-    mountsMap.forEach(function (mount, baseMount) {
+    mountsMap.forEach(function (mount: MountType, baseMount) {
       if (typeof mount != 'object') return;
       if (mount == null) return;
       if (!("type" in mount)) return;
@@ -97,7 +98,7 @@ export class HomePage extends Page {
         children: makeElement({
           tag: "a",
           text: linkText,
-          onclick: _ => {
+          onclick: () => {
             pageState.currentBaseMount = baseMount;
             pageState.currentMountType = mountType;
             changePage(linkPage);

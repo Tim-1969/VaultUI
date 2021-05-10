@@ -1,7 +1,7 @@
 import { getObjectKeys } from "./utils";
 
 type optionsFunctionsObject = {
-  [key: string]: (e: any, arg: any) => void
+  [key: string]: (e: Element, arg: unknown) => void
 }
 
 const optionsFunctions: optionsFunctionsObject = {
@@ -13,9 +13,9 @@ const optionsFunctions: optionsFunctionsObject = {
   },
   "id": (e: Element, arg: string) => e.id = arg,
   "html": (e: Element, arg: string) => e.innerHTML = arg,
-  "onclick": (e: HTMLButtonElement, arg: any) => e.onclick = arg,
+  "onclick": (e: Element, arg: () => void) => (e as HTMLButtonElement).onclick = arg,
   "attributes": setElementAttributes,
-  "text": (e: HTMLParagraphElement, arg: string) => e.innerText = arg,
+  "text": (e: Element, arg: string) => (e as HTMLParagraphElement).innerText = arg,
   "children": (e: Element, arg: Element | Element[]) => {
     if (Array.isArray(arg)) {
       arg.forEach(child => {
@@ -34,13 +34,12 @@ interface ElementInfo {
   class?: string | string[];
   id?: string;
   html?: string;
-  attributes?: {
-    [propName: string]: any
-  };
+  attributes?: Record<string, string>;
   children?: Element | Element[];
   text?: string;
   thenRun?: (e: Element) => void;
-  [propName: string]: any;
+  onclick?: () => void;
+  [propName: string]: unknown;
 }
 
 export function makeElement(elementInfo: ElementInfo): HTMLElement {
@@ -49,14 +48,14 @@ export function makeElement(elementInfo: ElementInfo): HTMLElement {
 
   for (const key of Object.getOwnPropertyNames(elementInfo)) {
     if (getObjectKeys(optionsFunctions).includes(key)) {
-      (optionsFunctions as any)[key](element, elementInfo[key]);
+      optionsFunctions[key](element, elementInfo[key]);
     }
   }
 
   return element;
 }
 
-export function setElementAttributes(element: Element, attributes: { [propName: string]: any }): void {
+export function setElementAttributes(element: Element, attributes: Record<string, string>): void {
   for (const key of Object.getOwnPropertyNames(attributes)) {
     element.setAttribute(key, attributes[key]);
   }

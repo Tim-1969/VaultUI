@@ -2,8 +2,8 @@ import { DoesNotExistError } from "../../types/internalErrors";
 import { appendAPIURL, getHeaders } from "../apiUtils";
 
 export async function getSecrets(
-  baseMount: string, 
-  mountType: string, 
+  baseMount: string,
+  mountType: string,
   secretPath: string[]
 ): Promise<string[]> {
   let secretURL = "";
@@ -14,14 +14,12 @@ export async function getSecrets(
     secretURL = `/v1/${baseMount}/${secretPath.join("")}?list=true`;
   }
   const request = new Request(appendAPIURL(secretURL), {
-    headers: (getHeaders() as any),
+    headers: getHeaders(),
   });
-  return fetch(request).then(response => {
-    if (response.status == 404) {
-      throw DoesNotExistError;
-    }
-    return response.json();
-  }).then(data => {
-    return data.data.keys;
-  });
+  const resp = await fetch(request);
+  if (resp.status == 404) {
+    throw DoesNotExistError;
+  }
+  const data = await resp.json() as { data: { keys: string[] } };
+  return data.data.keys;
 }

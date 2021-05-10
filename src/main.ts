@@ -2,14 +2,16 @@
 
 // JS & CSS
 
+/* eslint-disable */
 import "./scss/main.scss";
 import Icons from 'uikit/dist/js/uikit-icons.min.js';
 import UIkit from 'uikit/dist/js/uikit.min.js';
+// @ts-ignore
 UIkit.use(Icons);
 
-/* eslint-disable */
 import Prism from "prismjs";
 import "prismjs/components/prism-json";
+// @ts-ignore
 Prism.highlightAll();
 /* eslint-enable */
 
@@ -29,14 +31,19 @@ import i18next from 'i18next';
 // @ts-ignore
 import translations from './translations/index.mjs'
 
-function ListItem(children) {
+function ListItem(children: Element[] | Element): HTMLElement {
   return makeElement({
     tag: "li",
     children: children
   });
 }
 
-async function onLoad() {
+declare global {
+  interface Window { pageContent: Element; }
+}
+
+
+function onLoad(): void {
   document.body.innerHTML = "";
   document.body.appendChild(makeElement({
     tag: "nav",
@@ -52,17 +59,17 @@ async function onLoad() {
             ListItem(makeElement({
               tag: "a",
               text: i18next.t("home_btn"),
-              onclick: _ => { changePage("HOME"); }
+              onclick: () => { changePage("HOME"); }
             })),
             ListItem(makeElement({
               tag: "a",
               text: i18next.t("back_btn"),
-              onclick: _ => { (pageState.currentPage as Page).goBack(); }
+              onclick: () => { (pageState.currentPage as Page).goBack(); }
             })),
             ListItem(makeElement({
               tag: "a",
               text: i18next.t("refresh_btn"),
-              onclick: _ => { changePage(pageState.currentPageString); }
+              onclick: () => { changePage(pageState.currentPageString); }
             })),
           ]
         })
@@ -77,7 +84,7 @@ async function onLoad() {
             ListItem(makeElement({
               tag: "a",
               text: i18next.t("me_btn"),
-              onclick: _ => { changePage("ME"); }
+              onclick: () => { changePage("ME"); }
             }))
           ]
         })
@@ -105,43 +112,44 @@ async function onLoad() {
     })
   }));
 
-  (window as any).pageContent = document.querySelector("#pageContent");
+  window.pageContent = document.querySelector("#pageContent");
 
   if (process.env.NODE_ENV == "development") {
-    await playground();
+    playground();
   }
 
   renderPage();
 
-  setInterval(async () => {
+  setInterval(() => {
     if (pageState.currentPageString != "UNSEAL") {
       if (pageState.apiURL.length != 0) { return; }
-      const sealStatus = await getSealStatus();
-      if (sealStatus.sealed) {
-        changePage("UNSEAL");
-        return;
-      }
+      void getSealStatus().then((sealStatus) => {
+        if (sealStatus.sealed) {
+          changePage("UNSEAL");
+          return;
+        }        
+      });
     }
   }, 5000);
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded', function () {
   console.log("Loading...");
   // @ts-expect-error
   console.log("Build Data:", BUILD_STRING);
-  i18next.init({
+  void i18next.init({
     lng: pageState.language,
     fallbackLng: 'en',
     debug: true,
     // @ts-ignore
     resources: Object.fromEntries(Object.entries(translations).map(([k, v]) => [k, { translation: v }])),
     interpolation: {
-      format: function (value, format, _) {
+      format: function (value: unknown, format, _): string {
         if (format === 'until_date' && value instanceof Date) return formatDistance(new Date(), new Date(value));
-        return value;
+        return value as string;
       }
     }
-  }).then(async function (_) {
-    await onLoad();
+  }).then(function (_) {
+    onLoad();
   });
 }, false);

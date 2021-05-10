@@ -6,7 +6,6 @@ import { changePage, setErrorText, setPageContent, setTitleElement } from "../..
 import { fileToBase64, makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import { transitDecrypt } from "../../api/transit/transitDecrypt";
-import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from "i18next";
 
 export class TransitDecryptPage extends Page {
@@ -20,7 +19,7 @@ export class TransitDecryptPage extends Page {
 
   transitDecryptForm: HTMLFormElement;
 
-  async render(): Promise<void> {
+  render(): void {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div"
@@ -74,7 +73,7 @@ export class TransitDecryptPage extends Page {
     setPageContent(this.transitDecryptForm);
     this.transitDecryptForm.addEventListener("submit", async function (e: Event) {
       e.preventDefault();
-      await this.transitDecryptFormHandler();
+      await (this as TransitDecryptPage).transitDecryptFormHandler();
     }.bind(this));
   }
 
@@ -87,11 +86,11 @@ export class TransitDecryptPage extends Page {
 
     const ciphertext_file = formData.get("ciphertext_file") as File;
     if (ciphertext_file.size > 0) {
-      ciphertext = atob((await fileToBase64(ciphertext_file) as string).replace("data:text/plain;base64,", ""));
+      ciphertext = atob((await fileToBase64(ciphertext_file) ).replace("data:text/plain;base64,", ""));
     }
 
     try {
-      let res = await transitDecrypt(
+      const res = await transitDecrypt(
         pageState.currentBaseMount,
         pageState.currentSecret,
         { ciphertext: ciphertext },
@@ -102,9 +101,10 @@ export class TransitDecryptPage extends Page {
       }
       const modal = CopyableModal(i18next.t("transit_decrypt_decryption_result_modal_title"), plaintext);
       document.body.querySelector("#pageContent").appendChild(modal);
-      UIkit.modal(modal).show();
-    } catch (e) {
-      setErrorText(`API Error: ${e.message}`);
+      modal.show();
+    } catch (e: unknown) {
+      const error = e as Error;
+      setErrorText(`API Error: ${error.message}`);
     }
   }
 

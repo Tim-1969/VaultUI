@@ -20,7 +20,7 @@ export class LoginPage extends Page {
           tag: "input",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
-            required: true,
+            required: "true",
             type: "password",
             placeholder: i18next.t("token_input"),
             name: "token"
@@ -45,7 +45,7 @@ export class LoginPage extends Page {
           id: "usernameInput",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
-            required: true,
+            required: "true",
             type: "text",
             placeholder: i18next.t("username_input"),
             name: "username"
@@ -56,7 +56,7 @@ export class LoginPage extends Page {
           id: "passwordInput",
           class: ["uk-input", "uk-form-width-medium"],
           attributes: {
-            required: true,
+            required: "true",
             type: "password",
             placeholder: i18next.t("password_input"),
             name: "password"
@@ -127,7 +127,7 @@ export class LoginPage extends Page {
       pageState.token = token as string;
       lookupSelf().then(_ => {
         changePage("HOME");
-      }).catch(e => {
+      }).catch((e: Error) => {
         document.getElementById("tokenInput").classList.add("uk-form-danger");
         if (e.message == "permission denied") {
           setErrorText(i18next.t("token_login_error"));    
@@ -145,7 +145,7 @@ export class LoginPage extends Page {
       ).then(res => {
         pageState.token = res;
         changePage("HOME");
-      }).catch(e => {
+      }).catch((e: Error) => {
         document.getElementById("usernameInput").classList.add("uk-form-danger");
         document.getElementById("passwordInput").classList.add("uk-form-danger");
         setErrorText(e.message);

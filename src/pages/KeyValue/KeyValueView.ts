@@ -61,7 +61,7 @@ export class KeyValueViewPage extends Page {
               children: makeElement({
                 tag: "a",
                 text: secret,
-                onclick: _ => {
+                onclick: () => {
                   if (secret.endsWith("/")) {
                     pageState.pushCurrentSecretPath(secret);
                     changePage("KEY_VALUE_VIEW");
@@ -75,8 +75,9 @@ export class KeyValueViewPage extends Page {
           })
         ]
       }));
-    } catch (e) {
-      if (e == DoesNotExistError) {
+    } catch (e: unknown) {
+      const error = e as Error;
+      if (error == DoesNotExistError) {
         // getSecrets also 404's on no keys so dont go all the way back.
         if (pageState.currentSecretPath.length != 0) {
           return this.goBack();
@@ -87,7 +88,7 @@ export class KeyValueViewPage extends Page {
           }));
         }
       } else {
-        setErrorText(e.message);
+        setErrorText(error.message);
       }
     }
   }

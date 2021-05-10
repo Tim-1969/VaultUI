@@ -1,7 +1,7 @@
 import { appendAPIURL, getHeaders } from "../apiUtils";
 
 type SecretMetadataType = {
-  versions: Record<string, Record<any, any>>
+  versions: Record<string, unknown>
 }
 
 export async function getSecretMetadata(
@@ -10,12 +10,10 @@ export async function getSecretMetadata(
   name: string
 ): Promise<SecretMetadataType> {
   const request = new Request(appendAPIURL(`/v1/${baseMount}/metadata/${secretPath.join("")}/${name}`), {
-    headers: (getHeaders() as any),
+    headers: getHeaders(),
   });
 
-  return fetch(request).then(response => {
-    return response.json();
-  }).then(data => {
-    return data.data;
-  });
+  const resp = await fetch(request);
+  const data = await resp.json() as {data: SecretMetadataType};
+  return data.data;
 }

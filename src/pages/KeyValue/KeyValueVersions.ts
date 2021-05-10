@@ -39,7 +39,7 @@ export class KeyValueVersionsPage extends Page {
         children: makeElement({
           tag: "a",
           text: `v${ver}`,
-          onclick: _ => {
+          onclick: () => {
             pageState.currentSecretVersion = ver;
             changePage("KEY_VALUE_SECRET");
           }

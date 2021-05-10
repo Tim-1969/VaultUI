@@ -6,7 +6,6 @@ import { changePage, setErrorText, setPageContent, setTitleElement } from "../..
 import { fileToBase64, makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import { transitEncrypt } from "../../api/transit/transitEncrypt";
-import UIkit from 'uikit/dist/js/uikit.min.js';
 import i18next from "i18next";
 
 
@@ -22,7 +21,7 @@ export class TransitEncryptPage extends Page {
   transitEncryptForm: HTMLFormElement;
 
 
-  async render(): Promise<void> {
+  render(): void {
     setTitleElement(pageState);
     setPageContent(makeElement({
       tag: "div"
@@ -75,9 +74,9 @@ export class TransitEncryptPage extends Page {
     }) as HTMLFormElement;
     setPageContent(this.transitEncryptForm);
 
-    this.transitEncryptForm.addEventListener("submit", async function (e) {
+    this.transitEncryptForm.addEventListener("submit", async function (e: Event) {
       e.preventDefault();
-      await this.transitEncryptFormHandler();
+      await (this as TransitEncryptPage).transitEncryptFormHandler();
     }.bind(this));
   }
 
@@ -90,23 +89,24 @@ export class TransitEncryptPage extends Page {
 
     const plaintext_file = formData.get("plaintext_file") as File;
     if (plaintext_file.size > 0) {
-      plaintext = (await fileToBase64(plaintext_file) as string).replace("data:text/plain;base64,", "");
+      plaintext = (await fileToBase64(plaintext_file) ).replace("data:text/plain;base64,", "");
       plaintext = base64Checkbox == "on" ? atob(plaintext) : plaintext;
     } else {
       plaintext = base64Checkbox == "on" ? plaintext : btoa(plaintext);
     }
 
     try {
-      let res = await transitEncrypt(
+      const res = await transitEncrypt(
         pageState.currentBaseMount,
         pageState.currentSecret,
         { plaintext: plaintext }
       );
       const modal = CopyableModal(i18next.t("transit_encrypt_encryption_result_modal_title"), res.ciphertext);
       document.body.querySelector("#pageContent").appendChild(modal);
-      UIkit.modal(modal).show();
-    } catch (e) {
-      setErrorText(`API Error: ${e.message}`);
+      modal.show();
+    } catch (e: unknown) {
+      const error = e as Error;
+      setErrorText(`API Error: ${error.message}`);
     }
   }
 

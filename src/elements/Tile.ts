@@ -1,7 +1,7 @@
 import { makeElement } from "../htmlUtils";
 
 type TileParams = {
-  condition: Boolean;
+  condition: boolean;
   title: string;
   description: string;
   icon: string;

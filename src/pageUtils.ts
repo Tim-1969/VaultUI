@@ -46,13 +46,13 @@ export async function prePageChecks(): Promise<boolean> {
 
 export function addClipboardNotifications(clipboard: ClipboardJS, timeout = 1000): void {
   clipboard.on('success', () => {
-    (UIkit as any).notification(i18next.t("notification_copy_success"), {
+    (UIkit as {notification: (title: unknown, options: unknown) => void}).notification(i18next.t("notification_copy_success"), {
       status: 'success',
       timeout: timeout
     });
   });
   clipboard.on('error', function (e: Error) {
-    (UIkit as any).notification(i18next.t("notification_copy_error", {
+    (UIkit as {notification: (title: unknown, options: unknown) => void}).notification(i18next.t("notification_copy_error", {
       "error": e.message
     }), {
       status: 'danger',
@@ -64,9 +64,9 @@ export function addClipboardNotifications(clipboard: ClipboardJS, timeout = 1000
 export function setErrorText(text: string): void {
   const errorTextElement = document.querySelector("#errorText");
   if (errorTextElement) {
-    (document.querySelector("#errorText") as HTMLElement).innerText = `Error: ${text}`;
+    (document.querySelector("#errorText") as HTMLParagraphElement).innerText = `Error: ${text}`;
   }
-  (UIkit as any).notification({
+  (UIkit as {notification: (options: unknown) => void}).notification({
     message: `Error: ${text}`,
     status: 'danger',
     pos: 'top-center',
@@ -87,13 +87,13 @@ export function changePage(page: string, shouldSwitch = true): void {
 export function renderPage(): void {
   document.documentElement.dir = pageState.pageDirection;
   console.log("Rendering Page: ", (pageState.currentPage as Page).name);
-  (document.querySelector("#pageContent") as HTMLElement).innerHTML = "";
+  (document.querySelector("#pageContent") ).innerHTML = "";
   setPageTitle((pageState.currentPage as Page).name);
   (pageState.currentPage as Page).render();
 }
 
 export function setPageTitle(title: string | HTMLElement): void {
-  const pageTitle = (document.getElementById("pageTitle") as HTMLElement);
+  const pageTitle = (document.getElementById("pageTitle") );
   pageTitle.innerHTML = "";
   if (typeof title === "string") {
     pageTitle.innerText = title.toString();
@@ -154,7 +154,7 @@ export function setTitleElement(pageState: PageState): void {
 }
 
 export function setPageContent(content: string | HTMLElement): void {
-  const pageContent = (document.getElementById("pageContent") as HTMLElement);
+  const pageContent = (document.getElementById("pageContent") );
   if (typeof content === "string") {
     pageContent.innerHTML = content;
   } else {

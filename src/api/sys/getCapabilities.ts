@@ -15,11 +15,9 @@ export async function getCapabilitiesPath(path: string): Promise<string[]>  {
       }
     )
   });
-  return fetch(request).then(response => {
-    return response.json();
-  }).then(data => {
-    return data.capabilities;
-  });
+  const response = await fetch(request);
+  const data = await response.json() as {capabilities: string[]};
+  return data.capabilities;
 }
 
 export async function getCapabilities(

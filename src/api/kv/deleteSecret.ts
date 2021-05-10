@@ -32,12 +32,12 @@ export async function deleteSecret(
     secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
     request = new Request(appendAPIURL(secretURL), {
       method: "DELETE",
-      headers: (getHeaders() as any),
+      headers: getHeaders(),
     });
   }
   const response = await fetch(request);
   if (!response.ok) {
-    const json = await response.json();
+    const json = await response.json() as {errors: string[]};
     throw new Error(json.errors[0]);
   }
 }
