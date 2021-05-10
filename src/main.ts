@@ -4,14 +4,13 @@
 
 /* eslint-disable */
 import "./scss/main.scss";
-import Icons from 'uikit/dist/js/uikit-icons.min.js';
-import UIkit from 'uikit/dist/js/uikit.min.js';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 // @ts-ignore
 UIkit.use(Icons);
 
 import Prism from "prismjs";
 import "prismjs/components/prism-json";
-// @ts-ignore
 Prism.highlightAll();
 /* eslint-enable */
 

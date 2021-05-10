@@ -141,7 +141,7 @@ export class KeyValueSecretPage extends Page {
         kvList.appendChild(makeElement({
           tag: "pre",
           class: ["code-block", "language-json", "line-numbers"],
-          html: (Prism as { highlight: (text: string, language: null, languageStr: string) => string }).highlight(jsonText, null, 'json')
+          html: Prism.highlight(jsonText, Prism.languages.json, 'json')
         }));
       } else {
         secretsMap.forEach((value: string, key: string) => {

@@ -2,7 +2,7 @@ import { addClipboardNotifications } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import ClipboardJS from "clipboard";
 import FileSaver from 'file-saver';
-import UIkit from 'uikit/dist/js/uikit.min.js';
+import UIkit from 'uikit';
 import i18next from 'i18next';
 
 type FileSaverType = {
@@ -93,7 +93,7 @@ export function CopyableModal(name: string, contentString: string): ModalType {
     })
   }) as ModalType;
   modal.show = () => {
-    (UIkit as { modal: (ModalType) => { show: () => void } }).modal(modal).show();
+    UIkit.modal(modal).show();
   }
   return modal;
 }

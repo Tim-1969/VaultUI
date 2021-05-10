@@ -5,7 +5,7 @@ import { lookupSelf } from "./api/sys/lookupSelf";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import ClipboardJS from "clipboard";
-import UIkit from 'uikit/dist/js/uikit.min.js';
+import UIkit from 'uikit';
 import i18next from 'i18next';
 
 async function prePageChecksReal() {
@@ -42,17 +42,15 @@ export async function prePageChecks(): Promise<boolean> {
   return true;
 }
 
-
-
 export function addClipboardNotifications(clipboard: ClipboardJS, timeout = 1000): void {
   clipboard.on('success', () => {
-    (UIkit as {notification: (title: unknown, options: unknown) => void}).notification(i18next.t("notification_copy_success"), {
+    UIkit.notification(i18next.t("notification_copy_success"), {
       status: 'success',
       timeout: timeout
     });
   });
   clipboard.on('error', function (e: Error) {
-    (UIkit as {notification: (title: unknown, options: unknown) => void}).notification(i18next.t("notification_copy_error", {
+    UIkit.notification(i18next.t("notification_copy_error", {
       "error": e.message
     }), {
       status: 'danger',
@@ -64,9 +62,12 @@ export function addClipboardNotifications(clipboard: ClipboardJS, timeout = 1000
 export function setErrorText(text: string): void {
   const errorTextElement = document.querySelector("#errorText");
   if (errorTextElement) {
-    (document.querySelector("#errorText") as HTMLParagraphElement).innerText = `Error: ${text}`;
+    /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+    const p = document.querySelector("#errorText") as HTMLParagraphElement;
+    p.innerText = `Error: ${text}`;
+    /* eslint-enable @typescript-eslint/no-unnecessary-type-assertion */
   }
-  (UIkit as {notification: (options: unknown) => void}).notification({
+  UIkit.notification({
     message: `Error: ${text}`,
     status: 'danger',
     pos: 'top-center',
