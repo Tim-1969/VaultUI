@@ -10,11 +10,11 @@ export class KeyValueVersionsPage extends Page {
   constructor() {
     super();
   }
-  goBack(): void {
+  async goBack(): Promise<void> {
     if (pageState.currentSecretVersion != null) {
       pageState.currentSecretVersion = null;
     }
-    changePage("KEY_VALUE_SECRET");
+    await changePage("KEY_VALUE_SECRET");
   }
   async render(): Promise<void> {
     setTitleElement(pageState);
@@ -39,9 +39,9 @@ export class KeyValueVersionsPage extends Page {
           children: makeElement({
             tag: "a",
             text: `v${ver}`,
-            onclick: () => {
+            onclick: async () => {
               pageState.currentSecretVersion = ver;
-              changePage("KEY_VALUE_SECRET");
+              await changePage("KEY_VALUE_SECRET");
             },
           }),
         }),

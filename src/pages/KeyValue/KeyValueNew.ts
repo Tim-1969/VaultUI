@@ -10,13 +10,13 @@ export class KeyValueNewPage extends Page {
     super();
   }
 
-  goBack(): void {
-    changePage("KEY_VALUE_VIEW");
+  async goBack(): Promise<void> {
+    await changePage("KEY_VALUE_VIEW");
   }
 
   addKVNewForm: HTMLFormElement;
 
-  render(): void {
+  async render(): Promise<void> {
     setTitleElement(pageState);
     this.addKVNewForm = makeElement({
       tag: "form",
@@ -76,7 +76,7 @@ export class KeyValueNewPage extends Page {
         path,
         keyData,
       );
-      changePage("KEY_VALUE_VIEW");
+      await changePage("KEY_VALUE_VIEW");
     } catch (e: unknown) {
       const error = e as Error;
       setErrorText(error.message);

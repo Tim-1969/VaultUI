@@ -7,7 +7,7 @@ export class SetVaultURLPage extends Page {
   constructor() {
     super();
   }
-  render(): void {
+  async render(): Promise<void> {
     setPageContent(
       makeElement({
         tag: "form",
@@ -47,7 +47,7 @@ export class SetVaultURLPage extends Page {
       e.preventDefault();
       const formData = new FormData(document.querySelector("#setVaultURLForm"));
       pageState.apiURL = formData.get("vaultURL") as string;
-      changePage("HOME");
+      void changePage("HOME");
     });
   }
   get name(): string {

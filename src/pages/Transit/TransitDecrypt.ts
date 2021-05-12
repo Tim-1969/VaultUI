@@ -13,13 +13,13 @@ export class TransitDecryptPage extends Page {
     super();
   }
 
-  goBack(): void {
-    changePage("TRANSIT_VIEW_SECRET");
+  async goBack(): Promise<void> {
+    await changePage("TRANSIT_VIEW_SECRET");
   }
 
   transitDecryptForm: HTMLFormElement;
 
-  render(): void {
+  async render(): Promise<void> {
     setTitleElement(pageState);
     setPageContent(
       makeElement({

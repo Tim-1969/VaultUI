@@ -33,8 +33,8 @@ export class HomePage extends Page {
           children: makeElement({
             tag: "a",
             text: i18next.t("password_generator_btn"),
-            onclick: () => {
-              changePage("PW_GEN");
+            onclick: async () => {
+              await changePage("PW_GEN");
             },
           }),
         }),
@@ -57,7 +57,7 @@ export class HomePage extends Page {
       setErrorText(error.message);
       if (error.message == "permission denied") {
         pageState.token = "";
-        changePage("LOGIN");
+        await changePage("LOGIN");
       }
     }
 
@@ -85,7 +85,7 @@ export class HomePage extends Page {
       const mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
 
       let linkText = "";
-      let linkPage;
+      let linkPage: string;
       if (mount.type == "kv") {
         linkText = `K/V (v${mount.options.version}) - ${baseMount}`;
         linkPage = "KEY_VALUE_VIEW";
@@ -106,10 +106,10 @@ export class HomePage extends Page {
           children: makeElement({
             tag: "a",
             text: linkText,
-            onclick: () => {
+            onclick: async () => {
               pageState.currentBaseMount = baseMount;
               pageState.currentMountType = mountType;
-              changePage(linkPage);
+              await changePage(linkPage);
             },
           }),
         }),

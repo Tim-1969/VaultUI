@@ -15,7 +15,7 @@ export class SetLanguagePage extends Page {
   constructor() {
     super();
   }
-  render(): void {
+  async render(): Promise<void> {
     const setLanguageForm = makeElement({
       tag: "form",
       id: "setLanguageForm",
@@ -61,7 +61,7 @@ export class SetLanguagePage extends Page {
       void i18next.changeLanguage(language).then((t) => {
         pageState.pageDirection = t("language_direction");
         reloadNavBar();
-        changePage("HOME");
+        void changePage("HOME");
       });
     });
   }

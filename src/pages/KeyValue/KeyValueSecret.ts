@@ -14,13 +14,13 @@ export class KeyValueSecretPage extends Page {
   constructor() {
     super();
   }
-  goBack(): void {
+  async goBack(): Promise<void> {
     if (pageState.currentSecretVersion != null) {
       pageState.currentSecretVersion = null;
-      changePage("KEY_VALUE_VERSIONS");
+      await changePage("KEY_VALUE_VERSIONS");
     } else {
       pageState.currentSecret = "";
-      changePage("KEY_VALUE_VIEW");
+      await changePage("KEY_VALUE_VIEW");
     }
   }
   async render(): Promise<void> {
@@ -68,8 +68,8 @@ export class KeyValueSecretPage extends Page {
           tag: "button",
           id: "deleteButton",
           class: ["uk-button", "uk-button-danger"],
-          onclick: () => {
-            changePage("KEY_VALUE_DELETE");
+          onclick: async () => {
+            await changePage("KEY_VALUE_DELETE");
           },
           text: deleteButtonText,
         }),
@@ -82,8 +82,8 @@ export class KeyValueSecretPage extends Page {
             tag: "button",
             id: "editButton",
             class: ["uk-button", "uk-margin", "uk-button-primary"],
-            onclick: () => {
-              changePage("KEY_VALUE_SECRET_EDIT");
+            onclick: async () => {
+              await changePage("KEY_VALUE_SECRET_EDIT");
             },
             text: i18next.t("kv_secret_edit_btn"),
           }),
@@ -96,8 +96,8 @@ export class KeyValueSecretPage extends Page {
           tag: "button",
           id: "versionsButton",
           class: ["uk-button", "uk-button-secondary"],
-          onclick: () => {
-            changePage("KEY_VALUE_VERSIONS");
+          onclick: async () => {
+            await changePage("KEY_VALUE_VERSIONS");
           },
           text: i18next.t("kv_secret_versions_btn"),
         }),
@@ -135,7 +135,7 @@ export class KeyValueSecretPage extends Page {
                 pageState.currentSecret,
                 pageState.currentSecretVersion,
               ).then((_) => {
-                changePage(pageState.currentPageString);
+                void changePage(pageState.currentPageString);
               });
             },
           }),

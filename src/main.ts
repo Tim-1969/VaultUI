@@ -37,7 +37,7 @@ declare global {
   }
 }
 
-function onLoad(): void {
+async function onLoad(): Promise<void> {
   document.body.innerHTML = "";
   document.body.appendChild(NavBar());
   document.body.appendChild(
@@ -66,10 +66,10 @@ function onLoad(): void {
   window.pageContent = document.querySelector("#pageContent");
 
   if (process.env.NODE_ENV == "development") {
-    playground();
+    await playground();
   }
 
-  renderPage();
+  await renderPage();
 
   setInterval(() => {
     if (pageState.currentPageString != "UNSEAL") {
@@ -78,7 +78,7 @@ function onLoad(): void {
       }
       void getSealStatus().then((sealStatus) => {
         if (sealStatus.sealed) {
-          changePage("UNSEAL");
+          void changePage("UNSEAL");
           return;
         }
       });
@@ -110,7 +110,7 @@ document.addEventListener(
         },
       })
       .then(function (_) {
-        onLoad();
+        void onLoad();
       });
   },
   false,

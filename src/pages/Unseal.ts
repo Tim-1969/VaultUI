@@ -26,7 +26,7 @@ export class UnsealPage extends Page {
   unsealInputContent: HTMLElement;
   unsealKeyForm: HTMLFormElement;
 
-  cleanup(): void {
+  async cleanup(): Promise<void> {
     this.deinitWebcam();
     clearInterval(this.refresher);
   }
@@ -169,7 +169,7 @@ export class UnsealPage extends Page {
     progressBar.max = keysNeeded;
     if (!data.sealed) {
       progressBar.value = keysNeeded;
-      changePage("HOME");
+      void changePage("HOME");
     }
   }
 

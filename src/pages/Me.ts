@@ -31,9 +31,9 @@ export class MePage extends Page {
             children: makeElement({
               tag: "a",
               text: i18next.t("log_out_btn"),
-              onclick: () => {
+              onclick: async () => {
                 pageState.token = "";
-                changePage("HOME");
+                await changePage("HOME");
               },
             }),
           }),
@@ -59,7 +59,7 @@ export class MePage extends Page {
               onclick: () => {
                 renewSelf()
                   .then(() => {
-                    changePage("HOME");
+                    void changePage("HOME");
                   })
                   .catch((e: Error) => {
                     setErrorText(e.message);
@@ -82,7 +82,7 @@ export class MePage extends Page {
               text: i18next.t("seal_vault_btn"),
               onclick: async () => {
                 await sealVault();
-                changePage("UNSEAL_VAULT");
+                await changePage("UNSEAL_VAULT");
               },
             }),
           }),
@@ -91,8 +91,8 @@ export class MePage extends Page {
             children: makeElement({
               tag: "a",
               text: i18next.t("change_language_btn"),
-              onclick: () => {
-                changePage("SET_LANGUAGE");
+              onclick: async () => {
+                await changePage("SET_LANGUAGE");
               },
             }),
           }),

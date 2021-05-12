@@ -12,10 +12,10 @@ export class KeyValueSecretEditPage extends Page {
   constructor() {
     super();
   }
-  goBack(): void {
-    changePage("KEY_VALUE_SECRET");
+  async goBack(): Promise<void> {
+    await changePage("KEY_VALUE_SECRET");
   }
-  render(): void {
+  async render(): Promise<void> {
     setTitleElement(pageState);
     const loadingText = makeElement({
       tag: "p",
@@ -71,7 +71,7 @@ export class KeyValueSecretEditPage extends Page {
           JSON.parse(jar.toString()),
         )
           .then((_) => {
-            changePage("KEY_VALUE_SECRET");
+            void changePage("KEY_VALUE_SECRET");
             return;
           })
           .catch((e: Error) => {

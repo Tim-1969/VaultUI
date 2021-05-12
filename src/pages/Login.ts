@@ -12,7 +12,7 @@ export class LoginPage extends Page {
   constructor() {
     super();
   }
-  render(): void {
+  async render(): Promise<void> {
     const tokenLoginForm = makeElement({
       tag: "form",
       children: [
@@ -139,7 +139,7 @@ export class LoginPage extends Page {
       pageState.token = token as string;
       lookupSelf()
         .then((_) => {
-          changePage("HOME");
+          void changePage("HOME");
         })
         .catch((e: Error) => {
           document.getElementById("tokenInput").classList.add("uk-form-danger");
@@ -156,7 +156,7 @@ export class LoginPage extends Page {
       usernameLogin(formData.get("username") as string, formData.get("password") as string)
         .then((res) => {
           pageState.token = res;
-          changePage("HOME");
+          void changePage("HOME");
         })
         .catch((e: Error) => {
           document.getElementById("usernameInput").classList.add("uk-form-danger");

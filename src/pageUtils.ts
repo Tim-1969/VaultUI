@@ -10,24 +10,24 @@ import i18next from "i18next";
 
 async function prePageChecksReal() {
   if (pageState.language.length == 0) {
-    changePage("SET_LANGUAGE");
+    await changePage("SET_LANGUAGE");
     throw new Error("Language Not Set");
   }
   if (!pageState.apiURL) {
-    changePage("SET_VAULT_URL");
+    await changePage("SET_VAULT_URL");
     throw new Error("Vault URL Not Set");
   }
 
   const sealStatus = await getSealStatus();
   if (sealStatus.sealed) {
-    changePage("UNSEAL");
+    await changePage("UNSEAL");
     throw new Error("Vault Sealed");
   }
 
   try {
     await lookupSelf();
   } catch (e) {
-    changePage("LOGIN");
+    await changePage("LOGIN");
     throw e;
   }
 }
@@ -78,22 +78,20 @@ export function setErrorText(text: string): void {
   });
 }
 
-export function changePage(page: string, shouldSwitch = true): void {
-  if (pageState.currentPage && shouldSwitch) {
-    (pageState.currentPage as Page).cleanup();
+export async function changePage(page: string): Promise<void> {
+  if (pageState.currentPage) {
+    await (pageState.currentPage as Page).cleanup();
   }
   pageState.currentPage = page;
-  if (shouldSwitch) {
-    renderPage();
-  }
+  await renderPage();
 }
 
-export function renderPage(): void {
+export async function renderPage(): Promise<void> {
   document.documentElement.dir = pageState.pageDirection;
   console.log("Rendering Page: ", (pageState.currentPage as Page).name);
   document.querySelector("#pageContent").innerHTML = "";
   setPageTitle((pageState.currentPage as Page).name);
-  (pageState.currentPage as Page).render();
+  await (pageState.currentPage as Page).render();
 }
 
 export function setPageTitle(title: string | HTMLElement): void {
@@ -121,7 +119,7 @@ export function setTitleElement(pageState: PageState): void {
       makeElement({
         tag: "a",
         text: pageState.currentBaseMount + " ",
-        onclick: () => {
+        onclick: async () => {
           pageState.currentSecretPath = [];
           pageState.currentSecret = "";
           pageState.currentSecretVersion = null;
@@ -130,11 +128,11 @@ export function setTitleElement(pageState: PageState): void {
             pageState.currentMountType.startsWith("kv") ||
             pageState.currentMountType == "cubbyhole"
           ) {
-            changePage("KEY_VALUE_VIEW");
+            await changePage("KEY_VALUE_VIEW");
           } else if (pageState.currentMountType == "totp") {
-            changePage("TOTP");
+            await changePage("TOTP");
           } else if (pageState.currentMountType == "transit") {
-            changePage("TRANSIT_VIEW");
+            await changePage("TRANSIT_VIEW");
           }
         },
       }),
@@ -142,11 +140,11 @@ export function setTitleElement(pageState: PageState): void {
         return makeElement({
           tag: "a",
           text: secretPath + " ",
-          onclick: () => {
+          onclick: async () => {
             pageState.currentSecretVersion = null;
             if (pageState.currentMountType.startsWith("kv")) {
               pageState.currentSecretPath = secretPaths.slice(0, index + 1);
-              changePage("KEY_VALUE_VIEW");
+              await changePage("KEY_VALUE_VIEW");
             }
           },
         });

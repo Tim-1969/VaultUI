@@ -10,12 +10,12 @@ export class KeyValueViewPage extends Page {
   constructor() {
     super();
   }
-  goBack(): void {
+  async goBack(): Promise<void> {
     if (pageState.currentSecretPath.length != 0) {
       pageState.popCurrentSecretPath();
-      changePage("KEY_VALUE_VIEW");
+      await changePage("KEY_VALUE_VIEW");
     } else {
-      changePage("HOME");
+      await changePage("HOME");
     }
   }
   async render(): Promise<void> {
@@ -39,8 +39,8 @@ export class KeyValueViewPage extends Page {
       tag: "button",
       text: i18next.t("kv_view_new_btn"),
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
-      onclick: () => {
-        changePage("KEY_VALUE_NEW_SECRET");
+      onclick: async () => {
+        await changePage("KEY_VALUE_NEW_SECRET");
       },
     });
     kvViewPageContent.appendChild(newButton);
@@ -63,13 +63,13 @@ export class KeyValueViewPage extends Page {
                 children: makeElement({
                   tag: "a",
                   text: secret,
-                  onclick: () => {
+                  onclick: async () => {
                     if (secret.endsWith("/")) {
                       pageState.pushCurrentSecretPath(secret);
-                      changePage("KEY_VALUE_VIEW");
+                      await changePage("KEY_VALUE_VIEW");
                     } else {
                       pageState.currentSecret = secret;
-                      changePage("KEY_VALUE_SECRET");
+                      await changePage("KEY_VALUE_SECRET");
                     }
                   },
                 }),

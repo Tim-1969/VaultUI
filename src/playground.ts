@@ -15,7 +15,7 @@ declare global {
 }
 
 // Please empty this function before committing.
-export function playground(): void {
+export async function playground(): Promise<void> {
   console.log("Welcome to Playground!");
   window.pageState = pageState;
   window.i18next = i18next;

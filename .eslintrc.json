@@ -28,12 +28,8 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "@typescript-eslint/no-empty-function": [
-      "error",
-      {
-        "allow": ["arrowFunctions"]
-      }
-    ],
+    "@typescript-eslint/require-await": ["off"],
+    "@typescript-eslint/no-empty-function": ["off"],
     "@typescript-eslint/ban-ts-comment": ["off"],
     "sort-imports-es6-autofix/sort-imports-es6": [2],
     "@typescript-eslint/no-explicit-any": [2],

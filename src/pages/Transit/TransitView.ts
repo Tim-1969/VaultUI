@@ -11,8 +11,8 @@ export class TransitViewPage extends Page {
     super();
   }
 
-  goBack(): void {
-    changePage("HOME");
+  async goBack(): Promise<void> {
+    await changePage("HOME");
   }
 
   async render(): Promise<void> {
@@ -28,7 +28,7 @@ export class TransitViewPage extends Page {
       text: "New",
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
       onclick: () => {
-        changePage("TRANSIT_NEW_KEY");
+        void changePage("TRANSIT_NEW_KEY");
       },
     });
     transitViewContent.appendChild(newButton);
@@ -49,7 +49,7 @@ export class TransitViewPage extends Page {
                   text: secret,
                   onclick: () => {
                     pageState.currentSecret = secret;
-                    changePage("TRANSIT_VIEW_SECRET");
+                    void changePage("TRANSIT_VIEW_SECRET");
                   },
                 }),
               });

@@ -34,7 +34,7 @@ export class TOTPViewPage extends Page {
             tag: "a",
             text: i18next.t("totp_view_new_btn"),
             onclick: () => {
-              changePage("NEW_TOTP");
+              void changePage("NEW_TOTP");
             },
           }),
           makeElement({
@@ -51,7 +51,8 @@ export class TOTPViewPage extends Page {
 
     try {
       const res = await getTOTPKeys(pageState.currentBaseMount);
-      for (const totpKeyName in res.entries()) {
+      for (const totpKeyName of res) {
+        console.log(totpKeyName);
         const totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
         this.totpListElements[totpKeyName] = totpListElement;
@@ -81,7 +82,7 @@ export class TOTPViewPage extends Page {
     }, 3000) as unknown as number;
   }
 
-  cleanup(): void {
+  async cleanup(): Promise<void> {
     clearInterval(this.refresher);
     this.totpListElements = {};
   }

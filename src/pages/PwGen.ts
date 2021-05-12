@@ -58,7 +58,7 @@ export class PwGenPage extends Page {
   passwordAlphabet: HTMLSelectElement;
   passwordForm: HTMLFormElement;
 
-  render(): void {
+  async render(): Promise<void> {
     setPageContent("");
     this.passwordBox = CopyableInputBox(genPassword(passwordOptionsDefault));
 
@@ -135,7 +135,7 @@ export class PwGenPage extends Page {
     );
   }
 
-  cleanup(): void {
+  async cleanup(): Promise<void> {
     this.passwordBox = undefined;
     this.passwordLengthTitle = undefined;
     this.passwordLengthRange = undefined;

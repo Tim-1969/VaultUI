@@ -22,8 +22,8 @@ export function NavBar(): HTMLElement {
               makeElement({
                 tag: "a",
                 text: i18next.t("home_btn"),
-                onclick: () => {
-                  changePage("HOME");
+                onclick: async () => {
+                  await changePage("HOME");
                 },
               }),
             ),
@@ -31,8 +31,8 @@ export function NavBar(): HTMLElement {
               makeElement({
                 tag: "a",
                 text: i18next.t("back_btn"),
-                onclick: () => {
-                  (pageState.currentPage as Page).goBack();
+                onclick: async () => {
+                  await (pageState.currentPage as Page).goBack();
                 },
               }),
             ),
@@ -40,8 +40,8 @@ export function NavBar(): HTMLElement {
               makeElement({
                 tag: "a",
                 text: i18next.t("refresh_btn"),
-                onclick: () => {
-                  changePage(pageState.currentPageString);
+                onclick: async () => {
+                  await changePage(pageState.currentPageString);
                 },
               }),
             ),
@@ -59,8 +59,8 @@ export function NavBar(): HTMLElement {
               makeElement({
                 tag: "a",
                 text: i18next.t("me_btn"),
-                onclick: () => {
-                  changePage("ME");
+                onclick: async () => {
+                  await changePage("ME");
                 },
               }),
             ),

@@ -20,10 +20,10 @@ export class NewTOTPPage extends Page {
   constructor() {
     super();
   }
-  goBack(): void {
-    changePage("TOTP");
+  async goBack(): Promise<void> {
+    await changePage("TOTP");
   }
-  render(): void {
+  async render(): Promise<void> {
     setTitleElement(pageState);
 
     const totpForm = makeElement({
@@ -97,7 +97,7 @@ export class NewTOTPPage extends Page {
       };
       addNewTOTP(pageState.currentBaseMount, parms)
         .then((_) => {
-          changePage("TOTP");
+          void changePage("TOTP");
         })
         .catch((e: Error) => {
           setErrorText(`API Error: ${e.message}`);

@@ -4,20 +4,17 @@ export class Page {
   constructor() {
     // Do Nothing
   }
-  render(): unknown {
-    // Do Nothing
-    return null;
-  }
+  async render(): Promise<void> {}
   get name(): string {
     return "Page";
   }
   get titleSuffix(): string {
     return "";
   }
-  goBack(): void {
-    changePage("HOME");
+  async goBack(): Promise<void> {
+    await changePage("HOME");
   }
-  cleanup(): void {
+  async cleanup(): Promise<void> {
     // Do Nothing
   }
 }

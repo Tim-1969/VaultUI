@@ -11,8 +11,8 @@ export class TransitViewSecretPage extends Page {
     super();
   }
 
-  goBack(): void {
-    changePage("TRANSIT_VIEW");
+  async goBack(): Promise<void> {
+    await changePage("TRANSIT_VIEW");
   }
 
   async render(): Promise<void> {
@@ -33,7 +33,7 @@ export class TransitViewSecretPage extends Page {
             icon: "lock",
             iconText: i18next.t("transit_view_encrypt_icon_text"),
             onclick: () => {
-              changePage("TRANSIT_ENCRYPT");
+              void changePage("TRANSIT_ENCRYPT");
             },
           }),
           Tile({
@@ -43,7 +43,7 @@ export class TransitViewSecretPage extends Page {
             icon: "mail",
             iconText: i18next.t("transit_view_decrypt_icon_text"),
             onclick: () => {
-              changePage("TRANSIT_DECRYPT");
+              void changePage("TRANSIT_DECRYPT");
             },
           }),
           Tile({
@@ -53,7 +53,7 @@ export class TransitViewSecretPage extends Page {
             icon: "code",
             iconText: i18next.t("transit_view_rewrap_icon_text"),
             onclick: () => {
-              changePage("TRANSIT_REWRAP");
+              void changePage("TRANSIT_REWRAP");
             },
           }),
         ],

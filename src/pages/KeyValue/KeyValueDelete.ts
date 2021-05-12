@@ -9,16 +9,16 @@ export class KeyValueDeletePage extends Page {
   constructor() {
     super();
   }
-  goBack(): void {
+  async goBack(): Promise<void> {
     if (pageState.currentSecretVersion != null) {
       pageState.currentSecretVersion = null;
-      changePage("KEY_VALUE_SECRET");
+      await changePage("KEY_VALUE_SECRET");
     } else {
       pageState.currentSecret = "";
-      changePage("KEY_VALUE_VIEW");
+      await changePage("KEY_VALUE_VIEW");
     }
   }
-  render(): void {
+  async render(): Promise<void> {
     setTitleElement(pageState);
     setPageContent(
       makeElement({
@@ -40,7 +40,7 @@ export class KeyValueDeletePage extends Page {
                 pageState.currentSecret,
                 pageState.currentSecretVersion,
               ).then(() => {
-                this.goBack();
+                void this.goBack();
               });
             },
           }),
