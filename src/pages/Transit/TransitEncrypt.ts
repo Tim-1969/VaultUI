@@ -74,10 +74,10 @@ export class TransitEncryptPage extends Page {
     }) as HTMLFormElement;
     setPageContent(this.transitEncryptForm);
 
-    this.transitEncryptForm.addEventListener("submit", async function (e: Event) {
+    this.transitEncryptForm.addEventListener("submit", (e: Event) => {
       e.preventDefault();
-      await (this as TransitEncryptPage).transitEncryptFormHandler();
-    }.bind(this));
+      void this.transitEncryptFormHandler();
+    });
   }
 
   async transitEncryptFormHandler(): Promise<void> {

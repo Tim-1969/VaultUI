@@ -53,13 +53,13 @@ export class KeyValueNewPage extends Page {
     }) as HTMLFormElement;
     setPageContent(this.addKVNewForm);
 
-    this.addKVNewForm.addEventListener("submit", function (e: Event) {
+    this.addKVNewForm.addEventListener("submit", (e: Event) => {
       e.preventDefault();
-      (this as KeyValueNewPage).newKVSecretHandleForm();
-    }.bind(this));
+      void this.newKVSecretHandleForm();
+    });
   }
 
-  newKVSecretHandleForm(): void {
+  async newKVSecretHandleForm(): Promise<void> {
     const formData = new FormData(this.addKVNewForm);
     const path = formData.get("path") as string;
     let keyData = {};
@@ -68,18 +68,20 @@ export class KeyValueNewPage extends Page {
       keyData = { "key": "value" };
     }
 
-    createOrUpdateSecret(
-      pageState.currentBaseMount,
-      pageState.currentMountType,
-      pageState.currentSecretPath,
-      path,
-      keyData
-    ).then(_ => {
+    try {
+      await createOrUpdateSecret(
+        pageState.currentBaseMount,
+        pageState.currentMountType,
+        pageState.currentSecretPath,
+        path,
+        keyData
+      )
       changePage("KEY_VALUE_VIEW");
-      return;
-    }).catch((e: Error) => {
-      setErrorText(e.message);
-    });
+    } catch (e: unknown) {
+      const error = e as Error;
+      setErrorText(error.message);
+    }
+
   }
 
   get titleSuffix(): string {

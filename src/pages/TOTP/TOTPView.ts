@@ -24,7 +24,7 @@ export class TOTPViewPage extends Page {
   refresher: number;
   totpListElements: Record<string, TOTPListElement>;
 
-  render(): void {
+  async render(): Promise<void> {
     setTitleElement(pageState);
     const totpList = makeElement({ tag: "div" });
     setPageContent(makeElement({
@@ -47,30 +47,33 @@ export class TOTPViewPage extends Page {
     }));
 
 
-    getTOTPKeys(pageState.currentBaseMount).then(res => {
-      res.forEach(function (totpKeyName) {
-        const totpListElement = (this as TOTPViewPage).makeTOTPListElement(totpKeyName);
+    try {
+      const res = await getTOTPKeys(pageState.currentBaseMount);
+      for (const totpKeyName in res.entries()) {
+        const totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
-        (this as TOTPViewPage).totpListElements[totpKeyName] = totpListElement;
-        void (this as TOTPViewPage).updateTOTPElement(totpKeyName, totpListElement);
-      }, this);
+        this.totpListElements[totpKeyName] = totpListElement;
+        void this.updateTOTPElement(totpKeyName, totpListElement);
+      }
       document.getElementById("loadingText").remove();
-    }).catch((e: Error) => {
-      if (e == DoesNotExistError) {
+    } catch (e: unknown) {
+      const error = e as Error;
+      if (error == DoesNotExistError) {
         const loadingText = document.getElementById("loadingText");
         loadingText.innerText = i18next.t("totp_view_empty");
       } else {
-        setErrorText(e.message);
+        setErrorText(error.message);
       }
-    });
+    }
 
-    const totpRefresher = () => {
-      void Promise.all(Array.from(objectToMap(this.totpListElements)).map((kv: [string, TOTPListElement]) => {
+
+    const totpRefresher = async () => {
+      await Promise.all(Array.from(objectToMap(this.totpListElements)).map((kv: [string, TOTPListElement]) => {
         return this.updateTOTPElement(...kv);
       }))
     }
-    void totpRefresher();
-    this.refresher = setInterval(totpRefresher, 3000) as unknown as number;
+    await totpRefresher();
+    this.refresher = setInterval(() => { void totpRefresher(); }, 3000) as unknown as number;
   }
 
   cleanup(): void {

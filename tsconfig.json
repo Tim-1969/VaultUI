@@ -5,8 +5,9 @@
     "allowSyntheticDefaultImports": true,
     "module": "es6",
     "target": "es2019",
-    "jsx": "react",
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   }
 }
