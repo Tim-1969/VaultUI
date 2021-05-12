@@ -7,6 +7,6 @@ export function Option(label: string, value: string): HTMLElement {
     attributes: {
       label: label,
       value: value,
-    }
-  })
+    },
+  });
 }

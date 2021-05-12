@@ -5,8 +5,8 @@ import { lookupSelf } from "./api/sys/lookupSelf";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import ClipboardJS from "clipboard";
-import UIkit from 'uikit';
-import i18next from 'i18next';
+import UIkit from "uikit";
+import i18next from "i18next";
 
 async function prePageChecksReal() {
   if (pageState.language.length == 0) {
@@ -27,7 +27,7 @@ async function prePageChecksReal() {
   try {
     await lookupSelf();
   } catch (e) {
-    changePage("LOGIN")
+    changePage("LOGIN");
     throw e;
   }
 }
@@ -36,26 +36,29 @@ export async function prePageChecks(): Promise<boolean> {
   try {
     await prePageChecksReal();
   } catch (e) {
-    console.log("OHNO", e)
+    console.log("OHNO", e);
     return false;
   }
   return true;
 }
 
 export function addClipboardNotifications(clipboard: ClipboardJS, timeout = 1000): void {
-  clipboard.on('success', () => {
+  clipboard.on("success", () => {
     UIkit.notification(i18next.t("notification_copy_success"), {
-      status: 'success',
-      timeout: timeout
+      status: "success",
+      timeout: timeout,
     });
   });
-  clipboard.on('error', function (e: Error) {
-    UIkit.notification(i18next.t("notification_copy_error", {
-      "error": e.message
-    }), {
-      status: 'danger',
-      timeout: timeout
-    });
+  clipboard.on("error", function (e: Error) {
+    UIkit.notification(
+      i18next.t("notification_copy_error", {
+        error: e.message,
+      }),
+      {
+        status: "danger",
+        timeout: timeout,
+      },
+    );
   });
 }
 
@@ -69,9 +72,9 @@ export function setErrorText(text: string): void {
   }
   UIkit.notification({
     message: `Error: ${text}`,
-    status: 'danger',
-    pos: 'top-center',
-    timeout: 2000
+    status: "danger",
+    pos: "top-center",
+    timeout: 2000,
   });
 }
 
@@ -88,13 +91,13 @@ export function changePage(page: string, shouldSwitch = true): void {
 export function renderPage(): void {
   document.documentElement.dir = pageState.pageDirection;
   console.log("Rendering Page: ", (pageState.currentPage as Page).name);
-  (document.querySelector("#pageContent") ).innerHTML = "";
+  document.querySelector("#pageContent").innerHTML = "";
   setPageTitle((pageState.currentPage as Page).name);
   (pageState.currentPage as Page).render();
 }
 
 export function setPageTitle(title: string | HTMLElement): void {
-  const pageTitle = (document.getElementById("pageTitle") );
+  const pageTitle = document.getElementById("pageTitle");
   pageTitle.innerHTML = "";
   if (typeof title === "string") {
     pageTitle.innerText = title.toString();
@@ -106,7 +109,8 @@ export function setPageTitle(title: string | HTMLElement): void {
 function currentTitleSecretText() {
   let currentSecretText = pageState.currentSecret;
   currentSecretText += (pageState.currentPage as Page).titleSuffix;
-  if (pageState.currentSecretVersion !== null) currentSecretText += ` (v${pageState.currentSecretVersion})`;
+  if (pageState.currentSecretVersion !== null)
+    currentSecretText += ` (v${pageState.currentSecretVersion})`;
   return currentSecretText;
 }
 
@@ -122,14 +126,17 @@ export function setTitleElement(pageState: PageState): void {
           pageState.currentSecret = "";
           pageState.currentSecretVersion = null;
 
-          if (pageState.currentMountType.startsWith("kv") || pageState.currentMountType == "cubbyhole") {
+          if (
+            pageState.currentMountType.startsWith("kv") ||
+            pageState.currentMountType == "cubbyhole"
+          ) {
             changePage("KEY_VALUE_VIEW");
           } else if (pageState.currentMountType == "totp") {
             changePage("TOTP");
           } else if (pageState.currentMountType == "transit") {
             changePage("TRANSIT_VIEW");
           }
-        }
+        },
       }),
       ...pageState.currentSecretPath.map(function (secretPath, index, secretPaths) {
         return makeElement({
@@ -141,21 +148,21 @@ export function setTitleElement(pageState: PageState): void {
               pageState.currentSecretPath = secretPaths.slice(0, index + 1);
               changePage("KEY_VALUE_VIEW");
             }
-          }
+          },
         });
       }),
       makeElement({
         tag: "span",
         condition: pageState.currentSecret.length != 0,
-        text: currentTitleSecretText()
-      })
-    ]
+        text: currentTitleSecretText(),
+      }),
+    ],
   });
   setPageTitle(titleElement);
 }
 
 export function setPageContent(content: string | HTMLElement): void {
-  const pageContent = (document.getElementById("pageContent") );
+  const pageContent = document.getElementById("pageContent");
   if (typeof content === "string") {
     pageContent.innerHTML = content;
   } else {

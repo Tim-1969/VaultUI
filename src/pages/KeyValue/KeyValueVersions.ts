@@ -4,8 +4,7 @@ import { getSecretMetadata } from "../../api/kv/getSecretMetadata";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
 import { pageState } from "../../globalPageState";
-import i18next from 'i18next';
-
+import i18next from "i18next";
 
 export class KeyValueVersionsPage extends Page {
   constructor() {
@@ -23,28 +22,30 @@ export class KeyValueVersionsPage extends Page {
     const versionsList = makeElement({
       tag: "ul",
       id: "versionsList",
-      class: ["uk-nav", "uk-nav-default"]
+      class: ["uk-nav", "uk-nav-default"],
     });
     setPageContent(versionsList);
 
     const metadata = await getSecretMetadata(
       pageState.currentBaseMount,
       pageState.currentSecretPath,
-      pageState.currentSecret
+      pageState.currentSecret,
     );
 
     objectToMap(metadata.versions).forEach((_, ver) => {
-      versionsList.appendChild(makeElement({
-        tag: "li",
-        children: makeElement({
-          tag: "a",
-          text: `v${ver}`,
-          onclick: () => {
-            pageState.currentSecretVersion = ver;
-            changePage("KEY_VALUE_SECRET");
-          }
-        })
-      }));
+      versionsList.appendChild(
+        makeElement({
+          tag: "li",
+          children: makeElement({
+            tag: "a",
+            text: `v${ver}`,
+            onclick: () => {
+              pageState.currentSecretVersion = ver;
+              changePage("KEY_VALUE_SECRET");
+            },
+          }),
+        }),
+      );
     });
   }
 

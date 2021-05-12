@@ -4,8 +4,7 @@ import { changePage, setErrorText, setPageContent, setTitleElement } from "../..
 import { getSecrets } from "../../api/kv/getSecrets";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
-import i18next from 'i18next';
-
+import i18next from "i18next";
 
 export class KeyValueViewPage extends Page {
   constructor() {
@@ -28,10 +27,12 @@ export class KeyValueViewPage extends Page {
     setPageContent(kvViewPageContent);
 
     if (pageState.currentMountType == "cubbyhole") {
-      kvViewPageContent.appendChild(makeElement({
-        tag: "p",
-        text: i18next.t("kv_view_cubbyhole_text"),
-      }));
+      kvViewPageContent.appendChild(
+        makeElement({
+          tag: "p",
+          text: i18next.t("kv_view_cubbyhole_text"),
+        }),
+      );
     }
 
     const newButton = makeElement({
@@ -40,7 +41,7 @@ export class KeyValueViewPage extends Page {
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
       onclick: () => {
         changePage("KEY_VALUE_NEW_SECRET");
-      }
+      },
     });
     kvViewPageContent.appendChild(newButton);
 
@@ -51,30 +52,32 @@ export class KeyValueViewPage extends Page {
         pageState.currentSecretPath,
       );
 
-      kvViewPageContent.appendChild(makeElement({
-        tag: "ul",
-        class: ["uk-nav", "uk-nav-default"],
-        children: [
-          ...res.map(function (secret) {
-            return makeElement({
-              tag: "li",
-              children: makeElement({
-                tag: "a",
-                text: secret,
-                onclick: () => {
-                  if (secret.endsWith("/")) {
-                    pageState.pushCurrentSecretPath(secret);
-                    changePage("KEY_VALUE_VIEW");
-                  } else {
-                    pageState.currentSecret = secret;
-                    changePage("KEY_VALUE_SECRET");
-                  }
-                }
-              })
-            });
-          })
-        ]
-      }));
+      kvViewPageContent.appendChild(
+        makeElement({
+          tag: "ul",
+          class: ["uk-nav", "uk-nav-default"],
+          children: [
+            ...res.map(function (secret) {
+              return makeElement({
+                tag: "li",
+                children: makeElement({
+                  tag: "a",
+                  text: secret,
+                  onclick: () => {
+                    if (secret.endsWith("/")) {
+                      pageState.pushCurrentSecretPath(secret);
+                      changePage("KEY_VALUE_VIEW");
+                    } else {
+                      pageState.currentSecret = secret;
+                      changePage("KEY_VALUE_SECRET");
+                    }
+                  },
+                }),
+              });
+            }),
+          ],
+        }),
+      );
     } catch (e: unknown) {
       const error = e as Error;
       if (error == DoesNotExistError) {
@@ -82,10 +85,12 @@ export class KeyValueViewPage extends Page {
         if (pageState.currentSecretPath.length != 0) {
           return this.goBack();
         } else {
-          kvViewPageContent.appendChild(makeElement({
-            tag: "p",
-            text: i18next.t("kv_view_none_here_text")
-          }));
+          kvViewPageContent.appendChild(
+            makeElement({
+              tag: "p",
+              text: i18next.t("kv_view_none_here_text"),
+            }),
+          );
         }
       } else {
         setErrorText(error.message);

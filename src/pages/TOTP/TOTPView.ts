@@ -7,12 +7,11 @@ import { getTOTPKeys } from "../../api/totp/getTOTPKeys";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
 import { pageState } from "../../globalPageState";
-import i18next from 'i18next';
+import i18next from "i18next";
 
 export interface TOTPListElement extends HTMLElement {
   setCode(code: string): void;
 }
-
 
 export class TOTPViewPage extends Page {
   constructor() {
@@ -27,25 +26,28 @@ export class TOTPViewPage extends Page {
   async render(): Promise<void> {
     setTitleElement(pageState);
     const totpList = makeElement({ tag: "div" });
-    setPageContent(makeElement({
-      tag: "div",
-      children: [
-        makeElement({
-          tag: "a",
-          text: i18next.t("totp_view_new_btn"),
-          onclick: () => { changePage("NEW_TOTP"); }
-        }),
-        makeElement({
-          tag: "p",
-          id: "loadingText",
-          text: i18next.t("totp_view_loading"),
-        }),
-        makeElement({ tag: "br" }),
-        makeElement({ tag: "br" }),
-        totpList
-      ]
-    }));
-
+    setPageContent(
+      makeElement({
+        tag: "div",
+        children: [
+          makeElement({
+            tag: "a",
+            text: i18next.t("totp_view_new_btn"),
+            onclick: () => {
+              changePage("NEW_TOTP");
+            },
+          }),
+          makeElement({
+            tag: "p",
+            id: "loadingText",
+            text: i18next.t("totp_view_loading"),
+          }),
+          makeElement({ tag: "br" }),
+          makeElement({ tag: "br" }),
+          totpList,
+        ],
+      }),
+    );
 
     try {
       const res = await getTOTPKeys(pageState.currentBaseMount);
@@ -66,14 +68,17 @@ export class TOTPViewPage extends Page {
       }
     }
 
-
     const totpRefresher = async () => {
-      await Promise.all(Array.from(objectToMap(this.totpListElements)).map((kv: [string, TOTPListElement]) => {
-        return this.updateTOTPElement(...kv);
-      }))
-    }
+      await Promise.all(
+        Array.from(objectToMap(this.totpListElements)).map((kv: [string, TOTPListElement]) => {
+          return this.updateTOTPElement(...kv);
+        }),
+      );
+    };
     await totpRefresher();
-    this.refresher = setInterval(() => { void totpRefresher(); }, 3000) as unknown as number;
+    this.refresher = setInterval(() => {
+      void totpRefresher();
+    }, 3000) as unknown as number;
   }
 
   cleanup(): void {
@@ -92,7 +97,7 @@ export class TOTPViewPage extends Page {
     const gridElement = makeElement({
       tag: "div",
       class: ["uk-grid", "uk-grid-small", "uk-text-expand"],
-      children: [totpKeyBox, totpValueBox]
+      children: [totpKeyBox, totpValueBox],
     }) as TOTPListElement;
 
     gridElement.setCode = (code: string) => totpValueBox.setText(code);

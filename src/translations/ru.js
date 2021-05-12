@@ -1,164 +1,167 @@
 module.exports = {
   // The localised name for the language
-  "language_name": "русский",
+  language_name: "русский",
   // Internal: The direction of text (ltr or rtl)
-  "language_direction": "ltr",
+  language_direction: "ltr",
 
   // These are the buttons on the top bar.
-  "home_btn": "Главная страница",
-  "back_btn": "Назад",
-  "refresh_btn": "Обновить",
-  "me_btn": "Профиль/параметры",
+  home_btn: "Главная страница",
+  back_btn: "Назад",
+  refresh_btn: "Обновить",
+  me_btn: "Профиль/параметры",
 
   // General Notification Messages
-  "notification_copy_success": "Текст скопирован в буфер обмена.",
+  notification_copy_success: "Текст скопирован в буфер обмена.",
 
   // Copyable Modal
-  "copy_modal_download_btn": "Загрузить",
-  "copy_modal_copy_btn": "Копировать",
-  "copy_modal_close_btn": "Закрыть",
+  copy_modal_download_btn: "Загрузить",
+  copy_modal_copy_btn: "Копировать",
+  copy_modal_close_btn: "Закрыть",
 
   // Copyable Input Box
-  "copy_input_box_copy_icon_text": "Копировать",
+  copy_input_box_copy_icon_text: "Копировать",
 
   // File Upload Input
-  "file_upload_input_btn": "Загрузить файл",
+  file_upload_input_btn: "Загрузить файл",
 
   // Me Page
-  "me_page_title": "Профиль/параметры",
-  "log_out_btn": "Выход",
-  "seal_vault_btn": "Закрыть хранилище",
-  "copy_token_btn": "Копировать код доступа",
-  "renew_lease_btn": "Продлить действие кода доступа",
-  "change_language_btn": "Выбор языка",
+  me_page_title: "Профиль/параметры",
+  log_out_btn: "Выход",
+  seal_vault_btn: "Закрыть хранилище",
+  copy_token_btn: "Копировать код доступа",
+  renew_lease_btn: "Продлить действие кода доступа",
+  change_language_btn: "Выбор языка",
 
   // Home Page
-  "home_page_title": "Главная страница",
-  "vaulturl_text": "Адрес хранилища: {{text}}",
-  "password_generator_btn": "Генератор паролей",
-  "your_token_expires_in": "Продолжительность ключа: {{date, until_date}}",
+  home_page_title: "Главная страница",
+  vaulturl_text: "Адрес хранилища: {{text}}",
+  password_generator_btn: "Генератор паролей",
+  your_token_expires_in: "Продолжительность ключа: {{date, until_date}}",
 
   // Unseal Page
-  "unseal_vault_text": "Раскрыть хранилище",
-  "submit_key_btn": "Отправить ключ",
-  "unseal_input_btn": "Ввести ключ вручную",
-  "unseal_qr_btn": "Ввести ключ через QR-код",
-  "key_input_placeholder": "Ключ",
-  "unseal_keys_progress": "Ключи: {{progress}}/{{keys_needed}}",
+  unseal_vault_text: "Раскрыть хранилище",
+  submit_key_btn: "Отправить ключ",
+  unseal_input_btn: "Ввести ключ вручную",
+  unseal_qr_btn: "Ввести ключ через QR-код",
+  key_input_placeholder: "Ключ",
+  unseal_keys_progress: "Ключи: {{progress}}/{{keys_needed}}",
 
   // Language Selector Page
-  "set_language_title": "Выбор языка",
-  "set_language_btn": "Выбрать язык",
+  set_language_title: "Выбор языка",
+  set_language_btn: "Выбрать язык",
 
   // Password Generator Page
-  "password_generator_title": "Генератор паролей",
-  "password_length_title": "Длина пароля ({{min}}/{{max}})",
-  "gen_password_btn": "Генерировать",
+  password_generator_title: "Генератор паролей",
+  password_length_title: "Длина пароля ({{min}}/{{max}})",
+  gen_password_btn: "Генерировать",
 
   // Login Page
-  "log_in_title": "Вход",
-  "log_in_with_token": "Вход с кодом доступа",
-  "log_in_with_username": "Вход по имени",
-  "token_input": "Код доступа",
-  "username_input": "Имя пользователя",
-  "password_input": "Пароль",
-  "log_in_btn": "Войти",
-  "token_login_error": "Неправильный код доступа",
+  log_in_title: "Вход",
+  log_in_with_token: "Вход с кодом доступа",
+  log_in_with_username: "Вход по имени",
+  token_input: "Код доступа",
+  username_input: "Имя пользователя",
+  password_input: "Пароль",
+  log_in_btn: "Войти",
+  token_login_error: "Неправильный код доступа",
 
   // Key Value Delete Page
-  "kv_delete_title": "Удаление ключа/значения",
-  "kv_delete_text": "Вы уверены, что хотите удалить это?",
-  "kv_delete_btn": "Удалить",
-  "kv_delete_suffix": " (удалить)",
+  kv_delete_title: "Удаление ключа/значения",
+  kv_delete_text: "Вы уверены, что хотите удалить это?",
+  kv_delete_btn: "Удалить",
+  kv_delete_suffix: " (удалить)",
 
   // Key Value New Page
-  "kv_new_title": "Новый ключ/значение",
-  "kv_new_suffix": " (новый)",
-  "kv_new_path": "Относительный путь",
-  "kv_new_create_btn": "Создать пустые тайные данные",
+  kv_new_title: "Новый ключ/значение",
+  kv_new_suffix: " (новый)",
+  kv_new_path: "Относительный путь",
+  kv_new_create_btn: "Создать пустые тайные данные",
 
   // Key Value Secret Page
-  "kv_secret_title": "Тайные ключи/значения",
-  "kv_secret_deleted_text": "Тайная версия данных была удалена, но может быть восстановлена. Вы хотите восстановить её?",
-  "kv_secret_restore_btn": "Восстановить тайную версию",
-  "kv_secret_loading": "Загрузка тайных данных..",
-  "kv_secret_delete_btn": "Удалить",
-  "kv_secret_delete_all_btn": "Удалить все версии",
-  "kv_secret_delete_version_btn": "Удалить версию {{ version }}",
-  "kv_secret_edit_btn": "Редактировать",
-  "kv_secret_versions_btn": "Версии",
+  kv_secret_title: "Тайные ключи/значения",
+  kv_secret_deleted_text:
+    "Тайная версия данных была удалена, но может быть восстановлена. Вы хотите восстановить её?",
+  kv_secret_restore_btn: "Восстановить тайную версию",
+  kv_secret_loading: "Загрузка тайных данных..",
+  kv_secret_delete_btn: "Удалить",
+  kv_secret_delete_all_btn: "Удалить все версии",
+  kv_secret_delete_version_btn: "Удалить версию {{ version }}",
+  kv_secret_edit_btn: "Редактировать",
+  kv_secret_versions_btn: "Версии",
 
   // Key Value Secret Editor Page
-  "kv_sec_edit_title": "Редактировать ключи/значения",
-  "kv_sec_edit_btn": "Редактировать",
-  "kv_sec_edit_loading": "Загрузка редактора..",
-  "kv_sec_edit_invalid_json_err": "Некорректный JSON",
-  "kv_sec_edit_suffix": " (редакт.)",
+  kv_sec_edit_title: "Редактировать ключи/значения",
+  kv_sec_edit_btn: "Редактировать",
+  kv_sec_edit_loading: "Загрузка редактора..",
+  kv_sec_edit_invalid_json_err: "Некорректный JSON",
+  kv_sec_edit_suffix: " (редакт.)",
 
   // Key Value Secret Versions Page
-  "kv_sec_versions_title": "Версии ключей/значений",
-  "kv_sec_versions_suffix": " (версии)",
+  kv_sec_versions_title: "Версии ключей/значений",
+  kv_sec_versions_suffix: " (версии)",
 
   // Key Value View/List Secrets Page
-  "kv_view_title": "Просмотр ключей/значений",
-  "kv_view_cubbyhole_text": "При использовании cubbyhole, тайные данные можно хранить до тех пор, пока действителен ваш код доступа. Они будут удалены при истечении кода и могут быть просмотрены только с использованием этого кода.",
-  "kv_view_new_btn": "Создать",
-  "kv_view_none_here_text": "У вас на данный момент нет тайных данных. Хотите ли вы их создать?",
+  kv_view_title: "Просмотр ключей/значений",
+  kv_view_cubbyhole_text:
+    "При использовании cubbyhole, тайные данные можно хранить до тех пор, пока действителен ваш код доступа. Они будут удалены при истечении кода и могут быть просмотрены только с использованием этого кода.",
+  kv_view_new_btn: "Создать",
+  kv_view_none_here_text: "У вас на данный момент нет тайных данных. Хотите ли вы их создать?",
 
   // TOTP View Page
-  "totp_view_title": "TOTP",
-  "totp_view_new_btn": "Добавить ключ TOTP",
-  "totp_view_loading": "Загрузка кодов TOTP..",
-  "totp_view_empty": "У вас на данный момент нет кодов TOTP. Хотите ли вы их создать?",
-  "totp_view_loading_box": "Загрузка..",
+  totp_view_title: "TOTP",
+  totp_view_new_btn: "Добавить ключ TOTP",
+  totp_view_loading: "Загрузка кодов TOTP..",
+  totp_view_empty: "У вас на данный момент нет кодов TOTP. Хотите ли вы их создать?",
+  totp_view_loading_box: "Загрузка..",
 
   // New TOTP Key Page
-  "totp_new_title": "Новый ключ TOTP",
-  "totp_new_suffix": " (новый)",
-  "totp_new_name_text": "Имя ключа TOTP",
-  "totp_new_info": "Необходим либо ключ, либо адрес URI. Лучше всего использовать URI, но он может не сработать. Отсканируйте QR-код и скопируйте его адрес.",
-  "totp_new_uri_input": "URI",
-  "totp_new_key_input": "Ключ",
-  "totp_new_add_btn": "Добавить ключ TOTP",
+  totp_new_title: "Новый ключ TOTP",
+  totp_new_suffix: " (новый)",
+  totp_new_name_text: "Имя ключа TOTP",
+  totp_new_info:
+    "Необходим либо ключ, либо адрес URI. Лучше всего использовать URI, но он может не сработать. Отсканируйте QR-код и скопируйте его адрес.",
+  totp_new_uri_input: "URI",
+  totp_new_key_input: "Ключ",
+  totp_new_add_btn: "Добавить ключ TOTP",
 
   // Transit View Page
-  "transit_view_title": "Ключи Transit",
-  "transit_view_none_here_text": "У вас нет ключей Transit, хотите ли вы их создать?",
+  transit_view_title: "Ключи Transit",
+  transit_view_none_here_text: "У вас нет ключей Transit, хотите ли вы их создать?",
 
   // Transit View Secret Page
-  "transit_view_secret_title": "Просмотр тайных данных Transit",
-  "transit_view_encrypt_text": "Зашифровать",
-  "transit_view_encrypt_icon_text": "Значок шифрования",
-  "transit_view_encrypt_description": "Зашифровать текст или двоичные данные, закодированные base64.",
-  "transit_view_decrypt_text": "Расшифровать",
-  "transit_view_decrypt_description": "Расшифровать шифр-текст.",
-  "transit_view_decrypt_icon_text": "Значок расшифрования",
-  "transit_view_rewrap_text": "Перешифровать",
-  "transit_view_rewrap_description": "Перешифровать шифр-текст, используя другую версию ключа.",
-  "transit_view_rewrap_icon_text": "Значок перешифрования",
+  transit_view_secret_title: "Просмотр тайных данных Transit",
+  transit_view_encrypt_text: "Зашифровать",
+  transit_view_encrypt_icon_text: "Значок шифрования",
+  transit_view_encrypt_description: "Зашифровать текст или двоичные данные, закодированные base64.",
+  transit_view_decrypt_text: "Расшифровать",
+  transit_view_decrypt_description: "Расшифровать шифр-текст.",
+  transit_view_decrypt_icon_text: "Значок расшифрования",
+  transit_view_rewrap_text: "Перешифровать",
+  transit_view_rewrap_description: "Перешифровать шифр-текст, используя другую версию ключа.",
+  transit_view_rewrap_icon_text: "Значок перешифрования",
 
   // Transit Encrypt Page
-  "transit_encrypt_title": "Шифрование Transit",
-  "transit_encrypt_suffix": " (шифр.)",
-  "transit_encrypt_input_placeholder": "Текст или base64",
-  "transit_encrypt_already_encoded_checkbox": "Данные уже закодированы в base64?",
-  "transit_encrypt_encrypt_btn": "Зашифровать",
-  "transit_encrypt_encryption_result_modal_title": "Результат шифрования",
+  transit_encrypt_title: "Шифрование Transit",
+  transit_encrypt_suffix: " (шифр.)",
+  transit_encrypt_input_placeholder: "Текст или base64",
+  transit_encrypt_already_encoded_checkbox: "Данные уже закодированы в base64?",
+  transit_encrypt_encrypt_btn: "Зашифровать",
+  transit_encrypt_encryption_result_modal_title: "Результат шифрования",
 
   // Transit Decrypt Page
-  "transit_decrypt_title": "Расшифрование Transit",
-  "transit_decrypt_suffix": " (расшифр.)",
-  "transit_decrypt_input_placeholder": "Шифр-текст",
-  "transit_decrypt_decode_checkbox": "Нужно ли раскодировать текст из base64?",
-  "transit_decrypt_decrypt_btn": "Расшифровать",
-  "transit_decrypt_decryption_result_modal_title": "Результат расшифрования",
+  transit_decrypt_title: "Расшифрование Transit",
+  transit_decrypt_suffix: " (расшифр.)",
+  transit_decrypt_input_placeholder: "Шифр-текст",
+  transit_decrypt_decode_checkbox: "Нужно ли раскодировать текст из base64?",
+  transit_decrypt_decrypt_btn: "Расшифровать",
+  transit_decrypt_decryption_result_modal_title: "Результат расшифрования",
 
   // Transit Rewrap Page
-  "transit_rewrap_title": "Перешифрование Transit",
-  "transit_rewrap_suffix": " (перешифр.)",
-  "transit_rewrap_version_option_text": "{{version_num}}",
-  "transit_rewrap_latest_version_option_text": "{{version_num}} (последняя версия)",
-  "transit_rewrap_input_placeholder": "Шифр-текст",
-  "transit_rewrap_rewrap_btn": "Перешифровать",
-  "transit_rewrap_result_modal_title": "Результат перешифрования",
-}
+  transit_rewrap_title: "Перешифрование Transit",
+  transit_rewrap_suffix: " (перешифр.)",
+  transit_rewrap_version_option_text: "{{version_num}}",
+  transit_rewrap_latest_version_option_text: "{{version_num}} (последняя версия)",
+  transit_rewrap_input_placeholder: "Шифр-текст",
+  transit_rewrap_rewrap_btn: "Перешифровать",
+  transit_rewrap_result_modal_title: "Результат перешифрования",
+};

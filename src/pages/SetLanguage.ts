@@ -3,8 +3,8 @@ import { Page } from "../types/Page";
 import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
-import i18next from 'i18next';
 import { reloadNavBar } from "../elements/NavBar";
+import i18next from "i18next";
 
 // @ts-ignore
 import translations from "../translations/index.mjs";
@@ -20,25 +20,26 @@ export class SetLanguagePage extends Page {
       tag: "form",
       id: "setLanguageForm",
       children: [
-        Margin(makeElement({
-          tag: "select",
-          class: ["uk-select", "uk-form-width-large"],
-          attributes: {
-            name: "language"
-          },
-          children: languageIDs.map(function (languageID) {
-            return makeElement({
-              tag: "option",
-              text: i18next.getFixedT(languageID, null)("language_name"),
-              attributes: { value: languageID }
-            })
-          })
-        })
+        Margin(
+          makeElement({
+            tag: "select",
+            class: ["uk-select", "uk-form-width-large"],
+            attributes: {
+              name: "language",
+            },
+            children: languageIDs.map(function (languageID) {
+              return makeElement({
+                tag: "option",
+                text: i18next.getFixedT(languageID, null)("language_name"),
+                attributes: { value: languageID },
+              });
+            }),
+          }),
         ),
         makeElement({
           tag: "p",
           id: "errorText",
-          class: "uk-text-danger"
+          class: "uk-text-danger",
         }),
         makeElement({
           tag: "button",
@@ -46,9 +47,9 @@ export class SetLanguagePage extends Page {
           text: i18next.t("set_language_btn"),
           attributes: {
             type: "submit",
-          }
-        })
-      ]
+          },
+        }),
+      ],
     }) as HTMLFormElement;
     setPageContent(setLanguageForm);
     setLanguageForm.addEventListener("submit", function (e) {

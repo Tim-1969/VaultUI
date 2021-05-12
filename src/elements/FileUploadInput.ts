@@ -6,8 +6,8 @@ export function FileUploadInput(name: string): Element {
     tag: "input",
     attributes: {
       name: name,
-      type: "file"
-    }
+      type: "file",
+    },
   });
 
   const selectInput = makeElement({
@@ -15,8 +15,8 @@ export function FileUploadInput(name: string): Element {
     class: ["uk-input", "uk-form-width-medium"],
     attributes: {
       type: "text",
-      placeholder: i18next.t("file_upload_input_btn")
-    }
+      placeholder: i18next.t("file_upload_input_btn"),
+    },
   });
 
   const fileIcon = makeElement({
@@ -24,19 +24,15 @@ export function FileUploadInput(name: string): Element {
     class: "uk-form-icon",
     attributes: {
       "uk-icon": "icon: upload",
-      "role": "img"
+      role: "img",
     },
   });
 
   return makeElement({
     tag: "div",
     attributes: {
-      "uk-form-custom": "target: true"
+      "uk-form-custom": "target: true",
     },
-    children: [
-      fileIcon,
-      fileInput,
-      selectInput
-    ]
+    children: [fileIcon, fileInput, selectInput],
   });
 }

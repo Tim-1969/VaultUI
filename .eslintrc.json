@@ -1,14 +1,12 @@
 {
-  "plugins": [
-    "sort-imports-es6-autofix",
-    "@typescript-eslint"
-  ],
+  "plugins": ["sort-imports-es6-autofix", "@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 12,
@@ -23,9 +21,7 @@
     "BUILD_STRING": "writable"
   },
   "rules": {
-    "no-unused-vars": [
-      "off"
-    ],
+    "no-unused-vars": ["off"],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -38,15 +34,10 @@
         "allow": ["arrowFunctions"]
       }
     ],
-    "@typescript-eslint/ban-ts-comment": [
-      "off"
-    ],
-    "sort-imports-es6-autofix/sort-imports-es6": [
-      2
-    ],
-    "@typescript-eslint/no-explicit-any": [
-      2
-    ]
+    "@typescript-eslint/ban-ts-comment": ["off"],
+    "sort-imports-es6-autofix/sort-imports-es6": [2],
+    "@typescript-eslint/no-explicit-any": [2],
+    "prettier/prettier": 2
   },
   "env": {
     "browser": true,
@@ -57,10 +48,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".ts"
-        ]
+        "extensions": [".js", ".ts"]
       }
     }
   }

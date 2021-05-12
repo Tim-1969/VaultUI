@@ -5,13 +5,12 @@ export async function getSecret(
   mountType: string,
   secretPath: string[],
   name: string,
-  version: string|null = null
+  version: string | null = null,
 ): Promise<Record<string, unknown>> {
   let secretURL = "";
   if (mountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/data/${secretPath.join("")}/${name}`;
-    if (version != null)
-      secretURL += `?version=${version}`;
+    if (version != null) secretURL += `?version=${version}`;
   } else {
     secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
   }
@@ -20,10 +19,10 @@ export async function getSecret(
   });
 
   const resp = await fetch(request);
-  const data = await resp.json() as unknown;
+  const data = (await resp.json()) as unknown;
   if (mountType == "kv-v2") {
-    return (data as {data: {data: Record<string, unknown>}}).data.data;
+    return (data as { data: { data: Record<string, unknown> } }).data.data;
   } else {
-    return (data as {data: Record<string, unknown>}).data;
+    return (data as { data: Record<string, unknown> }).data;
   }
 }

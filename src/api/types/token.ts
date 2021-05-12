@@ -16,4 +16,4 @@ export type TokenInfo = {
   policies: string[];
   renewable: boolean;
   ttl: number;
-}
+};

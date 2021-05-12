@@ -1,8 +1,6 @@
 import { Page } from "./types/Page";
-import { allPages } from "./allPages"
-import {
-  getKeyByObjectPropertyValue,
-} from "./utils";
+import { allPages } from "./allPages";
+import { getKeyByObjectPropertyValue } from "./utils";
 
 export class PageState {
   constructor() {
@@ -14,47 +12,46 @@ export class PageState {
   // example: currentSecretPath is a array so when you try to .push() to it
   // it will modify the object that was getted from this class
   // then when you try to access it again, there will be a different object.
-  // I guess you could make another class that emulates a Array or Map 
+  // I guess you could make another class that emulates a Array or Map
   // by using a bunch of functions and modifying localStorage in order to remove some of
   // the clunkyness of this approach, but for now, this works.
 
   get apiURL(): string | null {
-    const apiurl = localStorage.getItem('apiURL') || "";
+    const apiurl = localStorage.getItem("apiURL") || "";
     return apiurl.length > 0 ? apiurl : null;
   }
   set apiURL(value: string) {
-    localStorage.setItem('apiURL', value);
+    localStorage.setItem("apiURL", value);
   }
 
   get token(): string | null {
-    const tok = localStorage.getItem('token') || "";
+    const tok = localStorage.getItem("token") || "";
     return tok.length > 0 ? tok : null;
   }
   set token(value: string) {
-    localStorage.setItem('token', value);
+    localStorage.setItem("token", value);
   }
 
   get pageDirection(): string {
-    return localStorage.getItem('pageDirection') || "ltr";
+    return localStorage.getItem("pageDirection") || "ltr";
   }
   set pageDirection(value: string) {
-    localStorage.setItem('pageDirection', value);
+    localStorage.setItem("pageDirection", value);
   }
 
   get language(): string {
-    return localStorage.getItem('language') || "";
+    return localStorage.getItem("language") || "";
   }
   set language(value: string) {
-    localStorage.setItem('language', value);
+    localStorage.setItem("language", value);
   }
 
   get currentBaseMount(): string {
-    return localStorage.getItem('currentBaseMount') || "";
+    return localStorage.getItem("currentBaseMount") || "";
   }
   set currentBaseMount(value: string) {
-    localStorage.setItem('currentBaseMount', value);
+    localStorage.setItem("currentBaseMount", value);
   }
-
 
   // Since this is a array we can't act directly on it so we need
   // functions to do the same modifications.
@@ -71,47 +68,47 @@ export class PageState {
   }
 
   get currentSecretPath(): string[] {
-    return JSON.parse(localStorage.getItem('currentSecretPath') || "[]") as string[];
+    return JSON.parse(localStorage.getItem("currentSecretPath") || "[]") as string[];
   }
   set currentSecretPath(value: string[]) {
-    localStorage.setItem('currentSecretPath', JSON.stringify(value));
+    localStorage.setItem("currentSecretPath", JSON.stringify(value));
   }
 
   get currentSecretVersion(): string | null {
-    const result = localStorage.getItem('currentSecretVersion')
+    const result = localStorage.getItem("currentSecretVersion");
     return result != "null" ? result || null : null;
   }
   set currentSecretVersion(value: string) {
-    localStorage.setItem('currentSecretVersion', String(value));
+    localStorage.setItem("currentSecretVersion", String(value));
   }
 
   get currentSecret(): string {
-    return localStorage.getItem('currentSecret') || "";
+    return localStorage.getItem("currentSecret") || "";
   }
   set currentSecret(value: string) {
-    localStorage.setItem('currentSecret', value);
+    localStorage.setItem("currentSecret", value);
   }
 
   get currentMountType(): string {
-    return localStorage.getItem('currentMountType') || "";
+    return localStorage.getItem("currentMountType") || "";
   }
   set currentMountType(value: string) {
-    localStorage.setItem('currentMountType', value);
+    localStorage.setItem("currentMountType", value);
   }
   get currentPageString(): string {
     const key = getKeyByObjectPropertyValue(allPages, this.currentPage);
     return key;
   }
   get currentPage(): Page | string {
-    const curPage = localStorage.getItem('currentPage') || "HOME";
+    const curPage = localStorage.getItem("currentPage") || "HOME";
     return allPages[curPage];
   }
   set currentPage(value: Page | string) {
-    if (typeof value == 'object') {
+    if (typeof value == "object") {
       const key = getKeyByObjectPropertyValue(allPages, value);
-      localStorage.setItem('currentPage', key);
+      localStorage.setItem("currentPage", key);
     } else {
-      localStorage.setItem('currentPage', value);
+      localStorage.setItem("currentPage", value);
     }
   }
 }

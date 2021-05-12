@@ -21,8 +21,8 @@ import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
 
 type pagesList = {
-  [key: string]: Page
-}
+  [key: string]: Page;
+};
 
 export const allPages: pagesList = {
   HOME: new HomePage(),

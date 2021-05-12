@@ -21,20 +21,24 @@ export class TransitDecryptPage extends Page {
 
   render(): void {
     setTitleElement(pageState);
-    setPageContent(makeElement({
-      tag: "div"
-    }));
+    setPageContent(
+      makeElement({
+        tag: "div",
+      }),
+    );
     this.transitDecryptForm = makeElement({
       tag: "form",
       children: [
-        Margin(makeElement({
-          tag: "textarea",
-          class: ["uk-textarea", "uk-form-width-medium"],
-          attributes: {
-            placeholder: i18next.t("transit_decrypt_input_placeholder"),
-            name: "ciphertext",
-          }
-        })),
+        Margin(
+          makeElement({
+            tag: "textarea",
+            class: ["uk-textarea", "uk-form-width-medium"],
+            attributes: {
+              placeholder: i18next.t("transit_decrypt_input_placeholder"),
+              name: "ciphertext",
+            },
+          }),
+        ),
         Margin(FileUploadInput("ciphertext_file")),
         Margin([
           makeElement({
@@ -51,14 +55,14 @@ export class TransitDecryptPage extends Page {
               attributes: {
                 type: "checkbox",
                 name: "decodeBase64Checkbox",
-              }
+              },
             }),
           }),
         ]),
         makeElement({
           tag: "p",
           id: "errorText",
-          class: "uk-text-danger"
+          class: "uk-text-danger",
         }),
         makeElement({
           tag: "button",
@@ -66,9 +70,9 @@ export class TransitDecryptPage extends Page {
           text: i18next.t("transit_decrypt_decrypt_btn"),
           attributes: {
             type: "submit",
-          }
-        })
-      ]
+          },
+        }),
+      ],
     }) as HTMLFormElement;
     setPageContent(this.transitDecryptForm);
     this.transitDecryptForm.addEventListener("submit", (e: Event) => {
@@ -86,20 +90,23 @@ export class TransitDecryptPage extends Page {
 
     const ciphertext_file = formData.get("ciphertext_file") as File;
     if (ciphertext_file.size > 0) {
-      ciphertext = atob((await fileToBase64(ciphertext_file) ).replace("data:text/plain;base64,", ""));
+      ciphertext = atob(
+        (await fileToBase64(ciphertext_file)).replace("data:text/plain;base64,", ""),
+      );
     }
 
     try {
-      const res = await transitDecrypt(
-        pageState.currentBaseMount,
-        pageState.currentSecret,
-        { ciphertext: ciphertext },
-      );
+      const res = await transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, {
+        ciphertext: ciphertext,
+      });
       let plaintext = res.plaintext;
       if (decodeBase64 == "on") {
         plaintext = atob(plaintext);
       }
-      const modal = CopyableModal(i18next.t("transit_decrypt_decryption_result_modal_title"), plaintext);
+      const modal = CopyableModal(
+        i18next.t("transit_decrypt_decryption_result_modal_title"),
+        plaintext,
+      );
       document.body.querySelector("#pageContent").appendChild(modal);
       modal.show();
     } catch (e: unknown) {

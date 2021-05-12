@@ -18,23 +18,35 @@ export function NavBar(): HTMLElement {
           tag: "ul",
           class: "uk-navbar-nav",
           children: [
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("home_btn"),
-              onclick: () => { changePage("HOME"); }
-            })),
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("back_btn"),
-              onclick: () => { (pageState.currentPage as Page).goBack(); }
-            })),
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("refresh_btn"),
-              onclick: () => { changePage(pageState.currentPageString); }
-            })),
-          ]
-        })
+            ListItem(
+              makeElement({
+                tag: "a",
+                text: i18next.t("home_btn"),
+                onclick: () => {
+                  changePage("HOME");
+                },
+              }),
+            ),
+            ListItem(
+              makeElement({
+                tag: "a",
+                text: i18next.t("back_btn"),
+                onclick: () => {
+                  (pageState.currentPage as Page).goBack();
+                },
+              }),
+            ),
+            ListItem(
+              makeElement({
+                tag: "a",
+                text: i18next.t("refresh_btn"),
+                onclick: () => {
+                  changePage(pageState.currentPageString);
+                },
+              }),
+            ),
+          ],
+        }),
       }),
       makeElement({
         tag: "div",
@@ -43,19 +55,22 @@ export function NavBar(): HTMLElement {
           tag: "ul",
           class: "uk-navbar-nav",
           children: [
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("me_btn"),
-              onclick: () => { changePage("ME"); }
-            }))
-          ]
-        })
-      })
-    ]
-  })
+            ListItem(
+              makeElement({
+                tag: "a",
+                text: i18next.t("me_btn"),
+                onclick: () => {
+                  changePage("ME");
+                },
+              }),
+            ),
+          ],
+        }),
+      }),
+    ],
+  });
 }
 
 export function reloadNavBar(): void {
   document.querySelector("#navBar").replaceWith(NavBar());
 }
-

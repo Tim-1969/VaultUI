@@ -4,7 +4,7 @@ import { appendAPIURL, getHeaders } from "../apiUtils";
 export async function getSecrets(
   baseMount: string,
   mountType: string,
-  secretPath: string[]
+  secretPath: string[],
 ): Promise<string[]> {
   let secretURL = "";
   if (mountType == "kv-v2") {
@@ -20,6 +20,6 @@ export async function getSecrets(
   if (resp.status == 404) {
     throw DoesNotExistError;
   }
-  const data = await resp.json() as { data: { keys: string[] } };
+  const data = (await resp.json()) as { data: { keys: string[] } };
   return data.data.keys;
 }

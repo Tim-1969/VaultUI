@@ -9,7 +9,7 @@ export interface CopyableInputBoxType extends HTMLElement {
 }
 
 export function CopyableInputBox(text: string, copyable = true): CopyableInputBoxType {
-  const inputBoxDiv = (makeElement({ tag: "div" }) as CopyableInputBoxType);
+  const inputBoxDiv = makeElement({ tag: "div" }) as CopyableInputBoxType;
   let inputBoxCopyButton: HTMLElement = null;
   if (copyable) {
     inputBoxCopyButton = makeElement({
@@ -17,26 +17,23 @@ export function CopyableInputBox(text: string, copyable = true): CopyableInputBo
       class: "uk-form-icon",
       attributes: {
         "uk-icon": "icon: copy",
-        "role": "img",
-        "aria-label": i18next.t("copy_input_box_copy_icon_text")
+        role: "img",
+        "aria-label": i18next.t("copy_input_box_copy_icon_text"),
       },
       thenRun: (e) => {
         const clipboard = new ClipboardJS(e);
         addClipboardNotifications(clipboard, 600);
-      }
+      },
     });
   }
 
   const inputBoxInput = makeElement({
     tag: "input",
     class: ["uk-input", "uk-input-copyable"],
-    attributes: { "readonly": "true", "type": "text" },
+    attributes: { readonly: "true", type: "text" },
   }) as HTMLInputElement;
 
-  const inputBoxInner = MarginInline([
-    inputBoxCopyButton,
-    inputBoxInput
-  ]);
+  const inputBoxInner = MarginInline([inputBoxCopyButton, inputBoxInput]);
   inputBoxDiv.appendChild(inputBoxInner);
 
   inputBoxDiv.setText = function (text) {
@@ -46,7 +43,6 @@ export function CopyableInputBox(text: string, copyable = true): CopyableInputBo
     }
   };
   inputBoxDiv.setText(text);
-
 
   return inputBoxDiv;
 }

@@ -19,7 +19,7 @@ export type TransitKeyBaseType = {
   exportable: boolean;
   allow_plaintext_backup: boolean;
   type: keyof typeof TransitKeyTypes;
-}
+};
 
 // Type returned when calling getTransitKey
 export type TransitKeyType = TransitKeyBaseType & {
@@ -32,4 +32,4 @@ export type TransitKeyType = TransitKeyBaseType & {
   supports_decryption: boolean;
   supports_derivation: boolean;
   supports_signing: boolean;
-}
+};

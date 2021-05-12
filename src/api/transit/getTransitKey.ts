@@ -11,6 +11,6 @@ export async function getTransitKey(baseMount: string, name: string): Promise<Tr
   if (resp.status == 404) {
     throw DoesNotExistError;
   }
-  const data = await resp.json() as { data: TransitKeyType };
+  const data = (await resp.json()) as { data: TransitKeyType };
   return data.data;
 }

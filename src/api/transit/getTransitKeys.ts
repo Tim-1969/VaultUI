@@ -9,6 +9,6 @@ export async function getTransitKeys(baseMount: string): Promise<string[]> {
   if (resp.status == 404) {
     throw DoesNotExistError;
   }
-  const data = await resp.json() as { data:  string[] };
+  const data = (await resp.json()) as { data: string[] };
   return data.data;
 }

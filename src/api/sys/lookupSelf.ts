@@ -6,7 +6,7 @@ export async function lookupSelf(): Promise<TokenInfo> {
     headers: getHeaders(),
   });
   const resp = await fetch(request);
-  const data = await resp.json() as { data?: TokenInfo; errors?: string[] };
+  const data = (await resp.json()) as { data?: TokenInfo; errors?: string[] };
   if ("data" in data) {
     return data.data;
   } else if ("errors" in data) {

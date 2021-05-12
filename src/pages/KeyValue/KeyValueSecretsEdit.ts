@@ -6,7 +6,7 @@ import { getSecret } from "../../api/kv/getSecret";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
 import { sortedObjectMap, verifyJSONString } from "../../utils";
-import i18next from 'i18next';
+import i18next from "i18next";
 
 export class KeyValueSecretEditPage extends Page {
   constructor() {
@@ -19,41 +19,43 @@ export class KeyValueSecretEditPage extends Page {
     setTitleElement(pageState);
     const loadingText = makeElement({
       tag: "p",
-      text: i18next.t("kv_sec_edit_loading")
+      text: i18next.t("kv_sec_edit_loading"),
     });
     const editor = makeElement({
       tag: "div",
-      class: ["editor", "language-json"]
+      class: ["editor", "language-json"],
     });
     const saveButton = makeElement({
       tag: "button",
       class: ["uk-button", "uk-button-primary"],
-      text: i18next.t("kv_sec_edit_btn")
+      text: i18next.t("kv_sec_edit_btn"),
     });
-    setPageContent(makeElement({
-      tag: "div",
-      children: [
-        loadingText,
-        editor,
-        makeElement({
-          tag: "p",
-          id: "errorText",
-          class: ["uk-text-danger", "uk-margin-top"]
-        }),
-        saveButton
-      ]
-    }));
+    setPageContent(
+      makeElement({
+        tag: "div",
+        children: [
+          loadingText,
+          editor,
+          makeElement({
+            tag: "p",
+            id: "errorText",
+            class: ["uk-text-danger", "uk-margin-top"],
+          }),
+          saveButton,
+        ],
+      }),
+    );
     void getSecret(
       pageState.currentBaseMount,
       pageState.currentMountType,
       pageState.currentSecretPath,
       pageState.currentSecret,
-    ).then(secretInfo => {
+    ).then((secretInfo) => {
       loadingText.remove();
 
       const secretsJSON = JSON.stringify(sortedObjectMap(secretInfo), null, 4);
 
-      const jar = CodeJar(editor, () => { }, { tab: ' '.repeat(4) });
+      const jar = CodeJar(editor, () => {}, { tab: " ".repeat(4) });
       jar.updateCode(secretsJSON);
       saveButton.onclick = function () {
         if (!verifyJSONString(jar.toString())) {
@@ -66,13 +68,15 @@ export class KeyValueSecretEditPage extends Page {
           pageState.currentMountType,
           pageState.currentSecretPath,
           pageState.currentSecret,
-          JSON.parse(jar.toString())
-        ).then(_ => {
-          changePage("KEY_VALUE_SECRET");
-          return;
-        }).catch((e: Error) => {
-          setErrorText(e.message);
-        });
+          JSON.parse(jar.toString()),
+        )
+          .then((_) => {
+            changePage("KEY_VALUE_SECRET");
+            return;
+          })
+          .catch((e: Error) => {
+            setErrorText(e.message);
+          });
       };
     });
   }

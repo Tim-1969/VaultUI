@@ -3,7 +3,7 @@ import { changePage, setErrorText, setPageContent, setTitleElement } from "../..
 import { createOrUpdateSecret } from "../../api/kv/createOrUpdateSecret";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
-import i18next from 'i18next';
+import i18next from "i18next";
 
 export class KeyValueNewPage extends Page {
   constructor() {
@@ -32,14 +32,14 @@ export class KeyValueNewPage extends Page {
               required: "true",
               type: "text",
               placeholder: i18next.t("kv_new_path"),
-              name: "path"
-            }
-          })
+              name: "path",
+            },
+          }),
         }),
         makeElement({
           tag: "p",
           id: "errorText",
-          class: "uk-text-danger"
+          class: "uk-text-danger",
         }),
         makeElement({
           tag: "button",
@@ -47,9 +47,9 @@ export class KeyValueNewPage extends Page {
           text: i18next.t("kv_new_create_btn"),
           attributes: {
             type: "submit",
-          }
-        })
-      ]
+          },
+        }),
+      ],
     }) as HTMLFormElement;
     setPageContent(this.addKVNewForm);
 
@@ -65,7 +65,7 @@ export class KeyValueNewPage extends Page {
     let keyData = {};
 
     if (["kv-v1", "cubbyhole"].includes(pageState.currentMountType)) {
-      keyData = { "key": "value" };
+      keyData = { key: "value" };
     }
 
     try {
@@ -74,14 +74,13 @@ export class KeyValueNewPage extends Page {
         pageState.currentMountType,
         pageState.currentSecretPath,
         path,
-        keyData
-      )
+        keyData,
+      );
       changePage("KEY_VALUE_VIEW");
     } catch (e: unknown) {
       const error = e as Error;
       setErrorText(error.message);
     }
-
   }
 
   get titleSuffix(): string {

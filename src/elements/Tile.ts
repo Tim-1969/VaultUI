@@ -7,7 +7,7 @@ type TileParams = {
   icon: string;
   iconText: string;
   onclick: () => void;
-}
+};
 
 export function Tile(params: TileParams): HTMLElement {
   if (!params.condition) return;
@@ -28,17 +28,17 @@ export function Tile(params: TileParams): HTMLElement {
             class: ["uk-icon", "uk-margin-small-left"],
             attributes: {
               "uk-icon": `icon: ${params.icon}`,
-              "role": "img",
-              "aria-label": params.iconText
-            }
-          })
+              role: "img",
+              "aria-label": params.iconText,
+            },
+          }),
         }),
         makeElement({
           tag: "span",
           class: "uk-text-muted",
-          text: params.description
-        })
-      ]
-    })
+          text: params.description,
+        }),
+      ],
+    }),
   });
 }

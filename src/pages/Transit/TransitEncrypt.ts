@@ -8,7 +8,6 @@ import { pageState } from "../../globalPageState";
 import { transitEncrypt } from "../../api/transit/transitEncrypt";
 import i18next from "i18next";
 
-
 export class TransitEncryptPage extends Page {
   constructor() {
     super();
@@ -20,23 +19,26 @@ export class TransitEncryptPage extends Page {
 
   transitEncryptForm: HTMLFormElement;
 
-
   render(): void {
     setTitleElement(pageState);
-    setPageContent(makeElement({
-      tag: "div"
-    }));
+    setPageContent(
+      makeElement({
+        tag: "div",
+      }),
+    );
     this.transitEncryptForm = makeElement({
       tag: "form",
       children: [
-        Margin(makeElement({
-          tag: "textarea",
-          class: ["uk-textarea", "uk-form-width-medium"],
-          attributes: {
-            placeholder: i18next.t("transit_encrypt_input_placeholder"),
-            name: "plaintext",
-          }
-        })),
+        Margin(
+          makeElement({
+            tag: "textarea",
+            class: ["uk-textarea", "uk-form-width-medium"],
+            attributes: {
+              placeholder: i18next.t("transit_encrypt_input_placeholder"),
+              name: "plaintext",
+            },
+          }),
+        ),
         Margin(FileUploadInput("plaintext_file")),
         Margin([
           makeElement({
@@ -53,14 +55,14 @@ export class TransitEncryptPage extends Page {
               attributes: {
                 type: "checkbox",
                 name: "base64Checkbox",
-              }
+              },
             }),
           }),
         ]),
         makeElement({
           tag: "p",
           id: "errorText",
-          class: "uk-text-danger"
+          class: "uk-text-danger",
         }),
         makeElement({
           tag: "button",
@@ -68,9 +70,9 @@ export class TransitEncryptPage extends Page {
           text: i18next.t("transit_encrypt_encrypt_btn"),
           attributes: {
             type: "submit",
-          }
-        })
-      ]
+          },
+        }),
+      ],
     }) as HTMLFormElement;
     setPageContent(this.transitEncryptForm);
 
@@ -89,19 +91,20 @@ export class TransitEncryptPage extends Page {
 
     const plaintext_file = formData.get("plaintext_file") as File;
     if (plaintext_file.size > 0) {
-      plaintext = (await fileToBase64(plaintext_file) ).replace("data:text/plain;base64,", "");
+      plaintext = (await fileToBase64(plaintext_file)).replace("data:text/plain;base64,", "");
       plaintext = base64Checkbox == "on" ? atob(plaintext) : plaintext;
     } else {
       plaintext = base64Checkbox == "on" ? plaintext : btoa(plaintext);
     }
 
     try {
-      const res = await transitEncrypt(
-        pageState.currentBaseMount,
-        pageState.currentSecret,
-        { plaintext: plaintext }
+      const res = await transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, {
+        plaintext: plaintext,
+      });
+      const modal = CopyableModal(
+        i18next.t("transit_encrypt_encryption_result_modal_title"),
+        res.ciphertext,
       );
-      const modal = CopyableModal(i18next.t("transit_encrypt_encryption_result_modal_title"), res.ciphertext);
       document.body.querySelector("#pageContent").appendChild(modal);
       modal.show();
     } catch (e: unknown) {

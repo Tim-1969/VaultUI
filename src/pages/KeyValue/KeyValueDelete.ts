@@ -3,7 +3,7 @@ import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
 import { deleteSecret } from "../../api/kv/deleteSecret";
 import { makeElement } from "../../htmlUtils";
 import { pageState } from "../../globalPageState";
-import i18next from 'i18next';
+import i18next from "i18next";
 
 export class KeyValueDeletePage extends Page {
   constructor() {
@@ -20,31 +20,33 @@ export class KeyValueDeletePage extends Page {
   }
   render(): void {
     setTitleElement(pageState);
-    setPageContent(makeElement({
-      tag: "div",
-      children: [
-        makeElement({
-          tag: "h5",
-          text: i18next.t("kv_delete_text")
-        }),
-        makeElement({
-          tag: "button",
-          class: ["uk-button", "uk-button-danger"],
-          text: i18next.t("kv_delete_btn"),
-          onclick: () => {
-            void deleteSecret(
-              pageState.currentBaseMount,
-              pageState.currentMountType,
-              pageState.currentSecretPath,
-              pageState.currentSecret,
-              pageState.currentSecretVersion,
-            ).then(() => {
-              this.goBack();
-            });
-          }
-        }),
-      ]
-    }));
+    setPageContent(
+      makeElement({
+        tag: "div",
+        children: [
+          makeElement({
+            tag: "h5",
+            text: i18next.t("kv_delete_text"),
+          }),
+          makeElement({
+            tag: "button",
+            class: ["uk-button", "uk-button-danger"],
+            text: i18next.t("kv_delete_btn"),
+            onclick: () => {
+              void deleteSecret(
+                pageState.currentBaseMount,
+                pageState.currentMountType,
+                pageState.currentSecretPath,
+                pageState.currentSecret,
+                pageState.currentSecretVersion,
+              ).then(() => {
+                this.goBack();
+              });
+            },
+          }),
+        ],
+      }),
+    );
   }
   get titleSuffix(): string {
     return i18next.t("kv_delete_suffix");

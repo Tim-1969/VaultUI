@@ -6,7 +6,7 @@ export async function deleteSecret(
   mountType: string,
   secretPath: string[],
   name: string,
-  version: string | null = null
+  version: string | null = null,
 ): Promise<void> {
   let secretURL = "";
 
@@ -19,9 +19,9 @@ export async function deleteSecret(
       method: "POST",
       headers: {
         ...getHeaders(),
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: version != null ? JSON.stringify({ "versions": [version] }) : "{}"
+      body: version != null ? JSON.stringify({ versions: [version] }) : "{}",
     });
   } else {
     if (mountType == "kv-v2") {
@@ -37,7 +37,7 @@ export async function deleteSecret(
   }
   const response = await fetch(request);
   if (!response.ok) {
-    const json = await response.json() as {errors: string[]};
+    const json = (await response.json()) as { errors: string[] };
     throw new Error(json.errors[0]);
   }
 }

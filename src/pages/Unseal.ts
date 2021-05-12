@@ -5,13 +5,12 @@ import { SealStatusType, getSealStatus } from "../api/sys/getSealStatus";
 import { changePage, setErrorText, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import { submitUnsealKey } from "../api/sys/submitUnsealKey";
-import i18next from 'i18next';
-
+import i18next from "i18next";
 
 const UnsealInputModes = {
   FORM_INPUT: "FORM_INPUT",
-  QR_INPUT: "QR_INPUT"
-}
+  QR_INPUT: "QR_INPUT",
+};
 
 export class UnsealPage extends Page {
   constructor() {
@@ -57,28 +56,33 @@ export class UnsealPage extends Page {
     this.unsealProgress = makeElement({
       tag: "progress",
       class: "uk-progress",
-      attributes: { value: "0", max: "0" }
+      attributes: { value: "0", max: "0" },
     }) as HTMLProgressElement;
     this.unsealProgressText = makeElement({
       tag: "p",
-      text: i18next.t("unseal_keys_progress", { progress: "0", keys_needed: "0" }),
+      text: i18next.t("unseal_keys_progress", {
+        progress: "0",
+        keys_needed: "0",
+      }),
     }) as HTMLParagraphElement;
     this.unsealInputContent = makeElement({
-      tag: "div"
-    });
-    setPageContent(makeElement({
       tag: "div",
-      children: [
-        this.unsealProgress,
-        makeElement({
-          tag: "p",
-          id: "errorText",
-          class: ["uk-text-danger", "uk-margin-top"]
-        }),
-        this.unsealProgressText,
-        this.unsealInputContent
-      ]
-    }));
+    });
+    setPageContent(
+      makeElement({
+        tag: "div",
+        children: [
+          this.unsealProgress,
+          makeElement({
+            tag: "p",
+            id: "errorText",
+            class: ["uk-text-danger", "uk-margin-top"],
+          }),
+          this.unsealProgressText,
+          this.unsealInputContent,
+        ],
+      }),
+    );
     this.switchInputMode(this.mode);
     this.updateSealProgress(await getSealStatus());
     this.makeRefresher();
@@ -86,29 +90,28 @@ export class UnsealPage extends Page {
 
   setButtons(method: string): void {
     const newMethod: string =
-      method == UnsealInputModes.FORM_INPUT ?
-        UnsealInputModes.QR_INPUT
-        :
-        UnsealInputModes.FORM_INPUT;
+      method == UnsealInputModes.FORM_INPUT
+        ? UnsealInputModes.QR_INPUT
+        : UnsealInputModes.FORM_INPUT;
     const buttonText: string =
-      newMethod == UnsealInputModes.FORM_INPUT ?
-        i18next.t("unseal_input_btn")
-        :
-        i18next.t("unseal_qr_btn");
-    this.unsealInputContent.appendChild(makeElement({
-      tag: "button",
-      class: ["uk-button", "uk-button-primary"],
-      text: buttonText,
-      onclick: () => {
-        this.switchInputMode(newMethod);
-      }
-    }))
+      newMethod == UnsealInputModes.FORM_INPUT
+        ? i18next.t("unseal_input_btn")
+        : i18next.t("unseal_qr_btn");
+    this.unsealInputContent.appendChild(
+      makeElement({
+        tag: "button",
+        class: ["uk-button", "uk-button-primary"],
+        text: buttonText,
+        onclick: () => {
+          this.switchInputMode(newMethod);
+        },
+      }),
+    );
   }
-
 
   switchInputMode(method: string): void {
     this.deinitWebcam();
-    this.unsealInputContent.querySelectorAll('*').forEach(n => n.remove())
+    this.unsealInputContent.querySelectorAll("*").forEach((n) => n.remove());
     if (method == UnsealInputModes.FORM_INPUT) this.makeUnsealForm();
     if (method == UnsealInputModes.QR_INPUT) void this.makeQRInput();
     this.setButtons(method);
@@ -118,22 +121,26 @@ export class UnsealPage extends Page {
     this.unsealKeyForm = makeElement({
       tag: "form",
       children: [
-        MarginInline(makeElement({
-          tag: "input",
-          class: ["uk-input", "uk-form-width-medium"],
-          attributes: {
-            required: "true",
-            type: "password",
-            placeholder: i18next.t("key_input_placeholder"),
-            name: "key"
-          }
-        })),
-        MarginInline(makeElement({
-          tag: "button",
-          class: ["uk-button", "uk-button-primary"],
-          text: i18next.t("submit_key_btn")
-        })),
-      ]
+        MarginInline(
+          makeElement({
+            tag: "input",
+            class: ["uk-input", "uk-form-width-medium"],
+            attributes: {
+              required: "true",
+              type: "password",
+              placeholder: i18next.t("key_input_placeholder"),
+              name: "key",
+            },
+          }),
+        ),
+        MarginInline(
+          makeElement({
+            tag: "button",
+            class: ["uk-button", "uk-button-primary"],
+            text: i18next.t("submit_key_btn"),
+          }),
+        ),
+      ],
     }) as HTMLFormElement;
     this.unsealInputContent.appendChild(this.unsealKeyForm);
     this.unsealKeyForm.addEventListener("submit", (e: Event) => {
@@ -155,7 +162,7 @@ export class UnsealPage extends Page {
     const text = this.unsealProgressText;
     text.innerText = i18next.t("unseal_keys_progress", {
       progress: String(progress),
-      keys_needed: String(keysNeeded)
+      keys_needed: String(keysNeeded),
     });
     const progressBar = this.unsealProgress;
     progressBar.value = progress;
@@ -167,19 +174,21 @@ export class UnsealPage extends Page {
   }
 
   submitKey(key: string): void {
-    submitUnsealKey(key).then(_ => {
-      void getSealStatus().then(data => {
-        void this.updateSealProgress(data);
+    submitUnsealKey(key)
+      .then((_) => {
+        void getSealStatus().then((data) => {
+          void this.updateSealProgress(data);
+        });
+      })
+      .catch((e: Error) => {
+        setErrorText(e.message);
       });
-    }).catch((e: Error) => {
-      setErrorText(e.message);
-    });
   }
 
   handleKeySubmit(): void {
     const formData = new FormData(this.unsealKeyForm);
 
-    this.submitKey(formData.get("key") as string)
+    this.submitKey(formData.get("key") as string);
   }
   get name(): string {
     return i18next.t("unseal_vault_text");

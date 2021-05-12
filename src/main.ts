@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // JS & CSS
 
@@ -17,51 +17,51 @@ import "prismjs/components/prism-json";
 Prism.highlightAll();
 /* eslint-enable */
 
-import {
-  changePage,
-  renderPage,
-} from "./pageUtils";
+import { NavBar } from "./elements/NavBar";
+import { changePage, renderPage } from "./pageUtils";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
-import { NavBar } from "./elements/NavBar";
 
 // Translations
-import { formatDistance } from './formatDistance';
-import i18next from 'i18next';
+import { formatDistance } from "./formatDistance";
+import i18next from "i18next";
 
 // @ts-ignore
-import translations from './translations/index.mjs';
+import translations from "./translations/index.mjs";
 
 declare global {
-  interface Window { pageContent: Element; }
+  interface Window {
+    pageContent: Element;
+  }
 }
-
 
 function onLoad(): void {
   document.body.innerHTML = "";
   document.body.appendChild(NavBar());
-  document.body.appendChild(makeElement({
-    tag: "div",
-    class: ["uk-container", "uk-container-medium", "uk-align-center"],
-    children: makeElement({
+  document.body.appendChild(
+    makeElement({
       tag: "div",
-      class: ["uk-card", "uk-card-body"],
-      children: [
-        makeElement({
-          tag: "h3",
-          class: "uk-card-title",
-          id: "pageTitle",
-          text: ""
-        }),
-        makeElement({
-          tag: "div",
-          id: "pageContent"
-        })
-      ]
-    })
-  }));
+      class: ["uk-container", "uk-container-medium", "uk-align-center"],
+      children: makeElement({
+        tag: "div",
+        class: ["uk-card", "uk-card-body"],
+        children: [
+          makeElement({
+            tag: "h3",
+            class: "uk-card-title",
+            id: "pageTitle",
+            text: "",
+          }),
+          makeElement({
+            tag: "div",
+            id: "pageContent",
+          }),
+        ],
+      }),
+    }),
+  );
 
   window.pageContent = document.querySelector("#pageContent");
 
@@ -73,34 +73,45 @@ function onLoad(): void {
 
   setInterval(() => {
     if (pageState.currentPageString != "UNSEAL") {
-      if (pageState.apiURL.length != 0) { return; }
+      if (pageState.apiURL.length != 0) {
+        return;
+      }
       void getSealStatus().then((sealStatus) => {
         if (sealStatus.sealed) {
           changePage("UNSEAL");
           return;
-        }        
+        }
       });
     }
   }, 5000);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  console.log("Loading...");
-  // @ts-expect-error
-  console.log("Build Data:", BUILD_STRING);
-  void i18next.init({
-    lng: pageState.language,
-    fallbackLng: 'en',
-    debug: true,
-    // @ts-ignore
-    resources: Object.fromEntries(Object.entries(translations).map(([k, v]) => [k, { translation: v }])),
-    interpolation: {
-      format: function (value: unknown, format, _): string {
-        if (format === 'until_date' && value instanceof Date) return formatDistance(new Date(), new Date(value));
-        return value as string;
-      }
-    }
-  }).then(function (_) {
-    onLoad();
-  });
-}, false);
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+    console.log("Loading...");
+    // @ts-expect-error
+    console.log("Build Data:", BUILD_STRING);
+    void i18next
+      .init({
+        lng: pageState.language,
+        fallbackLng: "en",
+        debug: true,
+        // @ts-ignore
+        resources: Object.fromEntries(
+          Object.entries(translations).map(([k, v]) => [k, { translation: v }]),
+        ),
+        interpolation: {
+          format: function (value: unknown, format, _): string {
+            if (format === "until_date" && value instanceof Date)
+              return formatDistance(new Date(), new Date(value));
+            return value as string;
+          },
+        },
+      })
+      .then(function (_) {
+        onLoad();
+      });
+  },
+  false,
+);

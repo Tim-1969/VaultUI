@@ -5,7 +5,7 @@ import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
 import { sortedObjectMap } from "../utils";
-import i18next from 'i18next';
+import i18next from "i18next";
 
 export class HomePage extends Page {
   constructor() {
@@ -15,7 +15,7 @@ export class HomePage extends Page {
     setPageContent("");
     if (!(await prePageChecks())) return;
 
-    const homePageContent = makeElement({tag: "div"});
+    const homePageContent = makeElement({ tag: "div" });
     setPageContent(homePageContent);
     const textList = makeElement({
       tag: "ul",
@@ -25,8 +25,8 @@ export class HomePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "span",
-            html: i18next.t("vaulturl_text", {"text": pageState.apiURL})
-          })
+            html: i18next.t("vaulturl_text", { text: pageState.apiURL }),
+          }),
         }),
         makeElement({
           tag: "li",
@@ -35,19 +35,23 @@ export class HomePage extends Page {
             text: i18next.t("password_generator_btn"),
             onclick: () => {
               changePage("PW_GEN");
-            }
-          })
-        })
-      ]
+            },
+          }),
+        }),
+      ],
     });
     homePageContent.appendChild(textList);
 
     try {
       const selfTokenInfo = await lookupSelf();
-      textList.appendChild(makeElement({
-        tag: "li",
-        text: i18next.t("your_token_expires_in", {"date": new Date(selfTokenInfo.expire_time)})
-      }));
+      textList.appendChild(
+        makeElement({
+          tag: "li",
+          text: i18next.t("your_token_expires_in", {
+            date: new Date(selfTokenInfo.expire_time),
+          }),
+        }),
+      );
     } catch (e: unknown) {
       const error = e as Error;
       setErrorText(error.message);
@@ -62,18 +66,21 @@ export class HomePage extends Page {
     pageState.currentSecret = "";
     pageState.currentSecretVersion = null;
 
-    const navList = makeElement({ tag: "ul", class: ["uk-nav", "uk-nav-default", "uk-margin-top"] });
+    const navList = makeElement({
+      tag: "ul",
+      class: ["uk-nav", "uk-nav-default", "uk-margin-top"],
+    });
     homePageContent.appendChild(navList);
 
     const mounts = await getMounts();
-    // sort it by secretPath so it's in alphabetical order consistantly. 
+    // sort it by secretPath so it's in alphabetical order consistantly.
     const mountsMap = sortedObjectMap(mounts);
 
     mountsMap.forEach(function (mount: MountType, baseMount) {
-      if (typeof mount != 'object') return;
+      if (typeof mount != "object") return;
       if (mount == null) return;
       if (!("type" in mount)) return;
-      if (!(["kv", "totp", "transit", "cubbyhole"].includes(mount.type))) return;
+      if (!["kv", "totp", "transit", "cubbyhole"].includes(mount.type)) return;
 
       const mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
 
@@ -85,26 +92,28 @@ export class HomePage extends Page {
       } else if (mount.type == "totp") {
         linkText = `TOTP - ${baseMount}`;
         linkPage = "TOTP";
-      } else if (mount.type == "transit"){
+      } else if (mount.type == "transit") {
         linkText = `Transit - ${baseMount}`;
-        linkPage = "TRANSIT_VIEW"; 
-      } else if (mount.type == "cubbyhole"){
+        linkPage = "TRANSIT_VIEW";
+      } else if (mount.type == "cubbyhole") {
         linkText = `Cubbyhole - ${baseMount}`;
-        linkPage = "KEY_VALUE_VIEW"; 
+        linkPage = "KEY_VALUE_VIEW";
       }
 
-      navList.appendChild(makeElement({
-        tag: "li",
-        children: makeElement({
-          tag: "a",
-          text: linkText,
-          onclick: () => {
-            pageState.currentBaseMount = baseMount;
-            pageState.currentMountType = mountType;
-            changePage(linkPage);
-          }
-        })
-      }));
+      navList.appendChild(
+        makeElement({
+          tag: "li",
+          children: makeElement({
+            tag: "a",
+            text: linkText,
+            onclick: () => {
+              pageState.currentBaseMount = baseMount;
+              pageState.currentMountType = mountType;
+              changePage(linkPage);
+            },
+          }),
+        }),
+      );
     });
   }
   get name(): string {

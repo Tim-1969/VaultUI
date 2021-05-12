@@ -10,6 +10,6 @@ export async function getTOTPKeys(baseMount: string): Promise<string[]> {
   if (resp.status == 404) {
     throw DoesNotExistError;
   }
-  const data = await resp.json() as {data: {keys: string[] }};
+  const data = (await resp.json()) as { data: { keys: string[] } };
   return data.data.keys;
 }
