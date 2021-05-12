@@ -84,9 +84,9 @@ export class TransitRewrapPage extends Page {
     }) as HTMLFormElement;
     setPageContent(this.transitRewrapForm);
 
-    this.transitRewrapForm.addEventListener("submit", (e: Event) => {
+    this.transitRewrapForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
-      void this.transitRewrapFormHandler();
+      await this.transitRewrapFormHandler();
     });
   }
 

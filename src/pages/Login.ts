@@ -132,37 +132,42 @@ export class LoginPage extends Page {
       }),
     );
 
-    tokenLoginForm.addEventListener("submit", function (e) {
+    tokenLoginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       const formData = new FormData(tokenLoginForm);
       const token = formData.get("token");
       pageState.token = token as string;
-      lookupSelf()
-        .then((_) => {
-          void changePage("HOME");
-        })
-        .catch((e: Error) => {
-          document.getElementById("tokenInput").classList.add("uk-form-danger");
-          if (e.message == "permission denied") {
-            setErrorText(i18next.t("token_login_error"));
-          } else {
-            setErrorText(e.message);
-          }
-        });
+
+      try {
+        await lookupSelf();
+        await changePage("HOME");
+      } catch (e: unknown) {
+        const error = e as Error;
+        document.getElementById("tokenInput").classList.add("uk-form-danger");
+        if (error.message == "permission denied") {
+          setErrorText(i18next.t("token_login_error"));
+        } else {
+          setErrorText(error.message);
+        }
+      }
     });
-    usernameLoginForm.addEventListener("submit", function (e) {
+    usernameLoginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       const formData = new FormData(usernameLoginForm);
-      usernameLogin(formData.get("username") as string, formData.get("password") as string)
-        .then((res) => {
-          pageState.token = res;
-          void changePage("HOME");
-        })
-        .catch((e: Error) => {
-          document.getElementById("usernameInput").classList.add("uk-form-danger");
-          document.getElementById("passwordInput").classList.add("uk-form-danger");
-          setErrorText(e.message);
-        });
+
+      try {
+        const res = await usernameLogin(
+          formData.get("username") as string,
+          formData.get("password") as string,
+        );
+        pageState.token = res;
+        await changePage("HOME");
+      } catch (e: unknown) {
+        const error = e as Error;
+        document.getElementById("usernameInput").classList.add("uk-form-danger");
+        document.getElementById("passwordInput").classList.add("uk-form-danger");
+        setErrorText(error.message);
+      }
     });
   }
 

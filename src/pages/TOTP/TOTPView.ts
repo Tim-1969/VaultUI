@@ -52,7 +52,6 @@ export class TOTPViewPage extends Page {
     try {
       const res = await getTOTPKeys(pageState.currentBaseMount);
       for (const totpKeyName of res) {
-        console.log(totpKeyName);
         const totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
         this.totpListElements[totpKeyName] = totpListElement;

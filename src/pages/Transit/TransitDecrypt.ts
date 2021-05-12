@@ -75,9 +75,9 @@ export class TransitDecryptPage extends Page {
       ],
     }) as HTMLFormElement;
     setPageContent(this.transitDecryptForm);
-    this.transitDecryptForm.addEventListener("submit", (e: Event) => {
+    this.transitDecryptForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
-      void this.transitDecryptFormHandler();
+      await this.transitDecryptFormHandler();
     });
   }
 

@@ -53,9 +53,9 @@ export class KeyValueNewPage extends Page {
     }) as HTMLFormElement;
     setPageContent(this.addKVNewForm);
 
-    this.addKVNewForm.addEventListener("submit", (e: Event) => {
+    this.addKVNewForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
-      void this.newKVSecretHandleForm();
+      await this.newKVSecretHandleForm();
     });
   }
 

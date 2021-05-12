@@ -52,17 +52,17 @@ export class SetLanguagePage extends Page {
       ],
     }) as HTMLFormElement;
     setPageContent(setLanguageForm);
-    setLanguageForm.addEventListener("submit", function (e) {
+    setLanguageForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       const formData = new FormData(setLanguageForm);
+
       const language = formData.get("language") as string;
       pageState.language = language;
-      console.log(pageState.language);
-      void i18next.changeLanguage(language).then((t) => {
-        pageState.pageDirection = t("language_direction");
-        reloadNavBar();
-        void changePage("HOME");
-      });
+
+      const t = await i18next.changeLanguage(language);
+      pageState.pageDirection = t("language_direction");
+      reloadNavBar();
+      await changePage("HOME");
     });
   }
   get name(): string {

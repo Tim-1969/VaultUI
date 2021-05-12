@@ -86,22 +86,25 @@ export class NewTOTPPage extends Page {
     }) as HTMLFormElement;
     setPageContent(totpForm);
 
-    totpForm.addEventListener("submit", function (e) {
+    totpForm.addEventListener("submit", async function (e) {
       e.preventDefault();
+
       const formData = new FormData(totpForm);
+
       const parms = {
         url: formData.get("uri") as string,
         key: removeDashSpaces(formData.get("key") as string).toUpperCase(),
         name: formData.get("name") as string,
         generate: false,
       };
-      addNewTOTP(pageState.currentBaseMount, parms)
-        .then((_) => {
-          void changePage("TOTP");
-        })
-        .catch((e: Error) => {
-          setErrorText(`API Error: ${e.message}`);
-        });
+
+      try {
+        await addNewTOTP(pageState.currentBaseMount, parms);
+        await changePage("TOTP");
+      } catch (e: unknown) {
+        const error = e as Error;
+        setErrorText(`API Error: ${error.message}`);
+      }
     });
   }
 

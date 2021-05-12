@@ -49,7 +49,7 @@ export class UnsealPage extends Page {
 
   async doRefresh(): Promise<void> {
     const status = await getSealStatus();
-    this.updateSealProgress(status);
+    await this.updateSealProgress(status);
   }
 
   async render(): Promise<void> {
@@ -84,7 +84,7 @@ export class UnsealPage extends Page {
       }),
     );
     this.switchInputMode(this.mode);
-    this.updateSealProgress(await getSealStatus());
+    await this.updateSealProgress(await getSealStatus());
     this.makeRefresher();
   }
 
@@ -150,13 +150,13 @@ export class UnsealPage extends Page {
   }
 
   async makeQRInput(): Promise<void> {
-    this.qrScanner = await QRScanner((code: string) => {
-      this.submitKey(code);
+    this.qrScanner = await QRScanner(async (code: string) => {
+      await this.submitKey(code);
     });
     this.unsealInputContent.appendChild(this.qrScanner);
   }
 
-  updateSealProgress(data: SealStatusType): void {
+  async updateSealProgress(data: SealStatusType): Promise<void> {
     const progress = data.progress;
     const keysNeeded = data.t;
     const text = this.unsealProgressText;
@@ -169,26 +169,24 @@ export class UnsealPage extends Page {
     progressBar.max = keysNeeded;
     if (!data.sealed) {
       progressBar.value = keysNeeded;
-      void changePage("HOME");
+      await changePage("HOME");
     }
   }
 
-  submitKey(key: string): void {
-    submitUnsealKey(key)
-      .then((_) => {
-        void getSealStatus().then((data) => {
-          void this.updateSealProgress(data);
-        });
-      })
-      .catch((e: Error) => {
-        setErrorText(e.message);
-      });
+  async submitKey(key: string): Promise<void> {
+    try {
+      await submitUnsealKey(key);
+      await this.updateSealProgress(await getSealStatus());
+    } catch (e: unknown) {
+      const error = e as Error;
+      setErrorText(error.message);
+    }
   }
 
-  handleKeySubmit(): void {
+  async handleKeySubmit(): Promise<void> {
     const formData = new FormData(this.unsealKeyForm);
 
-    this.submitKey(formData.get("key") as string);
+    await this.submitKey(formData.get("key") as string);
   }
   get name(): string {
     return i18next.t("unseal_vault_text");

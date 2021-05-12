@@ -43,11 +43,11 @@ export class SetVaultURLPage extends Page {
         ],
       }),
     );
-    document.getElementById("setVaultURLForm").addEventListener("submit", function (e) {
+    document.getElementById("setVaultURLForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const formData = new FormData(document.querySelector("#setVaultURLForm"));
       pageState.apiURL = formData.get("vaultURL") as string;
-      void changePage("HOME");
+      await changePage("HOME");
     });
   }
   get name(): string {
