@@ -25,7 +25,7 @@ import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
-import { TitleBar } from "./elements/TitleBar";
+import { NavBar } from "./elements/NavBar";
 
 // Translations
 import { formatDistance } from './formatDistance';
@@ -41,7 +41,7 @@ declare global {
 
 function onLoad(): void {
   document.body.innerHTML = "";
-  document.body.appendChild(TitleBar());
+  document.body.appendChild(NavBar());
   document.body.appendChild(makeElement({
     tag: "div",
     class: ["uk-container", "uk-container-medium", "uk-align-center"],

@@ -4,7 +4,7 @@ import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
 import i18next from 'i18next';
-import { reloadTitleBar } from "../elements/TitleBar";
+import { reloadNavBar } from "../elements/NavBar";
 
 // @ts-ignore
 import translations from "../translations/index.mjs";
@@ -59,7 +59,7 @@ export class SetLanguagePage extends Page {
       console.log(pageState.language);
       void i18next.changeLanguage(language).then((t) => {
         pageState.pageDirection = t("language_direction");
-        reloadTitleBar();
+        reloadNavBar();
         changePage("HOME");
       });
     });

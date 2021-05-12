@@ -5,9 +5,9 @@ import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
 import i18next from "i18next";
 
-export function TitleBar(): HTMLElement {
+export function NavBar(): HTMLElement {
   return makeElement({
-    id: "titleBar",
+    id: "navBar",
     tag: "nav",
     class: ["uk-navbar", "uk-navbar-container"],
     children: [
@@ -55,7 +55,7 @@ export function TitleBar(): HTMLElement {
   })
 }
 
-export function reloadTitleBar(): void {
-  document.querySelector(".titleBar").replaceWith(TitleBar());
+export function reloadNavBar(): void {
+  document.querySelector("#navBar").replaceWith(NavBar());
 }
 
