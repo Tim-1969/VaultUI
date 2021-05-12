@@ -5,6 +5,7 @@
 /* eslint-disable */
 import "./scss/main.scss";
 import UIkit from 'uikit';
+// Don't Sort These!
 import Icons from 'uikit/dist/js/uikit-icons';
 // @ts-ignore
 UIkit.use(Icons);
@@ -24,12 +25,13 @@ import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
+import { TitleBar } from "./elements/TitleBar";
 
 // Translations
 import { formatDistance } from './formatDistance';
 import i18next from 'i18next';
+
 // @ts-ignore
-import { TitleBar } from "./elements/TitleBar";
 import translations from './translations/index.mjs';
 
 declare global {

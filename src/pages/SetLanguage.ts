@@ -4,8 +4,9 @@ import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
 import i18next from 'i18next';
-// @ts-ignore
 import { reloadTitleBar } from "../elements/TitleBar";
+
+// @ts-ignore
 import translations from "../translations/index.mjs";
 
 const languageIDs = Object.getOwnPropertyNames(translations);
