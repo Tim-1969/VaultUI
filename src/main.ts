@@ -10,7 +10,9 @@ import Icons from 'uikit/dist/js/uikit-icons';
 UIkit.use(Icons);
 
 import Prism from "prismjs";
+// Don't Sort These!
 import "prismjs/components/prism-json";
+
 Prism.highlightAll();
 /* eslint-enable */
 
@@ -24,18 +26,11 @@ import { pageState } from "./globalPageState";
 import { playground } from "./playground";
 
 // Translations
-import { Page } from "./types/Page";
 import { formatDistance } from './formatDistance';
 import i18next from 'i18next';
 // @ts-ignore
-import translations from './translations/index.mjs'
-
-function ListItem(children: Element[] | Element): HTMLElement {
-  return makeElement({
-    tag: "li",
-    children: children
-  });
-}
+import { TitleBar } from "./elements/TitleBar";
+import translations from './translations/index.mjs';
 
 declare global {
   interface Window { pageContent: Element; }
@@ -44,52 +39,7 @@ declare global {
 
 function onLoad(): void {
   document.body.innerHTML = "";
-  document.body.appendChild(makeElement({
-    tag: "nav",
-    class: ["uk-navbar", "uk-navbar-container"],
-    children: [
-      makeElement({
-        tag: "div",
-        class: "uk-navbar-left",
-        children: makeElement({
-          tag: "ul",
-          class: "uk-navbar-nav",
-          children: [
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("home_btn"),
-              onclick: () => { changePage("HOME"); }
-            })),
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("back_btn"),
-              onclick: () => { (pageState.currentPage as Page).goBack(); }
-            })),
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("refresh_btn"),
-              onclick: () => { changePage(pageState.currentPageString); }
-            })),
-          ]
-        })
-      }),
-      makeElement({
-        tag: "div",
-        class: "uk-navbar-right",
-        children: makeElement({
-          tag: "ul",
-          class: "uk-navbar-nav",
-          children: [
-            ListItem(makeElement({
-              tag: "a",
-              text: i18next.t("me_btn"),
-              onclick: () => { changePage("ME"); }
-            }))
-          ]
-        })
-      })
-    ]
-  }));
+  document.body.appendChild(TitleBar());
   document.body.appendChild(makeElement({
     tag: "div",
     class: ["uk-container", "uk-container-medium", "uk-align-center"],

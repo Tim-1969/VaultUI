@@ -136,17 +136,16 @@ export class UnsealPage extends Page {
       ]
     }) as HTMLFormElement;
     this.unsealInputContent.appendChild(this.unsealKeyForm);
-    this.unsealKeyForm.addEventListener("submit", function (e: Event) {
+    this.unsealKeyForm.addEventListener("submit", (e: Event) => {
       e.preventDefault();
-      void (this as UnsealPage).handleKeySubmit();
-    }.bind(this));
+      void this.handleKeySubmit();
+    });
   }
 
   async makeQRInput(): Promise<void> {
-    this.qrScanner = await QRScanner(function (code: string) {
-      (this as UnsealPage).submitKey(code);
-      console.log('decoded qr code:', code)
-    }.bind(this));
+    this.qrScanner = await QRScanner((code: string) => {
+      this.submitKey(code);
+    });
     this.unsealInputContent.appendChild(this.qrScanner);
   }
 
