@@ -12,6 +12,7 @@ import { NewSecretsEnginePage } from "./pages/NewSecretsEngine";
 import { NewTOTPEnginePage } from "./pages/NewEngines/NewTOTPEngine";
 import { NewTOTPPage } from "./pages/TOTP/NewTOTP";
 import { NewTransitEnginePage } from "./pages/NewEngines/NewTransitEngine";
+import { NewTransitKeyPage } from "./pages/Transit/NewTransitKey";
 import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
 import { SetLanguagePage } from "./pages/SetLanguage";
@@ -37,6 +38,7 @@ export const allPages: pagesList = {
   SET_VAULT_URL: new SetVaultURLPage(),
   UNSEAL: new UnsealPage(),
   SET_LANGUAGE: new SetLanguagePage(),
+  TRANSIT_NEW_KEY: new NewTransitKeyPage(),
   TRANSIT_VIEW: new TransitViewPage(),
   TRANSIT_VIEW_SECRET: new TransitViewSecretPage(),
   TRANSIT_ENCRYPT: new TransitEncryptPage(),

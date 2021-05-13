@@ -157,6 +157,11 @@ module.exports = {
   transit_view_none_here_text:
     "You seem to have no transit keys here, would you like to create one?",
 
+  transit_new_key_title: "New Transit Key",
+  transit_new_key_name_input: "Name",
+  transit_new_key_create_btn: "Create",
+  transit_new_key_suffix: " (new)",
+
   // Transit View Secret Page
   transit_view_secret_title: "Transit Secret View",
   transit_view_encrypt_text: "Encrypt",

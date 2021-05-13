@@ -10,7 +10,6 @@ type TileParams = {
 };
 
 export function Tile(params: TileParams): HTMLElement {
-  console.log(params.condition == undefined, params.condition);
   if (params.condition == false) return;
   return makeElement({
     tag: "a",
