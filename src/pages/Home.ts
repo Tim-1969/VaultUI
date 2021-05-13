@@ -6,6 +6,7 @@ import { makeElement } from "../htmlUtils";
 import { pageState } from "../globalPageState";
 import { sortedObjectMap } from "../utils";
 import i18next from "i18next";
+import { getCapabilitiesPath } from "../api/sys/getCapabilities";
 
 export class HomePage extends Page {
   constructor() {
@@ -59,6 +60,18 @@ export class HomePage extends Page {
         pageState.token = "";
         await changePage("LOGIN");
       }
+    }
+
+    const mountsCapabilities = await getCapabilitiesPath("/sys/mounts");
+    if (mountsCapabilities.includes("sudo") && mountsCapabilities.includes("create")) {
+      textList.appendChild(makeElement({
+        tag: "button",
+        text: i18next.t("home_new_secrets_engine_button"),
+        class: ["uk-button", "uk-button-primary", "uk-margin-top"],
+        onclick: async () => {
+          await changePage("NEW_SECRETS_ENGINE");
+        },
+      }));
     }
 
     pageState.currentBaseMount = "";

@@ -1,16 +1,17 @@
 import { makeElement } from "../htmlUtils";
 
 type TileParams = {
-  condition: boolean;
+  condition?: boolean;
   title: string;
   description: string;
-  icon: string;
-  iconText: string;
+  icon?: string;
+  iconText?: string;
   onclick: () => void;
 };
 
 export function Tile(params: TileParams): HTMLElement {
-  if (!params.condition) return;
+  console.log(params.condition == undefined, params.condition);
+  if (params.condition == false) return;
   return makeElement({
     tag: "a",
     class: "uk-link-heading",
@@ -24,6 +25,7 @@ export function Tile(params: TileParams): HTMLElement {
           class: "uk-h4",
           text: params.title,
           children: makeElement({
+            condition: typeof params.icon == "string",
             tag: "span",
             class: ["uk-icon", "uk-margin-small-left"],
             attributes: {

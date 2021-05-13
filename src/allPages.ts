@@ -19,6 +19,8 @@ import { TransitRewrapPage } from "./pages/Transit/TransitRewrap";
 import { TransitViewPage } from "./pages/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
+import { NewSecretsEnginePage } from "./pages/NewSecretsEngine";
+import { NewKVEnginePage } from "./pages/NewEngines/NewKVEngine";
 
 type pagesList = {
   [key: string]: Page;
@@ -45,4 +47,6 @@ export const allPages: pagesList = {
   KEY_VALUE_DELETE: new KeyValueDeletePage(),
   KEY_VALUE_SECRET_EDIT: new KeyValueSecretEditPage(),
   PW_GEN: new PwGenPage(),
+  NEW_SECRETS_ENGINE: new NewSecretsEnginePage(),
+  NEW_KV_ENGINE: new NewKVEnginePage(),
 };

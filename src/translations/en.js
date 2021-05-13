@@ -37,6 +37,20 @@ module.exports = {
   vaulturl_text: "Vault URL: {{text}}",
   password_generator_btn: "Password Generator",
   your_token_expires_in: "Your token expires in {{date, until_date}}",
+  home_new_secrets_engine_button: "New Secrets Engine",
+
+  // New Secrets Engine Page
+  new_secrets_engine_title: "New Secrets Engine",
+  new_secrets_engine_kv_title: "Key/Value Storage",
+  new_secrets_engine_kv_description: "For storing key/value mapped secrets.",
+
+  // New KV Engine Page
+  new_kv_engine_title: "New Key/Value Engine",
+  new_kv_engine_name_input: "Name",
+  new_kv_engine_version_1: "Version 1",
+  new_kv_engine_version_2: "Version 2",
+  new_kv_engine_create_btn: "Create",
+
 
   // Unseal Page
   unseal_vault_text: "Unseal the Vault",
