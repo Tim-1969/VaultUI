@@ -30,6 +30,13 @@ export class NewSecretsEnginePage extends Page {
               void changePage("NEW_TOTP_ENGINE");
             },
           }),
+          Tile({
+            title: i18next.t("new_secrets_engine_transit_title"),
+            description: i18next.t("new_secrets_engine_transit_description"),
+            onclick: () => {
+              void changePage("NEW_TRANSIT_ENGINE");
+            },
+          }),
         ],
       }),
     );

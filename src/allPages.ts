@@ -11,6 +11,7 @@ import { NewKVEnginePage } from "./pages/NewEngines/NewKVEngine";
 import { NewSecretsEnginePage } from "./pages/NewSecretsEngine";
 import { NewTOTPEnginePage } from "./pages/NewEngines/NewTOTPEngine";
 import { NewTOTPPage } from "./pages/TOTP/NewTOTP";
+import { NewTransitEnginePage } from "./pages/NewEngines/NewTransitEngine";
 import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
 import { SetLanguagePage } from "./pages/SetLanguage";
@@ -51,4 +52,5 @@ export const allPages: pagesList = {
   NEW_SECRETS_ENGINE: new NewSecretsEnginePage(),
   NEW_KV_ENGINE: new NewKVEnginePage(),
   NEW_TOTP_ENGINE: new NewTOTPEnginePage(),
+  NEW_TRANSIT_ENGINE: new NewTransitEnginePage(),
 };
