@@ -41,8 +41,10 @@ module.exports = {
 
   // New Secrets Engine Page
   new_secrets_engine_title: "New Secrets Engine",
-  new_secrets_engine_kv_title: "Key/Value Storage",
+  new_secrets_engine_kv_title: "Key/Value",
   new_secrets_engine_kv_description: "For storing key/value mapped secrets.",
+  new_secrets_engine_totp_title: "TOTP",
+  new_secrets_engine_totp_description: "For handing Time-based One Time Pass (TOTP) codes.",
 
   // New KV Engine Page
   new_kv_engine_title: "New Key/Value Engine",
@@ -51,6 +53,10 @@ module.exports = {
   new_kv_engine_version_2: "Version 2",
   new_kv_engine_create_btn: "Create",
 
+  // New KV Engine Page
+  new_totp_engine_title: "New TOTP Engine",
+  new_totp_engine_name_input: "Name",
+  new_totp_engine_create_btn: "Create",
 
   // Unseal Page
   unseal_vault_text: "Unseal the Vault",

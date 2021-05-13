@@ -7,6 +7,9 @@ import { KeyValueVersionsPage } from "./pages/KeyValue/KeyValueVersions";
 import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView";
 import { LoginPage } from "./pages/Login";
 import { MePage } from "./pages/Me";
+import { NewKVEnginePage } from "./pages/NewEngines/NewKVEngine";
+import { NewSecretsEnginePage } from "./pages/NewSecretsEngine";
+import { NewTOTPEnginePage } from "./pages/NewEngines/NewTOTPEngine";
 import { NewTOTPPage } from "./pages/TOTP/NewTOTP";
 import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
@@ -19,8 +22,6 @@ import { TransitRewrapPage } from "./pages/Transit/TransitRewrap";
 import { TransitViewPage } from "./pages/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
-import { NewSecretsEnginePage } from "./pages/NewSecretsEngine";
-import { NewKVEnginePage } from "./pages/NewEngines/NewKVEngine";
 
 type pagesList = {
   [key: string]: Page;
@@ -49,4 +50,5 @@ export const allPages: pagesList = {
   PW_GEN: new PwGenPage(),
   NEW_SECRETS_ENGINE: new NewSecretsEnginePage(),
   NEW_KV_ENGINE: new NewKVEnginePage(),
+  NEW_TOTP_ENGINE: new NewTOTPEnginePage(),
 };

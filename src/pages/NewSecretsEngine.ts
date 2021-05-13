@@ -1,6 +1,6 @@
 import { Page } from "../types/Page";
 import { Tile } from "../elements/Tile";
-import { changePage, setPageContent, setTitleElement } from "../pageUtils";
+import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import i18next from "i18next";
 
@@ -21,6 +21,13 @@ export class NewSecretsEnginePage extends Page {
             description: i18next.t("new_secrets_engine_kv_description"),
             onclick: () => {
               void changePage("NEW_KV_ENGINE");
+            },
+          }),
+          Tile({
+            title: i18next.t("new_secrets_engine_totp_title"),
+            description: i18next.t("new_secrets_engine_totp_description"),
+            onclick: () => {
+              void changePage("NEW_TOTP_ENGINE");
             },
           }),
         ],
