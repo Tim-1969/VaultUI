@@ -31,10 +31,11 @@ export class TOTPViewPage extends Page {
         tag: "div",
         children: [
           makeElement({
-            tag: "a",
+            tag: "button",
             text: i18next.t("totp_view_new_btn"),
-            onclick: () => {
-              void changePage("NEW_TOTP");
+            class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
+            onclick: async () => {
+              await changePage("NEW_TOTP");
             },
           }),
           makeElement({
