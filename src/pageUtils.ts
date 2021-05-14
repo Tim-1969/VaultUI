@@ -3,6 +3,7 @@ import { PageState } from "./PageState";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { lookupSelf } from "./api/sys/lookupSelf";
 import { makeElement } from "./htmlUtils";
+import { pageRouter } from "./globalPageRouter";
 import { pageState } from "./globalPageState";
 import ClipboardJS from "clipboard";
 import UIkit from "uikit";
@@ -79,19 +80,7 @@ export function setErrorText(text: string): void {
 }
 
 export async function changePage(page: string): Promise<void> {
-  if (pageState.currentPage) {
-    await (pageState.currentPage as Page).cleanup();
-  }
-  pageState.currentPage = page;
-  await renderPage();
-}
-
-export async function renderPage(): Promise<void> {
-  document.documentElement.dir = pageState.pageDirection;
-  console.log("Rendering Page: ", (pageState.currentPage as Page).name);
-  document.querySelector("#pageContent").innerHTML = "";
-  setPageTitle((pageState.currentPage as Page).name);
-  await (pageState.currentPage as Page).render();
+  await pageRouter.changePage(page);
 }
 
 export function setPageTitle(title: string | HTMLElement): void {

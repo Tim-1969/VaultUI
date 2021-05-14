@@ -1,4 +1,6 @@
+import { PageRouter } from "./PageRouter";
 import { PageState } from "./PageState";
+import { pageRouter } from "./globalPageRouter";
 import { pageState } from "./globalPageState";
 import i18next from "i18next";
 
@@ -11,6 +13,7 @@ declare global {
   interface Window {
     pageState: PageState;
     i18next: unknown;
+    router: PageRouter;
   }
 }
 
@@ -19,4 +22,5 @@ export async function playground(): Promise<void> {
   console.log("Welcome to Playground!");
   window.pageState = pageState;
   window.i18next = i18next;
+  window.router = pageRouter;
 }

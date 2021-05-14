@@ -17,15 +17,17 @@ import "prismjs/components/prism-json";
 Prism.highlightAll();
 /* eslint-enable */
 
+// Actual Imports
+
 import { NavBar } from "./elements/NavBar";
-import { changePage, renderPage } from "./pageUtils";
+import { PageRouter } from "./PageRouter";
+import { allPages } from "./allPages";
+import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
-
-// Translations
-import { formatDistance } from "./formatDistance";
+import { setPageRouter } from "./globalPageRouter";
 import i18next from "i18next";
 
 // @ts-ignore
@@ -65,23 +67,34 @@ async function onLoad(): Promise<void> {
 
   window.pageContent = document.querySelector("#pageContent");
 
+  const pageRouter = new PageRouter(
+    allPages,
+    document.getElementById("pageContent"),
+    document.getElementById("pageTitle"),
+  );
+  setPageRouter(pageRouter);
+
+  pageRouter.addEventListener("pageChanged", async function (_) {
+    pageState.currentPage = await pageRouter.getCurrentPageID();
+    document.documentElement.dir = pageState.pageDirection;
+  });
+
   if (process.env.NODE_ENV == "development") {
     await playground();
   }
 
-  await renderPage();
+  await pageRouter.changePage(pageState.currentPageString);
 
-  setInterval(() => {
-    if (pageState.currentPageString != "UNSEAL") {
+  setInterval(async () => {
+    if ((await pageRouter.getCurrentPageID()) != "UNSEAL") {
       if (pageState.apiURL.length != 0) {
         return;
       }
-      void getSealStatus().then((sealStatus) => {
-        if (sealStatus.sealed) {
-          void changePage("UNSEAL");
-          return;
-        }
-      });
+      const sealStatus = await getSealStatus();
+      if (sealStatus.sealed) {
+        await pageRouter.changePage("UNSEAL");
+        return;
+      }
     }
   }, 5000);
 }

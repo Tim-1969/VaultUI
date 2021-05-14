@@ -1,8 +1,6 @@
 import { ListItem } from "./ListItem";
-import { Page } from "../types/Page";
-import { changePage } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState";
+import { pageRouter } from "../globalPageRouter";
 import i18next from "i18next";
 
 export function NavBar(): HTMLElement {
@@ -23,7 +21,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("home_btn"),
                 onclick: async () => {
-                  await changePage("HOME");
+                  await pageRouter.changePage("HOME");
                 },
               }),
             ),
@@ -32,7 +30,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("back_btn"),
                 onclick: async () => {
-                  await (pageState.currentPage as Page).goBack();
+                  await pageRouter.goBack();
                 },
               }),
             ),
@@ -41,7 +39,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("refresh_btn"),
                 onclick: async () => {
-                  await changePage(pageState.currentPageString);
+                  await pageRouter.refresh();
                 },
               }),
             ),
@@ -60,7 +58,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("me_btn"),
                 onclick: async () => {
-                  await changePage("ME");
+                  await pageRouter.changePage("ME");
                 },
               }),
             ),
