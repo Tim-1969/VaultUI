@@ -118,7 +118,7 @@ document.addEventListener(
         interpolation: {
           format: function (value: unknown, format, _): string {
             if (format === "until_date" && value instanceof Date)
-              return formatDistance(new Date(), new Date(value));
+              return formatDistance(new Date(), new Date(value), pageState.language);
             return value as string;
           },
         },
