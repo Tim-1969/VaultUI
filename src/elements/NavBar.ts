@@ -1,7 +1,7 @@
 import { ListItem } from "./ListItem";
+import { PageRouter } from "../PageSystem/PageRouter";
 import { makeElement } from "../htmlUtils";
 import i18next from "i18next";
-import { PageRouter } from "../PageSystem/PageRouter";
 
 export function NavBar(router: PageRouter): HTMLElement {
   return makeElement({

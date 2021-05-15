@@ -40,7 +40,7 @@ declare global {
 
 async function onLoad(): Promise<void> {
   document.body.innerHTML = "";
-  document.body.appendChild(makeElement({tag: "div", id: "navBarReplace"}));
+  document.body.appendChild(makeElement({ tag: "div", id: "navBarReplace" }));
   document.body.appendChild(
     makeElement({
       tag: "div",
