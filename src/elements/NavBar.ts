@@ -1,9 +1,9 @@
 import { ListItem } from "./ListItem";
 import { makeElement } from "../htmlUtils";
-import { pageRouter } from "../globalPageRouter";
 import i18next from "i18next";
+import { PageRouter } from "../PageSystem/PageRouter";
 
-export function NavBar(): HTMLElement {
+export function NavBar(router: PageRouter): HTMLElement {
   return makeElement({
     id: "navBar",
     tag: "nav",
@@ -21,7 +21,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("home_btn"),
                 onclick: async () => {
-                  await pageRouter.changePage("HOME");
+                  await router.changePage("HOME");
                 },
               }),
             ),
@@ -30,7 +30,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("back_btn"),
                 onclick: async () => {
-                  await pageRouter.goBack();
+                  await router.goBack();
                 },
               }),
             ),
@@ -39,7 +39,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("refresh_btn"),
                 onclick: async () => {
-                  await pageRouter.refresh();
+                  await router.refresh();
                 },
               }),
             ),
@@ -58,7 +58,7 @@ export function NavBar(): HTMLElement {
                 tag: "a",
                 text: i18next.t("me_btn"),
                 onclick: async () => {
-                  await pageRouter.changePage("ME");
+                  await router.changePage("ME");
                 },
               }),
             ),
@@ -69,6 +69,6 @@ export function NavBar(): HTMLElement {
   });
 }
 
-export function reloadNavBar(): void {
-  document.querySelector("#navBar").replaceWith(NavBar());
+export function reloadNavBar(router: PageRouter): void {
+  document.querySelector("#navBar").replaceWith(NavBar(router));
 }

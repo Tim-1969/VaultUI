@@ -1,9 +1,8 @@
-import { Page } from "../../types/Page";
-import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getSecretMetadata } from "../../api/kv/getSecretMetadata";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { pageState } from "../../globalPageState";
 import i18next from "i18next";
 
 export class KeyValueVersionsPage extends Page {
@@ -11,25 +10,23 @@ export class KeyValueVersionsPage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    if (pageState.currentSecretVersion != null) {
-      pageState.currentSecretVersion = null;
+    if (this.state.currentSecretVersion != null) {
+      this.state.currentSecretVersion = null;
     }
-    await changePage("KEY_VALUE_SECRET");
+    await this.router.changePage("KEY_VALUE_SECRET");
   }
   async render(): Promise<void> {
-    setTitleElement(pageState);
-
     const versionsList = makeElement({
       tag: "ul",
       id: "versionsList",
       class: ["uk-nav", "uk-nav-default"],
     });
-    setPageContent(versionsList);
+    await this.router.setPageContent(versionsList);
 
     const metadata = await getSecretMetadata(
-      pageState.currentBaseMount,
-      pageState.currentSecretPath,
-      pageState.currentSecret,
+      this.state.currentBaseMount,
+      this.state.currentSecretPath,
+      this.state.currentSecret,
     );
 
     objectToMap(metadata.versions).forEach((_, ver) => {
@@ -40,8 +37,8 @@ export class KeyValueVersionsPage extends Page {
             tag: "a",
             text: `v${ver}`,
             onclick: async () => {
-              pageState.currentSecretVersion = ver;
-              await changePage("KEY_VALUE_SECRET");
+              this.state.currentSecretVersion = ver;
+              await this.router.changePage("KEY_VALUE_SECRET");
             },
           }),
         }),
@@ -49,8 +46,8 @@ export class KeyValueVersionsPage extends Page {
     });
   }
 
-  get titleSuffix(): string {
-    return i18next.t("kv_sec_versions_suffix");
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("kv_sec_versions_suffix"));
   }
 
   get name(): string {

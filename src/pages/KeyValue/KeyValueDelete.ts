@@ -1,8 +1,7 @@
-import { Page } from "../../types/Page";
-import { changePage, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { deleteSecret } from "../../api/kv/deleteSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState";
 import i18next from "i18next";
 
 export class KeyValueDeletePage extends Page {
@@ -10,17 +9,16 @@ export class KeyValueDeletePage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    if (pageState.currentSecretVersion != null) {
-      pageState.currentSecretVersion = null;
-      await changePage("KEY_VALUE_SECRET");
+    if (this.state.currentSecretVersion != null) {
+      this.state.currentSecretVersion = null;
+      await this.router.changePage("KEY_VALUE_SECRET");
     } else {
-      pageState.currentSecret = "";
-      await changePage("KEY_VALUE_VIEW");
+      this.state.currentSecret = "";
+      await this.router.changePage("KEY_VALUE_VIEW");
     }
   }
   async render(): Promise<void> {
-    setTitleElement(pageState);
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
         children: [
@@ -34,11 +32,11 @@ export class KeyValueDeletePage extends Page {
             text: i18next.t("kv_delete_btn"),
             onclick: () => {
               void deleteSecret(
-                pageState.currentBaseMount,
-                pageState.currentMountType,
-                pageState.currentSecretPath,
-                pageState.currentSecret,
-                pageState.currentSecretVersion,
+                this.state.currentBaseMount,
+                this.state.currentMountType,
+                this.state.currentSecretPath,
+                this.state.currentSecret,
+                this.state.currentSecretVersion,
               ).then(() => {
                 void this.goBack();
               });
@@ -48,9 +46,11 @@ export class KeyValueDeletePage extends Page {
       }),
     );
   }
-  get titleSuffix(): string {
-    return i18next.t("kv_delete_suffix");
+
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("kv_delete_suffix"));
   }
+
   get name(): string {
     return i18next.t("kv_delete_title");
   }

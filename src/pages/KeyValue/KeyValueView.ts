@@ -1,9 +1,9 @@
 import { DoesNotExistError } from "../../types/internalErrors";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getSecrets } from "../../api/kv/getSecrets";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 
 export class KeyValueViewPage extends Page {
@@ -11,22 +11,20 @@ export class KeyValueViewPage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    if (pageState.currentSecretPath.length != 0) {
-      pageState.popCurrentSecretPath();
-      await changePage("KEY_VALUE_VIEW");
+    if (this.state.currentSecretPath.length != 0) {
+      this.state.popCurrentSecretPath();
+      await this.router.changePage("KEY_VALUE_VIEW");
     } else {
-      await changePage("HOME");
+      await this.router.changePage("HOME");
     }
   }
   async render(): Promise<void> {
-    pageState.currentSecret = "";
-
-    setTitleElement(pageState);
+    this.state.currentSecret = "";
 
     const kvViewPageContent = makeElement({ tag: "div" });
-    setPageContent(kvViewPageContent);
+    await this.router.setPageContent(kvViewPageContent);
 
-    if (pageState.currentMountType == "cubbyhole") {
+    if (this.state.currentMountType == "cubbyhole") {
       kvViewPageContent.appendChild(
         makeElement({
           tag: "p",
@@ -40,16 +38,16 @@ export class KeyValueViewPage extends Page {
       text: i18next.t("kv_view_new_btn"),
       class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
       onclick: async () => {
-        await changePage("KEY_VALUE_NEW_SECRET");
+        await this.router.changePage("KEY_VALUE_NEW_SECRET");
       },
     });
     kvViewPageContent.appendChild(newButton);
 
     try {
       const res = await getSecrets(
-        pageState.currentBaseMount,
-        pageState.currentMountType,
-        pageState.currentSecretPath,
+        this.state.currentBaseMount,
+        this.state.currentMountType,
+        this.state.currentSecretPath,
       );
 
       kvViewPageContent.appendChild(
@@ -57,7 +55,7 @@ export class KeyValueViewPage extends Page {
           tag: "ul",
           class: ["uk-nav", "uk-nav-default"],
           children: [
-            ...res.map(function (secret) {
+            ...res.map((secret) => {
               return makeElement({
                 tag: "li",
                 children: makeElement({
@@ -65,11 +63,11 @@ export class KeyValueViewPage extends Page {
                   text: secret,
                   onclick: async () => {
                     if (secret.endsWith("/")) {
-                      pageState.pushCurrentSecretPath(secret);
-                      await changePage("KEY_VALUE_VIEW");
+                      this.state.pushCurrentSecretPath(secret);
+                      await this.router.changePage("KEY_VALUE_VIEW");
                     } else {
-                      pageState.currentSecret = secret;
-                      await changePage("KEY_VALUE_SECRET");
+                      this.state.currentSecret = secret;
+                      await this.router.changePage("KEY_VALUE_SECRET");
                     }
                   },
                 }),
@@ -82,7 +80,7 @@ export class KeyValueViewPage extends Page {
       const error = e as Error;
       if (error == DoesNotExistError) {
         // getSecrets also 404's on no keys so dont go all the way back.
-        if (pageState.currentSecretPath.length != 0) {
+        if (this.state.currentSecretPath.length != 0) {
           return this.goBack();
         } else {
           kvViewPageContent.appendChild(
@@ -96,6 +94,10 @@ export class KeyValueViewPage extends Page {
         setErrorText(error.message);
       }
     }
+  }
+
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router);
   }
 
   get name(): string {

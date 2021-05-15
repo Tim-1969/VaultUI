@@ -1,7 +1,5 @@
-import { PageRouter } from "./PageRouter";
+import { PageRouter } from "./PageSystem/PageRouter";
 import { PageState } from "./PageState";
-import { pageRouter } from "./globalPageRouter";
-import { pageState } from "./globalPageState";
 import i18next from "i18next";
 
 // Playground is a way to debug and test things.
@@ -18,9 +16,9 @@ declare global {
 }
 
 // Please empty this function before committing.
-export async function playground(): Promise<void> {
+export async function playground(router: PageRouter): Promise<void> {
   console.log("Welcome to Playground!");
-  window.pageState = pageState;
+  window.pageState = router.state;
   window.i18next = i18next;
-  window.router = pageRouter;
+  window.router = router;
 }

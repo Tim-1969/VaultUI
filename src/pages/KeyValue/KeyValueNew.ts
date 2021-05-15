@@ -1,8 +1,8 @@
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { createOrUpdateSecret } from "../../api/kv/createOrUpdateSecret";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 
 export class KeyValueNewPage extends Page {
@@ -11,13 +11,12 @@ export class KeyValueNewPage extends Page {
   }
 
   async goBack(): Promise<void> {
-    await changePage("KEY_VALUE_VIEW");
+    await this.router.changePage("KEY_VALUE_VIEW");
   }
 
   addKVNewForm: HTMLFormElement;
 
   async render(): Promise<void> {
-    setTitleElement(pageState);
     this.addKVNewForm = makeElement({
       tag: "form",
       id: "addKVNewForm",
@@ -51,7 +50,7 @@ export class KeyValueNewPage extends Page {
         }),
       ],
     }) as HTMLFormElement;
-    setPageContent(this.addKVNewForm);
+    await this.router.setPageContent(this.addKVNewForm);
 
     this.addKVNewForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
@@ -64,27 +63,27 @@ export class KeyValueNewPage extends Page {
     const path = formData.get("path") as string;
     let keyData = {};
 
-    if (["kv-v1", "cubbyhole"].includes(pageState.currentMountType)) {
+    if (["kv-v1", "cubbyhole"].includes(this.state.currentMountType)) {
       keyData = { key: "value" };
     }
 
     try {
       await createOrUpdateSecret(
-        pageState.currentBaseMount,
-        pageState.currentMountType,
-        pageState.currentSecretPath,
+        this.state.currentBaseMount,
+        this.state.currentMountType,
+        this.state.currentSecretPath,
         path,
         keyData,
       );
-      await changePage("KEY_VALUE_VIEW");
+      await this.router.changePage("KEY_VALUE_VIEW");
     } catch (e: unknown) {
       const error = e as Error;
       setErrorText(error.message);
     }
   }
 
-  get titleSuffix(): string {
-    return i18next.t("kv_new_suffix");
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("kv_new_suffix"));
   }
 
   get name(): string {

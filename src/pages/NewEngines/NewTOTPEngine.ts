@@ -1,9 +1,8 @@
 import { Margin } from "../../elements/Margin";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
 import { makeElement } from "../../htmlUtils";
 import { newMount } from "../../api/sys/newMount";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 
 export class NewTOTPEnginePage extends Page {
@@ -42,9 +41,9 @@ export class NewTOTPEnginePage extends Page {
       ],
     }) as HTMLFormElement;
 
-    setPageContent(newEngineForm);
+    await this.router.setPageContent(newEngineForm);
 
-    newEngineForm.addEventListener("submit", async function (e) {
+    newEngineForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(newEngineForm);
 
@@ -55,9 +54,9 @@ export class NewTOTPEnginePage extends Page {
           name: name,
           type: "totp",
         });
-        pageState.currentMountType = "totp";
-        pageState.currentBaseMount = name + "/";
-        await changePage("TOTP");
+        this.state.currentMountType = "totp";
+        this.state.currentBaseMount = name + "/";
+        await this.router.changePage("TOTP");
       } catch (e) {
         const error = e as Error;
         setErrorText(error.message);

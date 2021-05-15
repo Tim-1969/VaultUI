@@ -1,4 +1,4 @@
-import { Page } from "./types/Page";
+import { Page } from "./PageSystem/Page";
 import { allPages } from "./allPages";
 import { getKeyByObjectPropertyValue } from "./utils";
 

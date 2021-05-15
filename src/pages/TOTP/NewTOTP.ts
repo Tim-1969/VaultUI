@@ -1,10 +1,10 @@
 import { Margin } from "../../elements/Margin";
 import { MarginInline } from "../../elements/MarginInline";
-import { Page } from "../../types/Page";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { addNewTOTP } from "../../api/totp/addNewTOTP";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
 import { makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 
 function replaceAll(str: string, replace: string, replaceWith: string): string {
@@ -21,11 +21,9 @@ export class NewTOTPPage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    await changePage("TOTP");
+    await this.router.changePage("TOTP");
   }
   async render(): Promise<void> {
-    setTitleElement(pageState);
-
     const totpForm = makeElement({
       tag: "form",
       children: [
@@ -84,9 +82,9 @@ export class NewTOTPPage extends Page {
         ),
       ],
     }) as HTMLFormElement;
-    setPageContent(totpForm);
+    await this.router.setPageContent(totpForm);
 
-    totpForm.addEventListener("submit", async function (e) {
+    totpForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const formData = new FormData(totpForm);
@@ -99,8 +97,8 @@ export class NewTOTPPage extends Page {
       };
 
       try {
-        await addNewTOTP(pageState.currentBaseMount, parms);
-        await changePage("TOTP");
+        await addNewTOTP(this.state.currentBaseMount, parms);
+        await this.router.changePage("TOTP");
       } catch (e: unknown) {
         const error = e as Error;
         setErrorText(`API Error: ${error.message}`);
@@ -108,8 +106,8 @@ export class NewTOTPPage extends Page {
     });
   }
 
-  get titleSuffix(): string {
-    return i18next.t("totp_new_suffix");
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("totp_new_suffix"));
   }
 
   get name(): string {

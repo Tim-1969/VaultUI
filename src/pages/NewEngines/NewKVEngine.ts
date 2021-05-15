@@ -1,10 +1,9 @@
 import { Margin } from "../../elements/Margin";
 import { Option } from "../../elements/Option";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
 import { makeElement } from "../../htmlUtils";
 import { newMount } from "../../api/sys/newMount";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 
 export class NewKVEnginePage extends Page {
@@ -56,9 +55,9 @@ export class NewKVEnginePage extends Page {
       ],
     }) as HTMLFormElement;
 
-    setPageContent(newEngineForm);
+    await this.router.setPageContent(newEngineForm);
 
-    newEngineForm.addEventListener("submit", async function (e) {
+    newEngineForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(newEngineForm);
 
@@ -73,9 +72,9 @@ export class NewKVEnginePage extends Page {
             version: version,
           },
         });
-        pageState.currentMountType = "kv-v" + version;
-        pageState.currentBaseMount = name + "/";
-        await changePage("KEY_VALUE_VIEW");
+        this.state.currentMountType = "kv-v" + version;
+        this.state.currentBaseMount = name + "/";
+        await this.router.changePage("KEY_VALUE_VIEW");
       } catch (e) {
         const error = e as Error;
         setErrorText(error.message);

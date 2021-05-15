@@ -1,14 +1,12 @@
-import { Page } from "../types/Page";
-import { changePage, setPageContent } from "../pageUtils";
+import { Page } from "../PageSystem/Page";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState";
 
 export class SetVaultURLPage extends Page {
   constructor() {
     super();
   }
   async render(): Promise<void> {
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "form",
         id: "setVaultURLForm",
@@ -43,11 +41,11 @@ export class SetVaultURLPage extends Page {
         ],
       }),
     );
-    document.getElementById("setVaultURLForm").addEventListener("submit", async function (e) {
+    document.getElementById("setVaultURLForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(document.querySelector("#setVaultURLForm"));
-      pageState.apiURL = formData.get("vaultURL") as string;
-      await changePage("HOME");
+      this.state.apiURL = formData.get("vaultURL") as string;
+      await this.router.changePage("HOME");
     });
   }
   get name(): string {

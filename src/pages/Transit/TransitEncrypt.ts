@@ -1,10 +1,10 @@
 import { CopyableModal } from "../../elements/CopyableModal";
 import { FileUploadInput } from "../../elements/FileUploadInput";
 import { Margin } from "../../elements/Margin";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { fileToBase64, makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import { transitEncrypt } from "../../api/transit/transitEncrypt";
 import i18next from "i18next";
 
@@ -14,14 +14,13 @@ export class TransitEncryptPage extends Page {
   }
 
   async goBack(): Promise<void> {
-    await changePage("TRANSIT_VIEW_SECRET");
+    await this.router.changePage("TRANSIT_VIEW_SECRET");
   }
 
   transitEncryptForm: HTMLFormElement;
 
   async render(): Promise<void> {
-    setTitleElement(pageState);
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
       }),
@@ -74,7 +73,7 @@ export class TransitEncryptPage extends Page {
         }),
       ],
     }) as HTMLFormElement;
-    setPageContent(this.transitEncryptForm);
+    await this.router.setPageContent(this.transitEncryptForm);
 
     this.transitEncryptForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
@@ -98,7 +97,7 @@ export class TransitEncryptPage extends Page {
     }
 
     try {
-      const res = await transitEncrypt(pageState.currentBaseMount, pageState.currentSecret, {
+      const res = await transitEncrypt(this.state.currentBaseMount, this.state.currentSecret, {
         plaintext: plaintext,
       });
       const modal = CopyableModal(
@@ -113,8 +112,8 @@ export class TransitEncryptPage extends Page {
     }
   }
 
-  get titleSuffix(): string {
-    return i18next.t("transit_encrypt_suffix");
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("transit_encrypt_suffix"));
   }
 
   get name(): string {

@@ -1,10 +1,9 @@
 import { MountType, getMounts } from "../api/sys/getMounts";
-import { Page } from "../types/Page";
-import { changePage, prePageChecks, setErrorText, setPageContent } from "../pageUtils";
+import { Page } from "../PageSystem/Page";
 import { getCapabilitiesPath } from "../api/sys/getCapabilities";
 import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState";
+import { prePageChecks, setErrorText } from "../pageUtils";
 import { sortedObjectMap } from "../utils";
 import i18next from "i18next";
 
@@ -13,11 +12,11 @@ export class HomePage extends Page {
     super();
   }
   async render(): Promise<void> {
-    setPageContent("");
-    if (!(await prePageChecks())) return;
+    await this.router.setPageContent("");
+    if (!(await prePageChecks(this.router))) return;
 
     const homePageContent = makeElement({ tag: "div" });
-    setPageContent(homePageContent);
+    await this.router.setPageContent(homePageContent);
     const textList = makeElement({
       tag: "ul",
       class: "uk-nav",
@@ -26,7 +25,7 @@ export class HomePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "span",
-            html: i18next.t("vaulturl_text", { text: pageState.apiURL }),
+            html: i18next.t("vaulturl_text", { text: this.state.apiURL }),
           }),
         }),
         makeElement({
@@ -35,7 +34,7 @@ export class HomePage extends Page {
             tag: "a",
             text: i18next.t("password_generator_btn"),
             onclick: async () => {
-              await changePage("PW_GEN");
+              await this.router.changePage("PW_GEN");
             },
           }),
         }),
@@ -57,8 +56,8 @@ export class HomePage extends Page {
       const error = e as Error;
       setErrorText(error.message);
       if (error.message == "permission denied") {
-        pageState.token = "";
-        await changePage("LOGIN");
+        this.state.token = "";
+        await this.router.changePage("LOGIN");
       }
     }
 
@@ -70,16 +69,16 @@ export class HomePage extends Page {
           text: i18next.t("home_new_secrets_engine_button"),
           class: ["uk-button", "uk-button-primary", "uk-margin-top"],
           onclick: async () => {
-            await changePage("NEW_SECRETS_ENGINE");
+            await this.router.changePage("NEW_SECRETS_ENGINE");
           },
         }),
       );
     }
 
-    pageState.currentBaseMount = "";
-    pageState.currentSecretPath = [];
-    pageState.currentSecret = "";
-    pageState.currentSecretVersion = null;
+    this.state.currentBaseMount = "";
+    this.state.currentSecretPath = [];
+    this.state.currentSecret = "";
+    this.state.currentSecretVersion = null;
 
     const navList = makeElement({
       tag: "ul",
@@ -91,7 +90,7 @@ export class HomePage extends Page {
     // sort it by secretPath so it's in alphabetical order consistantly.
     const mountsMap = sortedObjectMap(mounts);
 
-    mountsMap.forEach(function (mount: MountType, baseMount) {
+    mountsMap.forEach((mount: MountType, baseMount) => {
       if (typeof mount != "object") return;
       if (mount == null) return;
       if (!("type" in mount)) return;
@@ -122,9 +121,9 @@ export class HomePage extends Page {
             tag: "a",
             text: linkText,
             onclick: async () => {
-              pageState.currentBaseMount = baseMount;
-              pageState.currentMountType = mountType;
-              await changePage(linkPage);
+              this.state.currentBaseMount = baseMount;
+              this.state.currentMountType = mountType;
+              await this.router.changePage(linkPage);
             },
           }),
         }),

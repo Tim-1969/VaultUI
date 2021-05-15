@@ -1,10 +1,10 @@
 import { Margin } from "../../elements/Margin";
 import { Option } from "../../elements/Option";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { makeElement } from "../../htmlUtils";
 import { newTransitKey } from "../../api/transit/newTransitKey";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 
 export class NewTransitKeyPage extends Page {
@@ -12,8 +12,6 @@ export class NewTransitKeyPage extends Page {
     super();
   }
   async render(): Promise<void> {
-    setTitleElement(pageState);
-
     const newTransitKeyForm = makeElement({
       tag: "form",
       children: [
@@ -66,9 +64,9 @@ export class NewTransitKeyPage extends Page {
       ],
     }) as HTMLFormElement;
 
-    setPageContent(newTransitKeyForm);
+    await this.router.setPageContent(newTransitKeyForm);
 
-    newTransitKeyForm.addEventListener("submit", async function (e) {
+    newTransitKeyForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(newTransitKeyForm);
 
@@ -76,12 +74,12 @@ export class NewTransitKeyPage extends Page {
       const type = formData.get("type") as string;
 
       try {
-        await newTransitKey(pageState.currentBaseMount, {
+        await newTransitKey(this.state.currentBaseMount, {
           name: name,
           type: type,
         });
-        pageState.currentSecret = name;
-        await changePage("TRANSIT_VIEW_SECRET");
+        this.state.currentSecret = name;
+        await this.router.changePage("TRANSIT_VIEW_SECRET");
       } catch (e) {
         const error = e as Error;
         setErrorText(error.message);
@@ -89,8 +87,8 @@ export class NewTransitKeyPage extends Page {
     });
   }
 
-  get titleSuffix(): string {
-    return i18next.t("transit_new_key_suffix");
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("transit_new_key_suffix"));
   }
 
   get name(): string {

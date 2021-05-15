@@ -1,14 +1,7 @@
-import { Page } from "../types/Page";
-import {
-  addClipboardNotifications,
-  changePage,
-  prePageChecks,
-  setErrorText,
-  setPageContent,
-} from "../pageUtils";
+import { Page } from "../PageSystem/Page";
+import { addClipboardNotifications, prePageChecks, setErrorText } from "../pageUtils";
 import { getCapabilitiesPath } from "../api/sys/getCapabilities";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState";
 import { renewSelf } from "../api/sys/renewSelf";
 import { sealVault } from "../api/sys/sealVault";
 import ClipboardJS from "clipboard";
@@ -20,8 +13,8 @@ export class MePage extends Page {
   }
 
   async render(): Promise<void> {
-    if (!(await prePageChecks())) return;
-    setPageContent(
+    if (!(await prePageChecks(this.router))) return;
+    await this.router.setPageContent(
       makeElement({
         tag: "ul",
         class: "uk-nav",
@@ -32,8 +25,8 @@ export class MePage extends Page {
               tag: "a",
               text: i18next.t("log_out_btn"),
               onclick: async () => {
-                pageState.token = "";
-                await changePage("HOME");
+                this.state.token = "";
+                await this.router.changePage("HOME");
               },
             }),
           }),
@@ -43,7 +36,7 @@ export class MePage extends Page {
               tag: "a",
               text: i18next.t("copy_token_btn"),
               attributes: {
-                "data-clipboard-text": pageState.token,
+                "data-clipboard-text": this.state.token,
               },
               thenRun: (e) => {
                 const clipboard = new ClipboardJS(e);
@@ -59,7 +52,7 @@ export class MePage extends Page {
               onclick: () => {
                 renewSelf()
                   .then(() => {
-                    void changePage("HOME");
+                    void this.router.changePage("HOME");
                   })
                   .catch((e: Error) => {
                     setErrorText(e.message);
@@ -82,7 +75,7 @@ export class MePage extends Page {
               text: i18next.t("seal_vault_btn"),
               onclick: async () => {
                 await sealVault();
-                await changePage("UNSEAL_VAULT");
+                await this.router.changePage("UNSEAL_VAULT");
               },
             }),
           }),
@@ -92,7 +85,7 @@ export class MePage extends Page {
               tag: "a",
               text: i18next.t("change_language_btn"),
               onclick: async () => {
-                await changePage("SET_LANGUAGE");
+                await this.router.changePage("SET_LANGUAGE");
               },
             }),
           }),

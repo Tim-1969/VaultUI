@@ -1,6 +1,5 @@
-import { Page } from "../types/Page";
+import { Page } from "../PageSystem/Page";
 import { Tile } from "../elements/Tile";
-import { changePage, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
 import i18next from "i18next";
 
@@ -10,7 +9,7 @@ export class NewSecretsEnginePage extends Page {
   }
 
   async render(): Promise<void> {
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
         class: "uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small uk-grid-match",
@@ -19,22 +18,22 @@ export class NewSecretsEnginePage extends Page {
           Tile({
             title: i18next.t("new_secrets_engine_kv_title"),
             description: i18next.t("new_secrets_engine_kv_description"),
-            onclick: () => {
-              void changePage("NEW_KV_ENGINE");
+            onclick: async () => {
+              await this.router.changePage("NEW_KV_ENGINE");
             },
           }),
           Tile({
             title: i18next.t("new_secrets_engine_totp_title"),
             description: i18next.t("new_secrets_engine_totp_description"),
-            onclick: () => {
-              void changePage("NEW_TOTP_ENGINE");
+            onclick: async () => {
+              await this.router.changePage("NEW_TOTP_ENGINE");
             },
           }),
           Tile({
             title: i18next.t("new_secrets_engine_transit_title"),
             description: i18next.t("new_secrets_engine_transit_description"),
-            onclick: () => {
-              void changePage("NEW_TRANSIT_ENGINE");
+            onclick: async () => {
+              await this.router.changePage("NEW_TRANSIT_ENGINE");
             },
           }),
         ],

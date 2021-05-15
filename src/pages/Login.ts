@@ -1,10 +1,9 @@
 import { Margin } from "../elements/Margin";
 import { MarginInline } from "../elements/MarginInline";
-import { Page } from "../types/Page";
-import { changePage, setErrorText, setPageContent } from "../pageUtils";
+import { Page } from "../PageSystem/Page";
 import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState";
+import { setErrorText } from "../pageUtils";
 import { usernameLogin } from "../api/auth/usernameLogin";
 import i18next from "i18next";
 
@@ -83,7 +82,7 @@ export class LoginPage extends Page {
       ],
     }) as HTMLFormElement;
 
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
         children: [
@@ -132,15 +131,15 @@ export class LoginPage extends Page {
       }),
     );
 
-    tokenLoginForm.addEventListener("submit", async function (e) {
+    tokenLoginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(tokenLoginForm);
       const token = formData.get("token");
-      pageState.token = token as string;
+      this.state.token = token as string;
 
       try {
         await lookupSelf();
-        await changePage("HOME");
+        await this.router.changePage("HOME");
       } catch (e: unknown) {
         const error = e as Error;
         document.getElementById("tokenInput").classList.add("uk-form-danger");
@@ -151,7 +150,7 @@ export class LoginPage extends Page {
         }
       }
     });
-    usernameLoginForm.addEventListener("submit", async function (e) {
+    usernameLoginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(usernameLoginForm);
 
@@ -160,8 +159,8 @@ export class LoginPage extends Page {
           formData.get("username") as string,
           formData.get("password") as string,
         );
-        pageState.token = res;
-        await changePage("HOME");
+        this.state.token = res;
+        await this.router.changePage("HOME");
       } catch (e: unknown) {
         const error = e as Error;
         document.getElementById("usernameInput").classList.add("uk-form-danger");

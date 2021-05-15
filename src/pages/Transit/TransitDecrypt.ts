@@ -1,10 +1,10 @@
 import { CopyableModal } from "../../elements/CopyableModal";
 import { FileUploadInput } from "../../elements/FileUploadInput";
 import { Margin } from "../../elements/Margin";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { fileToBase64, makeElement } from "../../htmlUtils";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import { transitDecrypt } from "../../api/transit/transitDecrypt";
 import i18next from "i18next";
 
@@ -14,14 +14,13 @@ export class TransitDecryptPage extends Page {
   }
 
   async goBack(): Promise<void> {
-    await changePage("TRANSIT_VIEW_SECRET");
+    await this.router.changePage("TRANSIT_VIEW_SECRET");
   }
 
   transitDecryptForm: HTMLFormElement;
 
   async render(): Promise<void> {
-    setTitleElement(pageState);
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
       }),
@@ -74,7 +73,7 @@ export class TransitDecryptPage extends Page {
         }),
       ],
     }) as HTMLFormElement;
-    setPageContent(this.transitDecryptForm);
+    await this.router.setPageContent(this.transitDecryptForm);
     this.transitDecryptForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
       await this.transitDecryptFormHandler();
@@ -96,7 +95,7 @@ export class TransitDecryptPage extends Page {
     }
 
     try {
-      const res = await transitDecrypt(pageState.currentBaseMount, pageState.currentSecret, {
+      const res = await transitDecrypt(this.state.currentBaseMount, this.state.currentSecret, {
         ciphertext: ciphertext,
       });
       let plaintext = res.plaintext;
@@ -115,8 +114,8 @@ export class TransitDecryptPage extends Page {
     }
   }
 
-  get titleSuffix(): string {
-    return i18next.t("transit_decrypt_suffix");
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("transit_decrypt_suffix"));
   }
 
   get name(): string {

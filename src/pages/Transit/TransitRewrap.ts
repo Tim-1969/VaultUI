@@ -1,12 +1,12 @@
 import { CopyableModal } from "../../elements/CopyableModal";
 import { Margin } from "../../elements/Margin";
 import { Option } from "../../elements/Option";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getTransitKey } from "../../api/transit/getTransitKey";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import { transitRewrap } from "../../api/transit/transitRewrap";
 import i18next from "i18next";
 
@@ -18,14 +18,13 @@ export class TransitRewrapPage extends Page {
   }
 
   async goBack(): Promise<void> {
-    await changePage("TRANSIT_VIEW_SECRET");
+    await this.router.changePage("TRANSIT_VIEW_SECRET");
   }
 
   transitRewrapForm: HTMLFormElement;
 
   async render(): Promise<void> {
-    setTitleElement(pageState);
-    const transitKey = await getTransitKey(pageState.currentBaseMount, pageState.currentSecret);
+    const transitKey = await getTransitKey(this.state.currentBaseMount, this.state.currentSecret);
 
     const stringVersions = Array.from(
       objectToMap(transitKey.keys).keys(),
@@ -47,7 +46,7 @@ export class TransitRewrapPage extends Page {
       };
     });
 
-    setPageContent("");
+    await this.router.setPageContent("");
     this.transitRewrapForm = makeElement({
       tag: "form",
       children: [
@@ -82,7 +81,7 @@ export class TransitRewrapPage extends Page {
         }),
       ],
     }) as HTMLFormElement;
-    setPageContent(this.transitRewrapForm);
+    await this.router.setPageContent(this.transitRewrapForm);
 
     this.transitRewrapForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
@@ -93,7 +92,7 @@ export class TransitRewrapPage extends Page {
   async transitRewrapFormHandler(): Promise<void> {
     const formData = new FormData(this.transitRewrapForm);
     try {
-      const res = await transitRewrap(pageState.currentBaseMount, pageState.currentSecret, {
+      const res = await transitRewrap(this.state.currentBaseMount, this.state.currentSecret, {
         ciphertext: formData.get("ciphertext") as string,
         key_version: parseInt(formData.get("version") as string, 10),
       });
@@ -106,8 +105,8 @@ export class TransitRewrapPage extends Page {
     }
   }
 
-  get titleSuffix(): string {
-    return i18next.t("transit_rewrap_suffix");
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router, i18next.t("transit_rewrap_suffix"));
   }
 
   get name(): string {

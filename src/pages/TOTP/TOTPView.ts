@@ -1,12 +1,12 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox";
 import { DoesNotExistError } from "../../types/internalErrors";
-import { Page } from "../../types/Page";
-import { changePage, setErrorText, setPageContent, setTitleElement } from "../../pageUtils";
+import { Page } from "../../PageSystem/Page";
+import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getTOTPCode } from "../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../api/totp/getTOTPKeys";
 import { makeElement } from "../../htmlUtils";
 import { objectToMap } from "../../utils";
-import { pageState } from "../../globalPageState";
+import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 
 export interface TOTPListElement extends HTMLElement {
@@ -24,9 +24,8 @@ export class TOTPViewPage extends Page {
   totpListElements: Record<string, TOTPListElement>;
 
   async render(): Promise<void> {
-    setTitleElement(pageState);
     const totpList = makeElement({ tag: "div" });
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
         children: [
@@ -35,7 +34,7 @@ export class TOTPViewPage extends Page {
             text: i18next.t("totp_view_new_btn"),
             class: ["uk-button", "uk-button-primary", "uk-margin-bottom"],
             onclick: async () => {
-              await changePage("NEW_TOTP");
+              await this.router.changePage("NEW_TOTP");
             },
           }),
           makeElement({
@@ -51,7 +50,7 @@ export class TOTPViewPage extends Page {
     );
 
     try {
-      const res = await getTOTPKeys(pageState.currentBaseMount);
+      const res = await getTOTPKeys(this.state.currentBaseMount);
       for (const totpKeyName of res) {
         const totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
@@ -88,7 +87,7 @@ export class TOTPViewPage extends Page {
   }
 
   async updateTOTPElement(totpKeyName: string, totpListElement: TOTPListElement): Promise<void> {
-    totpListElement.setCode(await getTOTPCode(pageState.currentBaseMount, totpKeyName));
+    totpListElement.setCode(await getTOTPCode(this.state.currentBaseMount, totpKeyName));
   }
 
   makeTOTPListElement(totpKeyName: string): TOTPListElement {
@@ -104,6 +103,10 @@ export class TOTPViewPage extends Page {
     gridElement.setCode = (code: string) => totpValueBox.setText(code);
 
     return gridElement;
+  }
+
+  async getPageTitle(): Promise<Element | string> {
+    return await SecretTitleElement(this.router);
   }
 
   get name(): string {

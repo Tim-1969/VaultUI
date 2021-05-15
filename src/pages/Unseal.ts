@@ -1,9 +1,9 @@
 import { MarginInline } from "../elements/MarginInline";
-import { Page } from "../types/Page";
+import { Page } from "../PageSystem/Page";
 import { QRScanner, QRScannerType } from "../elements/QRScanner";
 import { SealStatusType, getSealStatus } from "../api/sys/getSealStatus";
-import { changePage, setErrorText, setPageContent } from "../pageUtils";
 import { makeElement } from "../htmlUtils";
+import { setErrorText } from "../pageUtils";
 import { submitUnsealKey } from "../api/sys/submitUnsealKey";
 import i18next from "i18next";
 
@@ -68,7 +68,7 @@ export class UnsealPage extends Page {
     this.unsealInputContent = makeElement({
       tag: "div",
     });
-    setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
         children: [
@@ -169,7 +169,7 @@ export class UnsealPage extends Page {
     progressBar.max = keysNeeded;
     if (!data.sealed) {
       progressBar.value = keysNeeded;
-      await changePage("HOME");
+      await this.router.changePage("HOME");
     }
   }
 

@@ -20,14 +20,13 @@ Prism.highlightAll();
 // Actual Imports
 
 import { NavBar } from "./elements/NavBar";
-import { PageRouter } from "./PageRouter";
+import { PageRouter } from "./PageSystem/PageRouter";
 import { allPages } from "./allPages";
 import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
-import { setPageRouter } from "./globalPageRouter";
 import i18next from "i18next";
 
 // @ts-ignore
@@ -41,7 +40,7 @@ declare global {
 
 async function onLoad(): Promise<void> {
   document.body.innerHTML = "";
-  document.body.appendChild(NavBar());
+  document.body.appendChild(makeElement({tag: "div", id: "navBarReplace"}));
   document.body.appendChild(
     makeElement({
       tag: "div",
@@ -69,10 +68,12 @@ async function onLoad(): Promise<void> {
 
   const pageRouter = new PageRouter(
     allPages,
+    pageState,
     document.getElementById("pageContent"),
     document.getElementById("pageTitle"),
   );
-  setPageRouter(pageRouter);
+
+  document.querySelector("#navBarReplace").replaceWith(NavBar(pageRouter));
 
   pageRouter.addEventListener("pageChanged", async function (_) {
     pageState.currentPage = await pageRouter.getCurrentPageID();
@@ -80,7 +81,7 @@ async function onLoad(): Promise<void> {
   });
 
   if (process.env.NODE_ENV == "development") {
-    await playground();
+    await playground(pageRouter);
   }
 
   await pageRouter.changePage(pageState.currentPageString);

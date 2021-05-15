@@ -1,5 +1,6 @@
-import { Page } from "./types/Page";
-import { getObjectKeys } from "./utils";
+import { Page } from "./Page";
+import { PageState } from "../PageState";
+import { getObjectKeys } from "../utils";
 
 type pageList = {
   [key: string]: Page;
@@ -9,9 +10,15 @@ const PageDoesNotExistError = new Error("Page does not exist.");
 const PageHasNotBeenSetError = new Error("Page has not been set.");
 
 export class PageRouter extends EventTarget {
-  constructor(pages: pageList, pageContentElement: HTMLElement, pageTitleElement: HTMLElement) {
+  constructor(
+    pages: pageList,
+    state: PageState,
+    pageContentElement: HTMLElement,
+    pageTitleElement: HTMLElement,
+  ) {
     super();
     this.pages = pages;
+    this.state = state;
     this.pageContentElement = pageContentElement;
     this.pageTitleElement = pageTitleElement;
   }
@@ -20,6 +27,7 @@ export class PageRouter extends EventTarget {
   private currentPageID: string;
   private currentPage: Page;
 
+  public state: PageState;
   public pageContentElement: HTMLElement;
   public pageTitleElement: HTMLElement;
 
@@ -27,8 +35,21 @@ export class PageRouter extends EventTarget {
     return getObjectKeys(this.pages);
   }
 
+  public async getCurrentPage(): Promise<Page> {
+    return this.currentPage;
+  }
+
   public async getCurrentPageID(): Promise<string> {
     return this.currentPageID;
+  }
+
+  public async setPageContent(content: string | HTMLElement): Promise<void> {
+    if (typeof content === "string") {
+      this.pageContentElement.innerHTML = content;
+    } else {
+      this.pageContentElement.innerHTML = "";
+      this.pageContentElement.appendChild(content);
+    }
   }
 
   public async changePage(pageID: string): Promise<void> {
@@ -42,6 +63,8 @@ export class PageRouter extends EventTarget {
     // Set the current page to the new page
     this.currentPageID = pageID;
     this.currentPage = this.pages[pageID];
+
+    await this.currentPage.setRouterAndState(this, this.state);
 
     // Dispatch an event saying the page has been changed.
     this.dispatchEvent(new CustomEvent("pageChanged"));
@@ -57,8 +80,12 @@ export class PageRouter extends EventTarget {
     this.pageContentElement.innerHTML = "";
     this.pageTitleElement.innerHTML = "";
 
-    // TODO: Make Page have a getTitle method.
-    this.pageTitleElement.innerText = this.currentPage.name;
+    const pageTitle = await this.currentPage.getPageTitle();
+    if (typeof pageTitle === "string") {
+      this.pageTitleElement.innerText = pageTitle;
+    } else {
+      this.pageTitleElement.appendChild(pageTitle);
+    }
 
     await this.currentPage.render();
   }

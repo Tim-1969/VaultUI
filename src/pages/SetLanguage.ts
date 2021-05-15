@@ -1,8 +1,6 @@
 import { Margin } from "../elements/Margin";
-import { Page } from "../types/Page";
-import { changePage, setPageContent } from "../pageUtils";
+import { Page } from "../PageSystem/Page";
 import { makeElement } from "../htmlUtils";
-import { pageState } from "../globalPageState";
 import { reloadNavBar } from "../elements/NavBar";
 import i18next from "i18next";
 
@@ -51,18 +49,18 @@ export class SetLanguagePage extends Page {
         }),
       ],
     }) as HTMLFormElement;
-    setPageContent(setLanguageForm);
-    setLanguageForm.addEventListener("submit", async function (e) {
+    await this.router.setPageContent(setLanguageForm);
+    setLanguageForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(setLanguageForm);
 
       const language = formData.get("language") as string;
-      pageState.language = language;
+      this.state.language = language;
 
       const t = await i18next.changeLanguage(language);
-      pageState.pageDirection = t("language_direction");
-      reloadNavBar();
-      await changePage("HOME");
+      this.state.pageDirection = t("language_direction");
+      reloadNavBar(this.router);
+      await this.router.changePage("HOME");
     });
   }
   get name(): string {
