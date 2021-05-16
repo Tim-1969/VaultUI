@@ -21,7 +21,7 @@ Prism.highlightAll();
 
 import { NavBar } from "./elements/NavBar";
 import { PageRouter } from "./PageSystem/PageRouter";
-import { allPages } from "./allPages";
+import { pageList } from "./allPages";
 import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
@@ -67,7 +67,7 @@ async function onLoad(): Promise<void> {
   window.pageContent = document.querySelector("#pageContent");
 
   const pageRouter = new PageRouter(
-    allPages,
+    pageList,
     pageState,
     document.getElementById("pageContent"),
     document.getElementById("pageTitle"),

@@ -1,28 +1,25 @@
 import { PageType } from "./PageType";
 import { getObjectKeys } from "../utils";
-
-type pageList = {
-  [key: string]: PageType;
-};
+import { PageListType } from "./PageListType";
 
 const PageDoesNotExistError = new Error("Page does not exist.");
 const PageHasNotBeenSetError = new Error("Page has not been set.");
 
 export class PageRouter extends EventTarget {
   constructor(
-    pages: pageList,
+    pageList: PageListType,
     state: unknown,
     pageContentElement: HTMLElement,
     pageTitleElement: HTMLElement,
   ) {
     super();
-    this.pages = pages;
+    this.pageList = pageList;
     this.state = state;
     this.pageContentElement = pageContentElement;
     this.pageTitleElement = pageTitleElement;
   }
 
-  private pages: pageList;
+  private pageList: PageListType;
   private currentPageID: string;
   private currentPage: PageType;
 
@@ -31,7 +28,7 @@ export class PageRouter extends EventTarget {
   public pageTitleElement: HTMLElement;
 
   public async getPageIDs(): Promise<string[]> {
-    return getObjectKeys(this.pages);
+    return await this.pageList.getPageIDs();
   }
 
   public async getCurrentPage(): Promise<PageType> {
@@ -61,7 +58,7 @@ export class PageRouter extends EventTarget {
 
     // Set the current page to the new page
     this.currentPageID = pageID;
-    this.currentPage = this.pages[pageID];
+    this.currentPage = await this.pageList.getPage(pageID);
 
     await this.currentPage.setRouterAndState(this, this.state);
 

@@ -24,6 +24,8 @@ import { TransitRewrapPage } from "./pages/Transit/TransitRewrap";
 import { TransitViewPage } from "./pages/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
+import { getObjectKeys } from "./utils";
+import { PageType } from "./PageSystem/PageType";
 
 type pagesList = {
   [key: string]: Page;
@@ -56,3 +58,21 @@ export const allPages: pagesList = {
   NEW_TOTP_ENGINE: new NewTOTPEnginePage(),
   NEW_TRANSIT_ENGINE: new NewTransitEnginePage(),
 };
+
+
+// This should implement all o PageListType
+class PageList {
+  constructor(pages: pagesList) {
+    this.pages = pages;
+  }
+  private pages: pagesList;
+
+  async getPageIDs(): Promise<string[]> {
+    return getObjectKeys(this.pages);
+  }
+  async getPage(pageID: string): Promise<PageType> {
+    return this.pages[pageID];
+  }
+}
+
+export const pageList = new PageList(allPages);
