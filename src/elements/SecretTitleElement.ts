@@ -1,46 +1,48 @@
 import { PageRouter } from "../PageSystem/PageRouter";
 import { makeElement } from "../htmlUtils";
+import { PageState } from "../PageState";
 
-function currentTitleSecretText(router: PageRouter, suffix = ""): string {
-  let currentSecretText = router.state.currentSecret;
+function currentTitleSecretText(state: PageState, suffix = ""): string {
+  let currentSecretText = state.currentSecret;
   currentSecretText += suffix;
-  if (router.state.currentSecretVersion !== null)
-    currentSecretText += ` (v${router.state.currentSecretVersion})`;
+  if (state.currentSecretVersion !== null)
+    currentSecretText += ` (v${state.currentSecretVersion})`;
   return currentSecretText;
 }
 
 export async function SecretTitleElement(router: PageRouter, suffix = ""): Promise<HTMLElement> {
+  let state = router.state as PageState;
   const titleElement = makeElement({
     tag: "div",
     children: [
       makeElement({
         tag: "a",
-        text: router.state.currentBaseMount + " ",
+        text: state.currentBaseMount + " ",
         onclick: async () => {
-          router.state.currentSecretPath = [];
-          router.state.currentSecret = "";
-          router.state.currentSecretVersion = null;
+          state.currentSecretPath = [];
+          state.currentSecret = "";
+          state.currentSecretVersion = null;
 
           if (
-            router.state.currentMountType.startsWith("kv") ||
-            router.state.currentMountType == "cubbyhole"
+            state.currentMountType.startsWith("kv") ||
+            state.currentMountType == "cubbyhole"
           ) {
             await router.changePage("KEY_VALUE_VIEW");
-          } else if (router.state.currentMountType == "totp") {
+          } else if (state.currentMountType == "totp") {
             await router.changePage("TOTP");
-          } else if (router.state.currentMountType == "transit") {
+          } else if (state.currentMountType == "transit") {
             await router.changePage("TRANSIT_VIEW");
           }
         },
       }),
-      ...router.state.currentSecretPath.map((secretPath, index, secretPaths) => {
+      ...state.currentSecretPath.map((secretPath, index, secretPaths) => {
         return makeElement({
           tag: "a",
           text: secretPath + " ",
           onclick: async () => {
-            router.state.currentSecretVersion = null;
-            if (router.state.currentMountType.startsWith("kv")) {
-              router.state.currentSecretPath = secretPaths.slice(0, index + 1);
+            state.currentSecretVersion = null;
+            if (state.currentMountType.startsWith("kv")) {
+              state.currentSecretPath = secretPaths.slice(0, index + 1);
               await router.changePage("KEY_VALUE_VIEW");
             }
           },
@@ -48,8 +50,8 @@ export async function SecretTitleElement(router: PageRouter, suffix = ""): Promi
       }),
       makeElement({
         tag: "span",
-        condition: router.state.currentSecret.length != 0,
-        text: currentTitleSecretText(router, suffix),
+        condition: state.currentSecret.length != 0,
+        text: currentTitleSecretText(state, suffix),
       }),
     ],
   });

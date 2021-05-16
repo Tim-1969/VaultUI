@@ -4,13 +4,15 @@ import { lookupSelf } from "./api/sys/lookupSelf";
 import ClipboardJS from "clipboard";
 import UIkit from "uikit";
 import i18next from "i18next";
+import { PageState } from "./PageState";
 
 async function prePageChecksReal(router: PageRouter) {
-  if (router.state.language.length == 0) {
+  let state = router.state as PageState;
+  if (state.language.length == 0) {
     await router.changePage("SET_LANGUAGE");
     throw new Error("Language Not Set");
   }
-  if (!router.state.apiURL) {
+  if (!state.apiURL) {
     await router.changePage("SET_VAULT_URL");
     throw new Error("Vault URL Not Set");
   }

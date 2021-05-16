@@ -1,5 +1,4 @@
 import { PageType } from "./PageType";
-import { PageState } from "../PageState";
 import { getObjectKeys } from "../utils";
 
 type pageList = {
@@ -12,7 +11,7 @@ const PageHasNotBeenSetError = new Error("Page has not been set.");
 export class PageRouter extends EventTarget {
   constructor(
     pages: pageList,
-    state: PageState,
+    state: unknown,
     pageContentElement: HTMLElement,
     pageTitleElement: HTMLElement,
   ) {
@@ -27,7 +26,7 @@ export class PageRouter extends EventTarget {
   private currentPageID: string;
   private currentPage: PageType;
 
-  public state: PageState;
+  public state: unknown;
   public pageContentElement: HTMLElement;
   public pageTitleElement: HTMLElement;
 

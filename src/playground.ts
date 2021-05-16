@@ -18,7 +18,7 @@ declare global {
 // Please empty this function before committing.
 export async function playground(router: PageRouter): Promise<void> {
   console.log("Welcome to Playground!");
-  window.pageState = router.state;
+  window.pageState = router.state as PageState;
   window.i18next = i18next;
   window.router = router;
 }
