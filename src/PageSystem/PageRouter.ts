@@ -1,9 +1,9 @@
-import { Page } from "./Page";
+import { PageType } from "./PageType";
 import { PageState } from "../PageState";
 import { getObjectKeys } from "../utils";
 
 type pageList = {
-  [key: string]: Page;
+  [key: string]: PageType;
 };
 
 const PageDoesNotExistError = new Error("Page does not exist.");
@@ -25,7 +25,7 @@ export class PageRouter extends EventTarget {
 
   private pages: pageList;
   private currentPageID: string;
-  private currentPage: Page;
+  private currentPage: PageType;
 
   public state: PageState;
   public pageContentElement: HTMLElement;
@@ -35,7 +35,7 @@ export class PageRouter extends EventTarget {
     return getObjectKeys(this.pages);
   }
 
-  public async getCurrentPage(): Promise<Page> {
+  public async getCurrentPage(): Promise<PageType> {
     return this.currentPage;
   }
 
