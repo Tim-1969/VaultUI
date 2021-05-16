@@ -1,5 +1,5 @@
 import { ListItem } from "./ListItem";
-import { PageRouter } from "../PageSystem/PageRouter";
+import { PageRouter } from "z-pagerouter";
 import { makeElement } from "../htmlUtils";
 import i18next from "i18next";
 

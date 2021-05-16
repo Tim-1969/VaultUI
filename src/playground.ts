@@ -1,4 +1,4 @@
-import { PageRouter } from "./PageSystem/PageRouter";
+import { PageRouter } from "z-pagerouter";
 import { PageState } from "./PageState";
 import i18next from "i18next";
 

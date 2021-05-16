@@ -1,4 +1,4 @@
-import { PageRouter } from "./PageSystem/PageRouter";
+import { PageRouter } from "z-pagerouter";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { lookupSelf } from "./api/sys/lookupSelf";
 import ClipboardJS from "clipboard";

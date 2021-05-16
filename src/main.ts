@@ -20,7 +20,7 @@ Prism.highlightAll();
 // Actual Imports
 
 import { NavBar } from "./elements/NavBar";
-import { PageRouter } from "./PageSystem/PageRouter";
+import { PageRouter } from "z-pagerouter";
 import { pageList } from "./allPages";
 import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";

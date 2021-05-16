@@ -1,4 +1,4 @@
-import { PageRouter } from "../PageSystem/PageRouter";
+import { PageRouter } from "z-pagerouter";
 import { makeElement } from "../htmlUtils";
 import { PageState } from "../PageState";
 
