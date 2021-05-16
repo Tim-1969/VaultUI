@@ -52,5 +52,3 @@ export class SetVaultURLPage extends Page {
     return "Set Vault URL";
   }
 }
-
-export { SetVaultURLPage as default };

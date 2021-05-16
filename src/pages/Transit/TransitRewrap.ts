@@ -113,5 +113,3 @@ export class TransitRewrapPage extends Page {
     return i18next.t("transit_rewrap_title");
   }
 }
-
-export { TransitRewrapPage as default };

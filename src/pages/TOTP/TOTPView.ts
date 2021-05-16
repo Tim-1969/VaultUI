@@ -113,5 +113,3 @@ export class TOTPViewPage extends Page {
     return i18next.t("totp_view_title");
   }
 }
-
-export { TOTPViewPage as default };

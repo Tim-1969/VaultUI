@@ -55,5 +55,3 @@ export class KeyValueDeletePage extends Page {
     return i18next.t("kv_delete_title");
   }
 }
-
-export { KeyValueDeletePage as default };

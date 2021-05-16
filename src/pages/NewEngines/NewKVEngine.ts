@@ -85,5 +85,3 @@ export class NewKVEnginePage extends Page {
     return i18next.t("new_kv_engine_title");
   }
 }
-
-export { NewKVEnginePage as default };

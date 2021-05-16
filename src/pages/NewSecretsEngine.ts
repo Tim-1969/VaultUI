@@ -45,5 +45,3 @@ export class NewSecretsEnginePage extends Page {
     return i18next.t("new_secrets_engine_title");
   }
 }
-
-export { NewSecretsEnginePage as default };

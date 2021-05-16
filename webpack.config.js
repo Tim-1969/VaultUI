@@ -22,8 +22,7 @@ module.exports = {
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: '[name].js',
-    filename: '[name].[contenthash].js',
+    filename: 'bundle.js',
   },
   stats: {
     preset: VERBOSE ? "detailed" : "normal",
@@ -45,11 +44,7 @@ module.exports = {
     modules: ['node_modules'],
     extensions: ['.tsx', '.ts', '.js', ".mjs"],
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+
   module: {
     rules: [
       {

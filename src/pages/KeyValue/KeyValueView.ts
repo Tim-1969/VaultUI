@@ -104,5 +104,3 @@ export class KeyValueViewPage extends Page {
     return i18next.t("kv_view_title");
   }
 }
-
-export { KeyValueViewPage as default };

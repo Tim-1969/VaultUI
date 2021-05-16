@@ -192,5 +192,3 @@ export class UnsealPage extends Page {
     return i18next.t("unseal_vault_text");
   }
 }
-
-export { UnsealPage as default };

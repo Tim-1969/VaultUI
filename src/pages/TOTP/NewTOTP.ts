@@ -114,5 +114,3 @@ export class NewTOTPPage extends Page {
     return i18next.t("totp_new_title");
   }
 }
-
-export { NewTOTPPage as default };

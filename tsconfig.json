@@ -3,7 +3,7 @@
     "outDir": "./dist/",
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
-    "module": "es2020",
+    "module": "es6",
     "target": "es2019",
     "strictBindCallApply": true,
     "noImplicitThis": true,
