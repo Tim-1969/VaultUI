@@ -15,11 +15,9 @@ var babelOptions = {
         "corejs": { "version": 3 },
         "useBuiltIns": "usage",
         "targets": {
-          "edge": "17",
           "firefox": "60",
           "chrome": "67",
-          "safari": "11.1",
-          "ie": "11"
+          "ie": "8"
         }
       }
     ]
@@ -36,31 +34,6 @@ const MODE = process.env.WEBPACK_MODE || "production"
 const DEBUG = MODE != "production";
 
 let commitHash = gitRevisionPlugin.commithash();
-
-let devrules = [{ test: /\.tsx?$/, loader: "ts-loader" }];
-let prodrules = [{
-  test: /\.ts(x?)$/,
-  exclude: /node_modules/,
-  use: [
-    {
-      loader: 'babel-loader',
-      options: babelOptions
-    },
-    {
-      loader: 'ts-loader'
-    }
-  ]
-},
-{
-  test: /\.js$/,
-  exclude: /node_modules/,
-  use: [
-    {
-      loader: 'babel-loader',
-      options: babelOptions
-    }
-  ]
-}];
 
 console.log("DEBUG:", DEBUG);
 
@@ -103,7 +76,29 @@ module.exports = {
           "sass-loader"
         ],
       },
-      ...(DEBUG ? devrules : prodrules),
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelOptions
+          },
+          {
+            loader: 'ts-loader'
+          }
+        ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelOptions
+          }
+        ]
+      }
     ],
   },
 };
