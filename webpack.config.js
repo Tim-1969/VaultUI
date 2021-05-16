@@ -7,14 +7,62 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
 
-
+var babelOptions = {
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "corejs": { "version": 3 },
+        "useBuiltIns": "usage",
+        "targets": {
+          "edge": "17",
+          "firefox": "60",
+          "chrome": "67",
+          "safari": "11.1",
+          "ie": "11"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": true }],
+    ["@babel/plugin-proposal-class-properties"],
+    ["@babel/transform-runtime"]
+  ]
+};
 
 const VERBOSE = Object.getOwnPropertyNames(process.env).includes("VERBOSE") || !true;
-const MODE  = process.env.WEBPACK_MODE || "production" 
+const MODE = process.env.WEBPACK_MODE || "production"
 const DEBUG = MODE != "production";
 
 let commitHash = gitRevisionPlugin.commithash();
 
+let devrules = [{ test: /\.tsx?$/, loader: "ts-loader" }];
+let prodrules = [{
+  test: /\.ts(x?)$/,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'babel-loader',
+      options: babelOptions
+    },
+    {
+      loader: 'ts-loader'
+    }
+  ]
+},
+{
+  test: /\.js$/,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'babel-loader',
+      options: babelOptions
+    }
+  ]
+}];
+
+console.log("DEBUG:", DEBUG);
 
 module.exports = {
   mode: MODE,
@@ -33,8 +81,8 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({ title: "VaultUI" }),
     new webpack.DefinePlugin({
-      BUILD_STRING: 
-      JSON.stringify(`Built At: ${new Date().toString()} by ${os.userInfo().username}@${os.hostname()} on commit ${commitHash}`),
+      BUILD_STRING:
+        JSON.stringify(`Built At: ${new Date().toString()} by ${os.userInfo().username}@${os.hostname()} on commit ${commitHash}`),
     })
   ],
   devServer: {
@@ -55,7 +103,7 @@ module.exports = {
           "sass-loader"
         ],
       },
-      { test: /\.tsx?$/, loader: "ts-loader" }
+      ...(DEBUG ? devrules : prodrules),
     ],
   },
 };
