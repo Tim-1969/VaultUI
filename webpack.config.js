@@ -16,8 +16,7 @@ var babelOptions = {
         "useBuiltIns": "usage",
         "targets": {
           "firefox": "60",
-          "chrome": "67",
-          "ie": "8"
+          "chrome": "67"
         }
       }
     ]
