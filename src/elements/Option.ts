@@ -1,4 +1,4 @@
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 
 export function Option(label: string, value: string): HTMLElement {
   return makeElement({

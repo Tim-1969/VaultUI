@@ -23,7 +23,7 @@ import { NavBar } from "./elements/NavBar";
 import { PageRouter } from "z-pagerouter";
 import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";
-import { makeElement } from "./htmlUtils";
+import { makeElement } from "z-makeelement";
 import { pageList } from "./allPages";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";

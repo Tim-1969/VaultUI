@@ -1,7 +1,7 @@
 import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { createOrUpdateSecret } from "../../api/kv/createOrUpdateSecret";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";
 

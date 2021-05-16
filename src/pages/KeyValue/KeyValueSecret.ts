@@ -3,7 +3,7 @@ import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getCapabilities } from "../../api/sys/getCapabilities";
 import { getSecret } from "../../api/kv/getSecret";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { sortedObjectMap } from "../../utils";
 import { undeleteSecret } from "../../api/kv/undeleteSecret";
 import Prism from "prismjs";

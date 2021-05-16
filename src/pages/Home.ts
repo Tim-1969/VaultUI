@@ -2,7 +2,7 @@ import { MountType, getMounts } from "../api/sys/getMounts";
 import { Page } from "../types/Page";
 import { getCapabilitiesPath } from "../api/sys/getCapabilities";
 import { lookupSelf } from "../api/sys/lookupSelf";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { prePageChecks, setErrorText } from "../pageUtils";
 import { sortedObjectMap } from "../utils";
 import i18next from "i18next";

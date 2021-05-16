@@ -2,7 +2,7 @@ import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
 import { QRScanner, QRScannerType } from "../elements/QRScanner";
 import { SealStatusType, getSealStatus } from "../api/sys/getSealStatus";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { setErrorText } from "../pageUtils";
 import { submitUnsealKey } from "../api/sys/submitUnsealKey";
 import i18next from "i18next";

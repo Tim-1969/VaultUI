@@ -2,7 +2,7 @@ import { Margin } from "../../elements/Margin";
 import { Option } from "../../elements/Option";
 import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { newTransitKey } from "../../api/transit/newTransitKey";
 import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";

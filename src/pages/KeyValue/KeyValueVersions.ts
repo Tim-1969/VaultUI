@@ -1,7 +1,7 @@
 import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getSecretMetadata } from "../../api/kv/getSecretMetadata";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { objectToMap } from "../../utils";
 import i18next from "i18next";
 

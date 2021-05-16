@@ -1,7 +1,7 @@
 import { Page } from "../types/Page";
 import { addClipboardNotifications, prePageChecks, setErrorText } from "../pageUtils";
 import { getCapabilitiesPath } from "../api/sys/getCapabilities";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { renewSelf } from "../api/sys/renewSelf";
 import { sealVault } from "../api/sys/sealVault";
 import ClipboardJS from "clipboard";

@@ -1,4 +1,4 @@
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import i18next from "i18next";
 
 export function FileUploadInput(name: string): Element {

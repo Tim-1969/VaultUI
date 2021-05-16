@@ -1,4 +1,4 @@
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 
 export function MarginInline(children: Element | Element[]): Element {
   return makeElement({

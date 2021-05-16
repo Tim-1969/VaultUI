@@ -4,7 +4,7 @@ import { Option } from "../../elements/Option";
 import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getTransitKey } from "../../api/transit/getTransitKey";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { objectToMap } from "../../utils";
 import { setErrorText } from "../../pageUtils";
 import { transitRewrap } from "../../api/transit/transitRewrap";

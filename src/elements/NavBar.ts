@@ -1,6 +1,6 @@
 import { ListItem } from "./ListItem";
 import { PageRouter } from "z-pagerouter";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import i18next from "i18next";
 
 export function NavBar(router: PageRouter): HTMLElement {

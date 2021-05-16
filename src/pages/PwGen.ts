@@ -2,7 +2,7 @@ import { CopyableInputBox, CopyableInputBoxType } from "../elements/CopyableInpu
 import { Margin } from "../elements/Margin";
 import { Option } from "../elements/Option";
 import { Page } from "../types/Page";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import i18next from "i18next";
 
 const passwordLengthMin = 1;

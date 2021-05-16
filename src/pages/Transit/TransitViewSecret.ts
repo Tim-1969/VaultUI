@@ -2,7 +2,7 @@ import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { Tile } from "../../elements/Tile";
 import { getTransitKey } from "../../api/transit/getTransitKey";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import i18next from "i18next";
 
 export class TransitViewSecretPage extends Page {

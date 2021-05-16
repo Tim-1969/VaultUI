@@ -1,6 +1,6 @@
 import { Page } from "../types/Page";
 import { Tile } from "../elements/Tile";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import i18next from "i18next";
 
 export class NewSecretsEnginePage extends Page {

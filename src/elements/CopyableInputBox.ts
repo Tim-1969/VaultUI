@@ -1,6 +1,6 @@
 import { MarginInline } from "./MarginInline";
 import { addClipboardNotifications } from "../pageUtils";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import ClipboardJS from "clipboard";
 import i18next from "i18next";
 

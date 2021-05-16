@@ -4,7 +4,7 @@ import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getTOTPCode } from "../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../api/totp/getTOTPKeys";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { objectToMap } from "../../utils";
 import { setErrorText } from "../../pageUtils";
 import i18next from "i18next";

@@ -1,6 +1,6 @@
 import { PageRouter } from "z-pagerouter";
 import { PageState } from "../PageState";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 
 function currentTitleSecretText(state: PageState, suffix = ""): string {
   let currentSecretText = state.currentSecret;

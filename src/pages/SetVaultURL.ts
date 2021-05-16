@@ -1,5 +1,5 @@
 import { Page } from "../types/Page";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 
 export class SetVaultURLPage extends Page {
   constructor() {

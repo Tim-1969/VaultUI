@@ -1,4 +1,4 @@
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 
 export function Margin(children: Element | Element[]): Element {
   return makeElement({

@@ -1,5 +1,5 @@
 import { addClipboardNotifications } from "../pageUtils";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import ClipboardJS from "clipboard";
 import FileSaver from "file-saver";
 import UIkit from "uikit";

@@ -1,6 +1,6 @@
 import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
-import { makeElement } from "../htmlUtils";
+import { makeElement } from "z-makeelement";
 import { reloadNavBar } from "../elements/NavBar";
 import i18next from "i18next";
 

@@ -1,7 +1,7 @@
 import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { deleteSecret } from "../../api/kv/deleteSecret";
-import { makeElement } from "../../htmlUtils";
+import { makeElement } from "z-makeelement";
 import i18next from "i18next";
 
 export class KeyValueDeletePage extends Page {
