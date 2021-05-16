@@ -1,6 +1,6 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox";
 import { DoesNotExistError } from "../../types/internalErrors";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getTOTPCode } from "../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../api/totp/getTOTPKeys";

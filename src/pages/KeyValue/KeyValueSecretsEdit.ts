@@ -1,5 +1,5 @@
 import { CodeJar } from "codejar";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { createOrUpdateSecret } from "../../api/kv/createOrUpdateSecret";
 import { getSecret } from "../../api/kv/getSecret";

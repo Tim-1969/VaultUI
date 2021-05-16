@@ -1,7 +1,7 @@
 import { CopyableInputBox, CopyableInputBoxType } from "../elements/CopyableInputBox";
 import { Margin } from "../elements/Margin";
 import { Option } from "../elements/Option";
-import { Page } from "../PageSystem/Page";
+import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
 import i18next from "i18next";
 

@@ -13,7 +13,7 @@ import { NewTOTPEnginePage } from "./pages/NewEngines/NewTOTPEngine";
 import { NewTOTPPage } from "./pages/TOTP/NewTOTP";
 import { NewTransitEnginePage } from "./pages/NewEngines/NewTransitEngine";
 import { NewTransitKeyPage } from "./pages/Transit/NewTransitKey";
-import { Page } from "./PageSystem/Page";
+import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
 import { SetLanguagePage } from "./pages/SetLanguage";
 import { SetVaultURLPage } from "./pages/SetVaultURL";

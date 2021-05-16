@@ -1,4 +1,4 @@
-import { Page } from "../PageSystem/Page";
+import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
 
 export class SetVaultURLPage extends Page {

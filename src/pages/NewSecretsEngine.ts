@@ -1,4 +1,4 @@
-import { Page } from "../PageSystem/Page";
+import { Page } from "../types/Page";
 import { Tile } from "../elements/Tile";
 import { makeElement } from "../htmlUtils";
 import i18next from "i18next";

@@ -1,7 +1,7 @@
 import { CopyableModal } from "../../elements/CopyableModal";
 import { FileUploadInput } from "../../elements/FileUploadInput";
 import { Margin } from "../../elements/Margin";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { fileToBase64, makeElement } from "../../htmlUtils";
 import { setErrorText } from "../../pageUtils";

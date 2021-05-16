@@ -1,4 +1,4 @@
-import { PageRouter } from "./PageRouter";
+import { PageRouter } from "../PageSystem/PageRouter";
 import { PageState } from "../PageState";
 
 export class Page {

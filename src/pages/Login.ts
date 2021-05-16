@@ -1,6 +1,6 @@
 import { Margin } from "../elements/Margin";
 import { MarginInline } from "../elements/MarginInline";
-import { Page } from "../PageSystem/Page";
+import { Page } from "../types/Page";
 import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "../htmlUtils";
 import { setErrorText } from "../pageUtils";

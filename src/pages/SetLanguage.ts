@@ -1,5 +1,5 @@
 import { Margin } from "../elements/Margin";
-import { Page } from "../PageSystem/Page";
+import { Page } from "../types/Page";
 import { makeElement } from "../htmlUtils";
 import { reloadNavBar } from "../elements/NavBar";
 import i18next from "i18next";

@@ -1,5 +1,5 @@
 import { Margin } from "../../elements/Margin";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { makeElement } from "../../htmlUtils";
 import { newMount } from "../../api/sys/newMount";
 import { setErrorText } from "../../pageUtils";

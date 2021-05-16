@@ -1,5 +1,5 @@
 import { CopyableInputBox } from "../../elements/CopyableInputBox";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getCapabilities } from "../../api/sys/getCapabilities";
 import { getSecret } from "../../api/kv/getSecret";

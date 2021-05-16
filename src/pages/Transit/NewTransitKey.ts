@@ -1,6 +1,6 @@
 import { Margin } from "../../elements/Margin";
 import { Option } from "../../elements/Option";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { makeElement } from "../../htmlUtils";
 import { newTransitKey } from "../../api/transit/newTransitKey";

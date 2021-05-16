@@ -1,7 +1,7 @@
 import { CopyableModal } from "../../elements/CopyableModal";
 import { Margin } from "../../elements/Margin";
 import { Option } from "../../elements/Option";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getTransitKey } from "../../api/transit/getTransitKey";
 import { makeElement } from "../../htmlUtils";

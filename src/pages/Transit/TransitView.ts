@@ -1,5 +1,5 @@
 import { DoesNotExistError } from "../../types/internalErrors";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getTransitKeys } from "../../api/transit/getTransitKeys";
 import { makeElement } from "../../htmlUtils";

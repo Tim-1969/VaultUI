@@ -1,5 +1,5 @@
 import { MountType, getMounts } from "../api/sys/getMounts";
-import { Page } from "../PageSystem/Page";
+import { Page } from "../types/Page";
 import { getCapabilitiesPath } from "../api/sys/getCapabilities";
 import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "../htmlUtils";

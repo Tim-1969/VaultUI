@@ -1,4 +1,4 @@
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { SecretTitleElement } from "../../elements/SecretTitleElement";
 import { getSecretMetadata } from "../../api/kv/getSecretMetadata";
 import { makeElement } from "../../htmlUtils";

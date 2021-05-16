@@ -1,6 +1,6 @@
 import { Margin } from "../../elements/Margin";
 import { Option } from "../../elements/Option";
-import { Page } from "../../PageSystem/Page";
+import { Page } from "../../types/Page";
 import { makeElement } from "../../htmlUtils";
 import { newMount } from "../../api/sys/newMount";
 import { setErrorText } from "../../pageUtils";
