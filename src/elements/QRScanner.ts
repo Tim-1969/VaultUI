@@ -33,7 +33,7 @@ export async function QRScanner(onScan: (code: string) => void): Promise<QRScann
     if (lastSeenValue == value) return;
     onScan(value);
   });
-  void qrScanner.start();
+  await qrScanner.start();
 
   QRInput.deinit = () => {
     try {

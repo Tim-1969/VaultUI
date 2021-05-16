@@ -62,7 +62,6 @@ export const allPages: pagesList = {
   NEW_TRANSIT_ENGINE: new NewTransitEnginePage(),
 };
 
-
 // This should implement all o PageListType
 class PageList {
   constructor(pages: pagesList) {

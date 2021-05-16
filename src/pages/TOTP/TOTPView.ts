@@ -55,7 +55,7 @@ export class TOTPViewPage extends Page {
         const totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
         this.totpListElements[totpKeyName] = totpListElement;
-        void this.updateTOTPElement(totpKeyName, totpListElement);
+        await this.updateTOTPElement(totpKeyName, totpListElement);
       }
       document.getElementById("loadingText").remove();
     } catch (e: unknown) {
@@ -76,8 +76,8 @@ export class TOTPViewPage extends Page {
       );
     };
     await totpRefresher();
-    this.refresher = setInterval(() => {
-      void totpRefresher();
+    this.refresher = setInterval(async () => {
+      await totpRefresher();
     }, 3000) as unknown as number;
   }
 

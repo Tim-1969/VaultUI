@@ -102,30 +102,27 @@ async function onLoad(): Promise<void> {
 
 document.addEventListener(
   "DOMContentLoaded",
-  function () {
+  async () => {
     console.log("Loading...");
     // @ts-expect-error
     console.log("Build Data:", BUILD_STRING);
-    void i18next
-      .init({
-        lng: pageState.language,
-        fallbackLng: "en",
-        debug: true,
-        // @ts-ignore
-        resources: Object.fromEntries(
-          Object.entries(translations).map(([k, v]) => [k, { translation: v }]),
-        ),
-        interpolation: {
-          format: function (value: unknown, format, _): string {
-            if (format === "until_date" && value instanceof Date)
-              return formatDistance(new Date(), new Date(value), pageState.language);
-            return value as string;
-          },
+    await i18next.init({
+      lng: pageState.language,
+      fallbackLng: "en",
+      debug: true,
+      // @ts-ignore
+      resources: Object.fromEntries(
+        Object.entries(translations).map(([k, v]) => [k, { translation: v }]),
+      ),
+      interpolation: {
+        format: function (value: unknown, format, _): string {
+          if (format === "until_date" && value instanceof Date)
+            return formatDistance(new Date(), new Date(value), pageState.language);
+          return value as string;
         },
-      })
-      .then(function (_) {
-        void onLoad();
-      });
+      },
+    });
+    await onLoad();
   },
   false,
 );

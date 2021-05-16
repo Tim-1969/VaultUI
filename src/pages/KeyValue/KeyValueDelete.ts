@@ -30,16 +30,15 @@ export class KeyValueDeletePage extends Page {
             tag: "button",
             class: ["uk-button", "uk-button-danger"],
             text: i18next.t("kv_delete_btn"),
-            onclick: () => {
-              void deleteSecret(
+            onclick: async () => {
+              await deleteSecret(
                 this.state.currentBaseMount,
                 this.state.currentMountType,
                 this.state.currentSecretPath,
                 this.state.currentSecret,
                 this.state.currentSecretVersion,
-              ).then(() => {
-                void this.goBack();
-              });
+              );
+              await this.goBack();
             },
           }),
         ],

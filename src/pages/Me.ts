@@ -49,14 +49,14 @@ export class MePage extends Page {
             children: makeElement({
               tag: "a",
               text: i18next.t("renew_lease_btn"),
-              onclick: () => {
-                renewSelf()
-                  .then(() => {
-                    void this.router.changePage("HOME");
-                  })
-                  .catch((e: Error) => {
-                    setErrorText(e.message);
-                  });
+              onclick: async () => {
+                try {
+                  await renewSelf();
+                  await this.router.changePage("HOME");
+                } catch (e: unknown) {
+                  const error = e as Error;
+                  setErrorText(error.message);
+                }
               },
             }),
           }),

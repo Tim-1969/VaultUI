@@ -40,8 +40,8 @@ export class UnsealPage extends Page {
   }
 
   makeRefresher(): void {
-    const id = setInterval(() => {
-      void (this as UnsealPage).doRefresh().then(() => {});
+    const id = setInterval(async () => {
+      await this.doRefresh();
       return;
     }, 1000);
     this.refresher = id as unknown as number;
@@ -83,7 +83,7 @@ export class UnsealPage extends Page {
         ],
       }),
     );
-    this.switchInputMode(this.mode);
+    await this.switchInputMode(this.mode);
     await this.updateSealProgress(await getSealStatus());
     this.makeRefresher();
   }
@@ -102,18 +102,18 @@ export class UnsealPage extends Page {
         tag: "button",
         class: ["uk-button", "uk-button-primary"],
         text: buttonText,
-        onclick: () => {
-          this.switchInputMode(newMethod);
+        onclick: async () => {
+          await this.switchInputMode(newMethod);
         },
       }),
     );
   }
 
-  switchInputMode(method: string): void {
+  async switchInputMode(method: string): Promise<void> {
     this.deinitWebcam();
     this.unsealInputContent.querySelectorAll("*").forEach((n) => n.remove());
     if (method == UnsealInputModes.FORM_INPUT) this.makeUnsealForm();
-    if (method == UnsealInputModes.QR_INPUT) void this.makeQRInput();
+    if (method == UnsealInputModes.QR_INPUT) await this.makeQRInput();
     this.setButtons(method);
   }
 
@@ -143,9 +143,9 @@ export class UnsealPage extends Page {
       ],
     }) as HTMLFormElement;
     this.unsealInputContent.appendChild(this.unsealKeyForm);
-    this.unsealKeyForm.addEventListener("submit", (e: Event) => {
+    this.unsealKeyForm.addEventListener("submit", async (e: Event) => {
       e.preventDefault();
-      void this.handleKeySubmit();
+      await this.handleKeySubmit();
     });
   }
 
