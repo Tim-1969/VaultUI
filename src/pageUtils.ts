@@ -1,13 +1,13 @@
 import { PageRouter } from "z-pagerouter";
+import { PageState } from "./PageState";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { lookupSelf } from "./api/sys/lookupSelf";
 import ClipboardJS from "clipboard";
 import UIkit from "uikit";
 import i18next from "i18next";
-import { PageState } from "./PageState";
 
 async function prePageChecksReal(router: PageRouter) {
-  let state = router.state as PageState;
+  const state = router.state as PageState;
   if (state.language.length == 0) {
     await router.changePage("SET_LANGUAGE");
     throw new Error("Language Not Set");

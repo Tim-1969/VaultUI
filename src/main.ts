@@ -21,10 +21,10 @@ Prism.highlightAll();
 
 import { NavBar } from "./elements/NavBar";
 import { PageRouter } from "z-pagerouter";
-import { pageList } from "./allPages";
 import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { makeElement } from "./htmlUtils";
+import { pageList } from "./allPages";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
 import i18next from "i18next";

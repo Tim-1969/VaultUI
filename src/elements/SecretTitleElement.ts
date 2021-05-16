@@ -1,17 +1,16 @@
 import { PageRouter } from "z-pagerouter";
-import { makeElement } from "../htmlUtils";
 import { PageState } from "../PageState";
+import { makeElement } from "../htmlUtils";
 
 function currentTitleSecretText(state: PageState, suffix = ""): string {
   let currentSecretText = state.currentSecret;
   currentSecretText += suffix;
-  if (state.currentSecretVersion !== null)
-    currentSecretText += ` (v${state.currentSecretVersion})`;
+  if (state.currentSecretVersion !== null) currentSecretText += ` (v${state.currentSecretVersion})`;
   return currentSecretText;
 }
 
 export async function SecretTitleElement(router: PageRouter, suffix = ""): Promise<HTMLElement> {
-  let state = router.state as PageState;
+  const state = router.state as PageState;
   const titleElement = makeElement({
     tag: "div",
     children: [
@@ -23,10 +22,7 @@ export async function SecretTitleElement(router: PageRouter, suffix = ""): Promi
           state.currentSecret = "";
           state.currentSecretVersion = null;
 
-          if (
-            state.currentMountType.startsWith("kv") ||
-            state.currentMountType == "cubbyhole"
-          ) {
+          if (state.currentMountType.startsWith("kv") || state.currentMountType == "cubbyhole") {
             await router.changePage("KEY_VALUE_VIEW");
           } else if (state.currentMountType == "totp") {
             await router.changePage("TOTP");

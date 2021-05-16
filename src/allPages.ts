@@ -25,7 +25,10 @@ import { TransitViewPage } from "./pages/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
 import { getObjectKeys } from "./utils";
+
+/* eslint-disable */
 import { PageType } from "z-pagerouter";
+/* eslint-enable */
 
 type pagesList = {
   [key: string]: Page;

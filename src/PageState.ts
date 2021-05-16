@@ -1,7 +1,3 @@
-import { Page } from "./types/Page";
-import { allPages } from "./allPages";
-import { getKeyByObjectPropertyValue } from "./utils";
-
 export class PageState {
   constructor() {
     // Do Nothing
@@ -96,19 +92,13 @@ export class PageState {
     localStorage.setItem("currentMountType", value);
   }
   get currentPageString(): string {
-    const key = getKeyByObjectPropertyValue(allPages, this.currentPage);
-    return key;
+    return this.currentPage;
   }
-  get currentPage(): Page | string {
+  get currentPage(): string {
     const curPage = localStorage.getItem("currentPage") || "HOME";
-    return allPages[curPage];
+    return curPage;
   }
-  set currentPage(value: Page | string) {
-    if (typeof value == "object") {
-      const key = getKeyByObjectPropertyValue(allPages, value);
-      localStorage.setItem("currentPage", key);
-    } else {
-      localStorage.setItem("currentPage", value);
-    }
+  set currentPage(value: string) {
+    localStorage.setItem("currentPage", value);
   }
 }
