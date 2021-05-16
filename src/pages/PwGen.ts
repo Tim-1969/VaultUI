@@ -146,3 +146,5 @@ export class PwGenPage extends Page {
     return i18next.t("password_generator_title");
   }
 }
+
+export { PwGenPage as default };

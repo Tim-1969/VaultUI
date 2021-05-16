@@ -54,3 +54,5 @@ export class KeyValueVersionsPage extends Page {
     return i18next.t("kv_sec_versions_title");
   }
 }
+
+export { KeyValueVersionsPage as default };

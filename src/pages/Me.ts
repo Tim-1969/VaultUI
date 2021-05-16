@@ -98,3 +98,5 @@ export class MePage extends Page {
     return i18next.t("me_page_title");
   }
 }
+
+export { MePage as default };

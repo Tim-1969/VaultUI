@@ -174,3 +174,5 @@ export class LoginPage extends Page {
     return i18next.t("log_in_title");
   }
 }
+
+export { LoginPage as default };

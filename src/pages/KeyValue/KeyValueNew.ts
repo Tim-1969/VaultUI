@@ -90,3 +90,4 @@ export class KeyValueNewPage extends Page {
     return i18next.t("kv_new_title");
   }
 }
+export { KeyValueNewPage as default };

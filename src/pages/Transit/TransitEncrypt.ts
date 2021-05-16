@@ -120,3 +120,5 @@ export class TransitEncryptPage extends Page {
     return i18next.t("transit_encrypt_title");
   }
 }
+
+export { TransitEncryptPage as default };

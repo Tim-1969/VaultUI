@@ -66,3 +66,5 @@ export class TransitViewSecretPage extends Page {
     return i18next.t("transit_view_secret_title");
   }
 }
+
+export { TransitViewSecretPage as default };

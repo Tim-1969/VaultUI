@@ -67,3 +67,5 @@ export class NewTransitEnginePage extends Page {
     return i18next.t("new_transit_engine_title");
   }
 }
+
+export { NewTransitEnginePage as default };

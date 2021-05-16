@@ -67,3 +67,5 @@ export class SetLanguagePage extends Page {
     return i18next.t("set_language_title");
   }
 }
+
+export { SetLanguagePage as default };

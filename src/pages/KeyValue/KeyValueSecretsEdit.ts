@@ -87,3 +87,4 @@ export class KeyValueSecretEditPage extends Page {
     return i18next.t("kv_sec_edit_title");
   }
 }
+export { KeyValueSecretEditPage as default };

@@ -95,3 +95,5 @@ export class NewTransitKeyPage extends Page {
     return i18next.t("transit_new_key_title");
   }
 }
+
+export { NewTransitKeyPage as default };

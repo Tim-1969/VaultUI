@@ -186,3 +186,5 @@ export class KeyValueSecretPage extends Page {
     return i18next.t("kv_secret_title");
   }
 }
+
+export { KeyValueSecretPage as default };

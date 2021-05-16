@@ -67,3 +67,5 @@ export class NewTOTPEnginePage extends Page {
     return i18next.t("new_totp_engine_title");
   }
 }
+
+export { NewTOTPEnginePage as default };

@@ -134,3 +134,5 @@ export class HomePage extends Page {
     return i18next.t("home_page_title");
   }
 }
+
+export { HomePage as default };

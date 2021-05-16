@@ -78,3 +78,5 @@ export class TransitViewPage extends Page {
     return i18next.t("transit_view_title");
   }
 }
+
+export { TransitViewPage as default };

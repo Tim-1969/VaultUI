@@ -1,67 +1,45 @@
-import { HomePage } from "./pages/Home";
-import { KeyValueDeletePage } from "./pages/KeyValue/KeyValueDelete";
-import { KeyValueNewPage } from "./pages/KeyValue/KeyValueNew";
-import { KeyValueSecretEditPage } from "./pages/KeyValue/KeyValueSecretsEdit";
-import { KeyValueSecretPage } from "./pages/KeyValue/KeyValueSecret";
-import { KeyValueVersionsPage } from "./pages/KeyValue/KeyValueVersions";
-import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView";
-import { LoginPage } from "./pages/Login";
-import { MePage } from "./pages/Me";
-import { NewKVEnginePage } from "./pages/NewEngines/NewKVEngine";
-import { NewSecretsEnginePage } from "./pages/NewSecretsEngine";
-import { NewTOTPEnginePage } from "./pages/NewEngines/NewTOTPEngine";
-import { NewTOTPPage } from "./pages/TOTP/NewTOTP";
-import { NewTransitEnginePage } from "./pages/NewEngines/NewTransitEngine";
-import { NewTransitKeyPage } from "./pages/Transit/NewTransitKey";
 import { Page } from "./types/Page";
-import { PwGenPage } from "./pages/PwGen";
-import { SetLanguagePage } from "./pages/SetLanguage";
-import { SetVaultURLPage } from "./pages/SetVaultURL";
-import { TOTPViewPage } from "./pages/TOTP/TOTPView";
-import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt";
-import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt";
-import { TransitRewrapPage } from "./pages/Transit/TransitRewrap";
-import { TransitViewPage } from "./pages/Transit/TransitView";
-import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
-import { UnsealPage } from "./pages/Unseal";
 import { getObjectKeys } from "./utils";
 
 /* eslint-disable */
 import { PageType } from "z-pagerouter";
 /* eslint-enable */
 
+type importType = Promise<{
+  default: { new (...args: unknown[]): Page };
+}>;
+
 type pagesList = {
-  [key: string]: Page;
+  [key: string]: importType;
 };
 
 export const allPages: pagesList = {
-  HOME: new HomePage(),
-  ME: new MePage(),
-  TOTP: new TOTPViewPage(),
-  NEW_TOTP: new NewTOTPPage(),
-  LOGIN: new LoginPage(),
-  SET_VAULT_URL: new SetVaultURLPage(),
-  UNSEAL: new UnsealPage(),
-  SET_LANGUAGE: new SetLanguagePage(),
-  TRANSIT_NEW_KEY: new NewTransitKeyPage(),
-  TRANSIT_VIEW: new TransitViewPage(),
-  TRANSIT_VIEW_SECRET: new TransitViewSecretPage(),
-  TRANSIT_ENCRYPT: new TransitEncryptPage(),
-  TRANSIT_DECRYPT: new TransitDecryptPage(),
-  TRANSIT_REWRAP: new TransitRewrapPage(),
-  KEY_VALUE_VIEW: new KeyValueViewPage(),
-  KEY_VALUE_SECRET: new KeyValueSecretPage(),
-  KEY_VALUE_VERSIONS: new KeyValueVersionsPage(),
-  KEY_VALUE_NEW_SECRET: new KeyValueNewPage(),
-  KEY_VALUE_DELETE: new KeyValueDeletePage(),
-  KEY_VALUE_SECRET_EDIT: new KeyValueSecretEditPage(),
-  PW_GEN: new PwGenPage(),
-  NEW_SECRETS_ENGINE: new NewSecretsEnginePage(),
-  NEW_KV_ENGINE: new NewKVEnginePage(),
-  NEW_TOTP_ENGINE: new NewTOTPEnginePage(),
-  NEW_TRANSIT_ENGINE: new NewTransitEnginePage(),
+  HOME: import("./pages/Home"),
+  ME: import("./pages/Me"),
+  TOTP: import("./pages/TOTP/TOTPView"),
+  NEW_TOTP: import("./pages/TOTP/NewTOTP"),
+  LOGIN: import("./pages/Login"),
+  SET_VAULT_URL: import("./pages/SetVaultURL"),
+  UNSEAL: import("./pages/Unseal"),
+  SET_LANGUAGE: import("./pages/SetLanguage"),
+  TRANSIT_NEW_KEY: import("./pages/Transit/NewTransitKey"),
+  TRANSIT_VIEW: import("./pages/Transit/TransitView"),
+  TRANSIT_VIEW_SECRET: import("./pages/Transit/TransitViewSecret"),
+  TRANSIT_ENCRYPT: import("./pages/Transit/TransitEncrypt"),
+  TRANSIT_DECRYPT: import("./pages/Transit/TransitDecrypt"),
+  TRANSIT_REWRAP: import("./pages/Transit/TransitRewrap"),
+  KEY_VALUE_VIEW: import("./pages/KeyValue/KeyValueView"),
+  KEY_VALUE_SECRET: import("./pages/KeyValue/KeyValueSecret"),
+  KEY_VALUE_VERSIONS: import("./pages/KeyValue/KeyValueVersions"),
+  KEY_VALUE_NEW_SECRET: import("./pages/KeyValue/KeyValueNew"),
+  KEY_VALUE_DELETE: import("./pages/KeyValue/KeyValueDelete"),
+  KEY_VALUE_SECRET_EDIT: import("./pages/KeyValue/KeyValueSecretsEdit"),
+  PW_GEN: import("./pages/PwGen"),
+  NEW_SECRETS_ENGINE: import("./pages/NewSecretsEngine"),
+  NEW_KV_ENGINE: import("./pages/NewEngines/NewKVEngine"),
+  NEW_TOTP_ENGINE: import("./pages/NewEngines/NewTOTPEngine"),
+  NEW_TRANSIT_ENGINE: import("./pages/NewEngines/NewTransitEngine"),
 };
-
 
 // This should implement all o PageListType
 class PageList {
@@ -74,7 +52,7 @@ class PageList {
     return getObjectKeys(this.pages);
   }
   async getPage(pageID: string): Promise<PageType> {
-    return this.pages[pageID];
+    return new (await this.pages[pageID]).default();
   }
 }
 
