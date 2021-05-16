@@ -32,12 +32,6 @@ import i18next from "i18next";
 // @ts-ignore
 import translations from "./translations/index.mjs";
 
-declare global {
-  interface Window {
-    pageContent: Element;
-  }
-}
-
 async function onLoad(): Promise<void> {
   document.body.innerHTML = "";
   document.body.appendChild(makeElement({ tag: "div", id: "navBarReplace" }));
@@ -63,8 +57,6 @@ async function onLoad(): Promise<void> {
       }),
     }),
   );
-
-  window.pageContent = document.querySelector("#pageContent");
 
   const pageRouter = new PageRouter(
     pageList,

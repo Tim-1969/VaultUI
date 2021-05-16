@@ -97,7 +97,7 @@ export class TransitRewrapPage extends Page {
         key_version: parseInt(formData.get("version") as string, 10),
       });
       const modal = CopyableModal(i18next.t("transit_rewrap_result_modal_title"), res.ciphertext);
-      document.body.querySelector("#pageContent").appendChild(modal);
+      this.router.pageContentElement.appendChild(modal);
       modal.show();
     } catch (e: unknown) {
       const error = e as Error;

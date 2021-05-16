@@ -104,7 +104,7 @@ export class TransitEncryptPage extends Page {
         i18next.t("transit_encrypt_encryption_result_modal_title"),
         res.ciphertext,
       );
-      document.body.querySelector("#pageContent").appendChild(modal);
+      this.router.pageContentElement.appendChild(modal);
       modal.show();
     } catch (e: unknown) {
       const error = e as Error;
