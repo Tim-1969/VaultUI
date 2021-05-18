@@ -29,8 +29,7 @@ export class AccessHomePage extends Page {
             description: i18next.t("access_auth_methods_description"),
             icon: "sign-in",
             onclick: async () => {
-              setErrorText(i18next.t("not_implemented"));
-              //await this.router.changePage("SECRETS_HOME");
+              await this.router.changePage("AUTH_HOME");
             },
           }),
           Tile({

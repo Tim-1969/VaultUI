@@ -217,4 +217,7 @@ module.exports = {
   access_groups_description: "View and manage groups of entities.",
   access_leases_title: "Leases",
   access_leases_description: "View and manage the leases of entities.",
+
+  // Auth Home Page
+  auth_home_title: "Auth",
 };
