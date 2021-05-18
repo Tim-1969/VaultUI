@@ -1,9 +1,9 @@
-import { DoesNotExistError } from "../../types/internalErrors";
-import { Page } from "../../types/Page";
-import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { getSecrets } from "../../api/kv/getSecrets";
+import { DoesNotExistError } from "../../../types/internalErrors";
+import { Page } from "../../../types/Page";
+import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { getSecrets } from "../../../api/kv/getSecrets";
 import { makeElement } from "z-makeelement";
-import { setErrorText } from "../../pageUtils";
+import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
 
 export class KeyValueViewPage extends Page {
@@ -15,7 +15,7 @@ export class KeyValueViewPage extends Page {
       this.state.popCurrentSecretPath();
       await this.router.changePage("KEY_VALUE_VIEW");
     } else {
-      await this.router.changePage("HOME");
+      await this.router.changePage("SECRETS_HOME");
     }
   }
   async render(): Promise<void> {

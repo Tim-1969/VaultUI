@@ -6,33 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
-
-var babelOptions = {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "corejs": { "version": 3 },
-        "useBuiltIns": "usage",
-        "targets": {
-          "firefox": "60",
-          "chrome": "67"
-        }
-      }
-    ]
-  ],
-  "plugins": [
-    ["@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": true }],
-    ["@babel/plugin-proposal-class-properties"],
-    ["@babel/transform-runtime"]
-  ]
-};
-
 let commitHash = gitRevisionPlugin.commithash();
 
+
 module.exports = {
-  mode: "production",
-  cache: false,
+  mode: "development",
+  cache: true,
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -70,27 +49,12 @@ module.exports = {
       },
       {
         test: /\.ts(x?)$/,
-        exclude: /node_modules/,
         use: [
-          {
-            loader: 'babel-loader',
-            options: babelOptions
-          },
           {
             loader: 'ts-loader'
           }
         ]
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: babelOptions
-          }
-        ]
-      }
     ],
   },
 };

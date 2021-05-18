@@ -1,12 +1,12 @@
-import { CopyableInputBox } from "../../elements/CopyableInputBox";
-import { DoesNotExistError } from "../../types/internalErrors";
-import { Page } from "../../types/Page";
-import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { getTOTPCode } from "../../api/totp/getTOTPCode";
-import { getTOTPKeys } from "../../api/totp/getTOTPKeys";
+import { CopyableInputBox } from "../../../elements/CopyableInputBox";
+import { DoesNotExistError } from "../../../types/internalErrors";
+import { Page } from "../../../types/Page";
+import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { getTOTPCode } from "../../../api/totp/getTOTPCode";
+import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";
 import { makeElement } from "z-makeelement";
-import { objectToMap } from "../../utils";
-import { setErrorText } from "../../pageUtils";
+import { objectToMap } from "../../../utils";
+import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
 
 export interface TOTPListElement extends HTMLElement {
@@ -22,6 +22,10 @@ export class TOTPViewPage extends Page {
 
   refresher: number;
   totpListElements: Record<string, TOTPListElement>;
+
+  async goBack(): Promise<void> {
+    await this.router.changePage("SECRETS_HOME");
+  }
 
   async render(): Promise<void> {
     const totpList = makeElement({ tag: "div" });

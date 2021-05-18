@@ -1,12 +1,12 @@
-import { CopyableModal } from "../../elements/CopyableModal";
-import { FileUploadInput } from "../../elements/FileUploadInput";
-import { Margin } from "../../elements/Margin";
-import { Page } from "../../types/Page";
-import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { fileToBase64 } from "../../htmlUtils";
+import { CopyableModal } from "../../../elements/CopyableModal";
+import { FileUploadInput } from "../../../elements/FileUploadInput";
+import { Margin } from "../../../elements/Margin";
+import { Page } from "../../../types/Page";
+import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { fileToBase64 } from "../../../htmlUtils";
 import { makeElement } from "z-makeelement";
-import { setErrorText } from "../../pageUtils";
-import { transitDecrypt } from "../../api/transit/transitDecrypt";
+import { setErrorText } from "../../../pageUtils";
+import { transitDecrypt } from "../../../api/transit/transitDecrypt";
 import i18next from "i18next";
 
 export class TransitDecryptPage extends Page {

@@ -34,10 +34,15 @@ module.exports = {
 
   // Home Page
   home_page_title: "Home",
-  vaulturl_text: "Vault URL: {{text}}",
-  password_generator_btn: "Password Generator",
-  your_token_expires_in: "Your token expires in {{date, until_date}}",
-  home_new_secrets_engine_button: "New Secrets Engine",
+  home_vaulturl_text: "Vault URL: {{text}}",
+  home_password_generator_btn: "Password Generator",
+  home_your_token_expires_in: "Your token expires in {{date, until_date}}",
+  home_secrets_title: "Secrets",
+  home_secrets_description: "View, create and manage secrets.",
+
+  // Secrets Home Page
+  secrets_home_page_title: "Secrets",
+  secrets_home_new_secrets_engine_button: "New Secrets Engine",
 
   // New Secrets Engine Page
   new_secrets_engine_title: "New Secrets Engine",

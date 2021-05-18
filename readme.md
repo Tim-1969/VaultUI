@@ -14,7 +14,7 @@ The resulting built files will be in `dist/`
 Use whatever browser you want, I personally test on latest Microsoft Edge Dev build.
 ```
 npm install --save-dev
-WEBPACK_MODE=development BROWSER=google-chrome npx webpack serve
+BROWSER=google-chrome npx webpack serve --config webpack-dev.config.js
 ```
 
 ## Translating

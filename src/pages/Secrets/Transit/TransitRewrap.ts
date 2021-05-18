@@ -1,13 +1,13 @@
-import { CopyableModal } from "../../elements/CopyableModal";
-import { Margin } from "../../elements/Margin";
-import { Option } from "../../elements/Option";
-import { Page } from "../../types/Page";
-import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { getTransitKey } from "../../api/transit/getTransitKey";
+import { CopyableModal } from "../../../elements/CopyableModal";
+import { Margin } from "../../../elements/Margin";
+import { Option } from "../../../elements/Option";
+import { Page } from "../../../types/Page";
+import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { getTransitKey } from "../../../api/transit/getTransitKey";
 import { makeElement } from "z-makeelement";
-import { objectToMap } from "../../utils";
-import { setErrorText } from "../../pageUtils";
-import { transitRewrap } from "../../api/transit/transitRewrap";
+import { objectToMap } from "../../../utils";
+import { setErrorText } from "../../../pageUtils";
+import { transitRewrap } from "../../../api/transit/transitRewrap";
 import i18next from "i18next";
 
 type versionOption = { version: string; label: string };

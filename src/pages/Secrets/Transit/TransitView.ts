@@ -1,9 +1,9 @@
-import { DoesNotExistError } from "../../types/internalErrors";
-import { Page } from "../../types/Page";
-import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { getTransitKeys } from "../../api/transit/getTransitKeys";
+import { DoesNotExistError } from "../../../types/internalErrors";
+import { Page } from "../../../types/Page";
+import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { getTransitKeys } from "../../../api/transit/getTransitKeys";
 import { makeElement } from "z-makeelement";
-import { setErrorText } from "../../pageUtils";
+import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
 
 export class TransitViewPage extends Page {
@@ -12,7 +12,7 @@ export class TransitViewPage extends Page {
   }
 
   async goBack(): Promise<void> {
-    await this.router.changePage("HOME");
+    await this.router.changePage("SECRETS_HOME");
   }
 
   async render(): Promise<void> {

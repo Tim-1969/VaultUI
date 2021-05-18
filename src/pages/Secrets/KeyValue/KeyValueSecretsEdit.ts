@@ -1,11 +1,11 @@
 import { CodeJar } from "codejar";
-import { Page } from "../../types/Page";
-import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { createOrUpdateSecret } from "../../api/kv/createOrUpdateSecret";
-import { getSecret } from "../../api/kv/getSecret";
+import { Page } from "../../../types/Page";
+import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
+import { getSecret } from "../../../api/kv/getSecret";
 import { makeElement } from "z-makeelement";
-import { setErrorText } from "../../pageUtils";
-import { sortedObjectMap, verifyJSONString } from "../../utils";
+import { setErrorText } from "../../../pageUtils";
+import { sortedObjectMap, verifyJSONString } from "../../../utils";
 import i18next from "i18next";
 
 export class KeyValueSecretEditPage extends Page {

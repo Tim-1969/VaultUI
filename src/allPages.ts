@@ -1,28 +1,29 @@
 import { HomePage } from "./pages/Home";
-import { KeyValueDeletePage } from "./pages/KeyValue/KeyValueDelete";
-import { KeyValueNewPage } from "./pages/KeyValue/KeyValueNew";
-import { KeyValueSecretEditPage } from "./pages/KeyValue/KeyValueSecretsEdit";
-import { KeyValueSecretPage } from "./pages/KeyValue/KeyValueSecret";
-import { KeyValueVersionsPage } from "./pages/KeyValue/KeyValueVersions";
-import { KeyValueViewPage } from "./pages/KeyValue/KeyValueView";
+import { KeyValueDeletePage } from "./pages/Secrets/KeyValue/KeyValueDelete";
+import { KeyValueNewPage } from "./pages/Secrets/KeyValue/KeyValueNew";
+import { KeyValueSecretEditPage } from "./pages/Secrets/KeyValue/KeyValueSecretsEdit";
+import { KeyValueSecretPage } from "./pages/Secrets/KeyValue/KeyValueSecret";
+import { KeyValueVersionsPage } from "./pages/Secrets/KeyValue/KeyValueVersions";
+import { KeyValueViewPage } from "./pages/Secrets/KeyValue/KeyValueView";
 import { LoginPage } from "./pages/Login";
 import { MePage } from "./pages/Me";
-import { NewKVEnginePage } from "./pages/NewEngines/NewKVEngine";
-import { NewSecretsEnginePage } from "./pages/NewSecretsEngine";
-import { NewTOTPEnginePage } from "./pages/NewEngines/NewTOTPEngine";
-import { NewTOTPPage } from "./pages/TOTP/NewTOTP";
-import { NewTransitEnginePage } from "./pages/NewEngines/NewTransitEngine";
-import { NewTransitKeyPage } from "./pages/Transit/NewTransitKey";
+import { NewKVEnginePage } from "./pages/Secrets/NewEngines/NewKVEngine";
+import { NewSecretsEnginePage } from "./pages/Secrets/NewSecretsEngine";
+import { NewTOTPEnginePage } from "./pages/Secrets/NewEngines/NewTOTPEngine";
+import { NewTOTPPage } from "./pages/Secrets/TOTP/NewTOTP";
+import { NewTransitEnginePage } from "./pages/Secrets/NewEngines/NewTransitEngine";
+import { NewTransitKeyPage } from "./pages/Secrets/Transit/NewTransitKey";
 import { Page } from "./types/Page";
 import { PwGenPage } from "./pages/PwGen";
+import { SecretsHomePage } from "./pages/Secrets/SecretsHome";
 import { SetLanguagePage } from "./pages/SetLanguage";
 import { SetVaultURLPage } from "./pages/SetVaultURL";
-import { TOTPViewPage } from "./pages/TOTP/TOTPView";
-import { TransitDecryptPage } from "./pages/Transit/TransitDecrypt";
-import { TransitEncryptPage } from "./pages/Transit/TransitEncrypt";
-import { TransitRewrapPage } from "./pages/Transit/TransitRewrap";
-import { TransitViewPage } from "./pages/Transit/TransitView";
-import { TransitViewSecretPage } from "./pages/Transit/TransitViewSecret";
+import { TOTPViewPage } from "./pages/Secrets/TOTP/TOTPView";
+import { TransitDecryptPage } from "./pages/Secrets/Transit/TransitDecrypt";
+import { TransitEncryptPage } from "./pages/Secrets/Transit/TransitEncrypt";
+import { TransitRewrapPage } from "./pages/Secrets/Transit/TransitRewrap";
+import { TransitViewPage } from "./pages/Secrets/Transit/TransitView";
+import { TransitViewSecretPage } from "./pages/Secrets/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
 import { getObjectKeys } from "./utils";
 
@@ -36,6 +37,7 @@ type pagesList = {
 
 export const allPages: pagesList = {
   HOME: new HomePage(),
+  SECRETS_HOME: new SecretsHomePage(),
   ME: new MePage(),
   TOTP: new TOTPViewPage(),
   NEW_TOTP: new NewTOTPPage(),

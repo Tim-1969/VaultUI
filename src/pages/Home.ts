@@ -1,10 +1,8 @@
-import { MountType, getMounts } from "../api/sys/getMounts";
 import { Page } from "../types/Page";
-import { getCapabilitiesPath } from "../api/sys/getCapabilities";
+import { Tile } from "../elements/Tile";
 import { lookupSelf } from "../api/sys/lookupSelf";
 import { makeElement } from "z-makeelement";
 import { prePageChecks, setErrorText } from "../pageUtils";
-import { sortedObjectMap } from "../utils";
 import i18next from "i18next";
 
 export class HomePage extends Page {
@@ -25,14 +23,14 @@ export class HomePage extends Page {
           tag: "li",
           children: makeElement({
             tag: "span",
-            html: i18next.t("vaulturl_text", { text: this.state.apiURL }),
+            html: i18next.t("home_vaulturl_text", { text: this.state.apiURL }),
           }),
         }),
         makeElement({
           tag: "li",
           children: makeElement({
             tag: "a",
-            text: i18next.t("password_generator_btn"),
+            text: i18next.t("home_password_generator_btn"),
             onclick: async () => {
               await this.router.changePage("PW_GEN");
             },
@@ -47,7 +45,7 @@ export class HomePage extends Page {
       textList.appendChild(
         makeElement({
           tag: "li",
-          text: i18next.t("your_token_expires_in", {
+          text: i18next.t("home_your_token_expires_in", {
             date: new Date(selfTokenInfo.expire_time),
           }),
         }),
@@ -61,74 +59,24 @@ export class HomePage extends Page {
       }
     }
 
-    const mountsCapabilities = await getCapabilitiesPath("/sys/mounts");
-    if (mountsCapabilities.includes("sudo") && mountsCapabilities.includes("create")) {
-      textList.appendChild(
-        makeElement({
-          tag: "button",
-          text: i18next.t("home_new_secrets_engine_button"),
-          class: ["uk-button", "uk-button-primary", "uk-margin-top"],
-          onclick: async () => {
-            await this.router.changePage("NEW_SECRETS_ENGINE");
-          },
-        }),
-      );
-    }
-
-    this.state.currentBaseMount = "";
-    this.state.currentSecretPath = [];
-    this.state.currentSecret = "";
-    this.state.currentSecretVersion = null;
-
-    const navList = makeElement({
-      tag: "ul",
-      class: ["uk-nav", "uk-nav-default", "uk-margin-top"],
-    });
-    homePageContent.appendChild(navList);
-
-    const mounts = await getMounts();
-    // sort it by secretPath so it's in alphabetical order consistantly.
-    const mountsMap = sortedObjectMap(mounts);
-
-    mountsMap.forEach((mount: MountType, baseMount) => {
-      if (typeof mount != "object") return;
-      if (mount == null) return;
-      if (!("type" in mount)) return;
-      if (!["kv", "totp", "transit", "cubbyhole"].includes(mount.type)) return;
-
-      const mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
-
-      let linkText = "";
-      let linkPage: string;
-      if (mount.type == "kv") {
-        linkText = `K/V (v${mount.options.version}) - ${baseMount}`;
-        linkPage = "KEY_VALUE_VIEW";
-      } else if (mount.type == "totp") {
-        linkText = `TOTP - ${baseMount}`;
-        linkPage = "TOTP";
-      } else if (mount.type == "transit") {
-        linkText = `Transit - ${baseMount}`;
-        linkPage = "TRANSIT_VIEW";
-      } else if (mount.type == "cubbyhole") {
-        linkText = `Cubbyhole - ${baseMount}`;
-        linkPage = "KEY_VALUE_VIEW";
-      }
-
-      navList.appendChild(
-        makeElement({
-          tag: "li",
-          children: makeElement({
-            tag: "a",
-            text: linkText,
+    textList.appendChild(
+      makeElement({
+        tag: "div",
+        class:
+          "uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small uk-grid-match uk-margin-top",
+        attributes: { "uk-grid": "" },
+        children: [
+          Tile({
+            title: i18next.t("home_secrets_title"),
+            description: i18next.t("home_secrets_description"),
+            icon: "file-edit",
             onclick: async () => {
-              this.state.currentBaseMount = baseMount;
-              this.state.currentMountType = mountType;
-              await this.router.changePage(linkPage);
+              await this.router.changePage("SECRETS_HOME");
             },
           }),
-        }),
-      );
-    });
+        ],
+      }),
+    );
   }
   get name(): string {
     return i18next.t("home_page_title");

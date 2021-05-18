@@ -1,13 +1,16 @@
-import { Margin } from "../../elements/Margin";
-import { Page } from "../../types/Page";
+import { Margin } from "../../../elements/Margin";
+import { Page } from "../../../types/Page";
 import { makeElement } from "z-makeelement";
-import { newMount } from "../../api/sys/newMount";
-import { setErrorText } from "../../pageUtils";
+import { newMount } from "../../../api/sys/newMount";
+import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
 
-export class NewTransitEnginePage extends Page {
+export class NewTOTPEnginePage extends Page {
   constructor() {
     super();
+  }
+  async goBack(): Promise<void> {
+    await this.router.changePage("SECRETS_HOME");
   }
   async render(): Promise<void> {
     const newEngineForm = makeElement({
@@ -20,7 +23,7 @@ export class NewTransitEnginePage extends Page {
             attributes: {
               required: "true",
               type: "text",
-              placeholder: i18next.t("new_transit_engine_name_input"),
+              placeholder: i18next.t("new_totp_engine_name_input"),
               name: "name",
             },
           }),
@@ -33,7 +36,7 @@ export class NewTransitEnginePage extends Page {
         makeElement({
           tag: "button",
           class: ["uk-button", "uk-button-primary"],
-          text: i18next.t("new_transit_engine_create_btn"),
+          text: i18next.t("new_totp_engine_create_btn"),
           attributes: {
             type: "submit",
           },
@@ -52,11 +55,11 @@ export class NewTransitEnginePage extends Page {
       try {
         await newMount({
           name: name,
-          type: "transit",
+          type: "totp",
         });
-        this.state.currentMountType = "transit";
+        this.state.currentMountType = "totp";
         this.state.currentBaseMount = name + "/";
-        await this.router.changePage("TRANSIT_VIEW");
+        await this.router.changePage("TOTP");
       } catch (e) {
         const error = e as Error;
         setErrorText(error.message);
@@ -64,6 +67,6 @@ export class NewTransitEnginePage extends Page {
     });
   }
   get name(): string {
-    return i18next.t("new_transit_engine_title");
+    return i18next.t("new_totp_engine_title");
   }
 }

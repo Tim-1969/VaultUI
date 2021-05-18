@@ -1,10 +1,10 @@
-import { Margin } from "../../elements/Margin";
-import { MarginInline } from "../../elements/MarginInline";
-import { Page } from "../../types/Page";
-import { SecretTitleElement } from "../../elements/SecretTitleElement";
-import { addNewTOTP } from "../../api/totp/addNewTOTP";
+import { Margin } from "../../../elements/Margin";
+import { MarginInline } from "../../../elements/MarginInline";
+import { Page } from "../../../types/Page";
+import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { addNewTOTP } from "../../../api/totp/addNewTOTP";
 import { makeElement } from "z-makeelement";
-import { setErrorText } from "../../pageUtils";
+import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
 
 function replaceAll(str: string, replace: string, replaceWith: string): string {

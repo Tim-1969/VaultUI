@@ -31,9 +31,9 @@ module.exports = {
 
   // Home Page
   home_page_title: "Accueil",
-  vaulturl_text: "Adresse du Vault: {{text}}",
-  password_generator_btn: "Générateur de mot de passe",
-  your_token_expires_in: "Votre jeton expire dans {{date, until_date}}",
+  home_vaulturl_text: "Adresse du Vault: {{text}}",
+  home_password_generator_btn: "Générateur de mot de passe",
+  home_your_token_expires_in: "Votre jeton expire dans {{date, until_date}}",
 
   // Unseal Page
   unseal_vault_text: "Ouvrir le Vault",
