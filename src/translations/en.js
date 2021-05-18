@@ -12,6 +12,7 @@ module.exports = {
 
   // General Notification Messages
   notification_copy_success: "Copied to clipboard.",
+  not_implemented: "Not Yet Implemented",
 
   // Copyable Modal
   copy_modal_download_btn: "Download",
@@ -39,6 +40,8 @@ module.exports = {
   home_your_token_expires_in: "Your token expires in {{date, until_date}}",
   home_secrets_title: "Secrets",
   home_secrets_description: "View, create and manage secrets.",
+  home_access_title: "Access",
+  home_access_description: "Manage who and what has access to vault and how they can authenticate.",
 
   // Secrets Home Page
   secrets_home_page_title: "Secrets",
@@ -203,4 +206,15 @@ module.exports = {
   transit_rewrap_input_placeholder: "Cyphertext",
   transit_rewrap_rewrap_btn: "Rewrap",
   transit_rewrap_result_modal_title: "Rewrap Result",
+
+  // Access Home
+  access_home_page_title: "Access",
+  access_auth_methods_title: "Authentication Methods",
+  access_auth_methods_description: "View and manage the allowed authentication methods.",
+  access_entities_title: "Entities",
+  access_entities_description: "View and manage who and what can access the vault.",
+  access_groups_title: "Groups",
+  access_groups_description: "View and manage groups of entities.",
+  access_leases_title: "Leases",
+  access_leases_description: "View and manage the leases of entities.",
 };

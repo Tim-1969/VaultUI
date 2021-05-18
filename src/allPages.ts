@@ -26,6 +26,8 @@ import { TransitViewPage } from "./pages/Secrets/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Secrets/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
 import { getObjectKeys } from "./utils";
+import { AccessHomePage } from "./pages/Access/AccessHome";
+
 
 /* eslint-disable */
 import { PageType } from "z-pagerouter";
@@ -38,6 +40,7 @@ type pagesList = {
 export const allPages: pagesList = {
   HOME: new HomePage(),
   SECRETS_HOME: new SecretsHomePage(),
+  ACCESS_HOME: new AccessHomePage(),
   ME: new MePage(),
   TOTP: new TOTPViewPage(),
   NEW_TOTP: new NewTOTPPage(),

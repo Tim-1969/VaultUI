@@ -59,7 +59,7 @@ export class HomePage extends Page {
       }
     }
 
-    textList.appendChild(
+    homePageContent.appendChild(
       makeElement({
         tag: "div",
         class:
@@ -72,6 +72,14 @@ export class HomePage extends Page {
             icon: "file-edit",
             onclick: async () => {
               await this.router.changePage("SECRETS_HOME");
+            },
+          }),
+          Tile({
+            title: i18next.t("home_access_title"),
+            description: i18next.t("home_access_description"),
+            icon: "users",
+            onclick: async () => {
+              await this.router.changePage("ACCESS_HOME");
             },
           }),
         ],
