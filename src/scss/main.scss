@@ -1,3 +1,5 @@
+@import "normalize.css/normalize.css";
+
 .editor {
 	background-color:  #3B4252;
 	padding: 1em;
@@ -9,9 +11,6 @@
     padding-right: 10px !important;
     padding-bottom: 10px !important;
     padding-left: 10px !important;
-}
-.wrap-pre {
-  white-space: pre-wrap;
 }
 @import "./prism-nord.scss";
 @import "./uikit.scss";

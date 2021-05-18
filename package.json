@@ -28,6 +28,7 @@
     "i18next": "^20.2.4",
     "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "^6.0.0",
+    "normalize.css": "^8.0.1",
     "prettier": "^2.3.0",
     "prismjs": "^1.23.0",
     "qr-scanner": "^1.2.0",
