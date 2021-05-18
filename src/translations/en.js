@@ -220,4 +220,6 @@ module.exports = {
 
   // Auth Home Page
   auth_home_title: "Auth",
+  auth_home_view_config: "View Config",
+  auth_home_edit_config: "Edit Config",
 };

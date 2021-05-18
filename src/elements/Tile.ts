@@ -1,7 +1,8 @@
 import { makeElement } from "z-makeelement";
 
-type TileParams = {
+export type TileParams = {
   condition?: boolean;
+  color?: string;
   title: string;
   description: string;
   icon?: string;
@@ -17,7 +18,7 @@ export function Tile(params: TileParams): HTMLElement {
     onclick: params.onclick,
     children: makeElement({
       tag: "div",
-      class: ["uk-padding-small", "uk-background-primary"],
+      class: ["uk-padding-small", "uk-background-" + (params.color || "primary")],
       children: [
         makeElement({
           tag: "p",
