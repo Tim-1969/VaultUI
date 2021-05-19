@@ -1,7 +1,7 @@
 import { CopyableInputBox } from "../../../elements/CopyableInputBox";
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { getTOTPCode } from "../../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";
 import { makeElement } from "z-makeelement";

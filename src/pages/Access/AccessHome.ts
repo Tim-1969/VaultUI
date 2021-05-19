@@ -1,9 +1,6 @@
-import { MountType, getMounts } from "../../api/sys/getMounts";
 import { Page } from "../../types/Page";
-import { getCapabilitiesPath } from "../../api/sys/getCapabilities";
 import { makeElement } from "z-makeelement";
 import { prePageChecks, setErrorText } from "../../pageUtils";
-import { sortedObjectMap } from "../../utils";
 import i18next from "i18next";
 import { Tile } from "../../elements/Tile";
 

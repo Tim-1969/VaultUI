@@ -1,13 +1,11 @@
 import { Page } from "../../../types/Page";
 import i18next from "i18next";
-import { setErrorText } from "../../../pageUtils";
 import { listAuth } from "../../../api/auth/listAuth";
 import { objectToMap } from "../../../utils";
 import { AuthMethod } from "../../../api/types/auth";
 import { makeElement } from "z-makeelement";
 
-
-export function AuthListElement(path: string, method: AuthMethod): HTMLElement {
+export function AuthListElement(page: Page, path: string, method: AuthMethod): HTMLElement {
   const isClickable = method.type != "token";
 
   return makeElement({
@@ -31,16 +29,19 @@ export function AuthListElement(path: string, method: AuthMethod): HTMLElement {
           makeElement({
             tag: "button",
             class: "uk-button uk-button-small uk-button-primary",
-            text: "View Config",
+            text: i18next.t("auth_home_view_config"),
+            onclick: async () => {
+              page.state.currentBaseMount = path;
+              await page.router.changePage("AUTH_VIEW_CONFIG");
+            },
           }),
           makeElement({
             tag: "button",
             class: "uk-button uk-button-small uk-button-primary",
-            text: "Edit Config",
+            text: i18next.t("auth_home_edit_config"),
           }),
         ]
       }),
-
     ],
   });
 }
@@ -53,11 +54,13 @@ export class AuthHomePage extends Page {
     await this.router.changePage("ACCESS_HOME");
   }
   async render(): Promise<void> {
+    this.state.currentSecretPath = [];
+
     let authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
     const contentElement = makeElement({ tag: "div" });
     this.router.setPageContent(contentElement);
     for (const [path, details] of authList) {
-      contentElement.appendChild(AuthListElement(path, details))
+      contentElement.appendChild(AuthListElement(this, path, details))
     }
   }
   get name(): string {

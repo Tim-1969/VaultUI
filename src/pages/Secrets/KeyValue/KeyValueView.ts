@@ -1,6 +1,6 @@
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { getSecrets } from "../../../api/kv/getSecrets";
 import { makeElement } from "z-makeelement";
 import { setErrorText } from "../../../pageUtils";

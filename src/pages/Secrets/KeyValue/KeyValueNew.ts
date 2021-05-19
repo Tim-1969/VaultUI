@@ -1,5 +1,5 @@
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
 import { makeElement } from "z-makeelement";
 import { setErrorText } from "../../../pageUtils";

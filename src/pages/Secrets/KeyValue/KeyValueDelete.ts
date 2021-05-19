@@ -1,5 +1,5 @@
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { deleteSecret } from "../../../api/kv/deleteSecret";
 import { makeElement } from "z-makeelement";
 import i18next from "i18next";

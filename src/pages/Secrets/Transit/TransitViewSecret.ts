@@ -1,5 +1,5 @@
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { Tile } from "../../../elements/Tile";
 import { getTransitKey } from "../../../api/transit/getTransitKey";
 import { makeElement } from "z-makeelement";

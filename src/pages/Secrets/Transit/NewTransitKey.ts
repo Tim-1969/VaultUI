@@ -1,7 +1,7 @@
 import { Margin } from "../../../elements/Margin";
 import { Option } from "../../../elements/Option";
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { makeElement } from "z-makeelement";
 import { newTransitKey } from "../../../api/transit/newTransitKey";
 import { setErrorText } from "../../../pageUtils";

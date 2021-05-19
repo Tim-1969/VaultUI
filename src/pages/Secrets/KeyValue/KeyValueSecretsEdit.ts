@@ -1,6 +1,6 @@
 import { CodeJar } from "codejar";
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
 import { getSecret } from "../../../api/kv/getSecret";
 import { makeElement } from "z-makeelement";

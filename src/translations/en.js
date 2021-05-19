@@ -222,4 +222,8 @@ module.exports = {
   auth_home_title: "Auth",
   auth_home_view_config: "View Config",
   auth_home_edit_config: "Edit Config",
+
+  // Auth View Conig Page
+  auth_view_config_title: "Auth View Config",
+  auth_view_config_suffix: " (view config)",
 };

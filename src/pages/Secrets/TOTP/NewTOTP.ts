@@ -1,7 +1,7 @@
 import { Margin } from "../../../elements/Margin";
 import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
-import { SecretTitleElement } from "../../../elements/SecretTitleElement";
+import { SecretTitleElement } from "../SecretTitleElement";
 import { addNewTOTP } from "../../../api/totp/addNewTOTP";
 import { makeElement } from "z-makeelement";
 import { setErrorText } from "../../../pageUtils";
