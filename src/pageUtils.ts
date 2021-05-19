@@ -76,3 +76,7 @@ export function setErrorText(text: string): void {
     timeout: 2000,
   });
 }
+
+export function notImplemented(): void {
+  setErrorText(i18next.t("not_implemented"));
+}

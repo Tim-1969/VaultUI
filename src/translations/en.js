@@ -226,4 +226,7 @@ module.exports = {
   // Auth View Conig Page
   auth_view_config_title: "Auth View Config",
   auth_view_config_suffix: " (view config)",
+
+  // userpass Users List
+  userpass_users_list_title: "Users List",
 };

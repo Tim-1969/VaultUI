@@ -1,3 +1,4 @@
+import { AccessHomePage } from "./pages/Access/AccessHome";
 import { HomePage } from "./pages/Home";
 import { KeyValueDeletePage } from "./pages/Secrets/KeyValue/KeyValueDelete";
 import { KeyValueNewPage } from "./pages/Secrets/KeyValue/KeyValueNew";
@@ -26,13 +27,12 @@ import { TransitViewPage } from "./pages/Secrets/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Secrets/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
 import { getObjectKeys } from "./utils";
-import { AccessHomePage } from "./pages/Access/AccessHome";
-
 
 /* eslint-disable */
-import { PageType } from "z-pagerouter";
 import { AuthHomePage } from "./pages/Access/Auth/AuthHome";
 import { AuthViewConfigPage } from "./pages/Access/Auth/AuthViewConfig";
+import { PageType } from "z-pagerouter";
+import { UserPassUsersListPage } from "./pages/Access/Auth/userpass/UserPassUsersList";
 /* eslint-enable */
 
 type pagesList = {
@@ -45,6 +45,7 @@ export const allPages: pagesList = {
   ACCESS_HOME: new AccessHomePage(),
   AUTH_HOME: new AuthHomePage(),
   AUTH_VIEW_CONFIG: new AuthViewConfigPage(),
+  USERPASS_USERS_LIST: new UserPassUsersListPage(),
   ME: new MePage(),
   TOTP: new TOTPViewPage(),
   NEW_TOTP: new NewTOTPPage(),

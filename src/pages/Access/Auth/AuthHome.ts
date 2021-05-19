@@ -1,9 +1,9 @@
-import { Page } from "../../../types/Page";
-import i18next from "i18next";
-import { listAuth } from "../../../api/auth/listAuth";
-import { objectToMap } from "../../../utils";
 import { AuthMethod } from "../../../api/types/auth";
+import { Page } from "../../../types/Page";
+import { listAuth } from "../../../api/auth/listAuth";
 import { makeElement } from "z-makeelement";
+import { objectToMap } from "../../../utils";
+import i18next from "i18next";
 
 export function AuthListElement(page: Page, path: string, method: AuthMethod): HTMLElement {
   const isClickable = method.type != "token";
@@ -16,11 +16,17 @@ export function AuthListElement(page: Page, path: string, method: AuthMethod): H
         tag: isClickable ? "a" : "span",
         class: "uk-h4 uk-margin-bottom",
         text: path,
+        onclick: async () => {
+          page.state.currentBaseMount = path;
+          if (method.type == "userpass") {
+            await page.router.changePage("USERPASS_USERS_LIST");
+          }
+        },
       }),
       makeElement({
         tag: "span",
         class: "uk-text-muted",
-        text: ` (${method.accessor})`
+        text: ` (${method.accessor})`,
       }),
       makeElement({
         tag: "div",
@@ -40,7 +46,7 @@ export function AuthListElement(page: Page, path: string, method: AuthMethod): H
             class: "uk-button uk-button-small uk-button-primary",
             text: i18next.t("auth_home_edit_config"),
           }),
-        ]
+        ],
       }),
     ],
   });
@@ -56,11 +62,11 @@ export class AuthHomePage extends Page {
   async render(): Promise<void> {
     this.state.currentSecretPath = [];
 
-    let authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
+    const authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
     const contentElement = makeElement({ tag: "div" });
-    this.router.setPageContent(contentElement);
+    await this.router.setPageContent(contentElement);
     for (const [path, details] of authList) {
-      contentElement.appendChild(AuthListElement(this, path, details))
+      contentElement.appendChild(AuthListElement(this, path, details));
     }
   }
   get name(): string {

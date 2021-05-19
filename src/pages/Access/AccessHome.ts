@@ -1,8 +1,8 @@
 import { Page } from "../../types/Page";
+import { Tile } from "../../elements/Tile";
 import { makeElement } from "z-makeelement";
 import { prePageChecks, setErrorText } from "../../pageUtils";
 import i18next from "i18next";
-import { Tile } from "../../elements/Tile";
 
 export class AccessHomePage extends Page {
   constructor() {
@@ -15,7 +15,7 @@ export class AccessHomePage extends Page {
     await this.router.setPageContent("");
     if (!(await prePageChecks(this.router))) return;
 
-    this.router.setPageContent(
+    await this.router.setPageContent(
       makeElement({
         tag: "div",
         class: "uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small uk-grid-match",

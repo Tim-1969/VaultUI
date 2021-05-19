@@ -1,9 +1,9 @@
-import { Page } from "../../../types/Page";
-import i18next from "i18next";
-import { listAuth } from "../../../api/auth/listAuth";
-import { objectToMap } from "../../../utils";
 import { AuthMethod } from "../../../api/types/auth";
+import { Page } from "../../../types/Page";
+import { listAuth } from "../../../api/auth/listAuth";
 import { makeElement } from "z-makeelement";
+import { objectToMap } from "../../../utils";
+import i18next from "i18next";
 
 export function HeaderAndContent(title: string, content: string): HTMLElement {
   return makeElement({
@@ -14,7 +14,7 @@ export function HeaderAndContent(title: string, content: string): HTMLElement {
         children: makeElement({
           tag: "h5",
           text: title,
-        })
+        }),
       }),
       makeElement({
         tag: "td",
@@ -23,10 +23,9 @@ export function HeaderAndContent(title: string, content: string): HTMLElement {
           text: content,
         }),
       }),
-    ]
-  })
+    ],
+  });
 }
-
 
 export class AuthViewConfigPage extends Page {
   constructor() {
@@ -41,42 +40,35 @@ export class AuthViewConfigPage extends Page {
       tag: "table",
       class: "uk-table",
     });
-    this.router.setPageContent(tableElement);
+    await this.router.setPageContent(tableElement);
     const contentElement = makeElement({ tag: "tbody" });
     tableElement.appendChild(contentElement);
 
-    let authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
-    let authMethod = authList.get(this.state.currentBaseMount);
+    const authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
+    const authMethod = authList.get(this.state.currentBaseMount);
 
+    contentElement.appendChild(HeaderAndContent("Type", authMethod.type));
+    contentElement.appendChild(HeaderAndContent("Path", this.state.currentBaseMount));
+    contentElement.appendChild(HeaderAndContent("Description", authMethod.description));
+    contentElement.appendChild(HeaderAndContent("Accessor", authMethod.accessor));
+    contentElement.appendChild(HeaderAndContent("Local", String(authMethod.local).toString()));
     contentElement.appendChild(
-      HeaderAndContent("Type", authMethod.type)
+      HeaderAndContent("Seal Wrap", String(authMethod.seal_wrap).toString()),
     );
     contentElement.appendChild(
-      HeaderAndContent("Path", this.state.currentBaseMount)
+      HeaderAndContent(
+        "List when unauthenticated?",
+        String(authMethod.config.listing_visibility).toString(),
+      ),
     );
     contentElement.appendChild(
-      HeaderAndContent("Description", authMethod.description)
+      HeaderAndContent("Default Lease TTL", String(authMethod.config.default_lease_ttl).toString()),
     );
     contentElement.appendChild(
-      HeaderAndContent("Accessor", authMethod.accessor)
+      HeaderAndContent("Max Lease TTL", String(authMethod.config.max_lease_ttl).toString()),
     );
     contentElement.appendChild(
-      HeaderAndContent("Local", String(authMethod.local).toString())
-    );
-    contentElement.appendChild(
-      HeaderAndContent("Seal Wrap", String(authMethod.seal_wrap).toString())
-    );
-    contentElement.appendChild(
-      HeaderAndContent("List when unauthenticated?", String(authMethod.config.listing_visibility).toString())
-    );
-    contentElement.appendChild(
-      HeaderAndContent("Default Lease TTL", String(authMethod.config.default_lease_ttl).toString())
-    );
-    contentElement.appendChild(
-      HeaderAndContent("Max Lease TTL", String(authMethod.config.max_lease_ttl).toString())
-    );
-    contentElement.appendChild(
-      HeaderAndContent("Token Type", authMethod.config.token_type as string)
+      HeaderAndContent("Token Type", authMethod.config.token_type as string),
     );
   }
 
