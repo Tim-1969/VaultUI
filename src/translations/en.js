@@ -223,9 +223,19 @@ module.exports = {
   auth_home_view_config: "View Config",
   auth_home_edit_config: "Edit Config",
 
-  // Auth View Conig Page
+  // Auth View Config Page
   auth_view_config_title: "Auth View Config",
   auth_view_config_suffix: " (view config)",
+  auth_view_config_type: "Type",
+  auth_view_config_path: "Path",
+  auth_view_config_description: "Description",
+  auth_view_config_accessor: "Accessor",
+  auth_view_config_local: "Local",
+  auth_view_config_seal_wrap: "Seal Wrap",
+  auth_view_config_list_when_unauth: "List when unauthenticated?",
+  auth_view_config_default_lease_ttl: "Default Lease TTL",
+  auth_view_config_max_lease_ttl: "Max Lease TTL",
+  auth_view_config_token_type: "Token Type",
 
   // userpass Users List
   userpass_users_list_title: "Users List",

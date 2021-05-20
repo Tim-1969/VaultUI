@@ -47,28 +47,50 @@ export class AuthViewConfigPage extends Page {
     const authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
     const authMethod = authList.get(this.state.baseMount);
 
-    contentElement.appendChild(HeaderAndContent("Type", authMethod.type));
-    contentElement.appendChild(HeaderAndContent("Path", this.state.baseMount));
-    contentElement.appendChild(HeaderAndContent("Description", authMethod.description));
-    contentElement.appendChild(HeaderAndContent("Accessor", authMethod.accessor));
-    contentElement.appendChild(HeaderAndContent("Local", String(authMethod.local).toString()));
     contentElement.appendChild(
-      HeaderAndContent("Seal Wrap", String(authMethod.seal_wrap).toString()),
+      HeaderAndContent(i18next.t("auth_view_config_type"), authMethod.type),
+    );
+    contentElement.appendChild(
+      HeaderAndContent(i18next.t("auth_view_config_path"), this.state.baseMount),
+    );
+    contentElement.appendChild(
+      HeaderAndContent(i18next.t("auth_view_config_description"), authMethod.description),
+    );
+    contentElement.appendChild(
+      HeaderAndContent(i18next.t("auth_view_config_accessor"), authMethod.accessor),
+    );
+    contentElement.appendChild(
+      HeaderAndContent(i18next.t("auth_view_config_local"), String(authMethod.local).toString()),
     );
     contentElement.appendChild(
       HeaderAndContent(
-        "List when unauthenticated?",
+        i18next.t("auth_view_config_seal_wrap"),
+        String(authMethod.seal_wrap).toString(),
+      ),
+    );
+    contentElement.appendChild(
+      HeaderAndContent(
+        i18next.t("auth_view_config_list_when_unauth"),
         String(authMethod.config.listing_visibility).toString(),
       ),
     );
     contentElement.appendChild(
-      HeaderAndContent("Default Lease TTL", String(authMethod.config.default_lease_ttl).toString()),
+      HeaderAndContent(
+        i18next.t("auth_view_config_default_lease_ttl"),
+        String(authMethod.config.default_lease_ttl).toString(),
+      ),
     );
     contentElement.appendChild(
-      HeaderAndContent("Max Lease TTL", String(authMethod.config.max_lease_ttl).toString()),
+      HeaderAndContent(
+        i18next.t("auth_view_config_max_lease_ttl"),
+        String(authMethod.config.max_lease_ttl).toString(),
+      ),
     );
     contentElement.appendChild(
-      HeaderAndContent("Token Type", authMethod.config.token_type as string),
+      HeaderAndContent(
+        i18next.t("auth_view_config_token_type"),
+        authMethod.config.token_type as string,
+      ),
     );
   }
 
