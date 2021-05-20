@@ -1,4 +1,11 @@
+// So that we dont get `PageType not found in 'z-pagerouter'  import/named`
+/* eslint-disable */
+import { PageType } from "z-pagerouter";
+/* eslint-enable */
+
 import { AccessHomePage } from "./pages/Access/AccessHome";
+import { AuthHomePage } from "./pages/Access/Auth/AuthHome";
+import { AuthViewConfigPage } from "./pages/Access/Auth/AuthViewConfig";
 import { HomePage } from "./pages/Home";
 import { KeyValueDeletePage } from "./pages/Secrets/KeyValue/KeyValueDelete";
 import { KeyValueNewPage } from "./pages/Secrets/KeyValue/KeyValueNew";
@@ -26,14 +33,8 @@ import { TransitRewrapPage } from "./pages/Secrets/Transit/TransitRewrap";
 import { TransitViewPage } from "./pages/Secrets/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Secrets/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
-import { getObjectKeys } from "./utils";
-
-/* eslint-disable */
-import { AuthHomePage } from "./pages/Access/Auth/AuthHome";
-import { AuthViewConfigPage } from "./pages/Access/Auth/AuthViewConfig";
-import { PageType } from "z-pagerouter";
 import { UserPassUsersListPage } from "./pages/Access/Auth/userpass/UserPassUsersList";
-/* eslint-enable */
+import { getObjectKeys } from "./utils";
 
 type pagesList = {
   [key: string]: Page;

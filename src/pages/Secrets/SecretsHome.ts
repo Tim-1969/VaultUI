@@ -55,7 +55,8 @@ export class SecretsHomePage extends Page {
       if (!("type" in mount)) return;
       if (!["kv", "totp", "transit", "cubbyhole"].includes(mount.type)) return;
 
-      const secretMountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
+      const secretMountType =
+        mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
 
       let linkText = "";
       let linkPage: string;

@@ -56,10 +56,7 @@ export class KeyValueSecretPage extends Page {
       let deleteButtonText = i18next.t("kv_secret_delete_btn");
       if (this.state.secretMountType == "kv-v2" && this.state.secretVersion == null) {
         deleteButtonText = i18next.t("kv_secret_delete_all_btn");
-      } else if (
-        this.state.secretMountType == "kv-v2" &&
-        this.state.secretVersion != null
-      ) {
+      } else if (this.state.secretMountType == "kv-v2" && this.state.secretVersion != null) {
         deleteButtonText = i18next.t("kv_secret_delete_version_btn", {
           version: this.state.secretVersion,
         });
