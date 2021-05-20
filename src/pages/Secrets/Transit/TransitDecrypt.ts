@@ -1,5 +1,6 @@
 import { CopyableModal } from "../../../elements/CopyableModal";
 import { FileUploadInput } from "../../../elements/FileUploadInput";
+import { Form } from "../../../elements/Form";
 import { Margin } from "../../../elements/Margin";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
@@ -21,14 +22,8 @@ export class TransitDecryptPage extends Page {
   transitDecryptForm: HTMLFormElement;
 
   async render(): Promise<void> {
-    await this.router.setPageContent(
-      makeElement({
-        tag: "div",
-      }),
-    );
-    this.transitDecryptForm = makeElement({
-      tag: "form",
-      children: [
+    this.transitDecryptForm = Form(
+      [
         Margin(
           makeElement({
             tag: "textarea",
@@ -73,12 +68,9 @@ export class TransitDecryptPage extends Page {
           },
         }),
       ],
-    }) as HTMLFormElement;
+      async (_) => await this.transitDecryptFormHandler(),
+    );
     await this.router.setPageContent(this.transitDecryptForm);
-    this.transitDecryptForm.addEventListener("submit", async (e: Event) => {
-      e.preventDefault();
-      await this.transitDecryptFormHandler();
-    });
   }
 
   async transitDecryptFormHandler(): Promise<void> {

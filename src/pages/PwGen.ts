@@ -1,4 +1,5 @@
 import { CopyableInputBox, CopyableInputBoxType } from "../elements/CopyableInputBox";
+import { Form } from "../elements/Form";
 import { Margin } from "../elements/Margin";
 import { Option } from "../elements/Option";
 import { Page } from "../types/Page";
@@ -90,9 +91,8 @@ export class PwGenPage extends Page {
       ],
     }) as HTMLSelectElement;
 
-    this.passwordForm = makeElement({
-      tag: "form",
-      children: [
+    this.passwordForm = Form(
+      [
         this.passwordLengthTitle,
         Margin(this.passwordLengthRange),
         Margin(this.passwordAlphabet),
@@ -106,9 +106,8 @@ export class PwGenPage extends Page {
           }),
         ),
       ],
-    }) as HTMLFormElement;
-
-    this.passwordForm.addEventListener("submit", (e) => this.formEvent(e));
+      (_) => this.updatePassword(),
+    );
     await this.router.setPageContent(this.passwordForm);
   }
 
@@ -117,11 +116,6 @@ export class PwGenPage extends Page {
       min: this?.passwordLengthRange?.value || 24,
       max: passwordLengthMax,
     });
-  }
-
-  formEvent(e: Event): void {
-    e.preventDefault();
-    this.updatePassword();
   }
 
   updatePassword(): void {

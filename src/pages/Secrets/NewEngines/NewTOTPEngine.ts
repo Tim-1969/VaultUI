@@ -1,3 +1,4 @@
+import { Form } from "../../../elements/Form";
 import { Margin } from "../../../elements/Margin";
 import { Page } from "../../../types/Page";
 import { makeElement } from "z-makeelement";
@@ -13,58 +14,55 @@ export class NewTOTPEnginePage extends Page {
     await this.router.changePage("SECRETS_HOME");
   }
   async render(): Promise<void> {
-    const newEngineForm = makeElement({
-      tag: "form",
-      children: [
-        Margin(
+    await this.router.setPageContent(
+      Form(
+        [
+          Margin(
+            makeElement({
+              tag: "input",
+              class: ["uk-input", "uk-form-width-medium"],
+              attributes: {
+                required: "true",
+                type: "text",
+                placeholder: i18next.t("new_totp_engine_name_input"),
+                name: "name",
+              },
+            }),
+          ),
           makeElement({
-            tag: "input",
-            class: ["uk-input", "uk-form-width-medium"],
+            tag: "p",
+            id: "errorText",
+            class: "uk-text-danger",
+          }),
+          makeElement({
+            tag: "button",
+            class: ["uk-button", "uk-button-primary"],
+            text: i18next.t("new_totp_engine_create_btn"),
             attributes: {
-              required: "true",
-              type: "text",
-              placeholder: i18next.t("new_totp_engine_name_input"),
-              name: "name",
+              type: "submit",
             },
           }),
-        ),
-        makeElement({
-          tag: "p",
-          id: "errorText",
-          class: "uk-text-danger",
-        }),
-        makeElement({
-          tag: "button",
-          class: ["uk-button", "uk-button-primary"],
-          text: i18next.t("new_totp_engine_create_btn"),
-          attributes: {
-            type: "submit",
-          },
-        }),
-      ],
-    }) as HTMLFormElement;
+        ],
+        async (form: HTMLFormElement) => {
+          const formData = new FormData(form);
 
-    await this.router.setPageContent(newEngineForm);
+          const name = formData.get("name") as string;
 
-    newEngineForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(newEngineForm);
-
-      const name = formData.get("name") as string;
-
-      try {
-        await newMount({
-          name: name,
-          type: "totp",
-        });
-        this.state.secretMountType = "totp";
-        this.state.baseMount = name + "/";
-        await this.router.changePage("TOTP");
-      } catch (e) {
-        const error = e as Error;
-        setErrorText(error.message);
-      }
-    });
+          try {
+            await newMount({
+              name: name,
+              type: "totp",
+            });
+            this.state.secretMountType = "totp";
+            this.state.baseMount = name + "/";
+            await this.router.changePage("TOTP");
+          } catch (e) {
+            const error = e as Error;
+            setErrorText(error.message);
+          }
+        },
+      ),
+    );
   }
   get name(): string {
     return i18next.t("new_totp_engine_title");

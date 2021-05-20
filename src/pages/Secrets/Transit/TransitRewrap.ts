@@ -1,4 +1,5 @@
 import { CopyableModal } from "../../../elements/CopyableModal";
+import { Form } from "../../../elements/Form";
 import { Margin } from "../../../elements/Margin";
 import { Option } from "../../../elements/Option";
 import { Page } from "../../../types/Page";
@@ -47,9 +48,8 @@ export class TransitRewrapPage extends Page {
     });
 
     await this.router.setPageContent("");
-    this.transitRewrapForm = makeElement({
-      tag: "form",
-      children: [
+    this.transitRewrapForm = Form(
+      [
         makeElement({
           tag: "select",
           name: "version",
@@ -80,13 +80,9 @@ export class TransitRewrapPage extends Page {
           },
         }),
       ],
-    }) as HTMLFormElement;
+      async (_) => await this.transitRewrapFormHandler(),
+    );
     await this.router.setPageContent(this.transitRewrapForm);
-
-    this.transitRewrapForm.addEventListener("submit", async (e: Event) => {
-      e.preventDefault();
-      await this.transitRewrapFormHandler();
-    });
   }
 
   async transitRewrapFormHandler(): Promise<void> {

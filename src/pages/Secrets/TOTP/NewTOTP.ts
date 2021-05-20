@@ -1,3 +1,4 @@
+import { Form } from "../../../elements/Form";
 import { Margin } from "../../../elements/Margin";
 import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
@@ -24,86 +25,83 @@ export class NewTOTPPage extends Page {
     await this.router.changePage("TOTP");
   }
   async render(): Promise<void> {
-    const totpForm = makeElement({
-      tag: "form",
-      children: [
-        Margin(
+    await this.router.setPageContent(
+      Form(
+        [
+          Margin(
+            makeElement({
+              tag: "input",
+              class: ["uk-input", "uk-form-width-medium"],
+              attributes: {
+                required: "true",
+                type: "text",
+                placeholder: i18next.t("totp_new_name_text"),
+                name: "name",
+              },
+            }),
+          ),
           makeElement({
-            tag: "input",
-            class: ["uk-input", "uk-form-width-medium"],
-            attributes: {
-              required: "true",
-              type: "text",
-              placeholder: i18next.t("totp_new_name_text"),
-              name: "name",
-            },
+            tag: "p",
+            text: i18next.t("totp_new_info"),
           }),
-        ),
-        makeElement({
-          tag: "p",
-          text: i18next.t("totp_new_info"),
-        }),
-        Margin(
+          Margin(
+            makeElement({
+              tag: "input",
+              class: ["uk-input", "uk-form-width-medium"],
+              attributes: {
+                type: "text",
+                placeholder: i18next.t("totp_new_uri_input"),
+                name: "uri",
+              },
+            }),
+          ),
+          Margin(
+            makeElement({
+              tag: "input",
+              class: ["uk-input", "uk-form-width-medium"],
+              attributes: {
+                type: "text",
+                placeholder: i18next.t("totp_new_key_input"),
+                name: "key",
+              },
+            }),
+          ),
           makeElement({
-            tag: "input",
-            class: ["uk-input", "uk-form-width-medium"],
-            attributes: {
-              type: "text",
-              placeholder: i18next.t("totp_new_uri_input"),
-              name: "uri",
-            },
+            tag: "p",
+            id: "errorText",
+            class: "uk-text-danger",
           }),
-        ),
-        Margin(
-          makeElement({
-            tag: "input",
-            class: ["uk-input", "uk-form-width-medium"],
-            attributes: {
-              type: "text",
-              placeholder: i18next.t("totp_new_key_input"),
-              name: "key",
-            },
-          }),
-        ),
-        makeElement({
-          tag: "p",
-          id: "errorText",
-          class: "uk-text-danger",
-        }),
-        MarginInline(
-          makeElement({
-            tag: "button",
-            class: ["uk-button", "uk-button-primary"],
-            text: i18next.t("totp_new_add_btn"),
-            attributes: {
-              type: "submit",
-            },
-          }),
-        ),
-      ],
-    }) as HTMLFormElement;
-    await this.router.setPageContent(totpForm);
+          MarginInline(
+            makeElement({
+              tag: "button",
+              class: ["uk-button", "uk-button-primary"],
+              text: i18next.t("totp_new_add_btn"),
+              attributes: {
+                type: "submit",
+              },
+            }),
+          ),
+        ],
+        async (form: HTMLFormElement) => {
+          const formData = new FormData(form);
 
-    totpForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+          const parms = {
+            url: formData.get("uri") as string,
+            key: removeDashSpaces(formData.get("key") as string).toUpperCase(),
+            name: formData.get("name") as string,
+            generate: false,
+          };
 
-      const formData = new FormData(totpForm);
-
-      const parms = {
-        url: formData.get("uri") as string,
-        key: removeDashSpaces(formData.get("key") as string).toUpperCase(),
-        name: formData.get("name") as string,
-        generate: false,
-      };
-
-      try {
-        await addNewTOTP(this.state.baseMount, parms);
-        await this.router.changePage("TOTP");
-      } catch (e: unknown) {
-        const error = e as Error;
-        setErrorText(`API Error: ${error.message}`);
-      }
-    });
+          try {
+            await addNewTOTP(this.state.baseMount, parms);
+            await this.router.changePage("TOTP");
+          } catch (e: unknown) {
+            const error = e as Error;
+            setErrorText(`API Error: ${error.message}`);
+          }
+        },
+      ),
+    );
   }
 
   async getPageTitle(): Promise<Element | string> {

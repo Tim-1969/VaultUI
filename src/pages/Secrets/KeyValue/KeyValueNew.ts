@@ -1,3 +1,4 @@
+import { Form } from "../../../elements/Form";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
@@ -14,52 +15,45 @@ export class KeyValueNewPage extends Page {
     await this.router.changePage("KEY_VALUE_VIEW");
   }
 
-  addKVNewForm: HTMLFormElement;
-
   async render(): Promise<void> {
-    this.addKVNewForm = makeElement({
-      tag: "form",
-      id: "addKVNewForm",
-      children: [
-        makeElement({
-          tag: "div",
-          class: "uk-margin",
-          children: makeElement({
-            tag: "input",
-            class: ["uk-input", "uk-form-width-medium"],
+    await this.router.setPageContent(
+      Form(
+        [
+          makeElement({
+            tag: "div",
+            class: "uk-margin",
+            children: makeElement({
+              tag: "input",
+              class: ["uk-input", "uk-form-width-medium"],
+              attributes: {
+                required: "true",
+                type: "text",
+                placeholder: i18next.t("kv_new_path"),
+                name: "path",
+              },
+            }),
+          }),
+          makeElement({
+            tag: "p",
+            id: "errorText",
+            class: "uk-text-danger",
+          }),
+          makeElement({
+            tag: "button",
+            class: ["uk-button", "uk-button-primary"],
+            text: i18next.t("kv_new_create_btn"),
             attributes: {
-              required: "true",
-              type: "text",
-              placeholder: i18next.t("kv_new_path"),
-              name: "path",
+              type: "submit",
             },
           }),
-        }),
-        makeElement({
-          tag: "p",
-          id: "errorText",
-          class: "uk-text-danger",
-        }),
-        makeElement({
-          tag: "button",
-          class: ["uk-button", "uk-button-primary"],
-          text: i18next.t("kv_new_create_btn"),
-          attributes: {
-            type: "submit",
-          },
-        }),
-      ],
-    }) as HTMLFormElement;
-    await this.router.setPageContent(this.addKVNewForm);
-
-    this.addKVNewForm.addEventListener("submit", async (e: Event) => {
-      e.preventDefault();
-      await this.newKVSecretHandleForm();
-    });
+        ],
+        async (form: HTMLFormElement) => await this.newKVSecretHandleForm(form),
+      ),
+    );
   }
 
-  async newKVSecretHandleForm(): Promise<void> {
-    const formData = new FormData(this.addKVNewForm);
+  async newKVSecretHandleForm(form: HTMLFormElement): Promise<void> {
+    const formData = new FormData(form);
     const path = formData.get("path") as string;
     let keyData = {};
 

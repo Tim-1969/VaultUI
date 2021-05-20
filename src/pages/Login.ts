@@ -1,3 +1,4 @@
+import { Form } from "../elements/Form";
 import { Margin } from "../elements/Margin";
 import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
@@ -12,9 +13,8 @@ export class LoginPage extends Page {
     super();
   }
   async render(): Promise<void> {
-    const tokenLoginForm = makeElement({
-      tag: "form",
-      children: [
+    const tokenLoginForm = Form(
+      [
         Margin(
           makeElement({
             tag: "input",
@@ -38,11 +38,28 @@ export class LoginPage extends Page {
           }),
         ),
       ],
-    }) as HTMLFormElement;
+      async (form: HTMLFormElement) => {
+        const formData = new FormData(form);
+        const token = formData.get("token");
+        this.state.token = token as string;
 
-    const usernameLoginForm = makeElement({
-      tag: "form",
-      children: [
+        try {
+          await lookupSelf();
+          await this.router.changePage("HOME");
+        } catch (e: unknown) {
+          const error = e as Error;
+          document.getElementById("tokenInput").classList.add("uk-form-danger");
+          if (error.message == "permission denied") {
+            setErrorText(i18next.t("token_login_error"));
+          } else {
+            setErrorText(error.message);
+          }
+        }
+      },
+    );
+
+    const usernameLoginForm = Form(
+      [
         Margin(
           makeElement({
             tag: "input",
@@ -80,7 +97,24 @@ export class LoginPage extends Page {
           }),
         ),
       ],
-    }) as HTMLFormElement;
+      async (form: HTMLFormElement) => {
+        const formData = new FormData(form);
+
+        try {
+          const res = await usernameLogin(
+            formData.get("username") as string,
+            formData.get("password") as string,
+          );
+          this.state.token = res;
+          await this.router.changePage("HOME");
+        } catch (e: unknown) {
+          const error = e as Error;
+          document.getElementById("usernameInput").classList.add("uk-form-danger");
+          document.getElementById("passwordInput").classList.add("uk-form-danger");
+          setErrorText(error.message);
+        }
+      },
+    );
 
     await this.router.setPageContent(
       makeElement({
@@ -130,44 +164,6 @@ export class LoginPage extends Page {
         ],
       }),
     );
-
-    tokenLoginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(tokenLoginForm);
-      const token = formData.get("token");
-      this.state.token = token as string;
-
-      try {
-        await lookupSelf();
-        await this.router.changePage("HOME");
-      } catch (e: unknown) {
-        const error = e as Error;
-        document.getElementById("tokenInput").classList.add("uk-form-danger");
-        if (error.message == "permission denied") {
-          setErrorText(i18next.t("token_login_error"));
-        } else {
-          setErrorText(error.message);
-        }
-      }
-    });
-    usernameLoginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(usernameLoginForm);
-
-      try {
-        const res = await usernameLogin(
-          formData.get("username") as string,
-          formData.get("password") as string,
-        );
-        this.state.token = res;
-        await this.router.changePage("HOME");
-      } catch (e: unknown) {
-        const error = e as Error;
-        document.getElementById("usernameInput").classList.add("uk-form-danger");
-        document.getElementById("passwordInput").classList.add("uk-form-danger");
-        setErrorText(error.message);
-      }
-    });
   }
 
   get name(): string {

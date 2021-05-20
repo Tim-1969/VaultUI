@@ -1,3 +1,4 @@
+import { Form } from "../elements/Form";
 import { Page } from "../types/Page";
 import { makeElement } from "z-makeelement";
 
@@ -7,10 +8,8 @@ export class SetVaultURLPage extends Page {
   }
   async render(): Promise<void> {
     await this.router.setPageContent(
-      makeElement({
-        tag: "form",
-        id: "setVaultURLForm",
-        children: [
+      Form(
+        [
           makeElement({
             tag: "div",
             class: "uk-margin",
@@ -39,14 +38,13 @@ export class SetVaultURLPage extends Page {
             },
           }),
         ],
-      }),
+        async (form: HTMLFormElement) => {
+          const formData = new FormData(form);
+          this.state.apiURL = formData.get("vaultURL") as string;
+          await this.router.changePage("HOME");
+        },
+      ),
     );
-    document.getElementById("setVaultURLForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(document.querySelector("#setVaultURLForm"));
-      this.state.apiURL = formData.get("vaultURL") as string;
-      await this.router.changePage("HOME");
-    });
   }
   get name(): string {
     return "Set Vault URL";

@@ -1,3 +1,4 @@
+import { Form } from "../elements/Form";
 import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
 import { QRScanner, QRScannerType } from "../elements/QRScanner";
@@ -118,9 +119,8 @@ export class UnsealPage extends Page {
   }
 
   makeUnsealForm(): void {
-    this.unsealKeyForm = makeElement({
-      tag: "form",
-      children: [
+    this.unsealKeyForm = Form(
+      [
         MarginInline(
           makeElement({
             tag: "input",
@@ -141,12 +141,11 @@ export class UnsealPage extends Page {
           }),
         ),
       ],
-    }) as HTMLFormElement;
+      async (_) => {
+        await this.handleKeySubmit();
+      },
+    );
     this.unsealInputContent.appendChild(this.unsealKeyForm);
-    this.unsealKeyForm.addEventListener("submit", async (e: Event) => {
-      e.preventDefault();
-      await this.handleKeySubmit();
-    });
   }
 
   async makeQRInput(): Promise<void> {
