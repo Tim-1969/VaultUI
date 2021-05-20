@@ -91,6 +91,21 @@ export class PageState {
   set secretMountType(value: string) {
     localStorage.setItem("secretMountType", value);
   }
+
+  get authPath(): string {
+    return localStorage.getItem("authPath") || "";
+  }
+  set authPath(value: string) {
+    localStorage.setItem("authPath", value);
+  }
+
+  get userPassUser(): string {
+    return localStorage.getItem("userPassUser") || "";
+  }
+  set userPassUser(value: string) {
+    localStorage.setItem("userPassUser", value);
+  }
+
   get currentPage(): string {
     const curPage = localStorage.getItem("currentPage") || "HOME";
     return curPage;

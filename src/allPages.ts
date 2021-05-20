@@ -33,6 +33,7 @@ import { TransitRewrapPage } from "./pages/Secrets/Transit/TransitRewrap";
 import { TransitViewPage } from "./pages/Secrets/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Secrets/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
+import { UserPassUserViewPage } from "./pages/Access/Auth/userpass/UserPassUserView";
 import { UserPassUsersListPage } from "./pages/Access/Auth/userpass/UserPassUsersList";
 import { getObjectKeys } from "./utils";
 
@@ -47,6 +48,7 @@ export const allPages: pagesList = {
   AUTH_HOME: new AuthHomePage(),
   AUTH_VIEW_CONFIG: new AuthViewConfigPage(),
   USERPASS_USERS_LIST: new UserPassUsersListPage(),
+  USERPASS_USER_VIEW: new UserPassUserViewPage(),
   ME: new MePage(),
   TOTP: new TOTPViewPage(),
   NEW_TOTP: new NewTOTPPage(),

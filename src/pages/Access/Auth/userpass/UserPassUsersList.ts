@@ -1,7 +1,6 @@
 import { Page } from "../../../../types/Page";
 import { listUserPassUsers } from "../../../../api/auth/userpass/listUserPassUsers";
 import { makeElement } from "z-makeelement";
-import { notImplemented } from "../../../../pageUtils";
 import i18next from "i18next";
 
 export class UserPassUsersListPage extends Page {
@@ -16,7 +15,7 @@ export class UserPassUsersListPage extends Page {
     const pageContent = makeElement({ tag: "div" });
     await this.router.setPageContent(pageContent);
 
-    const users = await listUserPassUsers(this.state.baseMount);
+    const users = await listUserPassUsers(this.state.authPath);
     pageContent.appendChild(
       makeElement({
         tag: "ul",
@@ -27,7 +26,10 @@ export class UserPassUsersListPage extends Page {
               children: makeElement({
                 tag: "a",
                 text: user,
-                onclick: notImplemented,
+                onclick: async () => {
+                  this.state.userPassUser = user;
+                  await this.router.changePage("USERPASS_USER_VIEW");
+                },
               }),
             });
           }),

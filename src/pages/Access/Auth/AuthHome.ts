@@ -17,7 +17,7 @@ export function AuthListElement(page: Page, path: string, method: AuthMethod): H
         class: "uk-h4 uk-margin-bottom",
         text: path,
         onclick: async () => {
-          page.state.baseMount = path;
+          page.state.authPath = path;
           if (method.type == "userpass") {
             await page.router.changePage("USERPASS_USERS_LIST");
           }

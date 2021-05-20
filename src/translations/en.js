@@ -239,4 +239,16 @@ module.exports = {
 
   // userpass Users List
   userpass_users_list_title: "Users List",
+
+  // userpass User View
+  userpass_user_view_title: "User View",
+  userpass_user_view_cidrs: "Generated Token's Bound CIDRs",
+  userpass_user_view_exp_max_ttl: "Generated Token's Explicit Maximum TTL",
+  userpass_user_view_max_ttl: "Generated Token's Maximum TTL",
+  userpass_user_view_default_policy_attached: "Do Not Attach 'default' Policy To Generated Tokens",
+  userpass_user_view_max_token_uses: "Maximum Uses of Generated Tokens",
+  userpass_user_view_token_peroid: "Generated Token's Period",
+  userpass_user_view_policies: "Generated Token's Policies",
+  userpass_user_view_initial_ttl: "Generated Token's Initial TTL",
+  userpass_user_view_type: "Generated Token's Type",
 };

@@ -1,31 +1,10 @@
 import { AuthMethod } from "../../../api/types/auth";
+import { HeaderAndContent } from "../../../elements/HeaderAndContent";
 import { Page } from "../../../types/Page";
 import { listAuth } from "../../../api/auth/listAuth";
 import { makeElement } from "z-makeelement";
 import { objectToMap } from "../../../utils";
 import i18next from "i18next";
-
-export function HeaderAndContent(title: string, content: string): HTMLElement {
-  return makeElement({
-    tag: "tr",
-    children: [
-      makeElement({
-        tag: "td",
-        children: makeElement({
-          tag: "h5",
-          text: title,
-        }),
-      }),
-      makeElement({
-        tag: "td",
-        children: makeElement({
-          tag: "p",
-          text: content,
-        }),
-      }),
-    ],
-  });
-}
 
 export class AuthViewConfigPage extends Page {
   constructor() {
