@@ -3,11 +3,11 @@ import { appendAPIURL, getHeaders } from "../apiUtils";
 
 export async function getSecrets(
   baseMount: string,
-  mountType: string,
+  secretMountType: string,
   secretPath: string[],
 ): Promise<string[]> {
   let secretURL = "";
-  if (mountType == "kv-v2") {
+  if (secretMountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/metadata/${secretPath.join("")}?list=true`;
   } else {
     // cubbyhole and v1 are identical

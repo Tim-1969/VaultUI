@@ -14,11 +14,11 @@ export class KeyValueSecretPage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    if (this.state.currentSecretVersion != null) {
-      this.state.currentSecretVersion = null;
+    if (this.state.secretVersion != null) {
+      this.state.secretVersion = null;
       await this.router.changePage("KEY_VALUE_VERSIONS");
     } else {
-      this.state.currentSecret = "";
+      this.state.secretItem = "";
       await this.router.changePage("KEY_VALUE_VIEW");
     }
   }
@@ -48,20 +48,20 @@ export class KeyValueSecretPage extends Page {
     const kvList = document.querySelector("#kvList");
     let isSecretNestedJson = false;
     const caps = await getCapabilities(
-      this.state.currentBaseMount,
-      this.state.currentSecretPath,
-      this.state.currentSecret,
+      this.state.baseMount,
+      this.state.secretPath,
+      this.state.secretItem,
     );
     if (caps.includes("delete")) {
       let deleteButtonText = i18next.t("kv_secret_delete_btn");
-      if (this.state.currentMountType == "kv-v2" && this.state.currentSecretVersion == null) {
+      if (this.state.secretMountType == "kv-v2" && this.state.secretVersion == null) {
         deleteButtonText = i18next.t("kv_secret_delete_all_btn");
       } else if (
-        this.state.currentMountType == "kv-v2" &&
-        this.state.currentSecretVersion != null
+        this.state.secretMountType == "kv-v2" &&
+        this.state.secretVersion != null
       ) {
         deleteButtonText = i18next.t("kv_secret_delete_version_btn", {
-          version: this.state.currentSecretVersion,
+          version: this.state.secretVersion,
         });
       }
       buttonsBlock.appendChild(
@@ -77,7 +77,7 @@ export class KeyValueSecretPage extends Page {
       );
     }
     if (caps.includes("update")) {
-      if (this.state.currentSecretVersion == null) {
+      if (this.state.secretVersion == null) {
         buttonsBlock.appendChild(
           makeElement({
             tag: "button",
@@ -91,7 +91,7 @@ export class KeyValueSecretPage extends Page {
         );
       }
     }
-    if (this.state.currentMountType == "kv-v2") {
+    if (this.state.secretMountType == "kv-v2") {
       buttonsBlock.appendChild(
         makeElement({
           tag: "button",
@@ -106,13 +106,14 @@ export class KeyValueSecretPage extends Page {
     }
 
     const secretInfo = await getSecret(
-      this.state.currentBaseMount,
-      this.state.currentMountType,
-      this.state.currentSecretPath,
-      this.state.currentSecret,
-      this.state.currentSecretVersion,
+      this.state.baseMount,
+      this.state.secretMountType,
+      this.state.secretPath,
+      this.state.secretItem,
+      this.state.secretVersion,
     );
-    if (secretInfo == null && this.state.currentMountType == "kv-v2") {
+
+    if (secretInfo == null && this.state.secretMountType == "kv-v2") {
       document.querySelector("#buttonsBlock").remove();
       document.getElementById("loadingText").remove();
 
@@ -131,12 +132,12 @@ export class KeyValueSecretPage extends Page {
           class: ["uk-button", "uk-button-primary"],
           onclick: async () => {
             await undeleteSecret(
-              this.state.currentBaseMount,
-              this.state.currentSecretPath,
-              this.state.currentSecret,
-              this.state.currentSecretVersion,
+              this.state.baseMount,
+              this.state.secretPath,
+              this.state.secretItem,
+              this.state.secretVersion,
             );
-            await this.router.changePage(this.state.currentPageString);
+            await this.router.refresh();
           },
         }),
       );

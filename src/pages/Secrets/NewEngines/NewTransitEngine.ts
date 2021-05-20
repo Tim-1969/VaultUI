@@ -57,8 +57,8 @@ export class NewTransitEnginePage extends Page {
           name: name,
           type: "transit",
         });
-        this.state.currentMountType = "transit";
-        this.state.currentBaseMount = name + "/";
+        this.state.secretMountType = "transit";
+        this.state.baseMount = name + "/";
         await this.router.changePage("TRANSIT_VIEW");
       } catch (e) {
         const error = e as Error;

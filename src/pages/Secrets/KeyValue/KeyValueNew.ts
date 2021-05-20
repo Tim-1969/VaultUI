@@ -63,15 +63,15 @@ export class KeyValueNewPage extends Page {
     const path = formData.get("path") as string;
     let keyData = {};
 
-    if (["kv-v1", "cubbyhole"].includes(this.state.currentMountType)) {
+    if (["kv-v1", "cubbyhole"].includes(this.state.secretMountType)) {
       keyData = { key: "value" };
     }
 
     try {
       await createOrUpdateSecret(
-        this.state.currentBaseMount,
-        this.state.currentMountType,
-        this.state.currentSecretPath,
+        this.state.baseMount,
+        this.state.secretMountType,
+        this.state.secretPath,
         path,
         keyData,
       );

@@ -15,7 +15,7 @@ export class TransitViewSecretPage extends Page {
   }
 
   async render(): Promise<void> {
-    const transitKey = await getTransitKey(this.state.currentBaseMount, this.state.currentSecret);
+    const transitKey = await getTransitKey(this.state.baseMount, this.state.secretItem);
 
     await this.router.setPageContent(
       makeElement({

@@ -96,7 +96,7 @@ export class TransitDecryptPage extends Page {
     }
 
     try {
-      const res = await transitDecrypt(this.state.currentBaseMount, this.state.currentSecret, {
+      const res = await transitDecrypt(this.state.baseMount, this.state.secretItem, {
         ciphertext: ciphertext,
       });
       let plaintext = res.plaintext;

@@ -5,7 +5,7 @@ export class PageState {
 
   // NOTE: When a item in the page state isn't a string (e.g it is a array or object),
   // you need to add helper methods to mutate it or else it wont save.
-  // example: currentSecretPath is a array so when you try to .push() to it
+  // example: secretPath is a array so when you try to .push() to it
   // it will modify the object that was getted from this class
   // then when you try to access it again, there will be a different object.
   // I guess you could make another class that emulates a Array or Map
@@ -42,57 +42,54 @@ export class PageState {
     localStorage.setItem("language", value);
   }
 
-  get currentBaseMount(): string {
-    return localStorage.getItem("currentBaseMount") || "";
+  get baseMount(): string {
+    return localStorage.getItem("baseMount") || "";
   }
-  set currentBaseMount(value: string) {
-    localStorage.setItem("currentBaseMount", value);
+  set baseMount(value: string) {
+    localStorage.setItem("baseMount", value);
   }
 
   // Since this is a array we can't act directly on it so we need
   // functions to do the same modifications.
   // See the note at the start o
-  popCurrentSecretPath(): void {
-    const secPath = this.currentSecretPath;
+  popSecretPath(): void {
+    const secPath = this.secretPath;
     secPath.pop();
-    this.currentSecretPath = secPath;
+    this.secretPath = secPath;
   }
-  pushCurrentSecretPath(...args: string[]): void {
-    const secPath = this.currentSecretPath;
+  pushSecretPath(...args: string[]): void {
+    const secPath = this.secretPath;
     secPath.push(...args);
-    this.currentSecretPath = secPath;
+    this.secretPath = secPath;
   }
 
-  get currentSecretPath(): string[] {
-    return JSON.parse(localStorage.getItem("currentSecretPath") || "[]") as string[];
+  get secretPath(): string[] {
+    return JSON.parse(localStorage.getItem("secretPath") || "[]") as string[];
   }
-  set currentSecretPath(value: string[]) {
-    localStorage.setItem("currentSecretPath", JSON.stringify(value));
+  set secretPath(value: string[]) {
+    localStorage.setItem("secretPath", JSON.stringify(value));
   }
 
-  get currentSecretVersion(): string | null {
-    const result = localStorage.getItem("currentSecretVersion");
+  get secretVersion(): string | null {
+    const result = localStorage.getItem("secretVersion");
     return result != "null" ? result || null : null;
   }
-  set currentSecretVersion(value: string) {
-    localStorage.setItem("currentSecretVersion", String(value));
+  set secretVersion(value: string) {
+    localStorage.setItem("secretVersion", String(value));
   }
 
-  get currentSecret(): string {
-    return localStorage.getItem("currentSecret") || "";
+  get secretItem(): string {
+    return localStorage.getItem("secretItem") || "";
   }
-  set currentSecret(value: string) {
-    localStorage.setItem("currentSecret", value);
+  set secretItem(value: string) {
+    localStorage.setItem("secretItem", value);
   }
 
-  get currentMountType(): string {
-    return localStorage.getItem("currentMountType") || "";
+  get secretMountType(): string {
+    return localStorage.getItem("secretMountType") || "";
   }
-  set currentMountType(value: string) {
-    localStorage.setItem("currentMountType", value);
-  }
-  get currentPageString(): string {
-    return this.currentPage;
+  set secretMountType(value: string) {
+    localStorage.setItem("secretMountType", value);
   }
   get currentPage(): string {
     const curPage = localStorage.getItem("currentPage") || "HOME";

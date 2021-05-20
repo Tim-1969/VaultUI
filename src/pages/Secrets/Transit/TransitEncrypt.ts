@@ -98,7 +98,7 @@ export class TransitEncryptPage extends Page {
     }
 
     try {
-      const res = await transitEncrypt(this.state.currentBaseMount, this.state.currentSecret, {
+      const res = await transitEncrypt(this.state.baseMount, this.state.secretItem, {
         plaintext: plaintext,
       });
       const modal = CopyableModal(

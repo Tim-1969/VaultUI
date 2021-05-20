@@ -54,7 +54,7 @@ export class TOTPViewPage extends Page {
     );
 
     try {
-      const res = await getTOTPKeys(this.state.currentBaseMount);
+      const res = await getTOTPKeys(this.state.baseMount);
       for (const totpKeyName of res) {
         const totpListElement = this.makeTOTPListElement(totpKeyName);
         totpList.appendChild(totpListElement);
@@ -91,7 +91,7 @@ export class TOTPViewPage extends Page {
   }
 
   async updateTOTPElement(totpKeyName: string, totpListElement: TOTPListElement): Promise<void> {
-    totpListElement.setCode(await getTOTPCode(this.state.currentBaseMount, totpKeyName));
+    totpListElement.setCode(await getTOTPCode(this.state.baseMount, totpKeyName));
   }
 
   makeTOTPListElement(totpKeyName: string): TOTPListElement {

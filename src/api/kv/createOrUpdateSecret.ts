@@ -3,7 +3,7 @@ import { removeDoubleSlash } from "../../utils";
 
 export async function createOrUpdateSecret(
   baseMount: string,
-  mountType: string,
+  secretMountType: string,
   secretPath: string[],
   name: string,
   data: Record<string, unknown>,
@@ -11,7 +11,7 @@ export async function createOrUpdateSecret(
   let secretURL = "";
   let APIData = {};
 
-  if (mountType == "kv-v2") {
+  if (secretMountType == "kv-v2") {
     secretURL = `/v1/${baseMount}/data/${secretPath.join("/")}/${name}`;
     APIData = { data: data };
   } else {

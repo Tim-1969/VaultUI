@@ -76,7 +76,7 @@ async function onLoad(): Promise<void> {
     await playground(pageRouter);
   }
 
-  await pageRouter.changePage(pageState.currentPageString);
+  await pageRouter.changePage(pageState.currentPage);
 
   setInterval(async () => {
     if ((await pageRouter.getCurrentPageID()) != "UNSEAL") {

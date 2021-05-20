@@ -16,7 +16,7 @@ export class UserPassUsersListPage extends Page {
     const pageContent = makeElement({ tag: "div" });
     await this.router.setPageContent(pageContent);
 
-    const users = await listUserPassUsers(this.state.currentBaseMount);
+    const users = await listUserPassUsers(this.state.baseMount);
     pageContent.appendChild(
       makeElement({
         tag: "ul",

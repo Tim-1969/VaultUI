@@ -16,7 +16,7 @@ export class TransitViewPage extends Page {
   }
 
   async render(): Promise<void> {
-    this.state.currentSecret = "";
+    this.state.secretItem = "";
 
     const transitViewContent = makeElement({ tag: "div" });
     await this.router.setPageContent(transitViewContent);
@@ -32,7 +32,7 @@ export class TransitViewPage extends Page {
     transitViewContent.appendChild(newButton);
 
     try {
-      const res = await getTransitKeys(this.state.currentBaseMount);
+      const res = await getTransitKeys(this.state.baseMount);
 
       transitViewContent.appendChild(
         makeElement({
@@ -46,7 +46,7 @@ export class TransitViewPage extends Page {
                   tag: "a",
                   text: secret,
                   onclick: async () => {
-                    this.state.currentSecret = secret;
+                    this.state.secretItem = secret;
                     await this.router.changePage("TRANSIT_VIEW_SECRET");
                   },
                 }),

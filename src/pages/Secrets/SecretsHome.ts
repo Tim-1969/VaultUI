@@ -34,10 +34,10 @@ export class SecretsHomePage extends Page {
       );
     }
 
-    this.state.currentBaseMount = "";
-    this.state.currentSecretPath = [];
-    this.state.currentSecret = "";
-    this.state.currentSecretVersion = null;
+    this.state.baseMount = "";
+    this.state.secretPath = [];
+    this.state.secretItem = "";
+    this.state.secretVersion = null;
 
     const navList = makeElement({
       tag: "ul",
@@ -55,7 +55,7 @@ export class SecretsHomePage extends Page {
       if (!("type" in mount)) return;
       if (!["kv", "totp", "transit", "cubbyhole"].includes(mount.type)) return;
 
-      const mountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
+      const secretMountType = mount.type == "kv" ? "kv-v" + String(mount.options.version) : mount.type;
 
       let linkText = "";
       let linkPage: string;
@@ -80,8 +80,8 @@ export class SecretsHomePage extends Page {
             tag: "a",
             text: linkText,
             onclick: async () => {
-              this.state.currentBaseMount = baseMount;
-              this.state.currentMountType = mountType;
+              this.state.baseMount = baseMount;
+              this.state.secretMountType = secretMountType;
               await this.router.changePage(linkPage);
             },
           }),

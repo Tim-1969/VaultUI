@@ -10,8 +10,8 @@ export class KeyValueVersionsPage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    if (this.state.currentSecretVersion != null) {
-      this.state.currentSecretVersion = null;
+    if (this.state.secretVersion != null) {
+      this.state.secretVersion = null;
     }
     await this.router.changePage("KEY_VALUE_SECRET");
   }
@@ -24,9 +24,9 @@ export class KeyValueVersionsPage extends Page {
     await this.router.setPageContent(versionsList);
 
     const metadata = await getSecretMetadata(
-      this.state.currentBaseMount,
-      this.state.currentSecretPath,
-      this.state.currentSecret,
+      this.state.baseMount,
+      this.state.secretPath,
+      this.state.secretItem,
     );
 
     objectToMap(metadata.versions).forEach((_, ver) => {
@@ -37,7 +37,7 @@ export class KeyValueVersionsPage extends Page {
             tag: "a",
             text: `v${ver}`,
             onclick: async () => {
-              this.state.currentSecretVersion = ver;
+              this.state.secretVersion = ver;
               await this.router.changePage("KEY_VALUE_SECRET");
             },
           }),

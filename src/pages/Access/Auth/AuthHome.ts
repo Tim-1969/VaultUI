@@ -17,7 +17,7 @@ export function AuthListElement(page: Page, path: string, method: AuthMethod): H
         class: "uk-h4 uk-margin-bottom",
         text: path,
         onclick: async () => {
-          page.state.currentBaseMount = path;
+          page.state.baseMount = path;
           if (method.type == "userpass") {
             await page.router.changePage("USERPASS_USERS_LIST");
           }
@@ -37,7 +37,7 @@ export function AuthListElement(page: Page, path: string, method: AuthMethod): H
             class: "uk-button uk-button-small uk-button-primary",
             text: i18next.t("auth_home_view_config"),
             onclick: async () => {
-              page.state.currentBaseMount = path;
+              page.state.baseMount = path;
               await page.router.changePage("AUTH_VIEW_CONFIG");
             },
           }),
@@ -60,7 +60,7 @@ export class AuthHomePage extends Page {
     await this.router.changePage("ACCESS_HOME");
   }
   async render(): Promise<void> {
-    this.state.currentSecretPath = [];
+    this.state.secretPath = [];
 
     const authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
     const contentElement = makeElement({ tag: "div" });

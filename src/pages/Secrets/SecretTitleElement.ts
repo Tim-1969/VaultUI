@@ -3,10 +3,10 @@ import { PageState } from "../../PageState";
 import { makeElement } from "z-makeelement";
 
 function currentTitleSecretText(state: PageState, suffix = ""): string {
-  let currentSecretText = state.currentSecret;
-  currentSecretText += suffix;
-  if (state.currentSecretVersion !== null) currentSecretText += ` (v${state.currentSecretVersion})`;
-  return currentSecretText;
+  let secretItemText = state.secretItem;
+  secretItemText += suffix;
+  if (state.secretVersion !== null) secretItemText += ` (v${state.secretVersion})`;
+  return secretItemText;
 }
 
 export async function SecretTitleElement(router: PageRouter, suffix = ""): Promise<HTMLElement> {
@@ -16,29 +16,29 @@ export async function SecretTitleElement(router: PageRouter, suffix = ""): Promi
     children: [
       makeElement({
         tag: "a",
-        text: state.currentBaseMount + " ",
+        text: state.baseMount + " ",
         onclick: async () => {
-          state.currentSecretPath = [];
-          state.currentSecret = "";
-          state.currentSecretVersion = null;
+          state.secretPath = [];
+          state.secretItem = "";
+          state.secretVersion = null;
 
-          if (state.currentMountType.startsWith("kv") || state.currentMountType == "cubbyhole") {
+          if (state.secretMountType.startsWith("kv") || state.secretMountType == "cubbyhole") {
             await router.changePage("KEY_VALUE_VIEW");
-          } else if (state.currentMountType == "totp") {
+          } else if (state.secretMountType == "totp") {
             await router.changePage("TOTP");
-          } else if (state.currentMountType == "transit") {
+          } else if (state.secretMountType == "transit") {
             await router.changePage("TRANSIT_VIEW");
           }
         },
       }),
-      ...state.currentSecretPath.map((secretPath, index, secretPaths) => {
+      ...state.secretPath.map((secretPath, index, secretPaths) => {
         return makeElement({
           tag: "a",
           text: secretPath + " ",
           onclick: async () => {
-            state.currentSecretVersion = null;
-            if (state.currentMountType.startsWith("kv")) {
-              state.currentSecretPath = secretPaths.slice(0, index + 1);
+            state.secretVersion = null;
+            if (state.secretMountType.startsWith("kv")) {
+              state.secretPath = secretPaths.slice(0, index + 1);
               await router.changePage("KEY_VALUE_VIEW");
             }
           },
@@ -46,7 +46,7 @@ export async function SecretTitleElement(router: PageRouter, suffix = ""): Promi
       }),
       makeElement({
         tag: "span",
-        condition: state.currentSecret.length != 0,
+        condition: state.secretItem.length != 0,
         text: currentTitleSecretText(state, suffix),
       }),
     ],

@@ -13,10 +13,10 @@ export class HomePage extends Page {
     await this.router.setPageContent("");
     if (!(await prePageChecks(this.router))) return;
 
-    this.state.currentBaseMount = "";
-    this.state.currentSecretPath = [];
-    this.state.currentSecret = "";
-    this.state.currentSecretVersion = null;
+    this.state.baseMount = "";
+    this.state.secretPath = [];
+    this.state.secretItem = "";
+    this.state.secretVersion = null;
 
     const homePageContent = makeElement({ tag: "div" });
     await this.router.setPageContent(homePageContent);

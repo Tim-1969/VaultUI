@@ -45,10 +45,10 @@ export class KeyValueSecretEditPage extends Page {
       }),
     );
     const secretInfo = await getSecret(
-      this.state.currentBaseMount,
-      this.state.currentMountType,
-      this.state.currentSecretPath,
-      this.state.currentSecret,
+      this.state.baseMount,
+      this.state.secretMountType,
+      this.state.secretPath,
+      this.state.secretItem,
     );
 
     loadingText.remove();
@@ -65,10 +65,10 @@ export class KeyValueSecretEditPage extends Page {
 
       try {
         await createOrUpdateSecret(
-          this.state.currentBaseMount,
-          this.state.currentMountType,
-          this.state.currentSecretPath,
-          this.state.currentSecret,
+          this.state.baseMount,
+          this.state.secretMountType,
+          this.state.secretPath,
+          this.state.secretItem,
           JSON.parse(jar.toString()),
         );
         await this.router.changePage("KEY_VALUE_SECRET");

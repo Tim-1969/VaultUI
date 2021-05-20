@@ -75,8 +75,8 @@ export class NewKVEnginePage extends Page {
             version: version,
           },
         });
-        this.state.currentMountType = "kv-v" + version;
-        this.state.currentBaseMount = name + "/";
+        this.state.secretMountType = "kv-v" + version;
+        this.state.baseMount = name + "/";
         await this.router.changePage("KEY_VALUE_VIEW");
       } catch (e) {
         const error = e as Error;

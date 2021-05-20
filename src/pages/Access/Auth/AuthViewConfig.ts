@@ -45,10 +45,10 @@ export class AuthViewConfigPage extends Page {
     tableElement.appendChild(contentElement);
 
     const authList = objectToMap(await listAuth()) as Map<string, AuthMethod>;
-    const authMethod = authList.get(this.state.currentBaseMount);
+    const authMethod = authList.get(this.state.baseMount);
 
     contentElement.appendChild(HeaderAndContent("Type", authMethod.type));
-    contentElement.appendChild(HeaderAndContent("Path", this.state.currentBaseMount));
+    contentElement.appendChild(HeaderAndContent("Path", this.state.baseMount));
     contentElement.appendChild(HeaderAndContent("Description", authMethod.description));
     contentElement.appendChild(HeaderAndContent("Accessor", authMethod.accessor));
     contentElement.appendChild(HeaderAndContent("Local", String(authMethod.local).toString()));

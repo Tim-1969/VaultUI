@@ -9,11 +9,11 @@ export class KeyValueDeletePage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    if (this.state.currentSecretVersion != null) {
-      this.state.currentSecretVersion = null;
+    if (this.state.secretVersion != null) {
+      this.state.secretVersion = null;
       await this.router.changePage("KEY_VALUE_SECRET");
     } else {
-      this.state.currentSecret = "";
+      this.state.secretItem = "";
       await this.router.changePage("KEY_VALUE_VIEW");
     }
   }
@@ -32,11 +32,11 @@ export class KeyValueDeletePage extends Page {
             text: i18next.t("kv_delete_btn"),
             onclick: async () => {
               await deleteSecret(
-                this.state.currentBaseMount,
-                this.state.currentMountType,
-                this.state.currentSecretPath,
-                this.state.currentSecret,
-                this.state.currentSecretVersion,
+                this.state.baseMount,
+                this.state.secretMountType,
+                this.state.secretPath,
+                this.state.secretItem,
+                this.state.secretVersion,
               );
               await this.goBack();
             },

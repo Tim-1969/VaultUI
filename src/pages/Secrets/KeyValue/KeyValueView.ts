@@ -11,20 +11,20 @@ export class KeyValueViewPage extends Page {
     super();
   }
   async goBack(): Promise<void> {
-    if (this.state.currentSecretPath.length != 0) {
-      this.state.popCurrentSecretPath();
+    if (this.state.secretPath.length != 0) {
+      this.state.popSecretPath();
       await this.router.changePage("KEY_VALUE_VIEW");
     } else {
       await this.router.changePage("SECRETS_HOME");
     }
   }
   async render(): Promise<void> {
-    this.state.currentSecret = "";
+    this.state.secretItem = "";
 
     const kvViewPageContent = makeElement({ tag: "div" });
     await this.router.setPageContent(kvViewPageContent);
 
-    if (this.state.currentMountType == "cubbyhole") {
+    if (this.state.secretMountType == "cubbyhole") {
       kvViewPageContent.appendChild(
         makeElement({
           tag: "p",
@@ -45,9 +45,9 @@ export class KeyValueViewPage extends Page {
 
     try {
       const res = await getSecrets(
-        this.state.currentBaseMount,
-        this.state.currentMountType,
-        this.state.currentSecretPath,
+        this.state.baseMount,
+        this.state.secretMountType,
+        this.state.secretPath,
       );
 
       kvViewPageContent.appendChild(
@@ -63,10 +63,10 @@ export class KeyValueViewPage extends Page {
                   text: secret,
                   onclick: async () => {
                     if (secret.endsWith("/")) {
-                      this.state.pushCurrentSecretPath(secret);
+                      this.state.pushSecretPath(secret);
                       await this.router.changePage("KEY_VALUE_VIEW");
                     } else {
-                      this.state.currentSecret = secret;
+                      this.state.secretItem = secret;
                       await this.router.changePage("KEY_VALUE_SECRET");
                     }
                   },
@@ -80,7 +80,7 @@ export class KeyValueViewPage extends Page {
       const error = e as Error;
       if (error == DoesNotExistError) {
         // getSecrets also 404's on no keys so dont go all the way back.
-        if (this.state.currentSecretPath.length != 0) {
+        if (this.state.secretPath.length != 0) {
           return this.goBack();
         } else {
           kvViewPageContent.appendChild(

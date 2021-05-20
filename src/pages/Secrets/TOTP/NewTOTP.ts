@@ -97,7 +97,7 @@ export class NewTOTPPage extends Page {
       };
 
       try {
-        await addNewTOTP(this.state.currentBaseMount, parms);
+        await addNewTOTP(this.state.baseMount, parms);
         await this.router.changePage("TOTP");
       } catch (e: unknown) {
         const error = e as Error;

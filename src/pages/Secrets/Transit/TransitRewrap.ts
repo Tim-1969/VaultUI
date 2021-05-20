@@ -24,7 +24,7 @@ export class TransitRewrapPage extends Page {
   transitRewrapForm: HTMLFormElement;
 
   async render(): Promise<void> {
-    const transitKey = await getTransitKey(this.state.currentBaseMount, this.state.currentSecret);
+    const transitKey = await getTransitKey(this.state.baseMount, this.state.secretItem);
 
     const stringVersions = Array.from(
       objectToMap(transitKey.keys).keys(),
@@ -92,7 +92,7 @@ export class TransitRewrapPage extends Page {
   async transitRewrapFormHandler(): Promise<void> {
     const formData = new FormData(this.transitRewrapForm);
     try {
-      const res = await transitRewrap(this.state.currentBaseMount, this.state.currentSecret, {
+      const res = await transitRewrap(this.state.baseMount, this.state.secretItem, {
         ciphertext: formData.get("ciphertext") as string,
         key_version: parseInt(formData.get("version") as string, 10),
       });

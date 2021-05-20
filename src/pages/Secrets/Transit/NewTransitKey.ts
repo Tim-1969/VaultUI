@@ -74,11 +74,11 @@ export class NewTransitKeyPage extends Page {
       const type = formData.get("type") as string;
 
       try {
-        await newTransitKey(this.state.currentBaseMount, {
+        await newTransitKey(this.state.baseMount, {
           name: name,
           type: type,
         });
-        this.state.currentSecret = name;
+        this.state.secretItem = name;
         await this.router.changePage("TRANSIT_VIEW_SECRET");
       } catch (e) {
         const error = e as Error;

@@ -3,7 +3,7 @@ import { removeDoubleSlash } from "../../utils";
 
 export async function deleteSecret(
   baseMount: string,
-  mountType: string,
+  secretMountType: string,
   secretPath: string[],
   name: string,
   version: string | null = null,
@@ -12,7 +12,7 @@ export async function deleteSecret(
 
   let request;
 
-  if (mountType == "kv-v2" && version != null) {
+  if (secretMountType == "kv-v2" && version != null) {
     secretURL = `/v1/${baseMount}/delete/${secretPath.join("")}/${name}`;
     secretURL = removeDoubleSlash(secretURL).replace(/\/$/, "");
     request = new Request(appendAPIURL(secretURL), {
@@ -24,7 +24,7 @@ export async function deleteSecret(
       body: version != null ? JSON.stringify({ versions: [version] }) : "{}",
     });
   } else {
-    if (mountType == "kv-v2") {
+    if (secretMountType == "kv-v2") {
       secretURL = `/v1/${baseMount}/metadata/${secretPath.join("")}/${name}`;
     } else {
       secretURL = `/v1/${baseMount}/${secretPath.join("")}/${name}`;
