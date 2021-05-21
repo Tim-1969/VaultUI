@@ -14,6 +14,16 @@ export class UserPassUsersListPage extends Page {
   async render(): Promise<void> {
     const pageContent = makeElement({ tag: "div" });
     await this.router.setPageContent(pageContent);
+    pageContent.appendChild(
+      makeElement({
+        tag: "button",
+        class: ["uk-button", "uk-margin", "uk-button-primary"],
+        onclick: async () => {
+          await this.router.changePage("USERPASS_USER_NEW");
+        },
+        text: i18next.t("userpass_user_list_new_btn"),
+      }),
+    );
 
     const users = await listUserPassUsers(this.state.authPath);
     pageContent.appendChild(

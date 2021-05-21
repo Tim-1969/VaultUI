@@ -238,6 +238,7 @@ module.exports = {
   auth_view_config_token_type: "Token Type",
 
   // UserPass Common
+  userpass_common_username: "Username",
   userpass_common_password: "Password",
   userpass_common_cidrs: "Generated Token's Bound CIDRs",
   userpass_common_exp_max_ttl: "Generated Token's Explicit Maximum TTL",
@@ -251,6 +252,7 @@ module.exports = {
 
   // userpass Users List
   userpass_users_list_title: "Users List",
+  userpass_user_list_new_btn: "New",
 
   // userpass User View
   userpass_user_view_title: "User View",
@@ -259,4 +261,8 @@ module.exports = {
   // userpass user edit
   userpass_user_edit_title: "User Edit",
   userpass_user_edit_submit_btn: "Submit",
+
+  // userpass user new
+  userpass_user_new_title: "New User",
+  userpass_user_new_create_btn: "Create", 
 };
