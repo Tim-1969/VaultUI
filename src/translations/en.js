@@ -257,6 +257,7 @@ module.exports = {
   // userpass User View
   userpass_user_view_title: "User View",
   userpass_user_view_edit_btn: "Edit",
+  userpass_user_view_delete_btn: "Delete",
 
   // userpass user edit
   userpass_user_edit_title: "User Edit",
@@ -264,5 +265,10 @@ module.exports = {
 
   // userpass user new
   userpass_user_new_title: "New User",
-  userpass_user_new_create_btn: "Create", 
+  userpass_user_new_create_btn: "Create",
+
+  userpass_user_delete_title: "Delete User",
+  userpass_user_delete_text:
+    "Are you sure you want to delete this user? This action can't be reversed.",
+  userpass_user_delete_btn: "Delete User",
 };

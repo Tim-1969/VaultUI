@@ -14,19 +14,38 @@ export class UserPassUserViewPage extends Page {
   }
 
   async render(): Promise<void> {
-    const contentElement = makeElement({ tag: "div" });
-    await this.router.setPageContent(contentElement);
+    const pageContent = makeElement({
+      tag: "div",
+    });
+    await this.router.setPageContent(pageContent);
 
-    contentElement.appendChild(
-      makeElement({
-        tag: "button",
-        class: ["uk-button", "uk-margin", "uk-button-primary"],
-        onclick: async () => {
-          await this.router.changePage("USERPASS_USER_EDIT");
-        },
-        text: i18next.t("userpass_user_view_edit_btn"),
-      }),
-    );
+    const buttonBoxElement = makeElement({
+      tag: "p",
+      children: [
+        makeElement({
+          tag: "button",
+          class: ["uk-button", "uk-button-danger"],
+          onclick: async () => {
+            await this.router.changePage("USERPASS_USER_DELETE");
+          },
+          text: i18next.t("userpass_user_view_delete_btn"),
+        }),
+        makeElement({
+          tag: "button",
+          class: ["uk-button", "uk-button-primary"],
+          onclick: async () => {
+            await this.router.changePage("USERPASS_USER_EDIT");
+          },
+          text: i18next.t("userpass_user_view_edit_btn"),
+        }),
+      ],
+    });
+    pageContent.appendChild(buttonBoxElement);
+
+    const contentElement = makeElement({
+      tag: "div",
+    });
+    pageContent.appendChild(contentElement);
 
     const tableElement = makeElement({
       tag: "table",
