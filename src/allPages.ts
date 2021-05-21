@@ -36,6 +36,7 @@ import { UnsealPage } from "./pages/Unseal";
 import { UserPassUserViewPage } from "./pages/Access/Auth/userpass/UserPassUserView";
 import { UserPassUsersListPage } from "./pages/Access/Auth/userpass/UserPassUsersList";
 import { getObjectKeys } from "./utils";
+import { UserPassUserEditPage } from "./pages/Access/Auth/userpass/UserPassUserEdit";
 
 type pagesList = {
   [key: string]: Page;
@@ -49,6 +50,7 @@ export const allPages: pagesList = {
   AUTH_VIEW_CONFIG: new AuthViewConfigPage(),
   USERPASS_USERS_LIST: new UserPassUsersListPage(),
   USERPASS_USER_VIEW: new UserPassUserViewPage(),
+  USERPASS_USER_EDIT: new UserPassUserEditPage(),
   ME: new MePage(),
   TOTP: new TOTPViewPage(),
   NEW_TOTP: new NewTOTPPage(),

@@ -2,6 +2,8 @@ export function removeDoubleSlash(str: string): string {
   return str.replace(/\/\/+/g, "/");
 }
 
+export const toStr = (item: unknown): string => String(item).toString();
+
 export const getObjectKeys = (obj: Record<string, unknown>): string[] =>
   Object.getOwnPropertyNames(obj);
 export const objectToMap = (obj: Record<string, unknown>): Map<string, unknown> =>

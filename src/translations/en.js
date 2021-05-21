@@ -237,18 +237,27 @@ module.exports = {
   auth_view_config_max_lease_ttl: "Max Lease TTL",
   auth_view_config_token_type: "Token Type",
 
+  // UserPass Common
+  userpass_common_password: "Password",
+  userpass_common_cidrs: "Generated Token's Bound CIDRs",
+  userpass_common_exp_max_ttl: "Generated Token's Explicit Maximum TTL",
+  userpass_common_max_ttl: "Generated Token's Maximum TTL",
+  userpass_common_default_policy_attached: "Do Not Attach 'default' Policy To Generated Tokens",
+  userpass_common_max_token_uses: "Maximum Uses of Generated Tokens",
+  userpass_common_token_peroid: "Generated Token's Period",
+  userpass_common_policies: "Generated Token's Policies",
+  userpass_common_initial_ttl: "Generated Token's Initial TTL",
+  userpass_common_type: "Generated Token's Type",
+
   // userpass Users List
   userpass_users_list_title: "Users List",
 
   // userpass User View
   userpass_user_view_title: "User View",
-  userpass_user_view_cidrs: "Generated Token's Bound CIDRs",
-  userpass_user_view_exp_max_ttl: "Generated Token's Explicit Maximum TTL",
-  userpass_user_view_max_ttl: "Generated Token's Maximum TTL",
-  userpass_user_view_default_policy_attached: "Do Not Attach 'default' Policy To Generated Tokens",
-  userpass_user_view_max_token_uses: "Maximum Uses of Generated Tokens",
-  userpass_user_view_token_peroid: "Generated Token's Period",
-  userpass_user_view_policies: "Generated Token's Policies",
-  userpass_user_view_initial_ttl: "Generated Token's Initial TTL",
-  userpass_user_view_type: "Generated Token's Type",
+  userpass_user_view_edit_btn: "Edit",
+
+  // userpass user edit
+  userpass_user_edit_title: "User Edit",
+  userpass_user_edit_submit_btn: "Submit",
+
 };

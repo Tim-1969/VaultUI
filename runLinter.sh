@@ -1,3 +1,3 @@
 #!/bin/bash
 
-npx eslint -c .eslintrc.json "$@" --ext .js,.ts
+npx eslint --cache -c .eslintrc.json "$@" --ext .js,.ts
