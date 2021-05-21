@@ -1,4 +1,5 @@
 export type UserType = {
+  password?: string;
   token_bound_cidrs: string[];
   token_explicit_max_ttl: number;
   token_max_ttl: number;

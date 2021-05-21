@@ -259,5 +259,4 @@ module.exports = {
   // userpass user edit
   userpass_user_edit_title: "User Edit",
   userpass_user_edit_submit_btn: "Submit",
-
 };

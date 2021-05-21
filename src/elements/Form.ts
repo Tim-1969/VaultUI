@@ -1,9 +1,11 @@
-import { makeElement, ElementInfo } from "z-makeelement";
+/* eslint-disable */
+import { ElementInfo, makeElement } from "z-makeelement";
+/* eslint-enable */
 
 export function Form(
   children: Element[],
   submit: (form: HTMLFormElement) => unknown,
-  options: Partial<ElementInfo> = {}
+  options: Partial<ElementInfo> = {},
 ): HTMLFormElement {
   const form = makeElement({
     tag: "form",

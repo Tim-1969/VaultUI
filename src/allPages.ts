@@ -33,10 +33,10 @@ import { TransitRewrapPage } from "./pages/Secrets/Transit/TransitRewrap";
 import { TransitViewPage } from "./pages/Secrets/Transit/TransitView";
 import { TransitViewSecretPage } from "./pages/Secrets/Transit/TransitViewSecret";
 import { UnsealPage } from "./pages/Unseal";
+import { UserPassUserEditPage } from "./pages/Access/Auth/userpass/UserPassUserEdit";
 import { UserPassUserViewPage } from "./pages/Access/Auth/userpass/UserPassUserView";
 import { UserPassUsersListPage } from "./pages/Access/Auth/userpass/UserPassUsersList";
 import { getObjectKeys } from "./utils";
-import { UserPassUserEditPage } from "./pages/Access/Auth/userpass/UserPassUserEdit";
 
 type pagesList = {
   [key: string]: Page;

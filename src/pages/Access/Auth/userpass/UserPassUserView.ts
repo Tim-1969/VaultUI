@@ -4,7 +4,6 @@ import { getUserPassUser } from "../../../../api/auth/userpass/getUserPassUser";
 import { makeElement } from "z-makeelement";
 import { toStr } from "../../../../utils";
 import i18next from "i18next";
-import { notImplemented } from "../../../../pageUtils";
 
 export class UserPassUserViewPage extends Page {
   constructor() {
