@@ -19,7 +19,6 @@ Prism.highlightAll();
 
 // Actual Imports
 
-import { NavBar } from "./elements/NavBar";
 import { PageRouter } from "z-pagerouter";
 import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";
@@ -27,6 +26,7 @@ import { makeElement } from "z-makeelement";
 import { pageList } from "./allPages";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
+import { reloadNavBar } from "./elements/NavBar";
 import i18next from "i18next";
 
 // @ts-ignore
@@ -34,7 +34,7 @@ import translations from "./translations/index.mjs";
 
 async function onLoad(): Promise<void> {
   document.body.innerHTML = "";
-  document.body.appendChild(makeElement({ tag: "div", id: "navBarReplace" }));
+  document.body.appendChild(makeElement({ tag: "div", id: "navBarBox" }));
   document.body.appendChild(
     makeElement({
       tag: "div",
@@ -65,7 +65,7 @@ async function onLoad(): Promise<void> {
     document.getElementById("pageTitle"),
   );
 
-  document.querySelector("#navBarReplace").replaceWith(NavBar(pageRouter));
+  reloadNavBar(pageRouter);
 
   pageRouter.addEventListener("pageChanged", async function (_) {
     pageState.currentPage = await pageRouter.getCurrentPageID();
