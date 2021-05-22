@@ -1,7 +1,7 @@
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { deleteSecret } from "../../../api/kv/deleteSecret";
-import { makeElement } from "z-makeelement";
+import { render } from "preact";
 import i18next from "i18next";
 
 export class KeyValueDeletePage extends Page {
@@ -18,31 +18,26 @@ export class KeyValueDeletePage extends Page {
     }
   }
   async render(): Promise<void> {
-    await this.router.setPageContent(
-      makeElement({
-        tag: "div",
-        children: [
-          makeElement({
-            tag: "h5",
-            text: i18next.t("kv_delete_text"),
-          }),
-          makeElement({
-            tag: "button",
-            class: ["uk-button", "uk-button-danger"],
-            text: i18next.t("kv_delete_btn"),
-            onclick: async () => {
-              await deleteSecret(
-                this.state.baseMount,
-                this.state.secretMountType,
-                this.state.secretPath,
-                this.state.secretItem,
-                this.state.secretVersion,
-              );
-              await this.goBack();
-            },
-          }),
-        ],
-      }),
+    render(
+      <div>
+        <h5>{i18next.t("kv_delete_text")}</h5>
+        <button
+          class="uk-button uk-button-danger"
+          onClick={async () => {
+            await deleteSecret(
+              this.state.baseMount,
+              this.state.secretMountType,
+              this.state.secretPath,
+              this.state.secretItem,
+              this.state.secretVersion,
+            );
+            await this.goBack();
+          }}
+        >
+          {i18next.t("kv_delete_btn")}
+        </button>
+      </div>,
+      this.router.pageContentElement,
     );
   }
 
