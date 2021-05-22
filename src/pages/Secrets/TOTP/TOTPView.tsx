@@ -1,3 +1,4 @@
+import { Component, JSX, render } from "preact";
 import { CopyableInputBox } from "../../../elements/ReactCopyableInputBox";
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { Page } from "../../../types/Page";
@@ -6,11 +7,11 @@ import { getTOTPCode } from "../../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
-import { render, JSX, Component } from "preact";
 
-
-
-export class RefreshingTOTPGridItem extends Component<{ baseMount: string; totpKey: string }, { totpValue: string }> {
+export class RefreshingTOTPGridItem extends Component<
+  { baseMount: string; totpKey: string },
+  { totpValue: string }
+> {
   constructor() {
     super();
     this.state = { totpValue: "" };
@@ -18,9 +19,9 @@ export class RefreshingTOTPGridItem extends Component<{ baseMount: string; totpK
   timer: unknown;
 
   updateTOTPCode(): void {
-    getTOTPCode(this.props.baseMount, this.props.totpKey).then((code) => {
+    void getTOTPCode(this.props.baseMount, this.props.totpKey).then((code) => {
       this.setState({ totpValue: code });
-    })
+    });
   }
 
   componentDidMount(): void {
@@ -53,43 +54,43 @@ export class TOTPViewPage extends Page {
   }
 
   async render(): Promise<void> {
-    render((
+    render(
       <div>
         <button
           class="uk-button uk-button-primary uk-margin-bottom"
           onClick={async () => {
             await this.router.changePage("NEW_TOTP");
-          }}>
+          }}
+        >
           {i18next.t("totp_view_new_btn")}
         </button>
         <br />
         <br />
         <div id="totpList">
-          {await (async () => {
-            try {
-              const elem = await Promise.all(Array.from(await getTOTPKeys(this.state.baseMount)).map(async (key) =>
-                <RefreshingTOTPGridItem
-                  baseMount={this.state.baseMount}
-                  totpKey={key}
-                />
-              ))
-              return elem;
-            } catch (e: unknown) {
-              const error = e as Error;
-              if (error == DoesNotExistError) {
-                return <p>{i18next.t("totp_view_empty")}</p>
-              } else {
-                setErrorText(error.message);
+          {
+            await (async () => {
+              try {
+                const elem = await Promise.all(
+                  Array.from(await getTOTPKeys(this.state.baseMount)).map(async (key) => (
+                    <RefreshingTOTPGridItem baseMount={this.state.baseMount} totpKey={key} />
+                  )),
+                );
+                return elem;
+              } catch (e: unknown) {
+                const error = e as Error;
+                if (error == DoesNotExistError) {
+                  return <p>{i18next.t("totp_view_empty")}</p>;
+                } else {
+                  setErrorText(error.message);
+                }
               }
-            }
-          })()}
+            })()
+          }
         </div>
-      </div>
-    ), this.router.pageContentElement)
-
+      </div>,
+      this.router.pageContentElement,
+    );
   }
-
-
 
   async getPageTitle(): Promise<Element | string> {
     return await SecretTitleElement(this.router);
