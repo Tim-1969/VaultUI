@@ -17,12 +17,16 @@ export class RefreshingTOTPGridItem extends Component<{ baseMount: string; totpK
   }
   timer: unknown;
 
+  updateTOTPCode(): void {
+    getTOTPCode(this.props.baseMount, this.props.totpKey).then((code) => {
+      this.setState({ totpValue: code });
+    })
+  }
+
   componentDidMount(): void {
+    this.updateTOTPCode();
     this.timer = setInterval(() => {
-      getTOTPCode(this.props.baseMount, this.props.totpKey).then((code) => {
-        this.setState({ totpValue: code });
-      })
-      this.setState({});
+      this.updateTOTPCode();
     }, 3000);
   }
 
@@ -62,8 +66,6 @@ export class TOTPViewPage extends Page {
         <br />
         <div id="totpList">
           {await (async () => {
-
-
             try {
               const elem = await Promise.all(Array.from(await getTOTPKeys(this.state.baseMount)).map(async (key) =>
                 <RefreshingTOTPGridItem
