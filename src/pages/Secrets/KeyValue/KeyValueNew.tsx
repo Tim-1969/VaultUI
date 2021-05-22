@@ -3,9 +3,9 @@ import { Margin } from "../../../elements/ReactMargin";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
+import { render } from "preact";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
-import { render } from "preact";
 
 export class KeyValueNewPage extends Page {
   constructor() {
@@ -17,11 +17,9 @@ export class KeyValueNewPage extends Page {
   }
 
   async render(): Promise<void> {
-    render((
+    render(
       <div>
-        <Form onSubmit={
-          async (formData) => await this.newKVSecretHandleForm(formData)
-        }>
+        <Form onSubmit={async (formData) => await this.newKVSecretHandleForm(formData)}>
           <Margin>
             <input
               class="uk-input uk-form-width-medium"
@@ -35,8 +33,9 @@ export class KeyValueNewPage extends Page {
             {i18next.t("kv_new_create_btn")}
           </button>
         </Form>
-      </div>
-    ), this.router.pageContentElement);
+      </div>,
+      this.router.pageContentElement,
+    );
   }
 
   async newKVSecretHandleForm(formData: FormData): Promise<void> {
