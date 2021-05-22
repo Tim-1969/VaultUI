@@ -107,6 +107,9 @@ document.addEventListener(
         Object.entries(translations).map(([k, v]) => [k, { translation: v }]),
       ),
       interpolation: {
+        escape: (str) => {
+          return str;
+        },
         format: function (value: unknown, format, _): string {
           if (format === "until_date" && value instanceof Date)
             return formatDistance(new Date(), new Date(value), pageState.language);

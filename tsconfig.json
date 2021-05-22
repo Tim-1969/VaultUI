@@ -8,6 +8,8 @@
     "strictBindCallApply": true,
     "noImplicitThis": true,
     "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
   }
 }
