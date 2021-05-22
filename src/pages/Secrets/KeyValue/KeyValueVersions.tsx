@@ -1,8 +1,8 @@
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { getSecretMetadata } from "../../../api/kv/getSecretMetadata";
-import { makeElement } from "z-makeelement";
 import { objectToMap } from "../../../utils";
+import { render } from "preact";
 import i18next from "i18next";
 
 export class KeyValueVersionsPage extends Page {
@@ -16,34 +16,30 @@ export class KeyValueVersionsPage extends Page {
     await this.router.changePage("KEY_VALUE_SECRET");
   }
   async render(): Promise<void> {
-    const versionsList = makeElement({
-      tag: "ul",
-      id: "versionsList",
-      class: ["uk-nav", "uk-nav-default"],
-    });
-    await this.router.setPageContent(versionsList);
-
     const metadata = await getSecretMetadata(
       this.state.baseMount,
       this.state.secretPath,
       this.state.secretItem,
     );
+    const versions = Array.from(objectToMap(metadata.versions).keys());
 
-    objectToMap(metadata.versions).forEach((_, ver) => {
-      versionsList.appendChild(
-        makeElement({
-          tag: "li",
-          children: makeElement({
-            tag: "a",
-            text: `v${ver}`,
-            onclick: async () => {
-              this.state.secretVersion = ver;
-              await this.router.changePage("KEY_VALUE_SECRET");
-            },
-          }),
-        }),
-      );
-    });
+    render(
+      <ul class="uk-nav uk-nav-default">
+        {versions.map((ver) => (
+          <li>
+            <a
+              onClick={async () => {
+                this.state.secretVersion = ver;
+                await this.router.changePage("KEY_VALUE_SECRET");
+              }}
+            >
+              {`v${ver}`}
+            </a>
+          </li>
+        ))}
+      </ul>,
+      this.router.pageContentElement,
+    );
   }
 
   async getPageTitle(): Promise<Element | string> {
