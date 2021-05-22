@@ -26,6 +26,7 @@ import { PwGenPage } from "./pages/PwGen";
 import { SecretsHomePage } from "./pages/Secrets/SecretsHome";
 import { SetLanguagePage } from "./pages/SetLanguage";
 import { SetVaultURLPage } from "./pages/SetVaultURL";
+import { TOTPDeletePage } from "./pages/Secrets/TOTP/TOTPDelete";
 import { TOTPViewPage } from "./pages/Secrets/TOTP/TOTPView";
 import { TransitDecryptPage } from "./pages/Secrets/Transit/TransitDecrypt";
 import { TransitEncryptPage } from "./pages/Secrets/Transit/TransitEncrypt";
@@ -58,6 +59,7 @@ export const allPages: pagesList = {
   ME: new MePage(),
   TOTP: new TOTPViewPage(),
   NEW_TOTP: new NewTOTPPage(),
+  TOTP_DELETE: new TOTPDeletePage(),
   LOGIN: new LoginPage(),
   SET_VAULT_URL: new SetVaultURLPage(),
   UNSEAL: new UnsealPage(),

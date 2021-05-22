@@ -1,7 +1,10 @@
 import { Component, JSX, render } from "preact";
 import { CopyableInputBox } from "../../../elements/ReactCopyableInputBox";
 import { DoesNotExistError } from "../../../types/internalErrors";
+import { MarginInline } from "../../../elements/ReactMarginInline";
 import { Page } from "../../../types/Page";
+import { PageRouter } from "z-pagerouter";
+import { PageState } from "../../../PageState";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { getTOTPCode } from "../../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";
@@ -9,7 +12,7 @@ import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
 
 export class RefreshingTOTPGridItem extends Component<
-  { baseMount: string; totpKey: string },
+  { baseMount: string; totpKey: string; router: PageRouter },
   { totpValue: string }
 > {
   constructor() {
@@ -36,6 +39,20 @@ export class RefreshingTOTPGridItem extends Component<
       <div class="uk-grid uk-grid-small uk-text-left" uk-grid>
         <CopyableInputBox text={this.props.totpKey} copyable />
         <CopyableInputBox text={this.state.totpValue} copyable />
+        <div>
+          <MarginInline>
+            <button
+              class="uk-button uk-button-danger"
+              onClick={async () => {
+                const state = this.props.router.state as PageState;
+                state.secretItem = this.props.totpKey;
+                await this.props.router.changePage("TOTP_DELETE");
+              }}
+            >
+              {i18next.t("totp_view_delete_btn")}
+            </button>
+          </MarginInline>
+        </div>
       </div>
     );
   }
@@ -54,6 +71,7 @@ export class TOTPViewPage extends Page {
   }
 
   async render(): Promise<void> {
+    this.state.secretItem = "";
     render(
       <div>
         <button
@@ -72,7 +90,11 @@ export class TOTPViewPage extends Page {
               try {
                 const elem = await Promise.all(
                   Array.from(await getTOTPKeys(this.state.baseMount)).map(async (key) => (
-                    <RefreshingTOTPGridItem baseMount={this.state.baseMount} totpKey={key} />
+                    <RefreshingTOTPGridItem
+                      baseMount={this.state.baseMount}
+                      totpKey={key}
+                      router={this.router}
+                    />
                   )),
                 );
                 return elem;

@@ -146,6 +146,7 @@ module.exports = {
   // TOTP View Page
   totp_view_title: "TOTP",
   totp_view_new_btn: "New",
+  totp_view_delete_btn: "Delete",
   totp_view_loading: "Loading TOTP Codes..",
   totp_view_empty: "You seem to have no TOTP codes here, would you like to create one?",
   totp_view_loading_box: "Loading..",
@@ -159,6 +160,12 @@ module.exports = {
   totp_new_uri_input: "URI",
   totp_new_key_input: "Key",
   totp_new_add_btn: "Add TOTP Key",
+
+  // TOTP Delete Page
+  totp_delete_title: "Delete TOTP Key",
+  totp_delete_suffix: " (delete)",
+  totp_delete_text: "Are you sure you want to delete this TOTP secret?",
+  totp_delete_button: "Delete",
 
   // Transit View Page
   transit_view_title: "Transit View",
