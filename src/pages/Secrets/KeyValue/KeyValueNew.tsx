@@ -1,10 +1,11 @@
-import { Form } from "../../../elements/Form";
+import { Form } from "../../../elements/ReactForm";
+import { Margin } from "../../../elements/ReactMargin";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
-import { makeElement } from "z-makeelement";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
+import { render } from "preact";
 
 export class KeyValueNewPage extends Page {
   constructor() {
@@ -16,44 +17,29 @@ export class KeyValueNewPage extends Page {
   }
 
   async render(): Promise<void> {
-    await this.router.setPageContent(
-      Form(
-        [
-          makeElement({
-            tag: "div",
-            class: "uk-margin",
-            children: makeElement({
-              tag: "input",
-              class: ["uk-input", "uk-form-width-medium"],
-              attributes: {
-                required: "true",
-                type: "text",
-                placeholder: i18next.t("kv_new_path"),
-                name: "path",
-              },
-            }),
-          }),
-          makeElement({
-            tag: "p",
-            id: "errorText",
-            class: "uk-text-danger",
-          }),
-          makeElement({
-            tag: "button",
-            class: ["uk-button", "uk-button-primary"],
-            text: i18next.t("kv_new_create_btn"),
-            attributes: {
-              type: "submit",
-            },
-          }),
-        ],
-        async (form: HTMLFormElement) => await this.newKVSecretHandleForm(form),
-      ),
-    );
+    render((
+      <div>
+        <Form onSubmit={
+          async (formData) => await this.newKVSecretHandleForm(formData)
+        }>
+          <Margin>
+            <input
+              class="uk-input uk-form-width-medium"
+              name="path"
+              placeholder={i18next.t("kv_new_path")}
+              required
+            />
+          </Margin>
+          <p class="uk-text-danger" id="errorText" />
+          <button class="uk-button uk-button-primary" type="submit">
+            {i18next.t("kv_new_create_btn")}
+          </button>
+        </Form>
+      </div>
+    ), this.router.pageContentElement);
   }
 
-  async newKVSecretHandleForm(form: HTMLFormElement): Promise<void> {
-    const formData = new FormData(form);
+  async newKVSecretHandleForm(formData: FormData): Promise<void> {
     const path = formData.get("path") as string;
     let keyData = {};
 
