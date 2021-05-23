@@ -18,7 +18,6 @@ import { MePage } from "./pages/Me";
 import { NewKVEnginePage } from "./pages/Secrets/NewEngines/NewKVEngine";
 import { NewSecretsEnginePage } from "./pages/Secrets/NewSecretsEngine";
 import { NewTOTPEnginePage } from "./pages/Secrets/NewEngines/NewTOTPEngine";
-import { NewTOTPPage } from "./pages/Secrets/TOTP/NewTOTP";
 import { NewTransitEnginePage } from "./pages/Secrets/NewEngines/NewTransitEngine";
 import { NewTransitKeyPage } from "./pages/Secrets/Transit/NewTransitKey";
 import { Page } from "./types/Page";
@@ -27,6 +26,7 @@ import { SecretsHomePage } from "./pages/Secrets/SecretsHome";
 import { SetLanguagePage } from "./pages/SetLanguage";
 import { SetVaultURLPage } from "./pages/SetVaultURL";
 import { TOTPDeletePage } from "./pages/Secrets/TOTP/TOTPDelete";
+import { TOTPNewPage } from "./pages/Secrets/TOTP/TOTPNew";
 import { TOTPViewPage } from "./pages/Secrets/TOTP/TOTPView";
 import { TransitDecryptPage } from "./pages/Secrets/Transit/TransitDecrypt";
 import { TransitEncryptPage } from "./pages/Secrets/Transit/TransitEncrypt";
@@ -57,8 +57,8 @@ export const allPages: pagesList = {
   USERPASS_USER_NEW: new UserPassUserNewPage(),
   USERPASS_USER_DELETE: new UserPassUserDeletePage(),
   ME: new MePage(),
-  TOTP: new TOTPViewPage(),
-  NEW_TOTP: new NewTOTPPage(),
+  TOTP_VIEW: new TOTPViewPage(),
+  TOTP_NEW: new TOTPNewPage(),
   TOTP_DELETE: new TOTPDeletePage(),
   LOGIN: new LoginPage(),
   SET_VAULT_URL: new SetVaultURLPage(),

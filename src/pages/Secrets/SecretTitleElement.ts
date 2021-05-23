@@ -2,9 +2,8 @@ import { PageRouter } from "z-pagerouter";
 import { PageState } from "../../PageState";
 import { makeElement } from "z-makeelement";
 
-function currentTitleSecretText(state: PageState, suffix = ""): string {
+function currentTitleSecretText(state: PageState): string {
   let secretItemText = state.secretItem;
-  secretItemText += suffix;
   if (state.secretVersion !== null) secretItemText += ` (v${state.secretVersion})`;
   return secretItemText;
 }
@@ -25,7 +24,7 @@ export async function SecretTitleElement(router: PageRouter, suffix = ""): Promi
           if (state.secretMountType.startsWith("kv") || state.secretMountType == "cubbyhole") {
             await router.changePage("KEY_VALUE_VIEW");
           } else if (state.secretMountType == "totp") {
-            await router.changePage("TOTP");
+            await router.changePage("TOTP_VIEW");
           } else if (state.secretMountType == "transit") {
             await router.changePage("TRANSIT_VIEW");
           }
@@ -47,7 +46,12 @@ export async function SecretTitleElement(router: PageRouter, suffix = ""): Promi
       makeElement({
         tag: "span",
         condition: state.secretItem.length != 0,
-        text: currentTitleSecretText(state, suffix),
+        text: currentTitleSecretText(state),
+      }),
+      makeElement({
+        tag: "span",
+        condition: suffix.length != 0,
+        text: suffix,
       }),
     ],
   });

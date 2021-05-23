@@ -15,7 +15,7 @@ export class TOTPDeletePage extends Page {
 
   async goBack(): Promise<void> {
     this.state.secretItem = "";
-    await this.router.changePage("TOTP");
+    await this.router.changePage("TOTP_VIEW");
   }
   async render(): Promise<void> {
     render(

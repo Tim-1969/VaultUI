@@ -77,7 +77,7 @@ export class TOTPViewPage extends Page {
         <button
           class="uk-button uk-button-primary uk-margin-bottom"
           onClick={async () => {
-            await this.router.changePage("NEW_TOTP");
+            await this.router.changePage("TOTP_NEW");
           }}
         >
           {i18next.t("totp_view_new_btn")}

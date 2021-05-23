@@ -65,7 +65,7 @@ export class SecretsHomePage extends Page {
         linkPage = "KEY_VALUE_VIEW";
       } else if (mount.type == "totp") {
         linkText = `TOTP - ${baseMount}`;
-        linkPage = "TOTP";
+        linkPage = "TOTP_VIEW";
       } else if (mount.type == "transit") {
         linkText = `Transit - ${baseMount}`;
         linkPage = "TRANSIT_VIEW";

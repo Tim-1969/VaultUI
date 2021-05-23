@@ -55,7 +55,7 @@ export class NewTOTPEnginePage extends Page {
             });
             this.state.secretMountType = "totp";
             this.state.baseMount = name + "/";
-            await this.router.changePage("TOTP");
+            await this.router.changePage("TOTP_VIEW");
           } catch (e) {
             const error = e as Error;
             setErrorText(error.message);
