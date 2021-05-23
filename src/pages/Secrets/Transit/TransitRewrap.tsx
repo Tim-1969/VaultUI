@@ -1,14 +1,14 @@
-import { CopyableModal } from "../../../elements/CopyableModal";
-import { Form } from "../../../elements/Form";
-import { Margin } from "../../../elements/Margin";
-import { Option } from "../../../elements/Option";
+import { CopyableModal } from "../../../elements/ReactCopyableModal";
+import { Form } from "../../../elements/ReactForm";
+import { Margin } from "../../../elements/ReactMargin";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { getTransitKey } from "../../../api/transit/getTransitKey";
-import { makeElement } from "z-makeelement";
 import { objectToMap } from "../../../utils";
+import { render } from "preact";
 import { setErrorText } from "../../../pageUtils";
 import { transitRewrap } from "../../../api/transit/transitRewrap";
+import UIkit from "uikit";
 import i18next from "i18next";
 
 type versionOption = { version: string; label: string };
@@ -21,8 +21,6 @@ export class TransitRewrapPage extends Page {
   async goBack(): Promise<void> {
     await this.router.changePage("TRANSIT_VIEW_SECRET");
   }
-
-  transitRewrapForm: HTMLFormElement;
 
   async render(): Promise<void> {
     const transitKey = await getTransitKey(this.state.baseMount, this.state.secretItem);
@@ -47,54 +45,49 @@ export class TransitRewrapPage extends Page {
       };
     });
 
-    await this.router.setPageContent("");
-    this.transitRewrapForm = Form(
-      [
-        makeElement({
-          tag: "select",
-          name: "version",
-          class: ["uk-select", "uk-width-1-2"],
-          children: options.map((option): HTMLElement => Option(option.label, option.version)),
-        }),
-        Margin(
-          makeElement({
-            tag: "textarea",
-            class: ["uk-textarea", "uk-width-1-2"],
-            attributes: {
-              placeholder: i18next.t("transit_rewrap_input_placeholder"),
-              name: "ciphertext",
-            },
-          }),
-        ),
-        makeElement({
-          tag: "p",
-          id: "errorText",
-          class: "uk-text-danger",
-        }),
-        makeElement({
-          tag: "button",
-          class: ["uk-button", "uk-button-primary"],
-          text: i18next.t("transit_rewrap_rewrap_btn"),
-          attributes: {
-            type: "submit",
-          },
-        }),
-      ],
-      async (_) => await this.transitRewrapFormHandler(),
+    render(
+      <Form onSubmit={async (data) => await this.onSubmit(data)}>
+        <Margin>
+          <select class="uk-select uk-width-1-2" name="version">
+            {options.map((option) => (
+              <option label={option.label} value={option.version}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </Margin>
+        <Margin>
+          <textarea
+            class="uk-textarea uk-width-1-2"
+            name="ciphertext"
+            placeholder={i18next.t("transit_rewrap_input_placeholder")}
+          />
+        </Margin>
+        <p class="uk-text-danger" id="errorText" />
+        <button class="uk-button uk-button-primary" type="submit">
+          {i18next.t("transit_rewrap_rewrap_btn")}
+        </button>
+        <div id="modalAttachmentPoint" />
+      </Form>,
+      this.router.pageContentElement,
     );
-    await this.router.setPageContent(this.transitRewrapForm);
   }
 
-  async transitRewrapFormHandler(): Promise<void> {
-    const formData = new FormData(this.transitRewrapForm);
+  async onSubmit(data: FormData): Promise<void> {
     try {
       const res = await transitRewrap(this.state.baseMount, this.state.secretItem, {
-        ciphertext: formData.get("ciphertext") as string,
-        key_version: parseInt(formData.get("version") as string, 10),
+        ciphertext: data.get("ciphertext") as string,
+        key_version: parseInt(data.get("version") as string, 10),
       });
-      const modal = CopyableModal(i18next.t("transit_rewrap_result_modal_title"), res.ciphertext);
-      this.router.pageContentElement.appendChild(modal);
-      modal.show();
+      render(
+        <CopyableModal
+          id="transitResultModal"
+          name={i18next.t("transit_rewrap_result_modal_title")}
+          contentString={res.ciphertext}
+        />,
+        document.querySelector("#modalAttachmentPoint"),
+      );
+      UIkit.modal(document.querySelector("#transitResultModal")).show();
     } catch (e: unknown) {
       const error = e as Error;
       setErrorText(`API Error: ${error.message}`);
