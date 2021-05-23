@@ -6,6 +6,7 @@ import UIkit from "uikit";
 import i18next from "i18next";
 
 export type CopyableModalProps = {
+  id: string;
   name: string;
   contentString: string;
 };
@@ -29,7 +30,7 @@ export class CopyableModal extends Component<CopyableModalProps, unknown> {
 
   render(): JSX.Element {
     return (
-      <div ref={this.ref} class="modal-section" uk-modal>
+      <div id={this.props.id} ref={this.ref} class="modal-section" uk-modal>
         <div class="uk-modal-dialog">
           <button class="uk-modal-close-default" type="button" uk-close />
           <div class="uk-modal-header">
