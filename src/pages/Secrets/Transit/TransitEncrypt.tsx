@@ -8,11 +8,11 @@ import { SecretTitleElement } from "../SecretTitleElement";
 import { fileToBase64 } from "../../../htmlUtils";
 import { render } from "preact";
 import { setErrorText } from "../../../pageUtils";
-import { transitDecrypt } from "../../../api/transit/transitDecrypt";
+import { transitEncrypt } from "../../../api/transit/transitEncrypt";
 import UIkit from "uikit";
 import i18next from "i18next";
 
-export class TransitDecryptPage extends Page {
+export class TransitEncryptPage extends Page {
   constructor() {
     super();
   }
@@ -27,19 +27,19 @@ export class TransitDecryptPage extends Page {
         <Margin>
           <textarea
             class="uk-textarea uk-form-width-medium"
-            name="ciphertext"
-            placeholder={i18next.t("transit_decrypt_input_placeholder")}
+            name="plaintext"
+            placeholder={i18next.t("transit_encrypt_input_placeholder")}
           />
         </Margin>
         <Margin>
-          <FileUploadInput name="ciphertext_file" />
+          <FileUploadInput name="plaintext_file" />
         </Margin>
-        <InputWithTitle title={i18next.t("transit_decrypt_decode_checkbox")}>
-          <input class="uk-checkbox" name="decodeBase64Checkbox" type="checkbox" />
+        <InputWithTitle title={i18next.t("transit_encrypt_already_encoded_checkbox")}>
+          <input class="uk-checkbox" name="base64Checkbox" type="checkbox" />
         </InputWithTitle>
         <p class="uk-text-danger" id="errorText" />
         <button class="uk-button uk-button-primary" type="submit">
-          {i18next.t("transit_decrypt_decrypt_btn")}
+          {i18next.t("transit_encrypt_encrypt_btn")}
         </button>
         <div id="modalAttachmentPoint" />
       </Form>,
@@ -48,30 +48,27 @@ export class TransitDecryptPage extends Page {
   }
 
   async onSubmit(data: FormData): Promise<void> {
-    const decodeBase64 = data.get("decodeBase64Checkbox") as string;
+    const base64Checkbox = data.get("base64Checkbox") as string;
 
-    let ciphertext = data.get("ciphertext") as string;
+    let plaintext = data.get("plaintext") as string;
 
-    const ciphertext_file = data.get("ciphertext_file") as File;
-    if (ciphertext_file.size > 0) {
-      ciphertext = atob(
-        (await fileToBase64(ciphertext_file)).replace("data:text/plain;base64,", ""),
-      );
+    const plaintext_file = data.get("plaintext_file") as File;
+    if (plaintext_file.size > 0) {
+      plaintext = (await fileToBase64(plaintext_file)).replace("data:text/plain;base64,", "");
+      plaintext = base64Checkbox == "on" ? atob(plaintext) : plaintext;
+    } else {
+      plaintext = base64Checkbox == "on" ? plaintext : btoa(plaintext);
     }
 
     try {
-      const res = await transitDecrypt(this.state.baseMount, this.state.secretItem, {
-        ciphertext: ciphertext,
+      const res = await transitEncrypt(this.state.baseMount, this.state.secretItem, {
+        plaintext: plaintext,
       });
-      let plaintext = res.plaintext;
-      if (decodeBase64 == "on") {
-        plaintext = atob(plaintext);
-      }
       render(
         <CopyableModal
           id="transitResultModal"
-          name={i18next.t("transit_decrypt_decryption_result_modal_title")}
-          contentString={plaintext}
+          name={i18next.t("transit_encrypt_encryption_result_modal_title")}
+          contentString={res.ciphertext}
         />,
         document.querySelector("#modalAttachmentPoint"),
       );
@@ -83,10 +80,10 @@ export class TransitDecryptPage extends Page {
   }
 
   async getPageTitle(): Promise<Element | string> {
-    return await SecretTitleElement(this.router, i18next.t("transit_decrypt_suffix"));
+    return await SecretTitleElement(this.router, i18next.t("transit_encrypt_suffix"));
   }
 
   get name(): string {
-    return i18next.t("transit_decrypt_title");
+    return i18next.t("transit_encrypt_title");
   }
 }
