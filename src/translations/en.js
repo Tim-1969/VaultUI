@@ -19,6 +19,9 @@ module.exports = {
   copy_modal_copy_btn: "Copy",
   copy_modal_close_btn: "Close",
 
+  // Generic Loading Text
+  content_loading: "Loading..",
+
   // Copyable Input Box
   copy_input_box_copy_icon_text: "Copy Button",
 
@@ -169,6 +172,7 @@ module.exports = {
 
   // Transit View Page
   transit_view_title: "Transit View",
+  transit_view_new_btn: "New",
   transit_view_none_here_text:
     "You seem to have no transit keys here, would you like to create one?",
 
