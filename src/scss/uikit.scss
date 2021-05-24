@@ -17,9 +17,13 @@ $global-danger-background: #bf616a;
 
 $button-primary-background: #5e81ac;
 $progress-bar-background: #5e81ac;
+
 $form-radio-background: $global-secondary-background;
 
 $form-select-option-color: $global-muted-color;
+
+$form-range-track-background: $global-link-color;
+$form-range-track-focus-background: $global-link-hover-color;
 
 // Keep these in same order as https://github.com/uikit/uikit/blob/develop/src/scss/components/_import.scss
 @import "uikit/src/scss/variables.scss";

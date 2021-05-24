@@ -13,7 +13,6 @@ export class Form extends Component<FormProps, unknown> {
       <form
         onSubmit={(e: Event) => {
           e.preventDefault();
-          console.log(this.ref.current);
           this.props.onSubmit(new FormData(this.ref.current));
         }}
         ref={this.ref}
