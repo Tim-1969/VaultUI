@@ -1,13 +1,107 @@
-import { CodeJar } from "codejar";
+import { CodeJarEditor } from "../../../elements/CodeJar/CodeJarEditor";
+import { Component, JSX, render } from "preact";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
 import { getSecret } from "../../../api/kv/getSecret";
-import { makeElement } from "z-makeelement";
-import { render } from "preact";
 import { setErrorText } from "../../../pageUtils";
 import { sortedObjectMap, verifyJSONString } from "../../../utils";
 import i18next from "i18next";
+//import { highlightElement } from "prismjs";
+
+export type KVEditProps = {
+  page: Page;
+};
+
+type KVEditState =
+  | {
+      dataLoaded: false;
+    }
+  | {
+      dataLoaded: true;
+      kvData: Record<string, unknown>;
+      code: string;
+    };
+
+export class KVEditor extends Component<KVEditProps, KVEditState> {
+  constructor() {
+    super();
+    this.state = {
+      dataLoaded: false,
+    };
+  }
+
+  async editorSave(): Promise<void> {
+    if (!this.state.dataLoaded) return;
+    const editorContent = this.state.code;
+    if (!verifyJSONString(editorContent)) {
+      setErrorText(i18next.t("kv_sec_edit_invalid_json_err"));
+      return;
+    }
+
+    await createOrUpdateSecret(
+      this.props.page.state.baseMount,
+      this.props.page.state.secretMountType,
+      this.props.page.state.secretPath,
+      this.props.page.state.secretItem,
+      JSON.parse(editorContent),
+    );
+    await this.props.page.router.changePage("KEY_VALUE_SECRET");
+  }
+
+  onCodeUpdate(code: string): void {
+    this.setState({
+      code: code,
+    });
+  }
+
+  loadData(): void {
+    void getSecret(
+      this.props.page.state.baseMount,
+      this.props.page.state.secretMountType,
+      this.props.page.state.secretPath,
+      this.props.page.state.secretItem,
+    ).then((kvData) => {
+      this.setState({
+        dataLoaded: true,
+        kvData: kvData,
+      });
+    });
+    return;
+  }
+
+  componentDidMount(): void {
+    if (!this.state.dataLoaded) {
+      this.loadData();
+    }
+  }
+
+  render(): JSX.Element {
+    if (!this.state.dataLoaded) {
+      return <p>{i18next.t("kv_sec_edit_loading")}</p>;
+    }
+
+    const secretsJSON = JSON.stringify(
+      Object.fromEntries(sortedObjectMap(this.state.kvData)),
+      null,
+      4,
+    );
+
+    return (
+      <div>
+        <p class="uk-text-danger" id="errorText" />
+        <CodeJarEditor
+          highlight={() => {}}
+          code={secretsJSON}
+          onUpdate={(code) => this.onCodeUpdate(code)}
+        />
+        <button class="uk-button uk-button-primary" onClick={() => this.editorSave()}>
+          {i18next.t("kv_sec_edit_btn")}
+        </button>
+      </div>
+    );
+  }
+}
 
 export class KeyValueSecretEditPage extends Page {
   constructor() {
@@ -17,67 +111,7 @@ export class KeyValueSecretEditPage extends Page {
     await this.router.changePage("KEY_VALUE_SECRET");
   }
   async render(): Promise<void> {
-    const loadingText = makeElement({
-      tag: "p",
-      text: i18next.t("kv_sec_edit_loading"),
-    });
-    const editor = makeElement({
-      tag: "div",
-      class: ["editor", "language-json"],
-    });
-    const saveButton = makeElement({
-      tag: "button",
-      class: ["uk-button", "uk-button-primary"],
-      text: i18next.t("kv_sec_edit_btn"),
-    });
-    await this.router.setPageContent(
-      makeElement({
-        tag: "div",
-        children: [
-          loadingText,
-          editor,
-          makeElement({
-            tag: "p",
-            id: "errorText",
-            class: ["uk-text-danger", "uk-margin-top"],
-          }),
-          saveButton,
-        ],
-      }),
-    );
-    const secretInfo = await getSecret(
-      this.state.baseMount,
-      this.state.secretMountType,
-      this.state.secretPath,
-      this.state.secretItem,
-    );
-
-    loadingText.remove();
-
-    const secretsJSON = JSON.stringify(Object.fromEntries(sortedObjectMap(secretInfo)), null, 4);
-
-    const jar = CodeJar(editor, () => {}, { tab: " ".repeat(4) });
-    jar.updateCode(secretsJSON);
-    saveButton.onclick = async () => {
-      if (!verifyJSONString(jar.toString())) {
-        setErrorText(i18next.t("kv_sec_edit_invalid_json_err"));
-        return;
-      }
-
-      try {
-        await createOrUpdateSecret(
-          this.state.baseMount,
-          this.state.secretMountType,
-          this.state.secretPath,
-          this.state.secretItem,
-          JSON.parse(jar.toString()),
-        );
-        await this.router.changePage("KEY_VALUE_SECRET");
-      } catch (e: unknown) {
-        const error = e as Error;
-        setErrorText(error.message);
-      }
-    };
+    render(<KVEditor page={this} />, this.router.pageContentElement);
   }
 
   async renderPageTitle(): Promise<void> {
