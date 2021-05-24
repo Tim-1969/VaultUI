@@ -1,5 +1,5 @@
-import { Form } from "../elements/ReactForm";
-import { Margin } from "../elements/ReactMargin";
+import { Form } from "../elements/Form";
+import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
 import { render } from "preact";
 

@@ -1,8 +1,8 @@
 import { CopyableModal } from "../../../elements/CopyableModal";
 import { FileUploadInput } from "../../../elements/FileUploadInput";
-import { Form } from "../../../elements/ReactForm";
+import { Form } from "../../../elements/Form";
 import { InputWithTitle } from "../../../elements/InputWithTitle";
-import { Margin } from "../../../elements/ReactMargin";
+import { Margin } from "../../../elements/Margin";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { fileToBase64 } from "../../../htmlUtils";

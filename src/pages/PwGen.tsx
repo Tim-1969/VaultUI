@@ -1,7 +1,7 @@
 import { Component, JSX, createRef, render } from "preact";
 import { CopyableInputBox } from "../elements/CopyableInputBox";
-import { Form } from "../elements/ReactForm";
-import { Margin } from "../elements/ReactMargin";
+import { Form } from "../elements/Form";
+import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
 import i18next from "i18next";
 

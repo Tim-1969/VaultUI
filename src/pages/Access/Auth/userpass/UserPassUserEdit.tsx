@@ -1,6 +1,6 @@
-import { Form } from "../../../../elements/ReactForm";
+import { Form } from "../../../../elements/Form";
 import { InputWithTitle } from "../../../../elements/InputWithTitle";
-import { MarginInline } from "../../../../elements/ReactMarginInline";
+import { MarginInline } from "../../../../elements/MarginInline";
 import { Page } from "../../../../types/Page";
 import { UserType } from "../../../../api/types/userpass/user";
 import { createOrUpdateUserPassUser } from "../../../../api/auth/userpass/createOrUpdateUserPassUser";

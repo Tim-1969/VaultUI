@@ -1,5 +1,5 @@
 import { JSX } from "preact";
-import { Margin } from "./ReactMargin";
+import { Margin } from "./Margin";
 
 export type InputWithTitleProps = {
   title: string;

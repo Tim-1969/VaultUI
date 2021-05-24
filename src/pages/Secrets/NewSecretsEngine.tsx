@@ -1,5 +1,5 @@
 import { Page } from "../../types/Page";
-import { Tile } from "../../elements/ReactTile";
+import { Tile } from "../../elements/Tile";
 import { render } from "preact";
 import i18next from "i18next";
 

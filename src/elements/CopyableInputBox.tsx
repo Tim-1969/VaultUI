@@ -1,5 +1,5 @@
 import { Component, JSX, createRef } from "preact";
-import { MarginInline } from "./ReactMarginInline";
+import { MarginInline } from "./MarginInline";
 import { addClipboardNotifications } from "../pageUtils";
 import ClipboardJS from "clipboard";
 import i18next from "i18next";

@@ -1,6 +1,6 @@
-import { Form } from "../../../elements/ReactForm";
-import { Margin } from "../../../elements/ReactMargin";
-import { MarginInline } from "../../../elements/ReactMarginInline";
+import { Form } from "../../../elements/Form";
+import { Margin } from "../../../elements/Margin";
+import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
 import { newMount } from "../../../api/sys/newMount";
 import { render } from "preact";

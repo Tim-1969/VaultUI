@@ -1,7 +1,7 @@
 import { Component, JSX, render } from "preact";
 import { CopyableInputBox } from "../../../elements/CopyableInputBox";
 import { DoesNotExistError } from "../../../types/internalErrors";
-import { MarginInline } from "../../../elements/ReactMarginInline";
+import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
 import { PageRouter } from "z-pagerouter";
 import { PageState } from "../../../PageState";
