@@ -1,6 +1,6 @@
+import { JSX } from "preact/jsx-runtime";
 import { PageRouter } from "z-pagerouter";
 import { PageState } from "../../PageState";
-import { makeElement } from "z-makeelement";
 
 function currentTitleSecretText(state: PageState): string {
   let secretItemText = state.secretItem;
@@ -8,15 +8,20 @@ function currentTitleSecretText(state: PageState): string {
   return secretItemText;
 }
 
-export async function SecretTitleElement(router: PageRouter, suffix = ""): Promise<HTMLElement> {
+type SecretTitleElementProps = {
+  router: PageRouter;
+  suffix?: string;
+};
+
+export function SecretTitleElement(props: SecretTitleElementProps): JSX.Element {
+  const router = props.router;
+  const suffix = props.suffix || "";
   const state = router.state as PageState;
-  const titleElement = makeElement({
-    tag: "div",
-    children: [
-      makeElement({
-        tag: "a",
-        text: state.baseMount + " ",
-        onclick: async () => {
+
+  return (
+    <div>
+      <a
+        onClick={async () => {
           state.secretPath = [];
           state.secretItem = "";
           state.secretVersion = null;
@@ -28,32 +33,25 @@ export async function SecretTitleElement(router: PageRouter, suffix = ""): Promi
           } else if (state.secretMountType == "transit") {
             await router.changePage("TRANSIT_VIEW");
           }
-        },
-      }),
-      ...state.secretPath.map((secretPath, index, secretPaths) => {
-        return makeElement({
-          tag: "a",
-          text: secretPath + " ",
-          onclick: async () => {
+        }}
+      >
+        {state.baseMount + " "}
+      </a>
+      {...state.secretPath.map((secretPath, index, secretPaths) => (
+        <a
+          onClick={async () => {
             state.secretVersion = null;
             if (state.secretMountType.startsWith("kv")) {
               state.secretPath = secretPaths.slice(0, index + 1);
               await router.changePage("KEY_VALUE_VIEW");
             }
-          },
-        });
-      }),
-      makeElement({
-        tag: "span",
-        condition: state.secretItem.length != 0,
-        text: currentTitleSecretText(state),
-      }),
-      makeElement({
-        tag: "span",
-        condition: suffix.length != 0,
-        text: suffix,
-      }),
-    ],
-  });
-  return titleElement;
+          }}
+        >
+          {secretPath + " "}
+        </a>
+      ))}
+      {state.secretItem.length != 0 && <span>{currentTitleSecretText(state)}</span>}
+      {suffix.length != 0 && <span>{suffix}</span>}
+    </div>
+  );
 }

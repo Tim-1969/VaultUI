@@ -42,8 +42,11 @@ export class KeyValueVersionsPage extends Page {
     );
   }
 
-  async getPageTitle(): Promise<Element | string> {
-    return await SecretTitleElement(this.router, i18next.t("kv_sec_versions_suffix"));
+  async renderPageTitle(): Promise<void> {
+    render(
+      <SecretTitleElement router={this.router} suffix={i18next.t("kv_sec_versions_suffix")} />,
+      this.router.pageTitleElement,
+    );
   }
 
   get name(): string {

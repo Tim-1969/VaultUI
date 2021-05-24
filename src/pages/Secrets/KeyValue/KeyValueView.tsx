@@ -89,8 +89,8 @@ export class KeyValueViewPage extends Page {
     );
   }
 
-  async getPageTitle(): Promise<Element | string> {
-    return await SecretTitleElement(this.router);
+  async renderPageTitle(): Promise<void> {
+    render(<SecretTitleElement router={this.router} />, this.router.pageTitleElement);
   }
 
   get name(): string {

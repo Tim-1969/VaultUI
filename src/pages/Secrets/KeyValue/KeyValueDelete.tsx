@@ -41,8 +41,11 @@ export class KeyValueDeletePage extends Page {
     );
   }
 
-  async getPageTitle(): Promise<Element | string> {
-    return await SecretTitleElement(this.router, i18next.t("kv_delete_suffix"));
+  async renderPageTitle(): Promise<void> {
+    render(
+      <SecretTitleElement router={this.router} suffix={i18next.t("kv_delete_suffix")} />,
+      this.router.pageTitleElement,
+    );
   }
 
   get name(): string {

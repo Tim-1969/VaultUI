@@ -13,8 +13,8 @@ export class Page {
   get name(): string {
     return "Page";
   }
-  async getPageTitle(): Promise<Element | string> {
-    return this.name;
+  async renderPageTitle(): Promise<void> {
+    this.router.pageTitleElement.innerText = this.name;
   }
   async goBack(): Promise<void> {
     await this.router.changePage("HOME");

@@ -4,6 +4,7 @@ import { SecretTitleElement } from "../SecretTitleElement";
 import { createOrUpdateSecret } from "../../../api/kv/createOrUpdateSecret";
 import { getSecret } from "../../../api/kv/getSecret";
 import { makeElement } from "z-makeelement";
+import { render } from "preact";
 import { setErrorText } from "../../../pageUtils";
 import { sortedObjectMap, verifyJSONString } from "../../../utils";
 import i18next from "i18next";
@@ -79,8 +80,11 @@ export class KeyValueSecretEditPage extends Page {
     };
   }
 
-  async getPageTitle(): Promise<Element | string> {
-    return await SecretTitleElement(this.router, i18next.t("kv_sec_edit_suffix"));
+  async renderPageTitle(): Promise<void> {
+    render(
+      <SecretTitleElement router={this.router} suffix={i18next.t("kv_sec_edit_suffix")} />,
+      this.router.pageTitleElement,
+    );
   }
 
   get name(): string {
