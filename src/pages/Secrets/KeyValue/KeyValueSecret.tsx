@@ -1,4 +1,4 @@
-import { CopyableInputBox } from "../../../elements/ReactCopyableInputBox";
+import { CopyableInputBox } from "../../../elements/CopyableInputBox";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { getCapabilities } from "../../../api/sys/getCapabilities";

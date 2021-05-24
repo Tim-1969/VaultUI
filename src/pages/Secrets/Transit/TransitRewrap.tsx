@@ -1,4 +1,4 @@
-import { CopyableModal } from "../../../elements/ReactCopyableModal";
+import { CopyableModal } from "../../../elements/CopyableModal";
 import { Form } from "../../../elements/ReactForm";
 import { Margin } from "../../../elements/ReactMargin";
 import { Page } from "../../../types/Page";

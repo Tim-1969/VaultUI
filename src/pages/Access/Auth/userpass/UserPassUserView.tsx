@@ -1,4 +1,4 @@
-import { HeaderAndContent } from "../../../../elements/ReactHeaderAndContent";
+import { HeaderAndContent } from "../../../../elements/HeaderAndContent";
 import { Page } from "../../../../types/Page";
 import { getUserPassUser } from "../../../../api/auth/userpass/getUserPassUser";
 import { render } from "preact";

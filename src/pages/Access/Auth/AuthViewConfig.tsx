@@ -1,5 +1,5 @@
 import { AuthMethod } from "../../../api/types/auth";
-import { HeaderAndContent } from "../../../elements/ReactHeaderAndContent";
+import { HeaderAndContent } from "../../../elements/HeaderAndContent";
 import { Page } from "../../../types/Page";
 import { listAuth } from "../../../api/auth/listAuth";
 import { objectToMap, toStr } from "../../../utils";

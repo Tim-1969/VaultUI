@@ -1,7 +1,7 @@
-import { CopyableModal } from "../../../elements/ReactCopyableModal";
-import { FileUploadInput } from "../../../elements/ReactFileUploadInput";
+import { CopyableModal } from "../../../elements/CopyableModal";
+import { FileUploadInput } from "../../../elements/FileUploadInput";
 import { Form } from "../../../elements/ReactForm";
-import { InputWithTitle } from "../../../elements/ReactInputWithTitle";
+import { InputWithTitle } from "../../../elements/InputWithTitle";
 import { Margin } from "../../../elements/ReactMargin";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";

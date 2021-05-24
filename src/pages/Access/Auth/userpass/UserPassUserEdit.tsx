@@ -1,5 +1,5 @@
 import { Form } from "../../../../elements/ReactForm";
-import { InputWithTitle } from "../../../../elements/ReactInputWithTitle";
+import { InputWithTitle } from "../../../../elements/InputWithTitle";
 import { MarginInline } from "../../../../elements/ReactMarginInline";
 import { Page } from "../../../../types/Page";
 import { UserType } from "../../../../api/types/userpass/user";

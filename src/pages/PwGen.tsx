@@ -1,5 +1,5 @@
 import { Component, JSX, createRef, render } from "preact";
-import { CopyableInputBox } from "../elements/ReactCopyableInputBox";
+import { CopyableInputBox } from "../elements/CopyableInputBox";
 import { Form } from "../elements/ReactForm";
 import { Margin } from "../elements/ReactMargin";
 import { Page } from "../types/Page";

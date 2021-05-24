@@ -1,5 +1,5 @@
 import { Component, JSX, render } from "preact";
-import { CopyableInputBox } from "../../../elements/ReactCopyableInputBox";
+import { CopyableInputBox } from "../../../elements/CopyableInputBox";
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { MarginInline } from "../../../elements/ReactMarginInline";
 import { Page } from "../../../types/Page";
