@@ -54,7 +54,7 @@ export class KeyValueSecretEditPage extends Page {
 
     loadingText.remove();
 
-    const secretsJSON = JSON.stringify(sortedObjectMap(secretInfo), null, 4);
+    const secretsJSON = JSON.stringify(Object.fromEntries(sortedObjectMap(secretInfo)), null, 4);
 
     const jar = CodeJar(editor, () => {}, { tab: " ".repeat(4) });
     jar.updateCode(secretsJSON);
