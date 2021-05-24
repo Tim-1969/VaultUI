@@ -17,45 +17,32 @@ import "prismjs/components/prism-json";
 Prism.highlightAll();
 /* eslint-enable */
 
-// Actual Imports
+// @ts-ignore
+import translations from "./translations/index.mjs";
 
+// Actual Imports
 import { PageRouter } from "z-pagerouter";
 import { formatDistance } from "./formatDistance";
 import { getSealStatus } from "./api/sys/getSealStatus";
-import { makeElement } from "z-makeelement";
 import { pageList } from "./allPages";
 import { pageState } from "./globalPageState";
 import { playground } from "./playground";
 import { reloadNavBar } from "./elements/NavBar";
+import { render } from "preact";
 import i18next from "i18next";
 
-// @ts-ignore
-import translations from "./translations/index.mjs";
-
 async function onLoad(): Promise<void> {
-  document.body.innerHTML = "";
-  document.body.appendChild(makeElement({ tag: "div", id: "navBarBox" }));
-  document.body.appendChild(
-    makeElement({
-      tag: "div",
-      class: ["uk-container", "uk-container-medium", "uk-align-center"],
-      children: makeElement({
-        tag: "div",
-        class: ["uk-card", "uk-card-body"],
-        children: [
-          makeElement({
-            tag: "h3",
-            class: "uk-card-title",
-            id: "pageTitle",
-            text: "",
-          }),
-          makeElement({
-            tag: "div",
-            id: "pageContent",
-          }),
-        ],
-      }),
-    }),
+  render(
+    <>
+      <div id="navBarBox" />
+      <div class="uk-container uk-container-medium uk-align-center">
+        <div class="uk-card uk-card-body">
+          <h3 class="uk-card-title" id="pageTitle" />
+          <div id="pageContent" />
+        </div>
+      </div>
+    </>,
+    document.body,
   );
 
   const pageRouter = new PageRouter(

@@ -12,7 +12,7 @@ let commitHash = gitRevisionPlugin.commithash();
 module.exports = {
   mode: "development",
   cache: true,
-  entry: './src/main.ts',
+  entry: './src/main.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
