@@ -82,31 +82,58 @@ export class SecretsHomePage extends Page {
 
     render(
       <div>
-        <p>
-          {mountsCapabilities.includes("sudo") && mountsCapabilities.includes("create") && (
-            <button
-              class="uk-button uk-button-primary"
-              onClick={async () => {
-                await this.router.changePage("NEW_SECRETS_ENGINE");
-              }}
-            >
-              {i18next.t("secrets_home_new_secrets_engine_button")}
-            </button>
-          )}
-        </p>
-        <ul class="uk-nav uk-nav-default">
-          {Array.from(mountsMap as Map<string, MountType>).map((args: [string, MountType]) => {
-            const baseMount = args[0];
-            const mount = args[1];
-            if (isSupportedMount(mount)) {
-              return <MountLink page={this} mount={mount} baseMount={baseMount} />;
-            }
-          })}
-        </ul>
+        <div>
+          <p>
+            {mountsCapabilities.includes("sudo") && mountsCapabilities.includes("create") && (
+              <button
+                class="uk-button uk-button-primary"
+                onClick={async () => {
+                  await this.router.changePage("NEW_SECRETS_ENGINE");
+                }}
+              >
+                {i18next.t("secrets_home_new_secrets_engine_button")}
+              </button>
+            )}
+          </p>
+        </div>
+        <div class="uk-margin-top">
+          <ul class="uk-nav uk-nav-default">
+            {Array.from(mountsMap as Map<string, MountType>).map((args: [string, MountType]) => {
+              const baseMount = args[0];
+              const mount = args[1];
+              if (isSupportedMount(mount)) {
+                return <MountLink page={this} mount={mount} baseMount={baseMount} />;
+              }
+            })}
+          </ul>
+        </div>
       </div>,
       this.router.pageContentElement,
     );
   }
+
+  async renderPageTitle(): Promise<void> {
+    render(
+      <div>
+        <a
+          onClick={async () => {
+            await this.router.changePage("HOME");
+          }}
+        >
+          {"/ "}
+        </a>
+        <a
+          onClick={async () => {
+            await this.router.changePage("HOME");
+          }}
+        >
+          {"secrets/ "}
+        </a>
+      </div>,
+      this.router.pageTitleElement,
+    );
+  }
+
   get name(): string {
     return i18next.t("secrets_home_page_title");
   }

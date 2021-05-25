@@ -1,6 +1,7 @@
 import { Component, JSX, render } from "preact";
 import { CopyableInputBox } from "../../../elements/CopyableInputBox";
 import { DoesNotExistError } from "../../../types/internalErrors";
+import { Grid, GridSizes } from "../../../elements/Grid";
 import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
 import { PageRouter } from "z-pagerouter";
@@ -36,7 +37,7 @@ export class RefreshingTOTPGridItem extends Component<
 
   render(): JSX.Element {
     return (
-      <div class="uk-grid uk-grid-small uk-text-left" uk-grid>
+      <Grid size={GridSizes.NORMAL}>
         <CopyableInputBox text={this.props.totpKey} copyable />
         <CopyableInputBox text={this.state.totpValue} copyable />
         <div>
@@ -53,7 +54,7 @@ export class RefreshingTOTPGridItem extends Component<
             </button>
           </MarginInline>
         </div>
-      </div>
+      </Grid>
     );
   }
 }

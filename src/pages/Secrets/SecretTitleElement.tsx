@@ -22,6 +22,14 @@ export function SecretTitleElement(props: SecretTitleElementProps): JSX.Element 
     <div>
       <a
         onClick={async () => {
+          await router.changePage("SECRETS_HOME");
+        }}
+      >
+        {"/ "}
+      </a>
+
+      <a
+        onClick={async () => {
           state.secretPath = [];
           state.secretItem = "";
           state.secretVersion = null;

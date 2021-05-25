@@ -1,3 +1,4 @@
+import { Grid, GridSizes } from "../../../elements/Grid";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { Tile } from "../../../elements/Tile";
@@ -18,7 +19,7 @@ export class TransitViewSecretPage extends Page {
     const transitKey = await getTransitKey(this.state.baseMount, this.state.secretItem);
 
     render(
-      <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+      <Grid size={GridSizes.MATCHING_TWO_ROWS}>
         {transitKey.supports_encryption && (
           <Tile
             title={i18next.t("transit_view_encrypt_text")}
@@ -46,7 +47,7 @@ export class TransitViewSecretPage extends Page {
             onclick={async () => await this.router.changePage("TRANSIT_REWRAP")}
           />
         )}
-      </div>,
+      </Grid>,
       this.router.pageContentElement,
     );
   }

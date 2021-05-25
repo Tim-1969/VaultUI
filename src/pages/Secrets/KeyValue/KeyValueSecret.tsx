@@ -1,5 +1,6 @@
 import { Component, JSX, render } from "preact";
 import { CopyableInputBox } from "../../../elements/CopyableInputBox";
+import { Grid, GridSizes } from "../../../elements/Grid";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { getCapabilities } from "../../../api/sys/getCapabilities";
@@ -35,10 +36,10 @@ export class KVSecretVew extends Component<KVSecretViewProps, unknown> {
       return (
         <>
           {Array.from(secretsMap).map((data: [string, string]) => (
-            <div class="uk-grid uk-grid-small uk-text-left" uk-grid>
+            <Grid size={GridSizes.NORMAL}>
               <CopyableInputBox text={data[0]} copyable />
               <CopyableInputBox text={data[1]} copyable />
-            </div>
+            </Grid>
           ))}
         </>
       );

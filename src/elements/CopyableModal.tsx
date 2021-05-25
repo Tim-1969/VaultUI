@@ -2,7 +2,6 @@ import { Component, JSX, createRef } from "preact";
 import { addClipboardNotifications } from "../pageUtils";
 import ClipboardJS from "clipboard";
 import FileSaver from "file-saver";
-import UIkit from "uikit";
 import i18next from "i18next";
 
 export type CopyableModalProps = {
@@ -25,7 +24,6 @@ export class CopyableModal extends Component<CopyableModalProps, unknown> {
   componentDidMount(): void {
     const clipboard = new ClipboardJS(this.copyButtonRef.current);
     addClipboardNotifications(clipboard, 600);
-    UIkit.modal(this.ref.current).show();
   }
 
   render(): JSX.Element {

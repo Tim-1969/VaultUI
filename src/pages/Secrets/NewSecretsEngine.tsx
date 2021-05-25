@@ -1,3 +1,4 @@
+import { Grid, GridSizes } from "../../elements/Grid";
 import { Page } from "../../types/Page";
 import { Tile } from "../../elements/Tile";
 import { render } from "preact";
@@ -10,7 +11,7 @@ export class NewSecretsEnginePage extends Page {
 
   async render(): Promise<void> {
     render(
-      <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+      <Grid size={GridSizes.MATCHING_TWO_ROWS}>
         <Tile
           title={i18next.t("new_secrets_engine_kv_title")}
           description={i18next.t("new_secrets_engine_kv_description")}
@@ -32,7 +33,7 @@ export class NewSecretsEnginePage extends Page {
             await this.router.changePage("NEW_TRANSIT_ENGINE");
           }}
         />
-      </div>,
+      </Grid>,
       this.router.pageContentElement,
     );
   }

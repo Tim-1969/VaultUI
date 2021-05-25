@@ -1,3 +1,4 @@
+import { Grid, GridSizes } from "../../elements/Grid";
 import { Page } from "../../types/Page";
 import { Tile } from "../../elements/Tile";
 import { notImplemented, prePageChecks } from "../../pageUtils";
@@ -12,11 +13,11 @@ export class AccessHomePage extends Page {
     await this.router.changePage("HOME");
   }
   async render(): Promise<void> {
-    await this.router.setPageContent("");
+    this.router.pageContentElement.innerHTML = "";
     if (!(await prePageChecks(this.router))) return;
 
     render(
-      <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+      <Grid size={GridSizes.MATCHING_TWO_ROWS}>
         <Tile
           title={i18next.t("access_auth_methods_title")}
           description={i18next.t("access_auth_methods_description")}
@@ -41,7 +42,7 @@ export class AccessHomePage extends Page {
           icon="unlock"
           onclick={async () => notImplemented()}
         />
-      </div>,
+      </Grid>,
       this.router.pageContentElement,
     );
   }

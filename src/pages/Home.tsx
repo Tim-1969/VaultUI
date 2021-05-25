@@ -1,3 +1,5 @@
+import { Grid, GridSizes } from "../elements/Grid";
+import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
 import { Tile } from "../elements/Tile";
 import { TokenInfo } from "../api/types/token";
@@ -54,27 +56,26 @@ export class HomePage extends Page {
             </span>
           </li>
         </ul>
-        <div
-          class="uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small uk-grid-match uk-margin-top"
-          uk-grid
-        >
-          <Tile
-            title={i18next.t("home_secrets_title")}
-            description={i18next.t("home_secrets_description")}
-            icon="file-edit"
-            onclick={async () => {
-              await this.router.changePage("SECRETS_HOME");
-            }}
-          />
-          <Tile
-            title={i18next.t("home_access_title")}
-            description={i18next.t("home_access_description")}
-            icon="users"
-            onclick={async () => {
-              await this.router.changePage("ACCESS_HOME");
-            }}
-          />
-        </div>
+        <Margin>
+          <Grid size={GridSizes.MATCHING_TWO_ROWS}>
+            <Tile
+              title={i18next.t("home_secrets_title")}
+              description={i18next.t("home_secrets_description")}
+              icon="file-edit"
+              onclick={async () => {
+                await this.router.changePage("SECRETS_HOME");
+              }}
+            />
+            <Tile
+              title={i18next.t("home_access_title")}
+              description={i18next.t("home_access_description")}
+              icon="users"
+              onclick={async () => {
+                await this.router.changePage("ACCESS_HOME");
+              }}
+            />
+          </Grid>
+        </Margin>
       </div>,
       this.router.pageContentElement,
     );
