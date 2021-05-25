@@ -28,6 +28,10 @@ export class RefreshingTOTPGridItem extends Component<
     });
   }
 
+  componentWillUnmount(): void {
+    clearInterval(this.timer as number);
+  }
+
   componentDidMount(): void {
     this.updateTOTPCode();
     this.timer = setInterval(() => {
