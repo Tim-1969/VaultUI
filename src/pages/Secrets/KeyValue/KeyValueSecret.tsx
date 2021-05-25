@@ -1,9 +1,9 @@
+import { Component, JSX, render } from "preact";
 import { CopyableInputBox } from "../../../elements/CopyableInputBox";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { getCapabilities } from "../../../api/sys/getCapabilities";
 import { getSecret } from "../../../api/kv/getSecret";
-import { Component, JSX, render } from "preact";
 import { sortedObjectMap } from "../../../utils";
 import { undeleteSecret } from "../../../api/kv/undeleteSecret";
 import Prism from "prismjs";
@@ -80,15 +80,14 @@ export class KeyValueSecretPage extends Page {
 
     // On kv-v2, secrets can be deleted temporarily with the ability to restore
     // Do not show any buttons when the secret is deleted.
-    let secretIsDeleted = secretInfo == null && this.state.secretMountType == "kv-v2";
+    const secretIsDeleted = secretInfo == null && this.state.secretMountType == "kv-v2";
 
     render(
       <div>
         <p id="buttonsBlock">
           {
             // Delete Button
-            !secretIsDeleted &&
-            caps.includes("delete") && (
+            !secretIsDeleted && caps.includes("delete") && (
               <button
                 class="uk-button uk-button-danger"
                 onClick={async () => {
@@ -115,37 +114,31 @@ export class KeyValueSecretPage extends Page {
               </button>
             )
           }
-          {
-            !secretIsDeleted &&
-            caps.includes("update") && this.state.secretVersion == null && (
-              <button
-                class="uk-button uk-button-primary"
-                onClick={async () => {
-                  await this.router.changePage("KEY_VALUE_SECRET_EDIT");
-                }}
-              >
-                {i18next.t("kv_secret_edit_btn")}
-              </button>
-            )}
-          {
-            !secretIsDeleted &&
-            this.state.secretMountType == "kv-v2" && (
-              <button
-                class="uk-button uk-button-secondary"
-                onClick={async () => {
-                  await this.router.changePage("KEY_VALUE_VERSIONS");
-                }}
-              >
-                {i18next.t("kv_secret_versions_btn")}
-              </button>
-            )}
+          {!secretIsDeleted && caps.includes("update") && this.state.secretVersion == null && (
+            <button
+              class="uk-button uk-button-primary"
+              onClick={async () => {
+                await this.router.changePage("KEY_VALUE_SECRET_EDIT");
+              }}
+            >
+              {i18next.t("kv_secret_edit_btn")}
+            </button>
+          )}
+          {!secretIsDeleted && this.state.secretMountType == "kv-v2" && (
+            <button
+              class="uk-button uk-button-secondary"
+              onClick={async () => {
+                await this.router.changePage("KEY_VALUE_VERSIONS");
+              }}
+            >
+              {i18next.t("kv_secret_versions_btn")}
+            </button>
+          )}
         </p>
 
-        {!secretIsDeleted &&
-          <KVSecretVew kvData={secretInfo} />
-        }
+        {!secretIsDeleted && <KVSecretVew kvData={secretInfo} />}
 
-        {secretIsDeleted &&
+        {secretIsDeleted && (
           <>
             <p>{i18next.t("kv_secret_deleted_text")}</p>
             <button
@@ -163,8 +156,7 @@ export class KeyValueSecretPage extends Page {
               {i18next.t("kv_secret_restore_btn")}
             </button>
           </>
-        }
-
+        )}
       </div>,
       this.router.pageContentElement,
     );
