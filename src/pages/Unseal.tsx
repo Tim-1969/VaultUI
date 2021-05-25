@@ -4,7 +4,7 @@ import { MarginInline } from "../elements/MarginInline";
 import { Page } from "../types/Page";
 import { QRScanner } from "../elements/QRScanner";
 import { getSealStatus } from "../api/sys/getSealStatus";
-import { render } from "preact/compat";
+import { render } from "preact";
 import { setErrorText } from "../pageUtils";
 import { submitUnsealKey } from "../api/sys/submitUnsealKey";
 import { toStr } from "../utils";
