@@ -15,7 +15,6 @@ export type QRScannerProps = {
 export class QRScanner extends Component<QRScannerProps, unknown> {
   videoElement = createRef<HTMLVideoElement>();
 
-  stream: MediaStream;
   qrScanner: QrScanner;
 
   componentDidMount(): void {
@@ -27,7 +26,6 @@ export class QRScanner extends Component<QRScannerProps, unknown> {
         audio: false,
       })
       .then((stream) => {
-        this.stream = stream;
         this.videoElement.current.srcObject = stream;
         const lastSeenValue = "";
         const qrScanner = new QrScanner(this.videoElement.current, (value) => {
