@@ -1,53 +1,49 @@
-import { CodeJar } from "codejar";
-import { JSX } from "preact";
-import { Ref, useEffect, useRef } from "preact/compat";
+import { Component, JSX, createRef } from "preact";
+import { CodeJar as _CodeJar } from "codejar";
 
-interface EditorProps {
-  highlight: unknown;
-  options?: { tab: string };
+interface CodeJarProps {
+  language: string;
+  tabSize: number;
   code: string;
   onUpdate: (code: string) => void;
 }
 
-export const useCodeJar = (props: EditorProps): Ref<HTMLDivElement> => {
-  const editorRef = useRef<HTMLDivElement>(null);
-  const jar = useRef<CodeJar | null>(null);
+export class CodeJarEditor extends Component<CodeJarProps, unknown> {
+  editorRef = createRef<HTMLDivElement>();
+  jar = createRef<_CodeJar | null>();
 
-  useEffect(() => {
-    if (!editorRef.current) return;
-
-    jar.current = CodeJar(
-      editorRef.current,
-      props.highlight as (e: HTMLElement, pos?: unknown) => void,
-      { ...props.options, window: window },
-    );
-
-    jar.current.updateCode(props.code);
-
-    jar.current.onUpdate((txt) => {
-      if (!editorRef.current) return;
-      props.onUpdate(txt);
+  componentDidMount(): void {
+    this.jar.current = _CodeJar(this.editorRef.current, () => {}, {
+      tab: " ".repeat(this.props.tabSize),
+      window: window,
     });
 
-    return () => jar.current.destroy();
-  }, []);
+    this.jar.current.updateCode(this.props.code);
 
-  useEffect(() => {
-    if (!jar.current || !editorRef.current) return;
-    jar.current.updateCode(props.code);
-  }, [props.code]);
+    this.jar.current.onUpdate((txt) => {
+      this.props.onUpdate(txt);
+    });
+  }
 
-  useEffect(() => {
-    if (!jar.current || !props.options) return;
+  componentWillUnmount(): void {
+    if (this.jar.current) {
+      this.jar.current.destroy();
+    }
+  }
 
-    jar.current.updateOptions(props.options);
-  }, [props.options]);
+  componentDidUpdate(prevProps: CodeJarProps): void {
+    if (!this.jar.current) return;
 
-  return editorRef;
-};
+    if (
+      prevProps.code !== this.props.code ||
+      prevProps.tabSize !== this.props.tabSize ||
+      prevProps.language !== this.props.language
+    ) {
+      this.componentDidMount();
+    }
+  }
 
-export function CodeJarEditor(props: EditorProps): JSX.Element {
-  const editorRef = useCodeJar(props);
-
-  return <div class="editor language-json" ref={editorRef}></div>;
+  render(): JSX.Element {
+    return <div class={"editor language-" + this.props.language} ref={this.editorRef} />;
+  }
 }

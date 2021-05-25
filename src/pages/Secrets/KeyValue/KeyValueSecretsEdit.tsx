@@ -91,10 +91,10 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
       <div>
         <p class="uk-text-danger" id="errorText" />
         <CodeJarEditor
-          highlight={() => {}}
+          language="json"
+          tabSize={4}
           code={this.getStringKVData(this.state.kvData)}
           onUpdate={(code) => this.onCodeUpdate(code)}
-          options={{ tab: " ".repeat(4) }}
         />
         <button class="uk-button uk-button-primary" onClick={() => this.editorSave()}>
           {i18next.t("kv_sec_edit_btn")}
