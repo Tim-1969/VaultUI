@@ -15,13 +15,13 @@ export type KVEditProps = {
 
 type KVEditState =
   | {
-      dataLoaded: false;
-    }
+    dataLoaded: false;
+  }
   | {
-      dataLoaded: true;
-      kvData: Record<string, unknown>;
-      code: string;
-    };
+    dataLoaded: true;
+    kvData: Record<string, unknown>;
+    code: string;
+  };
 
 export class KVEditor extends Component<KVEditProps, KVEditState> {
   constructor() {
@@ -34,6 +34,7 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
   async editorSave(): Promise<void> {
     if (!this.state.dataLoaded) return;
     const editorContent = this.state.code;
+
     if (!verifyJSONString(editorContent)) {
       setErrorText(i18next.t("kv_sec_edit_invalid_json_err"));
       return;
@@ -65,6 +66,7 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
       this.setState({
         dataLoaded: true,
         kvData: kvData,
+        code: this.getStringKVData(kvData),
       });
     });
     return;
@@ -76,24 +78,27 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
     }
   }
 
+  getStringKVData(data: Record<string, unknown>): string {
+    return JSON.stringify(
+      Object.fromEntries(sortedObjectMap(data)),
+      null,
+      4,
+    );
+  }
+
   render(): JSX.Element {
     if (!this.state.dataLoaded) {
       return <p>{i18next.t("kv_sec_edit_loading")}</p>;
     }
 
-    const secretsJSON = JSON.stringify(
-      Object.fromEntries(sortedObjectMap(this.state.kvData)),
-      null,
-      4,
-    );
-
     return (
       <div>
         <p class="uk-text-danger" id="errorText" />
         <CodeJarEditor
-          highlight={() => {}}
-          code={secretsJSON}
+          highlight={() => { }}
+          code={this.getStringKVData(this.state.kvData)}
           onUpdate={(code) => this.onCodeUpdate(code)}
+          options={{ tab: " ".repeat(4) }}
         />
         <button class="uk-button uk-button-primary" onClick={() => this.editorSave()}>
           {i18next.t("kv_sec_edit_btn")}
