@@ -16,6 +16,7 @@ export class QRScanner extends Component<QRScannerProps, unknown> {
   videoElement = createRef<HTMLVideoElement>();
 
   stream: MediaStream;
+  qrScanner: QrScanner;
 
   componentDidMount(): void {
     void navigator.mediaDevices
@@ -33,16 +34,15 @@ export class QRScanner extends Component<QRScannerProps, unknown> {
           if (lastSeenValue == value) return;
           this.props.onScan(value);
         });
+        this.qrScanner = qrScanner;
         void qrScanner.start();
       });
   }
   componentWillUnmount(): void {
     try {
-      this.stream.getTracks().forEach(function (track) {
-        track.stop();
-      });
+      this.qrScanner.destroy();
     } catch (_) {
-      () => {};
+      // Do Nothing
     }
   }
 
