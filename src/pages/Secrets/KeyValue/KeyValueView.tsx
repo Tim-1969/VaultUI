@@ -8,69 +8,81 @@ import i18next from "i18next";
 
 export type KVKeysListProps = {
   page: Page;
+  baseMount: string;
+  secretMountType: string;
+  secretPath: string[];
 };
 
-type KVKeysListState =
-  | {
-      dataLoaded: false;
-    }
-  | {
-      dataLoaded: true;
-      keys: string[];
-    };
+type KVKeysListState = {
+  dataLoaded: boolean;
+  keys: string[];
+};
 
 export class KVKeysList extends Component<KVKeysListProps, KVKeysListState> {
   constructor() {
     super();
     this.state = {
       dataLoaded: false,
+      keys: [],
     };
   }
 
-  loadData(): void {
-    void getSecrets(
-      this.props.page.state.baseMount,
-      this.props.page.state.secretMountType,
-      this.props.page.state.secretPath,
-    )
-      .then((keys) => {
-        this.setState({
-          dataLoaded: true,
-          keys: keys,
-        });
-      })
-      .catch((e: Error) => {
-        // getSecrets also 404's on no keys so dont go all the way back.
-        if (e == DoesNotExistError) {
-          if (this.props.page.state.secretPath.length != 0) {
-            void this.props.page.goBack();
-            return;
-          } else {
-            this.setState({
-              dataLoaded: true,
-              keys: null,
-            });
-          }
-        } else {
-          setErrorText(e.message);
-        }
+  async loadData(): Promise<void> {
+    const page = this.props.page;
+    try {
+      const keys = await getSecrets(
+        this.props.baseMount,
+        this.props.secretMountType,
+        this.props.secretPath,
+      );
+      this.setState({
+        dataLoaded: true,
+        keys: keys,
       });
-    return;
+      return;
+    } catch (e: unknown) {
+      const error = e as Error;
+      if (error == DoesNotExistError) {
+        // getSecrets also 404's on no keys so dont go all the way back.
+        if (this.props.secretPath.length != 0) {
+          await page.goBack();
+          return;
+        }
+      } else {
+        setErrorText(error.message);
+      }
+      this.setState({
+        dataLoaded: true,
+        keys: null,
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps: KVKeysListProps): void {
+    // Do not set state.dataLoaded to false in here
+    // to provide a more smooth experiance when going through multiple keys.
+    if (
+      prevProps.baseMount !== this.props.baseMount ||
+      prevProps.secretMountType !== this.props.secretMountType ||
+      prevProps.secretPath !== this.props.secretPath
+    ) {
+      void this.loadData();
+    }
   }
 
   componentDidMount(): void {
-    if (!this.state.dataLoaded) {
-      this.loadData();
-    }
+    void this.loadData();
   }
 
   render(): JSX.Element {
     if (!this.state.dataLoaded) {
       return <p>{i18next.t("content_loading")}</p>;
     }
+
     if (this.state.keys == null) {
       return <p>{i18next.t("kv_view_none_here_text")}</p>;
     }
+
     return (
       <ul class="uk-nav uk-nav-default">
         {...this.state.keys.map((secret) => (
@@ -78,6 +90,8 @@ export class KVKeysList extends Component<KVKeysListProps, KVKeysListState> {
             <a
               onClick={async () => {
                 const page = this.props.page;
+                console.log(secret, page.state.secretPath, page.state.baseMount);
+
                 if (secret.endsWith("/")) {
                   page.state.pushSecretPath(secret);
                   await page.router.changePage("KEY_VALUE_VIEW");
@@ -109,8 +123,6 @@ export class KeyValueViewPage extends Page {
     }
   }
   async render(): Promise<void> {
-    this.state.secretItem = "";
-
     render(
       <>
         <div id="buttonsBox">
@@ -124,7 +136,12 @@ export class KeyValueViewPage extends Page {
           </button>
         </div>
         {this.state.secretMountType == "cubbyhole" && <p>{i18next.t("kv_view_cubbyhole_text")}</p>}
-        <KVKeysList page={this} />
+        <KVKeysList
+          page={this}
+          baseMount={this.state.baseMount}
+          secretMountType={this.state.secretMountType}
+          secretPath={this.state.secretPath}
+        />
       </>,
       this.router.pageContentElement,
     );
