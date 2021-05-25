@@ -15,13 +15,13 @@ export type KVEditProps = {
 
 type KVEditState =
   | {
-    dataLoaded: false;
-  }
+      dataLoaded: false;
+    }
   | {
-    dataLoaded: true;
-    kvData: Record<string, unknown>;
-    code: string;
-  };
+      dataLoaded: true;
+      kvData: Record<string, unknown>;
+      code: string;
+    };
 
 export class KVEditor extends Component<KVEditProps, KVEditState> {
   constructor() {
@@ -79,11 +79,7 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
   }
 
   getStringKVData(data: Record<string, unknown>): string {
-    return JSON.stringify(
-      Object.fromEntries(sortedObjectMap(data)),
-      null,
-      4,
-    );
+    return JSON.stringify(Object.fromEntries(sortedObjectMap(data)), null, 4);
   }
 
   render(): JSX.Element {
@@ -95,7 +91,7 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
       <div>
         <p class="uk-text-danger" id="errorText" />
         <CodeJarEditor
-          highlight={() => { }}
+          highlight={() => {}}
           code={this.getStringKVData(this.state.kvData)}
           onUpdate={(code) => this.onCodeUpdate(code)}
           options={{ tab: " ".repeat(4) }}
