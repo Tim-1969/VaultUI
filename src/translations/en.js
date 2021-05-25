@@ -163,6 +163,8 @@ module.exports = {
   totp_new_uri_input: "URI",
   totp_new_key_input: "Key",
   totp_new_add_btn: "Add TOTP Key",
+  totp_new_switch_to_qr_btn: "Switch to QR Input",
+  totp_new_switch_back_to_manual_input_btn: "Switch back to manual input",
 
   // TOTP Delete Page
   totp_delete_title: "Delete TOTP Key",
