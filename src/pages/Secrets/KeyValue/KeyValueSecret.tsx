@@ -23,11 +23,7 @@ export class KVSecretVew extends Component<KVSecretViewProps, unknown> {
     }
 
     if (isMultiLevelJSON) {
-      const jsonText = JSON.stringify(
-        sortedObjectMap(secretsMap as unknown as Record<string, unknown>),
-        null,
-        4,
-      );
+      const jsonText = JSON.stringify(Object.fromEntries(secretsMap), null, 4);
       const highlightedJson = Prism.highlight(jsonText, Prism.languages.json, "json");
       return (
         <pre
