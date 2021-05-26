@@ -12,11 +12,15 @@ module.exports = {
 
   // General Notification Messages
   notification_copy_success: "Текст скопирован в буфер обмена.",
+  not_implemented: "Функция ещё не реализована",
 
   // Copyable Modal
   copy_modal_download_btn: "Загрузить",
   copy_modal_copy_btn: "Копировать",
   copy_modal_close_btn: "Закрыть",
+
+  // Generic Loading Text
+  content_loading: "Загрузка..",
 
   // Copyable Input Box
   copy_input_box_copy_icon_text: "Копировать",
@@ -37,6 +41,41 @@ module.exports = {
   home_vaulturl_text: "Адрес хранилища: {{text}}",
   home_password_generator_btn: "Генератор паролей",
   home_your_token_expires_in: "Продолжительность ключа: {{date, until_date}}",
+  home_secrets_title: "Тайны",
+  home_secrets_description: "Просмотр, создание и управление тайнами.",
+  home_access_title: "Доступ",
+  home_access_description: "Управление доступом к хранилищу и способами аутентификации пользователей.",
+
+  // Secrets Home Page
+  secrets_home_page_title: "Тайны",
+  secrets_home_new_secrets_engine_button: "Новый обработчик тайн",
+
+  // New Secrets Engine Page
+  new_secrets_engine_title: "Новый обработчик тайн",
+  new_secrets_engine_kv_title: "Ключ/значение",
+  new_secrets_engine_kv_description: "Для хранения тайн в формате пар \"ключ/значение\".",
+  new_secrets_engine_totp_title: "TOTP",
+  new_secrets_engine_totp_description: "Для хранения одноразовых кодов, создаваемых алгоритмом TOTP.",
+  new_secrets_engine_transit_title: "Transit",
+  new_secrets_engine_transit_description:
+    "Для шифрования/расшифрования данных без их хранения.",
+
+  // New KV Engine Page
+  new_kv_engine_title: "Новый обработчик пар \"ключ/значение\"",
+  new_kv_engine_name_input: "Имя",
+  new_kv_engine_version_1: "Версия 1",
+  new_kv_engine_version_2: "Версия 2",
+  new_kv_engine_create_btn: "Создать",
+
+  // New KV Engine Page
+  new_totp_engine_title: "Новый обработчик TOTP",
+  new_totp_engine_name_input: "Имя",
+  new_totp_engine_create_btn: "Создать",
+
+  // New Transit Engine Page
+  new_transit_engine_title: "Новый обработчик Transit",
+  new_transit_engine_name_input: "Имя",
+  new_transit_engine_create_btn: "Создать",
 
   // Unseal Page
   unseal_vault_text: "Раскрыть хранилище",
@@ -109,7 +148,8 @@ module.exports = {
 
   // TOTP View Page
   totp_view_title: "TOTP",
-  totp_view_new_btn: "Добавить ключ TOTP",
+  totp_view_new_btn: "Добавить",
+  totp_view_delete_btn: "Удалить",
   totp_view_loading: "Загрузка кодов TOTP..",
   totp_view_empty: "У вас на данный момент нет кодов TOTP. Хотите ли вы их создать?",
   totp_view_loading_box: "Загрузка..",
@@ -123,10 +163,25 @@ module.exports = {
   totp_new_uri_input: "URI",
   totp_new_key_input: "Ключ",
   totp_new_add_btn: "Добавить ключ TOTP",
+  totp_new_switch_to_qr_btn: "Использовать ввод QR-кода",
+  totp_new_switch_back_to_manual_input_btn: "Использовать ручной ввод данных",
+
+  // TOTP Delete Page
+  totp_delete_title: "Удалить ключ TOTP",
+  totp_delete_suffix: " (удалить)",
+  totp_delete_text: "Вы уверены, что хотите удалить эту тайну TOTP?",
+  totp_delete_button: "Удалить",
 
   // Transit View Page
-  transit_view_title: "Ключи Transit",
-  transit_view_none_here_text: "У вас нет ключей Transit, хотите ли вы их создать?",
+  transit_view_title: "Просмотр Transit",
+  transit_view_new_btn: "Новый ключ",
+  transit_view_none_here_text:
+    "У вас нет ключей Transit, хотите ли вы их создать?",
+
+  transit_new_key_title: "Новый ключ Transit",
+  transit_new_key_name_input: "Имя",
+  transit_new_key_create_btn: "Создать",
+  transit_new_key_suffix: " (новый)",
 
   // Transit View Secret Page
   transit_view_secret_title: "Просмотр тайных данных Transit",
@@ -164,4 +219,69 @@ module.exports = {
   transit_rewrap_input_placeholder: "Шифр-текст",
   transit_rewrap_rewrap_btn: "Перешифровать",
   transit_rewrap_result_modal_title: "Результат перешифрования",
+
+  // Access Home
+  access_home_page_title: "Доступ",
+  access_auth_methods_title: "Методы аутентификации",
+  access_auth_methods_description: "Просмотр и управление разрешёнными методами аутентификации.",
+  access_entities_title: "Сущности",
+  access_entities_description: "Просмотр и управление пользователями и объектами, имеющих доступ к хранилищу.",
+  access_groups_title: "Группы",
+  access_groups_description: "Просмотр и управление группами сущностей.",
+  access_leases_title: "Коды доступа",
+  access_leases_description: "Просмотр и управление кодами доступа.",
+
+  // Auth Home Page
+  auth_home_title: "Аутентификация",
+  auth_home_view_config: "Просмотр настроек",
+  auth_home_edit_config: "Редактирование настроек",
+
+  // Auth View Config Page
+  auth_view_config_title: "Просмотр настроек аутентификации",
+  auth_view_config_suffix: " (просм. настр.)",
+  auth_view_config_type: "Тип",
+  auth_view_config_path: "Путь",
+  auth_view_config_description: "Описание",
+  auth_view_config_accessor: "Ссылка ключа доступа",
+  auth_view_config_local: "Локальный",
+  auth_view_config_seal_wrap: "Дополнительное шифрование",
+  auth_view_config_list_when_unauth: "Отображать без аутентификации?",
+  auth_view_config_default_lease_ttl: "Срок действия по умолчанию",
+  auth_view_config_max_lease_ttl: "Максимальный срок действия",
+  auth_view_config_token_type: "Тип кода доступа",
+
+  // UserPass Common
+  userpass_common_username: "Имя пользователя",
+  userpass_common_password: "Пароль",
+  userpass_common_cidrs: "Разрешённые IP-адреса кода доступа",
+  userpass_common_exp_max_ttl: "Явный максимальный срок генерируемых кодов доступа",
+  userpass_common_max_ttl: "Максимальный срок генерируемых кодов доступа",
+  userpass_common_default_policy_attached: "Не применять политику по умолчанию к генерируемым кодам доступа",
+  userpass_common_max_token_uses: "Максимальное кол-во применений генерируемых кодов доступа",
+  userpass_common_token_peroid: "Период генерируемых кодов доступа",
+  userpass_common_policies: "Политика генерируемых кодов доступа",
+  userpass_common_initial_ttl: "Изначальный срок генерируемых кодов доступа",
+  userpass_common_type: "Тип генерируемых кодов доступа",
+
+  // userpass Users List
+  userpass_users_list_title: "Список пользователей",
+  userpass_user_list_new_btn: "Новый пользователь",
+
+  // userpass User View
+  userpass_user_view_title: "Просмотр пользователя",
+  userpass_user_view_edit_btn: "Редактировать",
+  userpass_user_view_delete_btn: "Удалить",
+
+  // userpass user edit
+  userpass_user_edit_title: "Редактирование пользователя",
+  userpass_user_edit_submit_btn: "Отправить",
+
+  // userpass user new
+  userpass_user_new_title: "Новый пользователь",
+  userpass_user_new_create_btn: "Создать",
+
+  userpass_user_delete_title: "Удаление пользователя",
+  userpass_user_delete_text:
+    "Вы уверены, что хотите удалить этого пользователя? Это действие нельзя отменить.",
+  userpass_user_delete_btn: "Удалить пользователя",
 };
