@@ -74,6 +74,14 @@ export class HomePage extends Page {
                 await this.router.changePage("ACCESS_HOME");
               }}
             />
+            <Tile
+              title={i18next.t("home_policies_title")}
+              description={i18next.t("home_policies_description")}
+              icon="pencil"
+              onclick={async () => {
+                await this.router.changePage("POLICIES_HOME");
+              }}
+            />
           </Grid>
         </Margin>
       </div>,

@@ -45,6 +45,8 @@ module.exports = {
   home_secrets_description: "View, create and manage secrets.",
   home_access_title: "Access",
   home_access_description: "Manage who and what has access to vault and how they can authenticate.",
+  home_policies_title: "Policies",
+  home_policies_description: "Manage policies and permissions.",
 
   // Secrets Home Page
   secrets_home_page_title: "Secrets",
@@ -286,4 +288,8 @@ module.exports = {
   userpass_user_delete_text:
     "Are you sure you want to delete this user? This action can't be reversed.",
   userpass_user_delete_btn: "Delete User",
+
+  // Policies Home
+  policies_home_title: "Policies",
+  policies_home_new_btn: "New",
 };

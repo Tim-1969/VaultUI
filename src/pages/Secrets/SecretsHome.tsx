@@ -1,11 +1,10 @@
+import { JSX, render } from "preact";
 import { MountType, getMounts } from "../../api/sys/getMounts";
 import { Page } from "../../types/Page";
 import { getCapabilitiesPath } from "../../api/sys/getCapabilities";
 import { prePageChecks } from "../../pageUtils";
 import { sortedObjectMap } from "../../utils";
 import i18next from "i18next";
-
-import { JSX, render } from "preact";
 
 export type MountLinkProps = {
   page: Page;
@@ -109,28 +108,6 @@ export class SecretsHomePage extends Page {
         </div>
       </div>,
       this.router.pageContentElement,
-    );
-  }
-
-  async renderPageTitle(): Promise<void> {
-    render(
-      <div>
-        <a
-          onClick={async () => {
-            await this.router.changePage("HOME");
-          }}
-        >
-          {"/ "}
-        </a>
-        <a
-          onClick={async () => {
-            await this.router.changePage("HOME");
-          }}
-        >
-          {"secrets/ "}
-        </a>
-      </div>,
-      this.router.pageTitleElement,
     );
   }
 

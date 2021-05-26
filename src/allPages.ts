@@ -21,6 +21,7 @@ import { NewTOTPEnginePage } from "./pages/Secrets/NewEngines/NewTOTPEngine";
 import { NewTransitEnginePage } from "./pages/Secrets/NewEngines/NewTransitEngine";
 import { NewTransitKeyPage } from "./pages/Secrets/Transit/NewTransitKey";
 import { Page } from "./types/Page";
+import { PoliciesHomePage } from "./pages/Policies/PoliciesHome";
 import { PwGenPage } from "./pages/PwGen";
 import { SecretsHomePage } from "./pages/Secrets/SecretsHome";
 import { SetLanguagePage } from "./pages/SetLanguage";
@@ -47,36 +48,46 @@ type pagesList = {
 
 export const allPages: pagesList = {
   HOME: new HomePage(),
-  SECRETS_HOME: new SecretsHomePage(),
+  LOGIN: new LoginPage(),
+  SET_VAULT_URL: new SetVaultURLPage(),
+  UNSEAL: new UnsealPage(),
+  SET_LANGUAGE: new SetLanguagePage(),
+  ME: new MePage(),
+  PW_GEN: new PwGenPage(),
+
+  POLICIES_HOME: new PoliciesHomePage(),
+
   ACCESS_HOME: new AccessHomePage(),
+
   AUTH_HOME: new AuthHomePage(),
   AUTH_VIEW_CONFIG: new AuthViewConfigPage(),
+
   USERPASS_USERS_LIST: new UserPassUsersListPage(),
   USERPASS_USER_VIEW: new UserPassUserViewPage(),
   USERPASS_USER_EDIT: new UserPassUserEditPage(),
   USERPASS_USER_NEW: new UserPassUserNewPage(),
   USERPASS_USER_DELETE: new UserPassUserDeletePage(),
-  ME: new MePage(),
+
+  SECRETS_HOME: new SecretsHomePage(),
+
   TOTP_VIEW: new TOTPViewPage(),
   TOTP_NEW: new TOTPNewPage(),
   TOTP_DELETE: new TOTPDeletePage(),
-  LOGIN: new LoginPage(),
-  SET_VAULT_URL: new SetVaultURLPage(),
-  UNSEAL: new UnsealPage(),
-  SET_LANGUAGE: new SetLanguagePage(),
-  TRANSIT_NEW_KEY: new NewTransitKeyPage(),
+
   TRANSIT_VIEW: new TransitViewPage(),
+  TRANSIT_NEW_KEY: new NewTransitKeyPage(),
   TRANSIT_VIEW_SECRET: new TransitViewSecretPage(),
   TRANSIT_ENCRYPT: new TransitEncryptPage(),
   TRANSIT_DECRYPT: new TransitDecryptPage(),
   TRANSIT_REWRAP: new TransitRewrapPage(),
+
   KEY_VALUE_VIEW: new KeyValueViewPage(),
   KEY_VALUE_SECRET: new KeyValueSecretPage(),
   KEY_VALUE_VERSIONS: new KeyValueVersionsPage(),
   KEY_VALUE_NEW_SECRET: new KeyValueNewPage(),
   KEY_VALUE_DELETE: new KeyValueDeletePage(),
   KEY_VALUE_SECRET_EDIT: new KeyValueSecretEditPage(),
-  PW_GEN: new PwGenPage(),
+
   NEW_SECRETS_ENGINE: new NewSecretsEnginePage(),
   NEW_KV_ENGINE: new NewKVEnginePage(),
   NEW_TOTP_ENGINE: new NewTOTPEnginePage(),
