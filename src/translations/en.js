@@ -292,4 +292,9 @@ module.exports = {
   // Policies Home
   policies_home_title: "Policies",
   policies_home_new_btn: "New",
+
+  // Policy View
+  policy_view_title: "Policy View ({{policy}})",
+  policy_view_edit_btn: "Edit",
+  policy_view_delete_btn: "Delete",
 };

@@ -34,7 +34,14 @@ export class PoliciesHomePage extends Page {
           <ul class="uk-nav uk-nav-default">
             {policies.map((policy: string) => (
               <li>
-                <a onClick={notImplemented}>{policy}</a>
+                <a
+                  onClick={async () => {
+                    this.state.policyItem = policy;
+                    await this.router.changePage("POLICY_VIEW");
+                  }}
+                >
+                  {policy}
+                </a>
               </li>
             ))}
           </ul>

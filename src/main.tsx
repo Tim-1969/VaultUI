@@ -13,6 +13,7 @@ UIkit.use(Icons);
 import Prism from "prismjs";
 // Don't Sort These!
 import "prismjs/components/prism-json";
+import "prismjs/components/prism-hcl";
 
 Prism.highlightAll();
 /* eslint-enable */

@@ -1,3 +1,4 @@
+import { CodeBlock } from "../../../elements/CodeBlock";
 import { Component, JSX, render } from "preact";
 import { CopyableInputBox } from "../../../elements/CopyableInputBox";
 import { Grid, GridSizes } from "../../../elements/Grid";
@@ -7,7 +8,6 @@ import { getCapabilities } from "../../../api/sys/getCapabilities";
 import { getSecret } from "../../../api/kv/getSecret";
 import { sortedObjectMap } from "../../../utils";
 import { undeleteSecret } from "../../../api/kv/undeleteSecret";
-import Prism from "prismjs";
 import i18next from "i18next";
 
 export type KVSecretViewProps = {
@@ -25,13 +25,7 @@ export class KVSecretVew extends Component<KVSecretViewProps, unknown> {
 
     if (isMultiLevelJSON) {
       const jsonText = JSON.stringify(Object.fromEntries(secretsMap), null, 4);
-      const highlightedJson = Prism.highlight(jsonText, Prism.languages.json, "json");
-      return (
-        <pre
-          class="code-block language-json line-numbers"
-          dangerouslySetInnerHTML={{ __html: highlightedJson }}
-        />
-      );
+      return <CodeBlock language="json" code={jsonText} />;
     } else {
       return (
         <>

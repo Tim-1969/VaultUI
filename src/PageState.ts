@@ -92,6 +92,13 @@ export class PageState {
     localStorage.setItem("secretMountType", value);
   }
 
+  get policyItem(): string {
+    return localStorage.getItem("policyItem") || "";
+  }
+  set policyItem(value: string) {
+    localStorage.setItem("policyItem", value);
+  }
+
   get authPath(): string {
     return localStorage.getItem("authPath") || "";
   }
