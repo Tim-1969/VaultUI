@@ -1,5 +1,6 @@
 import { Form } from "../../../../elements/Form";
 import { InputWithTitle } from "../../../../elements/InputWithTitle";
+import { Margin } from "../../../../elements/Margin";
 import { MarginInline } from "../../../../elements/MarginInline";
 import { Page } from "../../../../types/Page";
 import { UserType } from "../../../../api/types/userpass/user";
@@ -29,9 +30,18 @@ export class UserPassUserEditPage extends Page {
           class="uk-input uk-form-width-large"
           name="password"
           type="password"
-          placeholder={i18next.t("userpass_common_password")}
+          placeholder={i18next.t("auth_common_password")}
         />
-        <InputWithTitle title={i18next.t("userpass_common_cidrs")}>
+
+        <Margin>
+          <p>{i18next.t("auth_common_zero_default")}</p>
+        </Margin>
+
+        <Margin>
+          <p>{i18next.t("auth_common_generated_tokens")}</p>
+        </Margin>
+
+        <InputWithTitle title={i18next.t("auth_common_cidrs")}>
           <input
             class="uk-input uk-form-width-large"
             name="cidrs"
@@ -39,7 +49,7 @@ export class UserPassUserEditPage extends Page {
             value={user.token_bound_cidrs.join()}
           />
         </InputWithTitle>
-        <InputWithTitle title={i18next.t("userpass_common_exp_max_ttl")}>
+        <InputWithTitle title={i18next.t("auth_common_exp_max_ttl")}>
           <input
             class="uk-input uk-form-width-large"
             name="exp_max_ttl"
@@ -47,7 +57,7 @@ export class UserPassUserEditPage extends Page {
             value={toStr(user.token_explicit_max_ttl)}
           />
         </InputWithTitle>
-        <InputWithTitle title={i18next.t("userpass_common_max_ttl")}>
+        <InputWithTitle title={i18next.t("auth_common_max_ttl")}>
           <input
             class="uk-input uk-form-width-large"
             name="max_ttl"
@@ -55,7 +65,7 @@ export class UserPassUserEditPage extends Page {
             value={toStr(user.token_max_ttl)}
           />
         </InputWithTitle>
-        <InputWithTitle title={i18next.t("userpass_common_default_policy_attached")}>
+        <InputWithTitle title={i18next.t("auth_common_default_policy_attached")}>
           <input
             class="uk-checkbox"
             name="def_pol_attached"
@@ -63,7 +73,7 @@ export class UserPassUserEditPage extends Page {
             value={toStr(user.token_no_default_policy)}
           />
         </InputWithTitle>
-        <InputWithTitle title={i18next.t("userpass_common_max_token_uses")}>
+        <InputWithTitle title={i18next.t("auth_common_max_token_uses")}>
           <input
             class="uk-input uk-form-width-large"
             name="max_uses"
@@ -71,7 +81,7 @@ export class UserPassUserEditPage extends Page {
             value={toStr(user.token_num_uses)}
           />
         </InputWithTitle>
-        <InputWithTitle title={i18next.t("userpass_common_token_peroid")}>
+        <InputWithTitle title={i18next.t("auth_common_token_peroid")}>
           <input
             class="uk-input uk-form-width-large"
             name="period"
@@ -79,7 +89,7 @@ export class UserPassUserEditPage extends Page {
             value={toStr(user.token_period)}
           />
         </InputWithTitle>
-        <InputWithTitle title={i18next.t("userpass_common_policies")}>
+        <InputWithTitle title={i18next.t("auth_common_policies")}>
           <input
             class="uk-input uk-form-width-large"
             name="policies"
@@ -87,7 +97,7 @@ export class UserPassUserEditPage extends Page {
             value={user.token_policies.join()}
           />
         </InputWithTitle>
-        <InputWithTitle title={i18next.t("userpass_common_initial_ttl")}>
+        <InputWithTitle title={i18next.t("auth_common_initial_ttl")}>
           <input
             class="uk-input uk-form-width-large"
             name="initial_ttl"

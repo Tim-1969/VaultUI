@@ -44,7 +44,8 @@ module.exports = {
   home_secrets_title: "Тайны",
   home_secrets_description: "Просмотр, создание и управление тайнами.",
   home_access_title: "Доступ",
-  home_access_description: "Управление доступом к хранилищу и способами аутентификации пользователей.",
+  home_access_description:
+    "Управление доступом к хранилищу и способами аутентификации пользователей.",
 
   // Secrets Home Page
   secrets_home_page_title: "Тайны",
@@ -53,15 +54,15 @@ module.exports = {
   // New Secrets Engine Page
   new_secrets_engine_title: "Новый обработчик тайн",
   new_secrets_engine_kv_title: "Ключ/значение",
-  new_secrets_engine_kv_description: "Для хранения тайн в формате пар \"ключ/значение\".",
+  new_secrets_engine_kv_description: 'Для хранения тайн в формате пар "ключ/значение".',
   new_secrets_engine_totp_title: "TOTP",
-  new_secrets_engine_totp_description: "Для хранения одноразовых кодов, создаваемых алгоритмом TOTP.",
+  new_secrets_engine_totp_description:
+    "Для хранения одноразовых кодов, создаваемых алгоритмом TOTP.",
   new_secrets_engine_transit_title: "Transit",
-  new_secrets_engine_transit_description:
-    "Для шифрования/расшифрования данных без их хранения.",
+  new_secrets_engine_transit_description: "Для шифрования/расшифрования данных без их хранения.",
 
   // New KV Engine Page
-  new_kv_engine_title: "Новый обработчик пар \"ключ/значение\"",
+  new_kv_engine_title: 'Новый обработчик пар "ключ/значение"',
   new_kv_engine_name_input: "Имя",
   new_kv_engine_version_1: "Версия 1",
   new_kv_engine_version_2: "Версия 2",
@@ -175,8 +176,7 @@ module.exports = {
   // Transit View Page
   transit_view_title: "Просмотр Transit",
   transit_view_new_btn: "Новый ключ",
-  transit_view_none_here_text:
-    "У вас нет ключей Transit, хотите ли вы их создать?",
+  transit_view_none_here_text: "У вас нет ключей Transit, хотите ли вы их создать?",
 
   transit_new_key_title: "Новый ключ Transit",
   transit_new_key_name_input: "Имя",
@@ -225,7 +225,8 @@ module.exports = {
   access_auth_methods_title: "Методы аутентификации",
   access_auth_methods_description: "Просмотр и управление разрешёнными методами аутентификации.",
   access_entities_title: "Сущности",
-  access_entities_description: "Просмотр и управление пользователями и объектами, имеющих доступ к хранилищу.",
+  access_entities_description:
+    "Просмотр и управление пользователями и объектами, имеющих доступ к хранилищу.",
   access_groups_title: "Группы",
   access_groups_description: "Просмотр и управление группами сущностей.",
   access_leases_title: "Коды доступа",
@@ -251,17 +252,18 @@ module.exports = {
   auth_view_config_token_type: "Тип кода доступа",
 
   // UserPass Common
-  userpass_common_username: "Имя пользователя",
-  userpass_common_password: "Пароль",
-  userpass_common_cidrs: "Разрешённые IP-адреса кода доступа",
-  userpass_common_exp_max_ttl: "Явный максимальный срок генерируемых кодов доступа",
-  userpass_common_max_ttl: "Максимальный срок генерируемых кодов доступа",
-  userpass_common_default_policy_attached: "Не применять политику по умолчанию к генерируемым кодам доступа",
-  userpass_common_max_token_uses: "Максимальное кол-во применений генерируемых кодов доступа",
-  userpass_common_token_peroid: "Период генерируемых кодов доступа",
-  userpass_common_policies: "Политика генерируемых кодов доступа",
-  userpass_common_initial_ttl: "Изначальный срок генерируемых кодов доступа",
-  userpass_common_type: "Тип генерируемых кодов доступа",
+  auth_common_username: "Имя пользователя",
+  auth_common_password: "Пароль",
+  auth_common_cidrs: "Разрешённые IP-адреса кода доступа",
+  auth_common_exp_max_ttl: "Явный максимальный срок генерируемых кодов доступа",
+  auth_common_max_ttl: "Максимальный срок генерируемых кодов доступа",
+  auth_common_default_policy_attached:
+    "Не применять политику по умолчанию к генерируемым кодам доступа",
+  auth_common_max_token_uses: "Максимальное кол-во применений генерируемых кодов доступа",
+  auth_common_token_peroid: "Период генерируемых кодов доступа",
+  auth_common_policies: "Политика генерируемых кодов доступа",
+  auth_common_initial_ttl: "Изначальный срок генерируемых кодов доступа",
+  auth_common_type: "Тип генерируемых кодов доступа",
 
   // userpass Users List
   userpass_users_list_title: "Список пользователей",

@@ -1,4 +1,5 @@
 import { HeaderAndContent } from "../../../../elements/HeaderAndContent";
+import { Margin } from "../../../../elements/Margin";
 import { Page } from "../../../../types/Page";
 import { getUserPassUser } from "../../../../api/auth/userpass/getUserPassUser";
 import { render } from "preact";
@@ -36,42 +37,51 @@ export class UserPassUserViewPage extends Page {
             {i18next.t("userpass_user_view_edit_btn")}
           </button>
         </p>
+
+        <Margin>
+          <p>{i18next.t("auth_common_zero_default")}</p>
+        </Margin>
+
+        <Margin>
+          <p>{i18next.t("auth_common_generated_tokens")}</p>
+        </Margin>
+
         <table class="uk-table">
           <tbody>
             <HeaderAndContent
-              title={i18next.t("userpass_common_cidrs")}
+              title={i18next.t("auth_common_cidrs")}
               content={user.token_bound_cidrs.join()}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_exp_max_ttl")}
+              title={i18next.t("auth_common_exp_max_ttl")}
               content={toStr(user.token_explicit_max_ttl)}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_max_ttl")}
+              title={i18next.t("auth_common_max_ttl")}
               content={toStr(user.token_max_ttl)}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_default_policy_attached")}
+              title={i18next.t("auth_common_default_policy_attached")}
               content={toStr(user.token_no_default_policy)}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_max_token_uses")}
+              title={i18next.t("auth_common_max_token_uses")}
               content={toStr(user.token_num_uses)}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_token_peroid")}
+              title={i18next.t("auth_common_token_peroid")}
               content={toStr(user.token_period)}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_policies")}
+              title={i18next.t("auth_common_policies")}
               content={user.token_policies.join()}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_initial_ttl")}
+              title={i18next.t("auth_common_initial_ttl")}
               content={toStr(user.token_ttl)}
             />
             <HeaderAndContent
-              title={i18next.t("userpass_common_type")}
+              title={i18next.t("auth_common_type")}
               content={toStr(user.token_type)}
             />
           </tbody>

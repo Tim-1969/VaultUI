@@ -24,7 +24,7 @@ export class UserPassUserNewPage extends Page {
             class="uk-input uk-form-width-large"
             name="username"
             type="text"
-            placeholder={i18next.t("userpass_common_username")}
+            placeholder={i18next.t("auth_common_username")}
           />
         </Margin>
         <Margin>
@@ -32,7 +32,7 @@ export class UserPassUserNewPage extends Page {
             class="uk-input uk-form-width-large"
             name="password"
             type="password"
-            placeholder={i18next.t("userpass_common_password")}
+            placeholder={i18next.t("auth_common_password")}
           />
         </Margin>
         <p class="uk-text-danger" id="errorText" />
