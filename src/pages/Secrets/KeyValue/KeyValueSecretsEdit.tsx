@@ -1,4 +1,4 @@
-import { CodeJarEditor } from "../../../elements/CodeJar/CodeJarEditor";
+import { CodeEditor } from "../../../elements/CodeEditor";
 import { Component, JSX, render } from "preact";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
@@ -90,7 +90,7 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
     return (
       <div>
         <p class="uk-text-danger" id="errorText" />
-        <CodeJarEditor
+        <CodeEditor
           language="json"
           tabSize={4}
           code={this.getStringKVData(this.state.kvData)}

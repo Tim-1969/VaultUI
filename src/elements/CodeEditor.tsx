@@ -2,23 +2,23 @@ import { Component, JSX, createRef } from "preact";
 import { CodeJar as _CodeJar } from "codejar";
 import { highlightElement } from "prismjs";
 
-interface CodeJarProps {
+interface CodeEditorProps {
   language: string;
   tabSize: number;
   code: string;
   onUpdate: (code: string) => void;
 }
 
-export class CodeJarEditor extends Component<CodeJarProps, unknown> {
+export class CodeEditor extends Component<CodeEditorProps, unknown> {
   editorRef = createRef<HTMLDivElement>();
   jar = createRef<_CodeJar | null>();
 
-  highlighter(e: HTMLElement, pos?: unknown): void {
+  highlighter(e: HTMLElement): void {
     highlightElement(e);
   }
 
   componentDidMount(): void {
-    this.jar.current = _CodeJar(this.editorRef.current, this.highlighter, {
+    this.jar.current = _CodeJar(this.editorRef.current, (e) => this.highlighter(e), {
       tab: " ".repeat(this.props.tabSize),
       window: window,
     });
@@ -36,7 +36,7 @@ export class CodeJarEditor extends Component<CodeJarProps, unknown> {
     }
   }
 
-  componentDidUpdate(prevProps: CodeJarProps): void {
+  componentDidUpdate(prevProps: CodeEditorProps): void {
     if (!this.jar.current) return;
 
     if (
@@ -49,6 +49,8 @@ export class CodeJarEditor extends Component<CodeJarProps, unknown> {
   }
 
   render(): JSX.Element {
-    return <div class={"editor language-" + this.props.language} ref={this.editorRef} />;
+    return (
+      <div class={"editor line-numbers language-" + this.props.language} ref={this.editorRef} />
+    );
   }
 }
