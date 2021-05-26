@@ -1,5 +1,6 @@
 import { Component, JSX, createRef } from "preact";
 import { CodeJar as _CodeJar } from "codejar";
+import { highlightElement } from "prismjs";
 
 interface CodeJarProps {
   language: string;
@@ -12,8 +13,12 @@ export class CodeJarEditor extends Component<CodeJarProps, unknown> {
   editorRef = createRef<HTMLDivElement>();
   jar = createRef<_CodeJar | null>();
 
+  highlighter(e: HTMLElement, pos?: unknown): void {
+    highlightElement(e);
+  }
+
   componentDidMount(): void {
-    this.jar.current = _CodeJar(this.editorRef.current, () => {}, {
+    this.jar.current = _CodeJar(this.editorRef.current, this.highlighter, {
       tab: " ".repeat(this.props.tabSize),
       window: window,
     });
