@@ -22,7 +22,7 @@ export class TokenLoginForm extends Component<{ page: Page }, unknown> {
             id="tokenInput"
             name="token"
             type="password"
-            placeholder={i18next.t("token_input")}
+            placeholder={i18next.t("log_in_token_input")}
             required
           />
         </Margin>
@@ -47,7 +47,7 @@ export class TokenLoginForm extends Component<{ page: Page }, unknown> {
       const error = e as Error;
       document.getElementById("tokenInput").classList.add("uk-form-danger");
       if (error.message == "permission denied") {
-        setErrorText(i18next.t("token_login_error"));
+        setErrorText(i18next.t("log_in_token_login_error"));
       } else {
         setErrorText(error.message);
       }
@@ -69,7 +69,7 @@ export class UsernameLoginForm extends Component<{ page: Page }, unknown> {
             id="usernameInput"
             name="username"
             type="text"
-            placeholder={i18next.t("username_input")}
+            placeholder={i18next.t("log_in_username_input")}
             required
           />
         </Margin>
@@ -79,7 +79,7 @@ export class UsernameLoginForm extends Component<{ page: Page }, unknown> {
             id="passwordInput"
             name="password"
             type="password"
-            placeholder={i18next.t("password_input")}
+            placeholder={i18next.t("log_in_password_input")}
             required
           />
         </Margin>

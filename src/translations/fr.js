@@ -23,11 +23,11 @@ module.exports = {
 
   // Me Page
   me_page_title: "Profil/Paramètres",
-  log_out_btn: "Déconnexion",
-  seal_vault_btn: "Verrouiller le coffre",
-  copy_token_btn: "Copier le jeton",
-  renew_lease_btn: "Renouveler le jeton",
-  change_language_btn: "Changer la langue",
+  me_log_out_btn: "Déconnexion",
+  me_seal_vault_btn: "Verrouiller le coffre",
+  me_copy_token_btn: "Copier le jeton",
+  me_renew_lease_btn: "Renouveler le jeton",
+  me_change_language_btn: "Changer la langue",
 
   // Home Page
   home_page_title: "Accueil",
@@ -37,10 +37,10 @@ module.exports = {
 
   // Unseal Page
   unseal_vault_text: "Ouvrir le Vault",
-  submit_key_btn: "Ajouter la clé",
+  unseal_submit_key_btn: "Ajouter la clé",
   unseal_input_btn: "Basculer en entrée de clé manuelle",
   unseal_qr_btn: "Basculer en entrée de QR code",
-  key_input_placeholder: "Clé",
+  unseal_key_input_placeholder: "Clé",
   unseal_keys_progress: "Clés: {{progress}}/{{keys_needed}}",
 
   // Language Selector Page
@@ -49,15 +49,15 @@ module.exports = {
 
   // Password Generator Page
   password_generator_title: "Générateur de mot de passe",
-  gen_password_btn: "Générer le mot de passe",
+  password_generator_generate_btn: "Générer le mot de passe",
 
   // Login Page
   log_in_title: "Connexion",
   log_in_with_token: "Jeton",
   log_in_with_username: "Nom d'utilisateur",
-  token_input: "Jeton",
-  username_input: "Nom d'utilisateur",
-  password_input: "Mot de passe",
+  log_in_token_input: "Jeton",
+  log_in_username_input: "Nom d'utilisateur",
+  log_in_password_input: "Mot de passe",
   log_in_btn: "Se connecter",
 
   // Key Value Delete Page

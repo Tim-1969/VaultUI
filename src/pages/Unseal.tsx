@@ -31,13 +31,13 @@ export function UnsealFormInput(props: UnsealFormInputProps): JSX.Element {
           class="uk-input uk-form-width-medium"
           name="unsealKey"
           type="password"
-          placeholder={i18next.t("key_input_placeholder")}
+          placeholder={i18next.t("unseal_key_input_placeholder")}
           required
         />
       </MarginInline>
       <MarginInline>
         <button class="uk-button uk-button-primary" type="submit">
-          {i18next.t("submit_key_btn")}
+          {i18next.t("unseal_submit_key_btn")}
         </button>
       </MarginInline>
     </Form>

@@ -49,11 +49,11 @@ export class MePage extends Page {
               await this.router.changePage("HOME");
             }}
           >
-            {i18next.t("log_out_btn")}
+            {i18next.t("me_log_out_btn")}
           </a>
         </li>
         <li>
-          <CopyLink text={i18next.t("copy_token_btn")} data={this.state.token} />
+          <CopyLink text={i18next.t("me_copy_token_btn")} data={this.state.token} />
         </li>
         <li>
           <a
@@ -67,7 +67,7 @@ export class MePage extends Page {
               }
             }}
           >
-            {i18next.t("renew_lease_btn")}
+            {i18next.t("me_renew_lease_btn")}
           </a>
         </li>
         {canSealVault && (
@@ -78,7 +78,7 @@ export class MePage extends Page {
                 await this.router.changePage("UNSEAL");
               }}
             >
-              {i18next.t("seal_vault_btn")}
+              {i18next.t("me_seal_vault_btn")}
             </a>
           </li>
         )}
@@ -88,7 +88,7 @@ export class MePage extends Page {
               await this.router.changePage("SET_LANGUAGE");
             }}
           >
-            {i18next.t("change_language_btn")}
+            {i18next.t("me_change_language_btn")}
           </a>
         </li>
       </ul>,

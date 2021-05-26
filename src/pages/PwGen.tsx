@@ -63,7 +63,7 @@ export class PasswordGenerator extends Component<unknown, PasswordGeneratorState
   alphabetSelector = createRef<HTMLSelectElement>();
 
   getPasswordLengthText(length: number): string {
-    return i18next.t("password_length_title", {
+    return i18next.t("password_generator_length_title", {
       min: length,
       max: passwordLengthMax,
     });
@@ -130,7 +130,7 @@ export class PasswordGenerator extends Component<unknown, PasswordGeneratorState
         />
         <Margin>
           <button class="uk-button uk-button-primary uk-margin-bottom" type="submit">
-            {i18next.t("gen_password_btn")}
+            {i18next.t("password_generator_generate_btn")}
           </button>
         </Margin>
       </Form>

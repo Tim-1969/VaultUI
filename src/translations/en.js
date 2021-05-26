@@ -30,11 +30,11 @@ module.exports = {
 
   // Me Page
   me_page_title: "Me/Settings",
-  log_out_btn: "Log Out",
-  seal_vault_btn: "Seal Vault",
-  copy_token_btn: "Copy Token",
-  renew_lease_btn: "Renew Token Lease",
-  change_language_btn: "Change Language",
+  me_log_out_btn: "Log Out",
+  me_seal_vault_btn: "Seal Vault",
+  me_copy_token_btn: "Copy Token",
+  me_renew_lease_btn: "Renew Token Lease",
+  me_change_language_btn: "Change Language",
 
   // Home Page
   home_page_title: "Home",
@@ -79,10 +79,10 @@ module.exports = {
 
   // Unseal Page
   unseal_vault_text: "Unseal the Vault",
-  submit_key_btn: "Submit Key",
+  unseal_submit_key_btn: "Submit Key",
   unseal_input_btn: "Switch to Manual Key Input",
   unseal_qr_btn: "Switch to QR Key Input",
-  key_input_placeholder: "Key",
+  unseal_key_input_placeholder: "Key",
   unseal_keys_progress: "Keys: {{progress}}/{{keys_needed}}",
 
   // Language Selector Page
@@ -91,18 +91,18 @@ module.exports = {
 
   // Password Generator Page
   password_generator_title: "Password Generator",
-  password_length_title: "Password Length ({{min}}/{{max}})",
-  gen_password_btn: "Generate Password",
+  password_generator_length_title: "Password Length ({{min}}/{{max}})",
+  password_generator_generate_btn: "Generate Password",
 
   // Login Page
   log_in_title: "Login",
   log_in_with_token: "Token",
   log_in_with_username: "Username",
-  token_input: "Token",
-  username_input: "Username",
-  password_input: "Password",
+  log_in_token_input: "Token",
+  log_in_username_input: "Username",
+  log_in_password_input: "Password",
   log_in_btn: "Login",
-  token_login_error: "Invalid Token",
+  log_in_token_login_error: "Invalid Token",
 
   // Key Value Delete Page
   kv_delete_title: "K/V Delete",

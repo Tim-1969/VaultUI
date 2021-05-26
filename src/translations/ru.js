@@ -30,11 +30,11 @@ module.exports = {
 
   // Me Page
   me_page_title: "Профиль/параметры",
-  log_out_btn: "Выход",
-  seal_vault_btn: "Закрыть хранилище",
-  copy_token_btn: "Копировать код доступа",
-  renew_lease_btn: "Продлить действие кода доступа",
-  change_language_btn: "Выбор языка",
+  me_log_out_btn: "Выход",
+  me_seal_vault_btn: "Закрыть хранилище",
+  me_copy_token_btn: "Копировать код доступа",
+  me_renew_lease_btn: "Продлить действие кода доступа",
+  me_change_language_btn: "Выбор языка",
 
   // Home Page
   home_page_title: "Главная страница",
@@ -80,10 +80,10 @@ module.exports = {
 
   // Unseal Page
   unseal_vault_text: "Раскрыть хранилище",
-  submit_key_btn: "Отправить ключ",
+  unseal_submit_key_btn: "Отправить ключ",
   unseal_input_btn: "Ввести ключ вручную",
   unseal_qr_btn: "Ввести ключ через QR-код",
-  key_input_placeholder: "Ключ",
+  unseal_key_input_placeholder: "Ключ",
   unseal_keys_progress: "Ключи: {{progress}}/{{keys_needed}}",
 
   // Language Selector Page
@@ -92,18 +92,18 @@ module.exports = {
 
   // Password Generator Page
   password_generator_title: "Генератор паролей",
-  password_length_title: "Длина пароля ({{min}}/{{max}})",
-  gen_password_btn: "Генерировать",
+  password_generator_length_title: "Длина пароля ({{min}}/{{max}})",
+  password_generator_generate_btn: "Генерировать",
 
   // Login Page
   log_in_title: "Вход",
   log_in_with_token: "Вход с кодом доступа",
   log_in_with_username: "Вход по имени",
-  token_input: "Код доступа",
-  username_input: "Имя пользователя",
-  password_input: "Пароль",
+  log_in_token_input: "Код доступа",
+  log_in_username_input: "Имя пользователя",
+  log_in_password_input: "Пароль",
   log_in_btn: "Войти",
-  token_login_error: "Неправильный код доступа",
+  log_in_token_login_error: "Неправильный код доступа",
 
   // Key Value Delete Page
   kv_delete_title: "Удаление ключа/значения",
