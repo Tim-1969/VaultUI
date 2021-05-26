@@ -1,7 +1,7 @@
 import { CodeBlock } from "../../elements/CodeBlock";
 import { Margin } from "../../elements/Margin";
 import { Page } from "../../types/Page";
-import { getPolicy } from "../../api/sys/getPolicy";
+import { getPolicy } from "../../api/sys/policies/getPolicy";
 import { notImplemented, prePageChecks } from "../../pageUtils";
 import { render } from "preact";
 import i18next from "i18next";
@@ -26,7 +26,12 @@ export class PolicyViewPage extends Page {
             {i18next.t("policy_view_edit_btn")}
           </button>
           {this.state.policyItem !== "default" && (
-            <button class="uk-button uk-button-danger" onClick={notImplemented}>
+            <button
+              class="uk-button uk-button-danger"
+              onClick={async () => {
+                await this.router.changePage("POLICY_DELETE");
+              }}
+            >
               {i18next.t("policy_view_delete_btn")}
             </button>
           )}

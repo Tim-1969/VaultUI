@@ -1,6 +1,6 @@
 import { Margin } from "../../elements/Margin";
 import { Page } from "../../types/Page";
-import { getPolicies } from "../../api/sys/getPolicies";
+import { getPolicies } from "../../api/sys/policies/getPolicies";
 import { notImplemented, prePageChecks } from "../../pageUtils";
 import { render } from "preact";
 import i18next from "i18next";

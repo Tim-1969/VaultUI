@@ -22,6 +22,7 @@ import { NewTransitEnginePage } from "./pages/Secrets/NewEngines/NewTransitEngin
 import { NewTransitKeyPage } from "./pages/Secrets/Transit/NewTransitKey";
 import { Page } from "./types/Page";
 import { PoliciesHomePage } from "./pages/Policies/PoliciesHome";
+import { PolicyDeletePage } from "./pages/Policies/PolicyDelete";
 import { PolicyViewPage } from "./pages/Policies/PolicyView";
 import { PwGenPage } from "./pages/PwGen";
 import { SecretsHomePage } from "./pages/Secrets/SecretsHome";
@@ -58,6 +59,7 @@ export const allPages: pagesList = {
 
   POLICIES_HOME: new PoliciesHomePage(),
   POLICY_VIEW: new PolicyViewPage(),
+  POLICY_DELETE: new PolicyDeletePage(),
 
   ACCESS_HOME: new AccessHomePage(),
 
