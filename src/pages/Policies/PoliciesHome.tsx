@@ -1,7 +1,7 @@
 import { Margin } from "../../elements/Margin";
 import { Page } from "../../types/Page";
 import { getPolicies } from "../../api/sys/policies/getPolicies";
-import { notImplemented, prePageChecks } from "../../pageUtils";
+import { prePageChecks } from "../../pageUtils";
 import { render } from "preact";
 import i18next from "i18next";
 
@@ -25,7 +25,12 @@ export class PoliciesHomePage extends Page {
     render(
       <div>
         <p>
-          <button class="uk-button uk-button-primary" onClick={notImplemented}>
+          <button
+            class="uk-button uk-button-primary"
+            onClick={async () => {
+              await this.router.changePage("POLICY_NEW");
+            }}
+          >
             {i18next.t("policies_home_new_btn")}
           </button>
         </p>

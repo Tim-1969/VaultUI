@@ -303,4 +303,10 @@ module.exports = {
   policy_delete_text:
     "Are you sure you want to delete this policy? It can't be reversed and there is a chance that all permissions will break.",
   policy_delete_btn: "Delete Policy",
+
+  // Policy New
+  policy_new_title: "Create New Policy",
+  policy_new_name_placeholder: "Policy Name",
+  policy_new_create_btn: "Create",
+  policy_new_already_exists: "This policy already exists.",
 };
