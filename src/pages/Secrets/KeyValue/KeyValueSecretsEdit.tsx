@@ -84,7 +84,7 @@ export class KVEditor extends Component<KVEditProps, KVEditState> {
 
   render(): JSX.Element {
     if (!this.state.dataLoaded) {
-      return <p>{i18next.t("kv_sec_edit_loading")}</p>;
+      return <p>{i18next.t("content_loading")}</p>;
     }
 
     return (

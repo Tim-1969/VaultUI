@@ -23,6 +23,7 @@ import { NewTransitKeyPage } from "./pages/Secrets/Transit/NewTransitKey";
 import { Page } from "./types/Page";
 import { PoliciesHomePage } from "./pages/Policies/PoliciesHome";
 import { PolicyDeletePage } from "./pages/Policies/PolicyDelete";
+import { PolicyEditPage } from "./pages/Policies/PolicyEdit";
 import { PolicyNewPage } from "./pages/Policies/PolicyNew";
 import { PolicyViewPage } from "./pages/Policies/PolicyView";
 import { PwGenPage } from "./pages/PwGen";
@@ -61,6 +62,7 @@ export const allPages: pagesList = {
   POLICIES_HOME: new PoliciesHomePage(),
   POLICY_VIEW: new PolicyViewPage(),
   POLICY_NEW: new PolicyNewPage(),
+  POLICY_EDIT: new PolicyEditPage(),
   POLICY_DELETE: new PolicyDeletePage(),
 
   ACCESS_HOME: new AccessHomePage(),
