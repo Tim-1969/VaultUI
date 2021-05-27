@@ -44,8 +44,9 @@ module.exports = {
   home_secrets_title: "Тайны",
   home_secrets_description: "Просмотр, создание и управление тайнами.",
   home_access_title: "Доступ",
-  home_access_description:
-    "Управление доступом к хранилищу и способами аутентификации пользователей.",
+  home_access_description: "Управление доступом к хранилищу и способами аутентификации пользователей.",
+  home_policies_title: "Политика",
+  home_policies_description: "Управление политикой и правами доступа.",
 
   // Secrets Home Page
   secrets_home_page_title: "Тайны",
@@ -56,10 +57,10 @@ module.exports = {
   new_secrets_engine_kv_title: "Ключ/значение",
   new_secrets_engine_kv_description: 'Для хранения тайн в формате пар "ключ/значение".',
   new_secrets_engine_totp_title: "TOTP",
-  new_secrets_engine_totp_description:
-    "Для хранения одноразовых кодов, создаваемых алгоритмом TOTP.",
+  new_secrets_engine_totp_description: "Для хранения одноразовых кодов, создаваемых алгоритмом TOTP.",
   new_secrets_engine_transit_title: "Transit",
-  new_secrets_engine_transit_description: "Для шифрования/расшифрования данных без их хранения.",
+  new_secrets_engine_transit_description:
+    "Для шифрования/расшифрования данных без их хранения.",
 
   // New KV Engine Page
   new_kv_engine_title: 'Новый обработчик пар "ключ/значение"',
@@ -176,7 +177,8 @@ module.exports = {
   // Transit View Page
   transit_view_title: "Просмотр Transit",
   transit_view_new_btn: "Новый ключ",
-  transit_view_none_here_text: "У вас нет ключей Transit, хотите ли вы их создать?",
+  transit_view_none_here_text:
+    "У вас нет ключей Transit, хотите ли вы их создать?",
 
   transit_new_key_title: "Новый ключ Transit",
   transit_new_key_name_input: "Имя",
@@ -225,8 +227,7 @@ module.exports = {
   access_auth_methods_title: "Методы аутентификации",
   access_auth_methods_description: "Просмотр и управление разрешёнными методами аутентификации.",
   access_entities_title: "Сущности",
-  access_entities_description:
-    "Просмотр и управление пользователями и объектами, имеющих доступ к хранилищу.",
+  access_entities_description: "Просмотр и управление пользователями и объектами, имеющих доступ к хранилищу.",
   access_groups_title: "Группы",
   access_groups_description: "Просмотр и управление группами сущностей.",
   access_leases_title: "Коды доступа",
@@ -254,16 +255,17 @@ module.exports = {
   // UserPass Common
   auth_common_username: "Имя пользователя",
   auth_common_password: "Пароль",
-  auth_common_cidrs: "Разрешённые IP-адреса кода доступа",
-  auth_common_exp_max_ttl: "Явный максимальный срок генерируемых кодов доступа",
-  auth_common_max_ttl: "Максимальный срок генерируемых кодов доступа",
-  auth_common_default_policy_attached:
-    "Не применять политику по умолчанию к генерируемым кодам доступа",
-  auth_common_max_token_uses: "Максимальное кол-во применений генерируемых кодов доступа",
-  auth_common_token_peroid: "Период генерируемых кодов доступа",
-  auth_common_policies: "Политика генерируемых кодов доступа",
-  auth_common_initial_ttl: "Изначальный срок генерируемых кодов доступа",
-  auth_common_type: "Тип генерируемых кодов доступа",
+  auth_common_zero_default: "Когда в поле указано значение 0, будет использовано значение по умолчанию",
+  auth_common_generated_tokens: "Эти параметры будут применяться к кодам доступа, создаваемым при входе в систему",
+  auth_common_cidrs: "Разрешённые IP-адреса (CIDR)",
+  auth_common_exp_max_ttl: "Явный максимальный срок",
+  auth_common_max_ttl: "Максимальный срок",
+  auth_common_default_policy_attached: "Не применять политику по умолчанию",
+  auth_common_max_token_uses: "Максимальное кол-во применений кодов доступа",
+  auth_common_token_peroid: "Период (в секундах)",
+  auth_common_policies: "Политика",
+  auth_common_initial_ttl: "Изначальный срок",
+  auth_common_type: "Тип кодов доступа",
 
   // userpass Users List
   userpass_users_list_title: "Список пользователей",
@@ -286,4 +288,28 @@ module.exports = {
   userpass_user_delete_text:
     "Вы уверены, что хотите удалить этого пользователя? Это действие нельзя отменить.",
   userpass_user_delete_btn: "Удалить пользователя",
+
+  // Policies Home
+  policies_home_title: "Политика",
+  policies_home_new_btn: "Новая политика",
+
+  // Policy View
+  policy_view_title: "Просмотр политики ({{policy}})",
+  policy_view_edit_btn: "Редактировать",
+  policy_view_delete_btn: "Удалить",
+
+  // Policy New
+  policy_new_title: "Создание новой политики",
+  policy_new_name_placeholder: "Название политики",
+  policy_new_create_btn: "Создать",
+  policy_new_already_exists: "Данная политика уже существует.",
+
+  policy_edit_title: "Редактирование политики ({{policy}})",
+  policy_edit_edit_btn: "Редактировать",
+
+  // Policy Delete
+  policy_delete_title: "Удаление политики ({{policy}})",
+  policy_delete_text:
+    "Вы уверены, что хотите удалить эту политику? Данное действие нельзя отменить, и есть возможность, что будут испорчены права доступа.",
+  policy_delete_btn: "Удалить политику",
 };
