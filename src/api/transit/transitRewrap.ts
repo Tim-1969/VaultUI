@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 import { removeDoubleSlash } from "../../utils";
 
 type RewrapResult = {
@@ -24,14 +24,12 @@ export async function transitRewrap(
     body: JSON.stringify(payload),
   });
 
-  const response = await fetch(request);
-  const data = (await response.json()) as {
-    errors?: string[];
+  const resp = await fetch(request);
+  await checkResponse(resp);
+
+  const data = (await resp.json()) as {
     data?: RewrapResult;
   };
-  if (!response.ok) {
-    throw new Error(data.errors[0]);
-  } else {
-    return data.data;
-  }
+
+  return data.data;
 }

@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 
 export type MountType = {
   type: string;
@@ -16,6 +16,8 @@ export async function getMounts(): Promise<MountsType> {
     headers: getHeaders(),
   });
   const resp = await fetch(request);
+  await checkResponse(resp);
+
   const data = (await resp.json()) as { data: { secret: MountsType } };
   return data.data.secret;
 }

@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 import { removeDoubleSlash } from "../../utils";
 
 export async function addNewTOTP(baseMount: string, parms: { name: string }): Promise<void> {
@@ -14,10 +14,5 @@ export async function addNewTOTP(baseMount: string, parms: { name: string }): Pr
     },
   );
   const resp = await fetch(request);
-  if (!resp.ok) {
-    const data = (await resp.json()) as { errors?: string[] };
-    if ("errors" in data) {
-      throw new Error(data.errors[0]);
-    }
-  }
+  await checkResponse(resp);
 }

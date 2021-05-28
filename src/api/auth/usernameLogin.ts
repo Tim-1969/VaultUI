@@ -1,4 +1,4 @@
-import { appendAPIURL } from "../apiUtils";
+import { appendAPIURL, checkResponse } from "../apiUtils";
 
 export async function usernameLogin(username: string, password: string): Promise<string> {
   const request = new Request(appendAPIURL(`/v1/auth/userpass/login/${username}`), {
@@ -10,13 +10,10 @@ export async function usernameLogin(username: string, password: string): Promise
   });
 
   const resp = await fetch(request);
+  await checkResponse(resp);
+
   const data = (await resp.json()) as {
-    auth?: { client_token: string };
-    errors?: string[];
+    auth: { client_token: string };
   };
-  if ("auth" in data) {
-    return data.auth.client_token;
-  } else if ("errors" in data) {
-    throw new Error(data.errors[0]);
-  }
+  return data.auth.client_token;
 }

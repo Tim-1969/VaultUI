@@ -1,5 +1,5 @@
 import { DoesNotExistError } from "../../types/internalErrors";
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 
 export async function getSecrets(
   baseMount: string,
@@ -16,10 +16,10 @@ export async function getSecrets(
   const request = new Request(appendAPIURL(secretURL), {
     headers: getHeaders(),
   });
+
   const resp = await fetch(request);
-  if (resp.status == 404) {
-    throw DoesNotExistError;
-  }
+  await checkResponse(resp);
+
   const data = (await resp.json()) as { data: { keys: string[] } };
   return data.data.keys;
 }

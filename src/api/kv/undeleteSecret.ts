@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 import { getObjectKeys, removeDoubleSlash } from "../../utils";
 import { getSecretMetadata } from "./getSecretMetadata";
 
@@ -24,9 +24,6 @@ export async function undeleteSecret(
     },
     body: JSON.stringify({ versions: [version] }),
   });
-  const response = await fetch(request);
-  if (!response.ok) {
-    const json = (await response.json()) as { errors: string[] };
-    throw new Error(json.errors[0]);
-  }
+  const resp = await fetch(request);
+  await checkResponse(resp);
 }

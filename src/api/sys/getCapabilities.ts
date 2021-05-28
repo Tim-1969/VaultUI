@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 import { removeDoubleSlash } from "../../utils";
 
 export async function getCapabilitiesPath(path: string): Promise<string[]> {
@@ -12,8 +12,10 @@ export async function getCapabilitiesPath(path: string): Promise<string[]> {
       paths: [removeDoubleSlash(path)],
     }),
   });
-  const response = await fetch(request);
-  const data = (await response.json()) as { capabilities: string[] };
+  const resp = await fetch(request);
+  await checkResponse(resp);
+
+  const data = (await resp.json()) as { capabilities: string[] };
   return data.capabilities;
 }
 

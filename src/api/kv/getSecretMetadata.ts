@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 
 type SecretMetadataType = {
   versions: Record<string, unknown>;
@@ -17,6 +17,8 @@ export async function getSecretMetadata(
   );
 
   const resp = await fetch(request);
+  await checkResponse(resp);
+
   const data = (await resp.json()) as { data: SecretMetadataType };
   return data.data;
 }

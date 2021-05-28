@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 import { removeDoubleSlash } from "../../utils";
 
 export async function deleteSecret(
@@ -35,9 +35,6 @@ export async function deleteSecret(
       headers: getHeaders(),
     });
   }
-  const response = await fetch(request);
-  if (!response.ok) {
-    const json = (await response.json()) as { errors: string[] };
-    throw new Error(json.errors[0]);
-  }
+  const resp = await fetch(request);
+  await checkResponse(resp);
 }

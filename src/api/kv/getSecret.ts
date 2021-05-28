@@ -1,4 +1,4 @@
-import { appendAPIURL, getHeaders } from "../apiUtils";
+import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 
 export async function getSecret(
   baseMount: string,
@@ -19,6 +19,9 @@ export async function getSecret(
   });
 
   const resp = await fetch(request);
+  await checkResponse(resp);
+
+
   const data = (await resp.json()) as unknown;
   if (secretMountType == "kv-v2") {
     return (data as { data: { data: Record<string, unknown> } }).data.data;
