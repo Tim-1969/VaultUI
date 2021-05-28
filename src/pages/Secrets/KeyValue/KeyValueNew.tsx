@@ -63,7 +63,7 @@ export class KeyValueNewPage extends Page {
 
   async renderPageTitle(): Promise<void> {
     render(
-      <SecretTitleElement router={this.router} suffix={i18next.t("kv_new_suffix")} />,
+      <SecretTitleElement page={this} suffix={i18next.t("kv_new_suffix")} />,
       this.router.pageTitleElement,
     );
   }

@@ -98,7 +98,7 @@ export class TransitViewPage extends Page {
   }
 
   async renderPageTitle(): Promise<void> {
-    render(<SecretTitleElement router={this.router} />, this.router.pageTitleElement);
+    render(<SecretTitleElement page={this} />, this.router.pageTitleElement);
   }
 
   get name(): string {

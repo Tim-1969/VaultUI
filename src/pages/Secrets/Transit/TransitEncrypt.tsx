@@ -81,7 +81,7 @@ export class TransitEncryptPage extends Page {
 
   async renderPageTitle(): Promise<void> {
     render(
-      <SecretTitleElement router={this.router} suffix={i18next.t("transit_encrypt_suffix")} />,
+      <SecretTitleElement page={this} suffix={i18next.t("transit_encrypt_suffix")} />,
       this.router.pageTitleElement,
     );
   }

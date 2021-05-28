@@ -117,7 +117,7 @@ export class KeyValueSecretEditPage extends Page {
 
   async renderPageTitle(): Promise<void> {
     render(
-      <SecretTitleElement router={this.router} suffix={i18next.t("kv_sec_edit_suffix")} />,
+      <SecretTitleElement page={this} suffix={i18next.t("kv_sec_edit_suffix")} />,
       this.router.pageTitleElement,
     );
   }

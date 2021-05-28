@@ -131,7 +131,7 @@ export class TOTPNewPage extends Page {
 
   async renderPageTitle(): Promise<void> {
     render(
-      <SecretTitleElement router={this.router} suffix={i18next.t("totp_new_suffix")} />,
+      <SecretTitleElement page={this} suffix={i18next.t("totp_new_suffix")} />,
       this.router.pageTitleElement,
     );
   }

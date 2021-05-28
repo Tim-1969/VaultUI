@@ -96,7 +96,7 @@ export class TransitRewrapPage extends Page {
 
   async renderPageTitle(): Promise<void> {
     render(
-      <SecretTitleElement router={this.router} suffix={i18next.t("transit_rewrap_suffix")} />,
+      <SecretTitleElement page={this} suffix={i18next.t("transit_rewrap_suffix")} />,
       this.router.pageTitleElement,
     );
   }

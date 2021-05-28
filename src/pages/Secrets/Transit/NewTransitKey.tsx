@@ -78,7 +78,7 @@ export class NewTransitKeyPage extends Page {
 
   async renderPageTitle(): Promise<void> {
     render(
-      <SecretTitleElement router={this.router} suffix={i18next.t("transit_new_key_suffix")} />,
+      <SecretTitleElement page={this} suffix={i18next.t("transit_new_key_suffix")} />,
       this.router.pageTitleElement,
     );
   }

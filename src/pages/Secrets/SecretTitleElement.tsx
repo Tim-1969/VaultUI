@@ -1,28 +1,26 @@
 import { JSX } from "preact/jsx-runtime";
-import { PageRouter } from "z-pagerouter";
-import { PageState } from "../../state/PageState";
+import { Page } from "../../types/Page";
 
-function currentTitleSecretText(state: PageState): string {
-  let secretItemText = state.secretItem;
-  if (state.secretVersion !== null) secretItemText += ` (v${state.secretVersion})`;
+function currentTitleSecretText(page: Page): string {
+  let secretItemText = page.state.secretItem;
+  if (page.state.secretVersion !== null) secretItemText += ` (v${page.state.secretVersion})`;
   return secretItemText;
 }
 
 type SecretTitleElementProps = {
-  router: PageRouter;
+  page: Page;
   suffix?: string;
 };
 
 export function SecretTitleElement(props: SecretTitleElementProps): JSX.Element {
-  const router = props.router;
+  const page = props.page;
   const suffix = props.suffix || "";
-  const state = router.state as PageState;
 
   return (
     <div>
       <a
         onClick={async () => {
-          await router.changePage("SECRETS_HOME");
+          await page.router.changePage("SECRETS_HOME");
         }}
       >
         {"/ "}
@@ -30,35 +28,38 @@ export function SecretTitleElement(props: SecretTitleElementProps): JSX.Element 
 
       <a
         onClick={async () => {
-          state.secretPath = [];
-          state.secretItem = "";
-          state.secretVersion = null;
+          page.state.secretPath = [];
+          page.state.secretItem = "";
+          page.state.secretVersion = null;
 
-          if (state.secretMountType.startsWith("kv") || state.secretMountType == "cubbyhole") {
-            await router.changePage("KEY_VALUE_VIEW");
-          } else if (state.secretMountType == "totp") {
-            await router.changePage("TOTP_VIEW");
-          } else if (state.secretMountType == "transit") {
-            await router.changePage("TRANSIT_VIEW");
+          if (
+            page.state.secretMountType.startsWith("kv") ||
+            page.state.secretMountType == "cubbyhole"
+          ) {
+            await page.router.changePage("KEY_VALUE_VIEW");
+          } else if (page.state.secretMountType == "totp") {
+            await page.router.changePage("TOTP_VIEW");
+          } else if (page.state.secretMountType == "transit") {
+            await page.router.changePage("TRANSIT_VIEW");
           }
         }}
       >
-        {state.baseMount + " "}
+        {page.state.baseMount + " "}
       </a>
-      {...state.secretPath.map((secretPath, index, secretPaths) => (
+      {...page.state.secretPath.map((secretPath, index, secretPaths) => (
         <a
           onClick={async () => {
-            state.secretVersion = null;
-            if (state.secretMountType.startsWith("kv")) {
-              state.secretPath = secretPaths.slice(0, index + 1);
-              await router.changePage("KEY_VALUE_VIEW");
+            page.state.secretVersion = null;
+            if (page.state.secretMountType.startsWith("kv")) {
+              page.state.secretPath = secretPaths.slice(0, index + 1);
+              await page.router.changePage("KEY_VALUE_VIEW");
             }
           }}
         >
           {secretPath + " "}
         </a>
       ))}
-      {state.secretItem.length != 0 && <span>{currentTitleSecretText(state)}</span>}
+      {page.state.secretItem.length != 0 && <span>{currentTitleSecretText(page)}</span>}
       {suffix.length != 0 && <span>{suffix}</span>}
     </div>
   );

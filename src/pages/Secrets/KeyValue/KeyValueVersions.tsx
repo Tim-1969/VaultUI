@@ -44,7 +44,7 @@ export class KeyValueVersionsPage extends Page {
 
   async renderPageTitle(): Promise<void> {
     render(
-      <SecretTitleElement router={this.router} suffix={i18next.t("kv_sec_versions_suffix")} />,
+      <SecretTitleElement page={this} suffix={i18next.t("kv_sec_versions_suffix")} />,
       this.router.pageTitleElement,
     );
   }
