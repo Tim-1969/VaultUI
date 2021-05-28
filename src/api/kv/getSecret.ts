@@ -47,8 +47,8 @@ export async function getSecret(
   version: string | null = null,
 ): Promise<Record<string, unknown>> {
   if (secretMountType == "kv-v2") {
-    return await getSecretKV2(baseMount, secretPath, name, version)
+    return await getSecretKV2(baseMount, secretPath, name, version);
   } else {
-    return await getSecretKV1(baseMount, secretPath, name)
+    return await getSecretKV1(baseMount, secretPath, name);
   }
 }

@@ -44,7 +44,8 @@ module.exports = {
   home_secrets_title: "Тайны",
   home_secrets_description: "Просмотр, создание и управление тайнами.",
   home_access_title: "Доступ",
-  home_access_description: "Управление доступом к хранилищу и способами аутентификации пользователей.",
+  home_access_description:
+    "Управление доступом к хранилищу и способами аутентификации пользователей.",
   home_policies_title: "Политика",
   home_policies_description: "Управление политикой и правами доступа.",
 
@@ -57,10 +58,10 @@ module.exports = {
   new_secrets_engine_kv_title: "Ключ/значение",
   new_secrets_engine_kv_description: 'Для хранения тайн в формате пар "ключ/значение".',
   new_secrets_engine_totp_title: "TOTP",
-  new_secrets_engine_totp_description: "Для хранения одноразовых кодов, создаваемых алгоритмом TOTP.",
+  new_secrets_engine_totp_description:
+    "Для хранения одноразовых кодов, создаваемых алгоритмом TOTP.",
   new_secrets_engine_transit_title: "Transit",
-  new_secrets_engine_transit_description:
-    "Для шифрования/расшифрования данных без их хранения.",
+  new_secrets_engine_transit_description: "Для шифрования/расшифрования данных без их хранения.",
 
   // New KV Engine Page
   new_kv_engine_title: 'Новый обработчик пар "ключ/значение"',
@@ -177,8 +178,7 @@ module.exports = {
   // Transit View Page
   transit_view_title: "Просмотр Transit",
   transit_view_new_btn: "Новый ключ",
-  transit_view_none_here_text:
-    "У вас нет ключей Transit, хотите ли вы их создать?",
+  transit_view_none_here_text: "У вас нет ключей Transit, хотите ли вы их создать?",
 
   transit_new_key_title: "Новый ключ Transit",
   transit_new_key_name_input: "Имя",
@@ -227,7 +227,8 @@ module.exports = {
   access_auth_methods_title: "Методы аутентификации",
   access_auth_methods_description: "Просмотр и управление разрешёнными методами аутентификации.",
   access_entities_title: "Сущности",
-  access_entities_description: "Просмотр и управление пользователями и объектами, имеющих доступ к хранилищу.",
+  access_entities_description:
+    "Просмотр и управление пользователями и объектами, имеющих доступ к хранилищу.",
   access_groups_title: "Группы",
   access_groups_description: "Просмотр и управление группами сущностей.",
   access_leases_title: "Коды доступа",
@@ -255,8 +256,10 @@ module.exports = {
   // UserPass Common
   auth_common_username: "Имя пользователя",
   auth_common_password: "Пароль",
-  auth_common_zero_default: "Когда в поле указано значение 0, будет использовано значение по умолчанию",
-  auth_common_generated_tokens: "Эти параметры будут применяться к кодам доступа, создаваемым при входе в систему",
+  auth_common_zero_default:
+    "Когда в поле указано значение 0, будет использовано значение по умолчанию",
+  auth_common_generated_tokens:
+    "Эти параметры будут применяться к кодам доступа, создаваемым при входе в систему",
   auth_common_cidrs: "Разрешённые IP-адреса (CIDR)",
   auth_common_exp_max_ttl: "Явный максимальный срок",
   auth_common_max_ttl: "Максимальный срок",

@@ -1,6 +1,7 @@
 export class PageState {
   constructor() {
-    // Do Nothing
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("reset")) localStorage.clear();
   }
 
   // NOTE: When a item in the page state isn't a string (e.g it is a array or object),

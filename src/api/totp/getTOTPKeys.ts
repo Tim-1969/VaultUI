@@ -1,4 +1,3 @@
-import { DoesNotExistError } from "../../types/internalErrors";
 import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 
 export async function getTOTPKeys(baseMount: string): Promise<string[]> {

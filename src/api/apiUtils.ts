@@ -1,6 +1,6 @@
-import { pageState } from "../globalPageState";
-import { DoesNotExistError } from "../types/internalErrors";
 import { BaseAPIResponse } from "./types/api";
+import { DoesNotExistError } from "../types/internalErrors";
+import { pageState } from "../globalPageState";
 
 export function getHeaders(): Record<string, string> {
   return {

@@ -8,7 +8,7 @@ export async function getTransitKey(baseMount: string, name: string): Promise<Tr
 
   const resp = await fetch(request);
   await checkResponse(resp);
-  
+
   const data = (await resp.json()) as { data: TransitKeyType };
   return data.data;
 }

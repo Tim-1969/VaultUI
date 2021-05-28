@@ -65,7 +65,7 @@ export class KVKeysList extends Component<KVKeysListProps, KVKeysListState> {
       prevProps.secretPath !== this.props.secretPath
     ) {
       this.setState({
-        dataLoaded: false
+        dataLoaded: false,
       });
       void this.loadData();
     }

@@ -8,6 +8,6 @@ export async function lookupSelf(): Promise<TokenInfo> {
   const resp = await fetch(request);
   await checkResponse(resp);
 
-  const data = (await resp.json()) as { data: TokenInfo; };
+  const data = (await resp.json()) as { data: TokenInfo };
   return data.data;
 }
