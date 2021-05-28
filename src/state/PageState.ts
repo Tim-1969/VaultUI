@@ -1,8 +1,17 @@
+import { StorageType } from "./storage/StorageType";
+
 export class PageState {
   constructor() {
     const params = new URLSearchParams(window.location.search);
-    if (params.has("reset")) localStorage.clear();
+    if (params.has("reset")) this.storage.clear();
+    if (params.has("incognito")) {
+      this.storage = sessionStorage;
+    } else {
+      this.storage = localStorage;
+    }
   }
+
+  private storage: StorageType;
 
   // NOTE: When a item in the page state isn't a string (e.g it is a array or object),
   // you need to add helper methods to mutate it or else it wont save.
@@ -14,40 +23,40 @@ export class PageState {
   // the clunkyness of this approach, but for now, this works.
 
   get apiURL(): string | null {
-    const apiurl = localStorage.getItem("apiURL") || "";
+    const apiurl = this.storage.getItem("apiURL") || "";
     return apiurl.length > 0 ? apiurl : null;
   }
   set apiURL(value: string) {
-    localStorage.setItem("apiURL", value);
+    this.storage.setItem("apiURL", value);
   }
 
   get token(): string | null {
-    const tok = localStorage.getItem("token") || "";
+    const tok = this.storage.getItem("token") || "";
     return tok.length > 0 ? tok : null;
   }
   set token(value: string) {
-    localStorage.setItem("token", value);
+    this.storage.setItem("token", value);
   }
 
   get pageDirection(): string {
-    return localStorage.getItem("pageDirection") || "ltr";
+    return this.storage.getItem("pageDirection") || "ltr";
   }
   set pageDirection(value: string) {
-    localStorage.setItem("pageDirection", value);
+    this.storage.setItem("pageDirection", value);
   }
 
   get language(): string {
-    return localStorage.getItem("language") || "";
+    return this.storage.getItem("language") || "";
   }
   set language(value: string) {
-    localStorage.setItem("language", value);
+    this.storage.setItem("language", value);
   }
 
   get baseMount(): string {
-    return localStorage.getItem("baseMount") || "";
+    return this.storage.getItem("baseMount") || "";
   }
   set baseMount(value: string) {
-    localStorage.setItem("baseMount", value);
+    this.storage.setItem("baseMount", value);
   }
 
   // Since this is a array we can't act directly on it so we need
@@ -65,60 +74,60 @@ export class PageState {
   }
 
   get secretPath(): string[] {
-    return JSON.parse(localStorage.getItem("secretPath") || "[]") as string[];
+    return JSON.parse(this.storage.getItem("secretPath") || "[]") as string[];
   }
   set secretPath(value: string[]) {
-    localStorage.setItem("secretPath", JSON.stringify(value));
+    this.storage.setItem("secretPath", JSON.stringify(value));
   }
 
   get secretVersion(): string | null {
-    const result = localStorage.getItem("secretVersion");
+    const result = this.storage.getItem("secretVersion");
     return result != "null" ? result || null : null;
   }
   set secretVersion(value: string) {
-    localStorage.setItem("secretVersion", String(value));
+    this.storage.setItem("secretVersion", String(value));
   }
 
   get secretItem(): string {
-    return localStorage.getItem("secretItem") || "";
+    return this.storage.getItem("secretItem") || "";
   }
   set secretItem(value: string) {
-    localStorage.setItem("secretItem", value);
+    this.storage.setItem("secretItem", value);
   }
 
   get secretMountType(): string {
-    return localStorage.getItem("secretMountType") || "";
+    return this.storage.getItem("secretMountType") || "";
   }
   set secretMountType(value: string) {
-    localStorage.setItem("secretMountType", value);
+    this.storage.setItem("secretMountType", value);
   }
 
   get policyItem(): string {
-    return localStorage.getItem("policyItem") || "";
+    return this.storage.getItem("policyItem") || "";
   }
   set policyItem(value: string) {
-    localStorage.setItem("policyItem", value);
+    this.storage.setItem("policyItem", value);
   }
 
   get authPath(): string {
-    return localStorage.getItem("authPath") || "";
+    return this.storage.getItem("authPath") || "";
   }
   set authPath(value: string) {
-    localStorage.setItem("authPath", value);
+    this.storage.setItem("authPath", value);
   }
 
   get userPassUser(): string {
-    return localStorage.getItem("userPassUser") || "";
+    return this.storage.getItem("userPassUser") || "";
   }
   set userPassUser(value: string) {
-    localStorage.setItem("userPassUser", value);
+    this.storage.setItem("userPassUser", value);
   }
 
   get currentPage(): string {
-    const curPage = localStorage.getItem("currentPage") || "HOME";
+    const curPage = this.storage.getItem("currentPage") || "HOME";
     return curPage;
   }
   set currentPage(value: string) {
-    localStorage.setItem("currentPage", value);
+    this.storage.setItem("currentPage", value);
   }
 }

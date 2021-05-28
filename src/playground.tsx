@@ -1,5 +1,5 @@
 import { PageRouter } from "z-pagerouter";
-import { PageState } from "./PageState";
+import { PageState } from "./state/PageState";
 import i18next from "i18next";
 
 // Playground is a way to debug and test things.

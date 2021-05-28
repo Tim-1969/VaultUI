@@ -1,5 +1,5 @@
 import { PageRouter } from "z-pagerouter";
-import { PageState } from "../PageState";
+import { PageState } from "../state/PageState";
 
 export class Page {
   constructor() {

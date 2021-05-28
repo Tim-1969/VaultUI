@@ -1,5 +1,5 @@
 import { PageRouter } from "z-pagerouter";
-import { PageState } from "./PageState";
+import { PageState } from "./state/PageState";
 import { getSealStatus } from "./api/sys/getSealStatus";
 import { lookupSelf } from "./api/sys/lookupSelf";
 import ClipboardJS from "clipboard";

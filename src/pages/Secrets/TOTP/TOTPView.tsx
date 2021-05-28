@@ -5,7 +5,7 @@ import { Grid, GridSizes } from "../../../elements/Grid";
 import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
 import { PageRouter } from "z-pagerouter";
-import { PageState } from "../../../PageState";
+import { PageState } from "../../../state/PageState";
 import { SecretTitleElement } from "../SecretTitleElement";
 import { getTOTPCode } from "../../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";

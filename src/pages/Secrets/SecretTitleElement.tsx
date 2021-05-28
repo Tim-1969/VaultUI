@@ -1,6 +1,6 @@
 import { JSX } from "preact/jsx-runtime";
 import { PageRouter } from "z-pagerouter";
-import { PageState } from "../../PageState";
+import { PageState } from "../../state/PageState";
 
 function currentTitleSecretText(state: PageState): string {
   let secretItemText = state.secretItem;
