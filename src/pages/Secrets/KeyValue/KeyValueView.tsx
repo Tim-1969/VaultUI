@@ -59,13 +59,14 @@ export class KVKeysList extends Component<KVKeysListProps, KVKeysListState> {
   }
 
   componentDidUpdate(prevProps: KVKeysListProps): void {
-    // Do not set state.dataLoaded to false in here
-    // to provide a more smooth experiance when going through multiple keys.
     if (
       prevProps.baseMount !== this.props.baseMount ||
       prevProps.secretMountType !== this.props.secretMountType ||
       prevProps.secretPath !== this.props.secretPath
     ) {
+      this.setState({
+        dataLoaded: false
+      });
       void this.loadData();
     }
   }
