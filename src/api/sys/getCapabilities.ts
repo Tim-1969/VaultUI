@@ -4,11 +4,11 @@ import { removeDoubleSlash } from "../../utils";
 export type CapabilitiesType = {
   [path: string]: string[];
   capabilities?: string[];
-}
+};
 
 export async function getCapabilitiesPath(path: string | string[]): Promise<CapabilitiesType> {
   if (!Array.isArray(path)) {
-    path = [removeDoubleSlash(path)]
+    path = [removeDoubleSlash(path)];
   } else {
     path = path.map((s) => removeDoubleSlash(s));
   }

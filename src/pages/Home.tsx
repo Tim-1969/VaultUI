@@ -3,6 +3,7 @@ import { Margin } from "../elements/Margin";
 import { Page } from "../types/Page";
 import { Tile } from "../elements/Tile";
 import { TokenInfo } from "../api/types/token";
+import { getCapabilitiesPath } from "../api/sys/getCapabilities";
 import { lookupSelf } from "../api/sys/lookupSelf";
 import { prePageChecks, setErrorText } from "../pageUtils";
 import { render } from "preact";
@@ -32,6 +33,10 @@ export class HomePage extends Page {
         await this.router.changePage("LOGIN");
       }
     }
+
+    const caps = await getCapabilitiesPath(["sys/auth", "sys/policies"]);
+    const authCaps = caps["sys/auth"];
+    const policiesCaps = caps["sys/auth"];
 
     render(
       <div>
@@ -70,6 +75,7 @@ export class HomePage extends Page {
               title={i18next.t("home_access_title")}
               description={i18next.t("home_access_description")}
               icon="users"
+              disabled={!authCaps.includes("read")}
               onclick={async () => {
                 await this.router.changePage("ACCESS_HOME");
               }}
@@ -78,6 +84,7 @@ export class HomePage extends Page {
               title={i18next.t("home_policies_title")}
               description={i18next.t("home_policies_description")}
               icon="pencil"
+              disabled={!policiesCaps.includes("read")}
               onclick={async () => {
                 await this.router.changePage("POLICIES_HOME");
               }}
