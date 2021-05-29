@@ -4,16 +4,16 @@ import { DoesNotExistError } from "../../../types/internalErrors";
 import { Grid, GridSizes } from "../../../elements/Grid";
 import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
-import { PageRouter } from "z-pagerouter";
-import { PageState } from "../../../state/PageState";
 import { SecretTitleElement } from "../SecretTitleElement";
+import { getCapabilitiesPath } from "../../../api/sys/getCapabilities";
 import { getTOTPCode } from "../../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";
+import { removeDoubleSlash } from "../../../utils";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
 
 export class RefreshingTOTPGridItem extends Component<
-  { baseMount: string; totpKey: string; router: PageRouter },
+  { baseMount: string; totpKey: string; page: Page; canDelete: boolean },
   { totpValue: string }
 > {
   constructor() {
@@ -46,16 +46,18 @@ export class RefreshingTOTPGridItem extends Component<
         <CopyableInputBox text={this.state.totpValue} copyable />
         <div>
           <MarginInline>
-            <button
-              class="uk-button uk-button-danger"
-              onClick={async () => {
-                const state = this.props.router.state as PageState;
-                state.secretItem = this.props.totpKey;
-                await this.props.router.changePage("TOTP_DELETE");
-              }}
-            >
-              {i18next.t("totp_view_delete_btn")}
-            </button>
+            {this.props.canDelete && (
+              <button
+                class="uk-button uk-button-danger"
+                onClick={async () => {
+                  const page = this.props.page;
+                  page.state.secretItem = this.props.totpKey;
+                  await page.router.changePage("TOTP_DELETE");
+                }}
+              >
+                {i18next.t("totp_view_delete_btn")}
+              </button>
+            )}
           </MarginInline>
         </div>
       </Grid>
@@ -94,13 +96,23 @@ export class TOTPViewPage extends Page {
             await (async () => {
               try {
                 const elem = await Promise.all(
-                  Array.from(await getTOTPKeys(this.state.baseMount)).map(async (key) => (
-                    <RefreshingTOTPGridItem
-                      baseMount={this.state.baseMount}
-                      totpKey={key}
-                      router={this.router}
-                    />
-                  )),
+                  Array.from(await getTOTPKeys(this.state.baseMount)).map(async (key) => {
+                    const caps = (
+                      await getCapabilitiesPath(
+                        removeDoubleSlash(this.state.baseMount + "code/" + key),
+                      )
+                    ).capabilities;
+                    if (caps.includes("read")) {
+                      return (
+                        <RefreshingTOTPGridItem
+                          baseMount={this.state.baseMount}
+                          totpKey={key}
+                          page={this}
+                          canDelete={caps.includes("delete")}
+                        />
+                      );
+                    }
+                  }),
                 );
                 return elem;
               } catch (e: unknown) {

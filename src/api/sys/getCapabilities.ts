@@ -8,9 +8,7 @@ export type CapabilitiesType = {
 
 export async function getCapabilitiesPath(path: string | string[]): Promise<CapabilitiesType> {
   if (!Array.isArray(path)) {
-    path = [removeDoubleSlash(path)];
-  } else {
-    path = path.map((s) => removeDoubleSlash(s));
+    path = [path];
   }
 
   const request = new Request(appendAPIURL("/v1/sys/capabilities-self"), {
