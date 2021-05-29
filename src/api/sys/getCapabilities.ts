@@ -1,7 +1,18 @@
 import { appendAPIURL, checkResponse, getHeaders } from "../apiUtils";
 import { removeDoubleSlash } from "../../utils";
 
-export async function getCapabilitiesPath(path: string): Promise<string[]> {
+export type CapabilitiesType = {
+  [path: string]: string[];
+  capabilities?: string[];
+}
+
+export async function getCapabilitiesPath(path: string | string[]): Promise<CapabilitiesType> {
+  if (!Array.isArray(path)) {
+    path = [removeDoubleSlash(path)]
+  } else {
+    path = path.map((s) => removeDoubleSlash(s));
+  }
+
   const request = new Request(appendAPIURL("/v1/sys/capabilities-self"), {
     method: "POST",
     headers: {
@@ -9,21 +20,21 @@ export async function getCapabilitiesPath(path: string): Promise<string[]> {
       ...getHeaders(),
     },
     body: JSON.stringify({
-      paths: [removeDoubleSlash(path)],
+      paths: path,
     }),
   });
   const resp = await fetch(request);
   await checkResponse(resp);
 
   const data = (await resp.json()) as { capabilities: string[] };
-  return data.capabilities;
+  return data;
 }
 
 export async function getCapabilities(
   baseMount: string,
   secretPath: string[],
   name: string,
-): Promise<string[]> {
+): Promise<CapabilitiesType> {
   return await getCapabilitiesPath(
     removeDoubleSlash(baseMount + secretPath.join("/") + "/" + name),
   );

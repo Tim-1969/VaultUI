@@ -34,7 +34,7 @@ export class MePage extends Page {
 
     let canSealVault = false;
     try {
-      const caps = await getCapabilitiesPath("sys/seal");
+      const caps = (await getCapabilitiesPath("sys/seal")).capabilities;
       canSealVault = caps.includes("sudo") && caps.includes("update");
     } catch (e) {
       canSealVault = false;

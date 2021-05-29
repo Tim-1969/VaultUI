@@ -55,11 +55,11 @@ export class KeyValueSecretPage extends Page {
     }
   }
   async render(): Promise<void> {
-    const caps = await getCapabilities(
+    const caps = (await getCapabilities(
       this.state.baseMount,
       this.state.secretPath,
       this.state.secretItem,
-    );
+    )).capabilities;
 
     const secretInfo = await getSecret(
       this.state.baseMount,

@@ -74,7 +74,7 @@ export class SecretsHomePage extends Page {
     this.state.secretItem = "";
     this.state.secretVersion = null;
 
-    const mountsCapabilities = await getCapabilitiesPath("/sys/mounts");
+    const mountsCapabilities = (await getCapabilitiesPath("/sys/mounts")).capabilities;
     const mounts = await getMounts();
     // sort it by secretPath so it's in alphabetical order consistantly.
     const mountsMap = sortedObjectMap(mounts);
