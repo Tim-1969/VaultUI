@@ -46,12 +46,14 @@ async function onLoad(): Promise<void> {
     document.body,
   );
 
-  const pageRouter = new PageRouter(
-    pageList,
-    pageState,
-    document.getElementById("pageContent"),
-    document.getElementById("pageTitle"),
-  );
+  const pageRouter = new PageRouter({
+    pageList: pageList,
+    state: pageState,
+    pageTitleElement: document.querySelector("#pageTitle"),
+    pageContentElement: document.querySelector("#pageContent"),
+    resetElementContent: !true,
+  });
+
 
   reloadNavBar(pageRouter);
 

@@ -107,6 +107,7 @@ class PageList {
   constructor(pages: pagesList) {
     this.pages = pages;
   }
+
   private pages: pagesList;
 
   async getPageIDs(): Promise<string[]> {

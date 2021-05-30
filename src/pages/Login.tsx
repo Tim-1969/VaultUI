@@ -45,7 +45,7 @@ export class TokenLoginForm extends Component<{ page: Page }, unknown> {
       await page.router.changePage("HOME");
     } catch (e: unknown) {
       const error = e as Error;
-      document.getElementById("tokenInput").classList.add("uk-form-danger");
+      document.querySelector("#tokenInput").classList.add("uk-form-danger");
       if (error.message == "permission denied") {
         setErrorText(i18next.t("log_in_token_login_error"));
       } else {
@@ -104,8 +104,8 @@ export class UsernameLoginForm extends Component<{ page: Page }, unknown> {
       await page.router.changePage("HOME");
     } catch (e: unknown) {
       const error = e as Error;
-      document.getElementById("usernameInput").classList.add("uk-form-danger");
-      document.getElementById("passwordInput").classList.add("uk-form-danger");
+      document.querySelector("#usernameInput").classList.add("uk-form-danger");
+      document.querySelector("#passwordInput").classList.add("uk-form-danger");
       setErrorText(error.message);
     }
   }
