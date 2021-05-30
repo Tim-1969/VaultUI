@@ -79,25 +79,32 @@ export class TOTPViewPage extends Page {
 
   async render(): Promise<void> {
     this.state.secretItem = "";
+
+    const caps = (await getCapabilitiesPath("/sys/mounts/" + this.state.baseMount)).capabilities;
+
     render(
       <div>
         <p>
-          <button
-            class="uk-button uk-button-primary"
-            onClick={async () => {
-              await this.router.changePage("TOTP_NEW");
-            }}
-          >
-            {i18next.t("totp_view_new_btn")}
-          </button>
-          <button
-            class="uk-button uk-button-danger"
-            onClick={async () => {
-              await this.router.changePage("DELETE_SECRET_ENGINE");
-            }}
-          >
-            {i18next.t("totp_view_delete_btn")}
-          </button>
+          {caps.includes("create") && (
+            <button
+              class="uk-button uk-button-primary"
+              onClick={async () => {
+                await this.router.changePage("TOTP_NEW");
+              }}
+            >
+              {i18next.t("totp_view_new_btn")}
+            </button>
+          )}
+          {caps.includes("delete") && (
+            <button
+              class="uk-button uk-button-danger"
+              onClick={async () => {
+                await this.router.changePage("DELETE_SECRET_ENGINE");
+              }}
+            >
+              {i18next.t("totp_view_delete_btn")}
+            </button>
+          )}
         </p>
         <br />
         <br />

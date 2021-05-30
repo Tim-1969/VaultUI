@@ -1,6 +1,7 @@
 import { Component, JSX, render } from "preact";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
+import { getCapabilitiesPath } from "../../../api/sys/getCapabilities";
 import { getTransitKeys } from "../../../api/transit/getTransitKeys";
 import i18next from "i18next";
 
@@ -79,25 +80,32 @@ export class TransitViewPage extends Page {
 
   async render(): Promise<void> {
     this.state.secretItem = "";
+
+    const caps = (await getCapabilitiesPath("/sys/mounts/" + this.state.baseMount)).capabilities;
+
     render(
       <>
         <p>
-          <button
-            class="uk-button uk-button-primary"
-            onClick={async () => {
-              await this.router.changePage("TRANSIT_NEW_KEY");
-            }}
-          >
-            {i18next.t("transit_view_new_btn")}
-          </button>
-          <button
-            class="uk-button uk-button-danger"
-            onClick={async () => {
-              await this.router.changePage("DELETE_SECRET_ENGINE");
-            }}
-          >
-            {i18next.t("transit_view_delete_btn")}
-          </button>
+          {caps.includes("create") && (
+            <button
+              class="uk-button uk-button-primary"
+              onClick={async () => {
+                await this.router.changePage("TRANSIT_NEW_KEY");
+              }}
+            >
+              {i18next.t("transit_view_new_btn")}
+            </button>
+          )}
+          {caps.includes("delete") && (
+            <button
+              class="uk-button uk-button-danger"
+              onClick={async () => {
+                await this.router.changePage("DELETE_SECRET_ENGINE");
+              }}
+            >
+              {i18next.t("transit_view_delete_btn")}
+            </button>
+          )}
         </p>
         <TransitViewListItem page={this} />
       </>,

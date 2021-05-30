@@ -2,6 +2,7 @@ import { Component, JSX, render } from "preact";
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
+import { getCapabilitiesPath } from "../../../api/sys/getCapabilities";
 import { getSecrets } from "../../../api/kv/getSecrets";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
@@ -124,18 +125,22 @@ export class KeyValueViewPage extends Page {
     }
   }
   async render(): Promise<void> {
+    const caps = (await getCapabilitiesPath("/sys/mounts/" + this.state.baseMount)).capabilities;
+
     render(
       <>
         <p>
-          <button
-            class="uk-button uk-button-primary"
-            onClick={async () => {
-              await this.router.changePage("KEY_VALUE_NEW_SECRET");
-            }}
-          >
-            {i18next.t("kv_view_new_btn")}
-          </button>
-          {this.state.secretPath.length == 0 && (
+          {caps.includes("create") && (
+            <button
+              class="uk-button uk-button-primary"
+              onClick={async () => {
+                await this.router.changePage("KEY_VALUE_NEW_SECRET");
+              }}
+            >
+              {i18next.t("kv_view_new_btn")}
+            </button>
+          )}
+          {this.state.secretPath.length == 0 && caps.includes("delete") && (
             <button
               class="uk-button uk-button-danger"
               onClick={async () => {
