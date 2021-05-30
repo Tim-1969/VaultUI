@@ -17,8 +17,8 @@ var babelOptions = {
         "corejs": { "version": 3 },
         "useBuiltIns": "usage",
         "targets": {
-          "firefox": "60",
-          "chrome": "67"
+          "firefox": "78",
+          "chrome": "84"
         }
       }
     ]
