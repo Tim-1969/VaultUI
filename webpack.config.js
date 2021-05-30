@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 var os = require("os");
 
+const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
@@ -91,6 +93,19 @@ module.exports = {
           }
         ]
       }
+    ],
+  },
+
+  optimization: {
+    minimize: true,
+    minimizer: [
+      `...`,
+      new TerserPlugin({
+        terserOptions: {
+          ecma: "2015"
+        }
+      }),
+      new CssMinimizerPlugin(),
     ],
   },
 };
