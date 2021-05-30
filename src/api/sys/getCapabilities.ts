@@ -28,6 +28,10 @@ export async function getCapabilitiesPath(path: string | string[]): Promise<Capa
   return data;
 }
 
+export async function getCapsPath(path: string | string[]): Promise<string[]> {
+  return (await getCapabilitiesPath(path)).capabilities;
+}
+
 export async function getCapabilities(
   baseMount: string,
   secretPath: string[],

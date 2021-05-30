@@ -1,7 +1,7 @@
 import { JSX, render } from "preact";
 import { MountType, getMounts } from "../../api/sys/getMounts";
 import { Page } from "../../types/Page";
-import { getCapabilitiesPath } from "../../api/sys/getCapabilities";
+import { getCapsPath } from "../../api/sys/getCapabilities";
 import { prePageChecks } from "../../pageUtils";
 import { sortedObjectMap } from "../../utils";
 import i18next from "i18next";
@@ -73,7 +73,7 @@ export class SecretsHomePage extends Page {
     this.state.secretItem = "";
     this.state.secretVersion = null;
 
-    const mountsCapabilities = (await getCapabilitiesPath("/sys/mounts")).capabilities;
+    const mountsCapabilities = await getCapsPath("/sys/mounts");
     const mounts = await getMounts();
     // sort it by secretPath so it's in alphabetical order consistantly.
     const mountsMap = sortedObjectMap(mounts);

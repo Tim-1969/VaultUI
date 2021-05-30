@@ -5,7 +5,7 @@ import { Grid, GridSizes } from "../../../elements/Grid";
 import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
-import { getCapabilitiesPath } from "../../../api/sys/getCapabilities";
+import { getCapsPath } from "../../../api/sys/getCapabilities";
 import { getTOTPCode } from "../../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";
 import { removeDoubleSlash } from "../../../utils";
@@ -80,7 +80,7 @@ export class TOTPViewPage extends Page {
   async render(): Promise<void> {
     this.state.secretItem = "";
 
-    const caps = (await getCapabilitiesPath("/sys/mounts/" + this.state.baseMount)).capabilities;
+    const caps = await getCapsPath("/sys/mounts/" + this.state.baseMount);
 
     render(
       <div>
@@ -114,11 +114,9 @@ export class TOTPViewPage extends Page {
               try {
                 const elem = await Promise.all(
                   Array.from(await getTOTPKeys(this.state.baseMount)).map(async (key) => {
-                    const caps = (
-                      await getCapabilitiesPath(
-                        removeDoubleSlash(this.state.baseMount + "code/" + key),
-                      )
-                    ).capabilities;
+                    const caps = await getCapsPath(
+                      removeDoubleSlash(this.state.baseMount + "code/" + key),
+                    );
                     if (caps.includes("read")) {
                       return (
                         <RefreshingTOTPGridItem

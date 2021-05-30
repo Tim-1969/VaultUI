@@ -2,7 +2,7 @@ import { Component, JSX, render } from "preact";
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
-import { getCapabilitiesPath } from "../../../api/sys/getCapabilities";
+import { getCapsPath } from "../../../api/sys/getCapabilities";
 import { getSecrets } from "../../../api/kv/getSecrets";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
@@ -92,7 +92,6 @@ export class KVKeysList extends Component<KVKeysListProps, KVKeysListState> {
             <a
               onClick={async () => {
                 const page = this.props.page;
-                console.log(secret, page.state.secretPath, page.state.baseMount);
 
                 if (secret.endsWith("/")) {
                   page.state.pushSecretPath(secret);
@@ -125,7 +124,7 @@ export class KeyValueViewPage extends Page {
     }
   }
   async render(): Promise<void> {
-    const caps = (await getCapabilitiesPath("/sys/mounts/" + this.state.baseMount)).capabilities;
+    const caps = await getCapsPath("/sys/mounts/" + this.state.baseMount);
 
     render(
       <>

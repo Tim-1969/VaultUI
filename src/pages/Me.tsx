@@ -1,7 +1,7 @@
 import { Component, JSX, createRef, render } from "preact";
 import { Page } from "../types/Page";
 import { addClipboardNotifications, prePageChecks, setErrorText } from "../pageUtils";
-import { getCapabilitiesPath } from "../api/sys/getCapabilities";
+import { getCapsPath } from "../api/sys/getCapabilities";
 import { renewSelf } from "../api/sys/renewSelf";
 import { sealVault } from "../api/sys/sealVault";
 import ClipboardJS from "clipboard";
@@ -34,7 +34,7 @@ export class MePage extends Page {
 
     let canSealVault = false;
     try {
-      const caps = (await getCapabilitiesPath("sys/seal")).capabilities;
+      const caps = await getCapsPath("sys/seal");
       canSealVault = caps.includes("sudo") && caps.includes("update");
     } catch (e) {
       canSealVault = false;

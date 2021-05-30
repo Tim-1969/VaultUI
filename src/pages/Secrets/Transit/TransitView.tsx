@@ -1,7 +1,7 @@
 import { Component, JSX, render } from "preact";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
-import { getCapabilitiesPath } from "../../../api/sys/getCapabilities";
+import { getCapsPath } from "../../../api/sys/getCapabilities";
 import { getTransitKeys } from "../../../api/transit/getTransitKeys";
 import i18next from "i18next";
 
@@ -81,7 +81,7 @@ export class TransitViewPage extends Page {
   async render(): Promise<void> {
     this.state.secretItem = "";
 
-    const caps = (await getCapabilitiesPath("/sys/mounts/" + this.state.baseMount)).capabilities;
+    const caps = await getCapsPath("/sys/mounts/" + this.state.baseMount);
 
     render(
       <>
