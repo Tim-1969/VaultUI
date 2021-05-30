@@ -54,7 +54,6 @@ async function onLoad(): Promise<void> {
     resetElementContent: !true,
   });
 
-
   reloadNavBar(pageRouter);
 
   pageRouter.addEventListener("pageChanged", async function (_) {

@@ -6,6 +6,7 @@ import { PageType } from "z-pagerouter";
 import { AccessHomePage } from "./pages/Access/AccessHome";
 import { AuthHomePage } from "./pages/Access/Auth/AuthHome";
 import { AuthViewConfigPage } from "./pages/Access/Auth/AuthViewConfig";
+import { DeleteSecretsEnginePage } from "./pages/Secrets/DeleteSecretsEngine";
 import { HomePage } from "./pages/Home";
 import { KeyValueDeletePage } from "./pages/Secrets/KeyValue/KeyValueDelete";
 import { KeyValueNewPage } from "./pages/Secrets/KeyValue/KeyValueNew";
@@ -95,6 +96,8 @@ export const allPages: pagesList = {
   KEY_VALUE_NEW_SECRET: new KeyValueNewPage(),
   KEY_VALUE_DELETE: new KeyValueDeletePage(),
   KEY_VALUE_SECRET_EDIT: new KeyValueSecretEditPage(),
+
+  DELETE_SECRET_ENGINE: new DeleteSecretsEnginePage(),
 
   NEW_SECRETS_ENGINE: new NewSecretsEnginePage(),
   NEW_KV_ENGINE: new NewKVEnginePage(),

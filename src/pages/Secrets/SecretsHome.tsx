@@ -66,7 +66,6 @@ export class SecretsHomePage extends Page {
     await this.router.changePage("HOME");
   }
   async render(): Promise<void> {
-    await this.router.setPageContent("");
     if (!(await prePageChecks(this.router))) return;
 
     this.state.baseMount = "";

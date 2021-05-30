@@ -152,7 +152,7 @@ module.exports = {
   // TOTP View Page
   totp_view_title: "TOTP",
   totp_view_new_btn: "Добавить",
-  totp_view_delete_btn: "Удалить",
+  totp_view_secret_delete_btn: "Удалить",
   totp_view_loading: "Загрузка кодов TOTP..",
   totp_view_empty: "У вас на данный момент нет кодов TOTP. Хотите ли вы их создать?",
   totp_view_loading_box: "Загрузка..",

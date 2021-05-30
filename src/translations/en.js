@@ -146,12 +146,14 @@ module.exports = {
   kv_view_cubbyhole_text:
     "In cubbyhole, secrets can be stored as long as the lease of your token is valid. They will be deleted when lease is expired and can only be viewed by your current token.",
   kv_view_new_btn: "New",
+  kv_view_delete_btn: "Delete",
   kv_view_none_here_text: "You seem to have no secrets here, would you like to create one?",
 
   // TOTP View Page
   totp_view_title: "TOTP",
   totp_view_new_btn: "New",
   totp_view_delete_btn: "Delete",
+  totp_view_secret_delete_btn: "Delete",
   totp_view_loading: "Loading TOTP Codes..",
   totp_view_empty: "You seem to have no TOTP codes here, would you like to create one?",
   totp_view_loading_box: "Loading..",
@@ -177,6 +179,7 @@ module.exports = {
   // Transit View Page
   transit_view_title: "Transit View",
   transit_view_new_btn: "New",
+  transit_view_delete_btn: "Delete",
   transit_view_none_here_text:
     "You seem to have no transit keys here, would you like to create one?",
 
@@ -221,6 +224,12 @@ module.exports = {
   transit_rewrap_input_placeholder: "Cyphertext",
   transit_rewrap_rewrap_btn: "Rewrap",
   transit_rewrap_result_modal_title: "Rewrap Result",
+
+  // Delete Secret Engine Page
+  delete_secrets_engine_title: "Delete Secret Engine ({{mount}})",
+  delete_secrets_engine_message:
+    "Are you sure you want to delete this secrets engine and all the data stored within? This can't be reversed.",
+  delete_secrets_engine_delete_btn: "Delete",
 
   // Access Home
   access_home_page_title: "Access",

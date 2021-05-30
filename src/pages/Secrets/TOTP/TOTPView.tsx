@@ -55,7 +55,7 @@ export class RefreshingTOTPGridItem extends Component<
                   await page.router.changePage("TOTP_DELETE");
                 }}
               >
-                {i18next.t("totp_view_delete_btn")}
+                {i18next.t("totp_view_secret_delete_btn")}
               </button>
             )}
           </MarginInline>
@@ -81,14 +81,24 @@ export class TOTPViewPage extends Page {
     this.state.secretItem = "";
     render(
       <div>
-        <button
-          class="uk-button uk-button-primary uk-margin-bottom"
-          onClick={async () => {
-            await this.router.changePage("TOTP_NEW");
-          }}
-        >
-          {i18next.t("totp_view_new_btn")}
-        </button>
+        <p>
+          <button
+            class="uk-button uk-button-primary"
+            onClick={async () => {
+              await this.router.changePage("TOTP_NEW");
+            }}
+          >
+            {i18next.t("totp_view_new_btn")}
+          </button>
+          <button
+            class="uk-button uk-button-danger"
+            onClick={async () => {
+              await this.router.changePage("DELETE_SECRET_ENGINE");
+            }}
+          >
+            {i18next.t("totp_view_delete_btn")}
+          </button>
+        </p>
         <br />
         <br />
         <div id="totpList">

@@ -90,6 +90,14 @@ export class TransitViewPage extends Page {
           >
             {i18next.t("transit_view_new_btn")}
           </button>
+          <button
+            class="uk-button uk-button-danger"
+            onClick={async () => {
+              await this.router.changePage("DELETE_SECRET_ENGINE");
+            }}
+          >
+            {i18next.t("transit_view_delete_btn")}
+          </button>
         </p>
         <TransitViewListItem page={this} />
       </>,

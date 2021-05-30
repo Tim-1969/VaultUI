@@ -126,16 +126,26 @@ export class KeyValueViewPage extends Page {
   async render(): Promise<void> {
     render(
       <>
-        <div id="buttonsBox">
+        <p>
           <button
-            class="uk-button uk-button-primary uk-margin-bottom"
+            class="uk-button uk-button-primary"
             onClick={async () => {
               await this.router.changePage("KEY_VALUE_NEW_SECRET");
             }}
           >
             {i18next.t("kv_view_new_btn")}
           </button>
-        </div>
+          {this.state.secretPath.length == 0 && (
+            <button
+              class="uk-button uk-button-danger"
+              onClick={async () => {
+                await this.router.changePage("DELETE_SECRET_ENGINE");
+              }}
+            >
+              {i18next.t("kv_view_delete_btn")}
+            </button>
+          )}
+        </p>
         {this.state.secretMountType == "cubbyhole" && <p>{i18next.t("kv_view_cubbyhole_text")}</p>}
         <KVKeysList
           page={this}
