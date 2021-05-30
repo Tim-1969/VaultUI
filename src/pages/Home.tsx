@@ -36,7 +36,7 @@ export class HomePage extends Page {
 
     const caps = await getCapabilitiesPath(["sys/auth", "sys/policies"]);
     const authCaps = caps["sys/auth"];
-    const policiesCaps = caps["sys/auth"];
+    const policiesCaps = caps["sys/policies"];
 
     render(
       <div>
