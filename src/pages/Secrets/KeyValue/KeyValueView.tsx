@@ -2,7 +2,7 @@ import { Component, JSX, render } from "preact";
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
-import { getCapsPath } from "../../../api/sys/getCapabilities";
+import { getCapabilitiesPath, getCapsPath } from "../../../api/sys/getCapabilities";
 import { getSecrets } from "../../../api/kv/getSecrets";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
@@ -124,12 +124,19 @@ export class KeyValueViewPage extends Page {
     }
   }
   async render(): Promise<void> {
-    const caps = await getCapsPath("/sys/mounts/" + this.state.baseMount);
+    const mountsPath = "/sys/mounts/" + this.state.baseMount;
+    const currentPath = this.state.baseMount + this.state.secretPath.join("/");
+    const caps = await getCapabilitiesPath([
+      mountsPath,
+      currentPath
+    ]);
+    const mountCaps = caps[mountsPath];
+    const pathCaps = caps[currentPath];
 
     render(
       <>
         <p>
-          {caps.includes("create") && (
+          {pathCaps.includes("create") && (
             <button
               class="uk-button uk-button-primary"
               onClick={async () => {
@@ -139,7 +146,7 @@ export class KeyValueViewPage extends Page {
               {i18next.t("kv_view_new_btn")}
             </button>
           )}
-          {this.state.secretPath.length == 0 && caps.includes("delete") && (
+          {this.state.secretPath.length == 0 && mountCaps.includes("delete") && (
             <button
               class="uk-button uk-button-danger"
               onClick={async () => {

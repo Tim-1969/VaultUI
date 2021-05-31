@@ -5,7 +5,7 @@ import { Grid, GridSizes } from "../../../elements/Grid";
 import { MarginInline } from "../../../elements/MarginInline";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
-import { getCapsPath } from "../../../api/sys/getCapabilities";
+import { getCapabilitiesPath, getCapsPath } from "../../../api/sys/getCapabilities";
 import { getTOTPCode } from "../../../api/totp/getTOTPCode";
 import { getTOTPKeys } from "../../../api/totp/getTOTPKeys";
 import { removeDoubleSlash } from "../../../utils";
@@ -80,12 +80,18 @@ export class TOTPViewPage extends Page {
   async render(): Promise<void> {
     this.state.secretItem = "";
 
-    const caps = await getCapsPath("/sys/mounts/" + this.state.baseMount);
+    const mountsPath = "/sys/mounts/" + this.state.baseMount;
+    const caps = await getCapabilitiesPath([
+      mountsPath,
+      this.state.baseMount,
+    ]);
+    const mountCaps = caps[mountsPath];
+    const totpCaps = caps[this.state.baseMount];
 
     render(
       <div>
         <p>
-          {caps.includes("create") && (
+          {totpCaps.includes("create") && (
             <button
               class="uk-button uk-button-primary"
               onClick={async () => {
@@ -95,7 +101,7 @@ export class TOTPViewPage extends Page {
               {i18next.t("totp_view_new_btn")}
             </button>
           )}
-          {caps.includes("delete") && (
+          {mountCaps.includes("delete") && (
             <button
               class="uk-button uk-button-danger"
               onClick={async () => {
@@ -106,8 +112,6 @@ export class TOTPViewPage extends Page {
             </button>
           )}
         </p>
-        <br />
-        <br />
         <div id="totpList">
           {
             await (async () => {
