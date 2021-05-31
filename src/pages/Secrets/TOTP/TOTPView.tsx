@@ -81,10 +81,7 @@ export class TOTPViewPage extends Page {
     this.state.secretItem = "";
 
     const mountsPath = "/sys/mounts/" + this.state.baseMount;
-    const caps = await getCapabilitiesPath([
-      mountsPath,
-      this.state.baseMount,
-    ]);
+    const caps = await getCapabilitiesPath([mountsPath, this.state.baseMount]);
     const mountCaps = caps[mountsPath];
     const totpCaps = caps[this.state.baseMount];
 

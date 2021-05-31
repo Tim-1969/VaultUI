@@ -12,11 +12,13 @@ export type MountLinkProps = {
   baseMount: string;
 };
 
+const supportedMountTypes = ["kv", "totp", "transit", "cubbyhole"];
+
 export function isSupportedMount(mount: MountType): boolean {
   if (typeof mount != "object") return false;
   if (mount == null) return false;
   if (!("type" in mount)) return false;
-  if (!["kv", "totp", "transit", "cubbyhole"].includes(mount.type)) return false;
+  if (!supportedMountTypes.includes(mount.type)) return false;
   return true;
 }
 

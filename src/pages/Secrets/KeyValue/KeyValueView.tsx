@@ -2,7 +2,7 @@ import { Component, JSX, render } from "preact";
 import { DoesNotExistError } from "../../../types/internalErrors";
 import { Page } from "../../../types/Page";
 import { SecretTitleElement } from "../SecretTitleElement";
-import { getCapabilitiesPath, getCapsPath } from "../../../api/sys/getCapabilities";
+import { getCapabilitiesPath } from "../../../api/sys/getCapabilities";
 import { getSecrets } from "../../../api/kv/getSecrets";
 import { setErrorText } from "../../../pageUtils";
 import i18next from "i18next";
@@ -126,10 +126,7 @@ export class KeyValueViewPage extends Page {
   async render(): Promise<void> {
     const mountsPath = "/sys/mounts/" + this.state.baseMount;
     const currentPath = this.state.baseMount + this.state.secretPath.join("/");
-    const caps = await getCapabilitiesPath([
-      mountsPath,
-      currentPath
-    ]);
+    const caps = await getCapabilitiesPath([mountsPath, currentPath]);
     const mountCaps = caps[mountsPath];
     const pathCaps = caps[currentPath];
 
