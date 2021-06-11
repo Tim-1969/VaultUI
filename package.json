@@ -35,7 +35,7 @@
     "prismjs": "^1.23.0",
     "qr-scanner": "^1.2.0",
     "raw-loader": "^4.0.2",
-    "sass-loader": "^11.1.1",
+    "sass-loader": "^12.1.0",
     "ts-loader": "^9.2.2",
     "typescript": "^4.3.2",
     "uikit": "^3.6.22",
