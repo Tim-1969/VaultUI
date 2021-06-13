@@ -52,14 +52,13 @@ async function onLoad(): Promise<void> {
     pageTitleElement: document.querySelector("#pageTitle"),
     pageContentElement: document.querySelector("#pageContent"),
     resetElementContent: !true,
+    onPageChanged: async function (_) {
+      pageState.currentPage = await pageRouter.getCurrentPageID();
+      document.documentElement.dir = pageState.pageDirection;
+    },
   });
 
   reloadNavBar(pageRouter);
-
-  pageRouter.addEventListener("pageChanged", async function (_) {
-    pageState.currentPage = await pageRouter.getCurrentPageID();
-    document.documentElement.dir = pageState.pageDirection;
-  });
 
   if (process.env.NODE_ENV == "development") {
     await playground(pageRouter);
