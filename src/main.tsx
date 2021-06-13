@@ -52,7 +52,7 @@ async function onLoad(): Promise<void> {
     pageTitleElement: document.querySelector("#pageTitle"),
     pageContentElement: document.querySelector("#pageContent"),
     resetElementContent: !true,
-    onPageChange: async function (_) {
+    onPageChange: async function () {
       pageState.currentPage = await pageRouter.getCurrentPageID();
       document.documentElement.dir = pageState.pageDirection;
     },
