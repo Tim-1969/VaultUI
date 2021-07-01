@@ -27,7 +27,7 @@
     "git-revision-webpack-plugin": "^5.0.0",
     "html-webpack-plugin": "^5.3.1",
     "i18next": "^20.3.1",
-    "mini-css-extract-plugin": "^1.6.0",
+    "mini-css-extract-plugin": "^2.0.0",
     "node-sass": "^6.0.0",
     "normalize.css": "^8.0.1",
     "preact": "^10.5.13",
