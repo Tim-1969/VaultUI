@@ -211,17 +211,17 @@ module.exports = {
 
   // Transit Decrypt Page
   transit_decrypt_title: "Transit Decrypt",
-  transit_decrypt_suffix: " (decrypt)",
+  transit_decrypt_suffix: " (entschlüsseln)",
   transit_decrypt_input_placeholder: "Cyphertext",
-  transit_decrypt_decode_checkbox: "Should the plaintext be base64 decoded?",
-  transit_decrypt_decrypt_btn: "Decrypt",
-  transit_decrypt_decryption_result_modal_title: "Decryption Result",
+  transit_decrypt_decode_checkbox: "Soll der Text base64 codiert werden?",
+  transit_decrypt_decrypt_btn: "Entschlüsseln",
+  transit_decrypt_decryption_result_modal_title: "Entschlüsselungs ergebnis",
 
   // Transit Rewrap Page
   transit_rewrap_title: "Transit Rewrap",
   transit_rewrap_suffix: " (rewrap)",
   transit_rewrap_version_option_text: "{{version_num}}",
-  transit_rewrap_latest_version_option_text: "{{version_num}} (latest)",
+  transit_rewrap_latest_version_option_text: "{{version_num}} (neuste)",
   transit_rewrap_input_placeholder: "Cyphertext",
   transit_rewrap_rewrap_btn: "Rewrap",
   transit_rewrap_result_modal_title: "Rewrap Result",
@@ -230,7 +230,7 @@ module.exports = {
   delete_secrets_engine_title: "Delete Secret Engine ({{mount}})",
   delete_secrets_engine_message:
     "Are you sure you want to delete this secrets engine and all the data stored within? This can't be reversed.",
-  delete_secrets_engine_delete_btn: "Delete",
+  delete_secrets_engine_delete_btn: "Löschen",
 
   // Access Home
   access_home_page_title: "Access",
@@ -263,7 +263,7 @@ module.exports = {
   auth_view_config_token_type: "Token Type",
 
   // UserPass Common
-  auth_common_username: "Username",
+  auth_common_username: "Benutzername",
   auth_common_password: "Passwort",
   auth_common_zero_default: "When one of these fields is 0, that means use the default value",
   auth_common_generated_tokens: "These settings apply to the tokens generated when logging in",
@@ -278,49 +278,48 @@ module.exports = {
   auth_common_type: "Token Type",
 
   // userpass Users List
-  userpass_users_list_title: "Users List",
-  userpass_user_list_new_btn: "New",
+  userpass_users_list_title: "Benutzerliste",
+  userpass_user_list_new_btn: "Neu",
 
   // userpass User View
-  userpass_user_view_title: "User View",
-  userpass_user_view_edit_btn: "Edit",
-  userpass_user_view_delete_btn: "Delete",
+  userpass_user_view_title: "Benutzer ansicht",
+  userpass_user_view_edit_btn: "Bearbeiten",
+  userpass_user_view_delete_btn: "Lösche",
 
   // userpass user edit
-  userpass_user_edit_title: "User Edit",
-  userpass_user_edit_submit_btn: "Submit",
+  userpass_user_edit_title: "Benutzer bearbeiten",
+  userpass_user_edit_submit_btn: "Fertig",
 
   // userpass user new
-  userpass_user_new_title: "New User",
-  userpass_user_new_create_btn: "Create",
+  userpass_user_new_title: "Neuer Benutzer",
+  userpass_user_new_create_btn: "erstellen",
 
-  userpass_user_delete_title: "Delete User",
+  userpass_user_delete_title: "User löschen",
   userpass_user_delete_text:
-    "Are you sure you want to delete this user? This action can't be reversed.",
-  userpass_user_delete_btn: "Delete User",
+    "Soll der nutzer wirklich gelöscht werden? Diese aktion kann nicht rückgängig gemacht werden.",
+  userpass_user_delete_btn: "Benutzer löschen",
 
   // Policies Home
-  policies_home_title: "Policies",
-  policies_home_new_btn: "New",
+  policies_home_title: "Richtlienien",
+  policies_home_new_btn: "Neu",
 
   // Policy View
-  policy_view_title: "Policy View ({{policy}})",
-  policy_view_edit_btn: "Edit",
-  policy_view_delete_btn: "Delete",
+  policy_view_title: "Richtlinie ({{policy}}) anschauen",
+  policy_view_edit_btn: "Bearbeiten",
+  policy_view_delete_btn: "Löschen",
 
   // Policy New
-  policy_new_title: "Create New Policy",
-  policy_new_name_placeholder: "Policy Name",
-  policy_new_create_btn: "Create",
-  policy_new_already_exists: "This policy already exists.",
+  policy_new_title: "Neue Richtlinie erstellen",
+  policy_new_name_placeholder: "Name der Richtlinie",
+  policy_new_create_btn: "Erstellen",
+  policy_new_already_exists: "Diese Richtlinie gibt es schon.",
 
-  policy_edit_title: "Edit Policy ({{policy}})",
-  policy_edit_edit_btn: "Edit",
+  policy_edit_title: "Richtlinie bearbeiten ({{policy}})",
+  policy_edit_edit_btn: "Bearbeiten",
 
   // Policy Delete
-  policy_delete_title: "Delete Policy ({{policy}})",
+  policy_delete_title: "Richtlinie löschen ({{policy}})",
   policy_delete_text:
-    "Are you sure you want to delete this policy? It can't be reversed and there is a chance that all permissions will break.",
-  policy_delete_btn: "Delete Policy",
+    "Sicher das diese Richtlinie gelöscht werden soll? Diese Aktion kann nicht rückgängig gemacht werden und könnte die Berechtigungen der Benutzer stören.",
+  policy_delete_btn: "Richtlinie Löschen",
 };
-
